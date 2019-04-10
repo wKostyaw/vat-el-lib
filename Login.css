@@ -1,0 +1,71 @@
+body {
+	background-color: #DDD;
+	font-family: Calibri;
+	margin: 0px;
+	min-height: 100vh;
+}
+.SiteHeader {
+	background-color: #EEE;
+	display: flex;
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #CECECE;
+	justify-content: center
+}
+.Logo {
+	height: 40px;
+	padding: 5px 0px;
+}
+.SiteName {
+	font-size: 24pt;
+	padding: 7px;
+	margin: 0;
+}
+
+.LoginForm {
+	Border: 1px solid #CECECE;
+	Border-radius: 3px;
+	width: 364px;
+	background-color: #FFF;
+	margin: 75px auto 0px auto;
+	padding: 50px;
+}
+.LFormHeader {
+	width: 350px;
+	font-size: 16pt;
+	display: inline-block;
+	margin: 0px 0px 50px 0px;
+	font-weight: bold;
+}
+.LFormLabel {
+	margin: 0px 0px 30px 0px;
+	width: 350px;
+	font-size: 14pt;
+	display: inline-block;
+}
+.TextField {
+	width: 350px;
+	border: 1px solid #CECECE;
+	/*padding: 0px 0px 0px 5px;*/
+	padding: 7px;
+	height: 25px;
+	display: block;
+	outline: none;
+}
+.LButton {
+	width: 364px;
+	height: 45px;
+	margin: 5px 0px 25px 0px;
+	background-color: #59D;
+	color: #FFF;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	outline: none;
+	cursor: pointer;
+}
+.LButton:hover {
+	background-color: #37B;
+}
+.LButton:active {
+	background-color: #37B;
+}

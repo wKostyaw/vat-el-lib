@@ -1,0 +1,96 @@
+.Slider {
+	position: relative;
+	width: 100%;
+	background-color: #FFF;
+	margin: 0px auto 10px auto;
+	border-bottom: 1px solid #CECECE;
+	padding-bottom: 20px;
+	overflow: hidden;
+}
+.SliderLogo {
+	Border-bottom: 1px solid #CECECE;
+	padding: 3px 0px 3px 5px;
+	background-color: #FFF;
+	color: #000;
+	font-size: 14pt;
+}
+.SliderButton {
+	position:relative;
+	width: 40px;
+	height: 200px;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: inline-block;
+	margin: 0px;
+	vertical-align: middle;
+	z-index: 1;
+}
+.SliderButton:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+.SliderButton img {
+	width: 40px;
+	height: 40px;
+	margin-top: 80px;
+}
+.SliderButtonLeft {
+	float: left;
+}
+.SliderButtonRight {
+	float: right;
+}
+.SliderItems {
+	position:relative;
+	height: 200px;
+	width: calc(100% - 80px);
+	margin: 0px;
+	display: inline-block;
+	vertical-align: middle;
+	white-space:nowrap;
+	background-color: #FFF;
+}
+.ExampleSliderItem {
+	position:relative;
+	left: 8px;
+	width: 300px;
+	height: 180px;
+	margin: 10px 8px 10px 0px;
+	padding: 0px;
+	display: inline-block;
+	vertical-align: top;
+	transition-property: left;
+	transition-duration: 1s;
+}
+.SliderBookName {
+	display: block;
+	white-space: normal;
+	text-decoration: none;
+	height: 35px;
+	font-size: 12pt;
+	padding-bottom: 5px;
+	overflow: hidden;
+}
+.SliderBookName:hover {
+	text-decoration: underline;
+}
+.SliderItemPreview {
+	display: inline-block;
+	vertical-align: top;
+	height: 140px;
+}
+.SliderItemPreview img {
+	display: block;
+	height: 100%;
+	margin: 0px auto;
+}
+.SliderItemInfo {
+	display: inline-block;
+	vertical-align: top;
+	height: 145px;
+	font-size: 10pt;
+	padding-left: 5px;
+}
+.SliderItemInfo p {
+	margin: 0px 0px 10px 0px;
+	white-space: normal;
+	width: 150px;
+}

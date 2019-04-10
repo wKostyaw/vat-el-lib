@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+	<meta charset="utf-8">
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="slider.css">
+		<link rel="stylesheet" type="text/css" href="BooksList.css">
+		<link rel="stylesheet" type="text/css" href="PageNavigation.css">
+	</head>
+	<body>
+		<div class="SiteHeader">
+			<div class="HeaderContent">
+				<img src="WorkInProgress.png" class="Logo">
+				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
+			</div>
+		</div>
+			<div class="SecondHeader" id="SecondHeader">
+				<div class="NCentered" id="Navigation">
+					<ul class="Navigation">
+						<li class="NButton"><a href="#" class="NBLink">Главная</a></li>
+						<li class="NButton"><a href="#" class="NBLink">Сохраненное</a></li>
+						<li class="NButton"><a href="#" class="NBLink">Авторы</a></li>
+						<li class="NButton"><a href="#" class="NBLink">Направление</a></li>
+					</ul>
+					<button type="button" Class="StartSearch SButton" onclick="SearchVisible()">
+						<img src="SearchIMG.png">
+					</button>
+				</div>
+				<form class="SearchForm" id="SearchForm" style="display: none;">
+					<button type="button" Class="StartSearch SButton">
+						<img src="SearchIMG.png">
+					</button>
+					<div>
+						<input type="text" class="SearchBookName" id="BookName" placeholder="Введите название книги">
+						<input type="button" class="SAOButton SButton" onclick="SAOButtonclick()" value="Дополнительные параметры">
+					</div>
+					<div class="SAOOptions" id="SAOOptions" style="display: none;">
+						<div class="SAOOption SAOAutor">
+							<label class="SAOLabel">Авторы (указать через запятую):
+								<input class="SAOInput" type="text">
+							</label>
+						</div>	
+						<div class="SAOOption SAOYear">
+							<label class="SAOLabel">Года (пример: 2019/2005-2009/2012, 2014):
+								<input class="SAOInput" type="text">
+							</label>
+						</div>
+						<div class="SAOOption SAOGenre">
+							<label class="SAOLabel">Жанры (указать через запятую):
+								<input class="SAOInput" type="text">
+							</label>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<div class="SiteWrapper">
+				<div class="SiteContent">
+					<div class="Slider">
+						<div Class="SliderLogo">Название того что внутри</div>
+						<div class="SliderButton SliderButtonLeft" onclick="LeftButtonClick()"><img src="ArrowL.png"></div>
+						<div class="SliderItems">
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo">
+									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
+									<p>Год: 2007</p>
+								</div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo">
+									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
+									<p>Год: 2007</p>
+								</div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+							<div class="ExampleSliderItem">
+								<a href="#" Class="SliderBookName">Название книги</a>
+								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemInfo"></div>
+							</div>
+						</div>
+						<div class="SliderButton SliderButtonRight" onclick="RightButtonClick()"><img src="ArrowR.png"></div>
+					</div>
+					<div class="BookBlock">
+						<div class="BookBlockItem">
+							<div class="BookPreview">
+								<img src="BookDefault.png">
+							</div>
+							<div class="BookInfo">
+								<span class="BookInfoItem">Название книги: Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку даже тут не влезло</span>
+								<span class="BookInfoItem">Авторы</span>
+								<span class="BookInfoItem">Издательство</span>
+								<span class="BookInfoItem">Год</span>
+								<span class="BookInfoItem">Что-то еще</span>
+							</div>
+						</div>
+						<div class="BookBlockButtons">
+							<button class="BookBlockButton">
+								Читать
+							</button>
+							<button class="BookBlockButton">
+								Сохранить к себе
+							</button>
+							<button class="BookBlockButton">
+								Что-то еще
+							</button>
+						</div>
+					</div>
+					<ul class="PageNavigation">
+						<li class="Page PreviousPage"><a href="#">◀</a></li>
+						<li class="Page FirstPage"><a href="#">1</a></li>
+						<li class="PageEmptySpace"></li>
+						<li class="Page"><a href="#">11</a></li>
+						<li class="Page"><a href="#">12</a></li>
+						<li class="Page"><a href="#">13</a></li>
+						<li class="Page"><a href="#">14</a></li>
+						<li class="Page"><a href="#">15</a></li>
+						<li class="PageEmptySpace"></li>
+						<li class="Page LastPage"><a href="#">999</a></li>
+						<li class="Page NextPage"><a href="#">▶</a></li>
+					</ul>
+				</div>
+			</div>
+		<div class="SiteFooter">
+			<div class="FooterContent">
+				<p class="Copyright">Сайт разработан в качестве дипломной работы студентами ВАТ имени В. П. Чкалова</p>
+			</div>
+		</div>
+	</body>
+	<script src="JQuerry.js" type="text/javascript"></script>
+	<script src="Slider.js" type="text/javascript"></script>
+	<script src="Script.js" type="text/javascript"></script>
+</html>

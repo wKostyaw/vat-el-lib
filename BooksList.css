@@ -1,0 +1,47 @@
+.BookBlock {
+	border-bottom: 1px solid #CECECE;
+	width: 100%;
+	margin: 0px auto 20px auto;
+	background-color: #FFF;
+}
+.BookBlockItem {
+	display: flex;
+	width: 100%;
+}
+.BookPreview {
+	height: 180px;
+	padding: 10px 0px;
+	margin-left: 10px;
+}
+.BookPreview img {
+	height: 100%;
+}
+.BookInfo {
+	padding: 10px 0px 10px 10px;
+	width: 800px;
+}
+.BookInfoItem {
+	display: block;
+	margin-bottom: 10px;
+}
+.BookBlockButtons {
+	padding: 0px 10px;
+	width: 100%;
+}
+.BookBlockButton {
+	width: 150px;
+	height: 30px;
+	margin: 5px 0px 25px 0px;
+	background-color: #59D;
+	color: #FFF;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	outline: none;
+	cursor: pointer;
+}
+.BookBlockButton:hover {
+	background-color: #37B;
+}
+.BookBlockButton:active {
+	background-color: #37B;
+}

@@ -1,0 +1,48 @@
+.PageNavigation {
+	display: inline-flex;
+	list-style: none;
+	padding: 0px;
+	border-radius: 3px;
+	margin: 0px 0px 20px 0px;
+}
+.Page {
+	display: flex;
+	border: 1px solid #CECECE;
+	margin-left: 3px;
+	width: 40px;
+	height: 40px;
+}
+.Page a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	color: #000;
+}
+.Page a:hover {
+	background-color: #DDEEF8;
+}
+.PreviousPage {
+	border-radius: 3px 0px 0px 3px;
+	width: 80px;
+}
+.PreviousPage a {
+	border-radius: 3px 0px 0px 3px;
+}
+.NextPage {
+	border-radius: 0px 3px 3px 0px;
+	width: 80px;
+}
+.NextPage a {
+	border-radius: 0px 3px 3px 0px;
+}
+.FirstPage {
+	
+}
+.LastPage {
+	
+}
+.PageEmptySpace {
+	width: 20px;
+}
