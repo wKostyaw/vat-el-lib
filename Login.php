@@ -1,13 +1,13 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 	<meta charset="utf-8">
 	<head>
 		<title>Авторизация</title>
-		<link rel="stylesheet" type="text/css" href="login.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
 	</head>
 	<body>
 		<div class="SiteHeader">
-			<img src="WorkInProgress.png" class="Logo">
+			<img src="img/WorkInProgress.png" class="Logo">
 			<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
 		</div>
 			<form class="LoginForm">
