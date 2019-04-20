@@ -22,7 +22,7 @@ a {
 	margin: 0;
 	float: left;
 }
-.HeaderContent, .SiteWrapper, .FooterContent, .SearchForm, .NCentered{
+.HeaderContent, .SiteWrapper, .FooterContent, .SearchForm, .NCentered {
 	width: 100%;
 	max-width: 1000px;
 	min-width: 700px;
@@ -37,11 +37,14 @@ a {
 .SecondHeader {
 	position: sticky;
 	top: 0;
-	border-bottom: 1px solid #CECECE;
+	/*border-bottom: 1px solid #CECECE;*/
 	margin: 0px 0px 20px 0px;
-	background-color: #333;
+	/*background-color: #FFF;*/
 	height: 40px;
 	z-index: 2;
+}
+.NCentered {
+	background-color: #59D;
 }
 .SiteWrapper {
 	margin-bottom: 25px;
@@ -92,7 +95,7 @@ a {
 	height: 40px;
 }
 .NBLink {
-	color: #999;
+	color: #DDD;
 	display: flex;
 	align-items: center;
 	height: 100%;
@@ -104,7 +107,7 @@ a {
 /* Поисковик */
 
 .SearchForm {
-	
+	background-color: #59D;
 }
 .SearchBookName, .SButton, .StartSearch, .SAOButton, .SAOInput {
 	outline: none;
@@ -112,11 +115,11 @@ a {
 .SearchBookName {
 	width: calc(100% - 300px);
 	height: 30px;
-	Border: 1px solid #666;
+	border: 1px solid #666;
 	margin: 4px 0px;
 	padding: 0px 0px 0px 5px;
 	vertical-align: top;
-	background-color: #222;
+	background-color: #48C;
 	float: right;
 	min-width: 100px;
 	color: #FFF;
@@ -130,7 +133,7 @@ a {
 	background-color: #444;
 }
 .StartSearch, .StartSearch img{
-	Border: none;
+	border: none;
 	margin: 0px;
 	padding: 0px;
 	background-color: rgba(0,0,0,0);
@@ -151,7 +154,7 @@ a {
 	height: 40px;
 	border: none;
 	float: left;
-	background-color: #333;
+	background-color: #59D;
 	background-image: url(SAOButtonIMG.png);
 	background-repeat: no-repeat;
 	background-size: 15px;
