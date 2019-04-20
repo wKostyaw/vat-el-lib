@@ -23,8 +23,8 @@ body {
 }
 
 .LoginForm {
-	Border: 1px solid #CECECE;
-	Border-radius: 3px;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
 	width: 364px;
 	background-color: #FFF;
 	margin: 75px auto 0px auto;
@@ -44,9 +44,8 @@ body {
 	display: inline-block;
 }
 .TextField {
-	width: 350px;
+	width: 364px;
 	border: 1px solid #CECECE;
-	/*padding: 0px 0px 0px 5px;*/
 	padding: 7px;
 	height: 25px;
 	display: block;

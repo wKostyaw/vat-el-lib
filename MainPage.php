@@ -1,8 +1,11 @@
-﻿<!DOCTYPE HTML>
+<?php
+	require "auth.php";
+?>
+<!doctype HTML>
 <html>
 	<meta charset="utf-8">
 	<head>
-		<title></title>
+		<title>Главная</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/slider.css">
 		<link rel="stylesheet" type="text/css" href="css/BooksList.css">
@@ -33,7 +36,7 @@
 					</button>
 					<div>
 						<input type="text" class="SearchBookName" id="BookName" placeholder="Введите название книги">
-						<input type="button" class="SAOButton SButton" onclick="SAOButtonclick()" value="Дополнительные параметры">
+						<input type="button" class="SAOButton SButton" onclick="SAOButtonclick()" value="Фильтр">
 					</div>
 					<div class="SAOOptions" id="SAOOptions" style="display: none;">
 						<div class="SAOOption SAOAutor">
