@@ -1,17 +1,17 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 	<meta charset="utf-8">
 	<head>
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="slider.css">
-		<link rel="stylesheet" type="text/css" href="BooksList.css">
-		<link rel="stylesheet" type="text/css" href="PageNavigation.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/slider.css">
+		<link rel="stylesheet" type="text/css" href="css/BooksList.css">
+		<link rel="stylesheet" type="text/css" href="css/PageNavigation.css">
 	</head>
 	<body>
 		<div class="SiteHeader">
 			<div class="HeaderContent">
-				<img src="WorkInProgress.png" class="Logo">
+				<img src="img/WorkInProgress.png" class="Logo">
 				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
 			</div>
 		</div>
@@ -24,12 +24,12 @@
 						<li class="NButton"><a href="#" class="NBLink">Направление</a></li>
 					</ul>
 					<button type="button" Class="StartSearch SButton" onclick="SearchVisible()">
-						<img src="SearchIMG.png">
+						<img src="img/SearchIMG.png">
 					</button>
 				</div>
 				<form class="SearchForm" id="SearchForm" style="display: none;">
 					<button type="button" Class="StartSearch SButton">
-						<img src="SearchIMG.png">
+						<img src="img/SearchIMG.png">
 					</button>
 					<div>
 						<input type="text" class="SearchBookName" id="BookName" placeholder="Введите название книги">
@@ -59,11 +59,11 @@
 				<div class="SiteContent">
 					<div class="Slider">
 						<div Class="SliderLogo">Название того что внутри</div>
-						<div class="SliderButton SliderButtonLeft" onclick="LeftButtonClick()"><img src="ArrowL.png"></div>
+						<div class="SliderButton SliderButtonLeft" onclick="LeftButtonClick()"><img src="img/ArrowL.png"></div>
 						<div class="SliderItems">
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo">
 									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
 									<p>Год: 2007</p>
@@ -71,7 +71,7 @@
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo">
 									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
 									<p>Год: 2007</p>
@@ -79,51 +79,51 @@
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 							<div class="ExampleSliderItem">
 								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="BookDefault.png"></div>
+								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
 								<div class="SliderItemInfo"></div>
 							</div>
 						</div>
-						<div class="SliderButton SliderButtonRight" onclick="RightButtonClick()"><img src="ArrowR.png"></div>
+						<div class="SliderButton SliderButtonRight" onclick="RightButtonClick()"><img src="img/ArrowR.png"></div>
 					</div>
 					<div class="BookBlock">
 						<div class="BookBlockItem">
 							<div class="BookPreview">
-								<img src="BookDefault.png">
+								<img src="img/BookDefault.png">
 							</div>
 							<div class="BookInfo">
 								<span class="BookInfoItem">Название книги: Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку даже тут не влезло</span>
@@ -166,7 +166,7 @@
 			</div>
 		</div>
 	</body>
-	<script src="JQuerry.js" type="text/javascript"></script>
-	<script src="Slider.js" type="text/javascript"></script>
-	<script src="Script.js" type="text/javascript"></script>
+	<script src="js/JQuerry.js" type="text/javascript"></script>
+	<script src="js/Slider.js" type="text/javascript"></script>
+	<script src="js/Script.js" type="text/javascript"></script>
 </html>
