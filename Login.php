@@ -1,4 +1,4 @@
-﻿
+
 	<meta charset="utf-8">
 	<head>
 		<title>Авторизация</title>
