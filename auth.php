@@ -6,7 +6,6 @@
 	}
 	if(isset($_GET['exit'])) {
 		session_destroy(); 
-		#redirect
 		header('Location: login.php');
 		exit;
 	}
