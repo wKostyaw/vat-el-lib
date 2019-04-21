@@ -4,9 +4,10 @@
 		header("Location: Login.php");
 		exit();
 	}
-	if () {
-		unset($_SESSION['password']);
-		unset($_SESSION['login']);
-		header("Location: login.php")
+	if(isset($_GET['exit'])) {
+		session_destroy(); 
+		#redirect
+		header('Location: login.php');
+		exit;
 	}
 ?>

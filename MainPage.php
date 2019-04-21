@@ -1,5 +1,6 @@
 <?php
 	require "auth.php";
+	
 ?>
 <!doctype HTML>
 <html>
@@ -29,7 +30,7 @@
 					<button type="button" Class="StartSearch SButton" onclick="SearchVisible()">
 						<img src="img/SearchIMG.png">
 					</button>
-					<button type="button">На выход</button>
+					<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
 				</div>
 				<form class="SearchForm" id="SearchForm" style="display: none;">
 					<button type="button" Class="StartSearch SButton">

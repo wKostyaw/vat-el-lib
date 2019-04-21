@@ -16,7 +16,9 @@
 			if ($count == 1) {
 					$_SESSION['login'] = $login;
 			} else {
-				echo '<p>Неверный логин/пароль</p>';
+				echo '<script type="text/javascript">';
+				echo 'alert("Неправильный логин или пароль!")';
+				echo '</script>';
 			}
 		}
 		if (isset($_SESSION['login'])) {
@@ -28,6 +30,7 @@
 ?>
 <!doctype HTML>
 <html>
+
 	<meta charset="utf-8">
 	<head>
 		<title>Авторизация</title>

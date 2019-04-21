@@ -94,6 +94,17 @@ a {
 	margin-left: 15px;
 	height: 40px;
 }
+.exitButton {
+	margin-right: 10px;
+	margin-left: 15px;
+	height: 40px;
+	background: #59D;
+	border: none;
+	color: #FFF;
+	font-size: 12pt;
+	float: right;
+
+}
 .NBLink {
 	color: #FFF;
 	display: flex;
