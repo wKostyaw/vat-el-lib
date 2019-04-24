@@ -1,4 +1,6 @@
 <?php
+	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
+	$select_db = mysqli_select_db ($connection, 'vat');
 	session_start();
 	if(!$_SESSION['login']) {
 		header("Location: Login.php");

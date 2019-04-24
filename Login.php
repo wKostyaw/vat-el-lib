@@ -4,7 +4,7 @@
 		header("Location: MainPage.php");
 	}
 	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
-
+	// 
 	if ($_POST['submit']) {
 		if (isset($_POST['login']) and isset($_POST['password'])){
 		$login = $_POST['login'];

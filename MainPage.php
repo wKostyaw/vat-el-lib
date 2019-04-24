@@ -1,6 +1,5 @@
 <?php
 	require "auth.php";
-	
 ?>
 <!doctype HTML>
 <html>
@@ -178,7 +177,6 @@
 	<div>
 		<form method="POST">
 			<h3>Добавить пользователя</h3>
-			<?php if(isset($smsg)){ ?><div role="alert"> <?php echo $smsg; ?> </div> <?php }?>
 			<?php if(isset($fsmsg)){ ?><div role="alert"> <?php echo $fsmsg; ?> </div> <?php }?>
 			<input type="text" name="login" placeholder="Логин" required>
 			<input type="password" name="password" placeholder="Пароль" required>
@@ -186,18 +184,21 @@
 		</form>
 	</div>
 	<?php 
-		$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
-		$select_db = mysqli_select_db ($connection, 'vat');
 		if (isset($_POST['login']) and isset($_POST['password'])) {
 			$login = $_POST['login'];
 			$password = $_POST['password'];
+			
 			$query = "INSERT INTO loginparol (login, password) VALUES ('$login', '$password')";
 			$result = mysqli_query ($connection, $query);
 
 			if ($result) {
-				$smsg = "Пользователь успешно добавлен";
+				echo '<script type="text/javascript">';
+				echo 'alert("Пользователь успешно добавлен")';
+				echo '</script>';
 			} else {
-				$fsmsg = "Ошибка";
+				echo '<script type="text/javascript">';
+				echo 'alert("Ошибка!")';
+				echo '</script>';
 			}
 		}
 
