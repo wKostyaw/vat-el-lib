@@ -20,11 +20,16 @@
 				echo 'alert("Неправильный логин или пароль!")';
 				echo '</script>';
 			}
-		}
-		if (isset($_SESSION['login'])) {
+		} 
+		if (isset($_SESSION['login'])){
 			$login = $_SESSION['login'];
-			header('Location: MainPage.php');
-			exit();
+			if ($login == 'admin') {
+				header('Location: admin.php');
+				exit();
+			} else {
+				header('Location: MainPage.php');
+				exit();
+			} 
 		}
 	}
 ?>
