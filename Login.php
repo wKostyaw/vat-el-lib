@@ -7,11 +7,11 @@
 	// 
 	if ($_POST['submit']) {
 		if (isset($_POST['login']) and isset($_POST['password'])){
-		$login = $_POST['login'];
-		$password = $_POST['password'];
-		$query = "SELECT * FROM loginparol WHERE login='$login' and password='$password'";
-		$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-		$count = mysqli_num_rows($result);
+			$login = $_POST['login'];
+			$password = $_POST['password'];
+			$query = "SELECT * FROM loginparol WHERE login='$login' and password='$password'";
+			$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+			$count = mysqli_num_rows($result);
 
 			if ($count == 1) {
 					$_SESSION['login'] = $login;
