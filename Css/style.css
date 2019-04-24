@@ -35,9 +35,7 @@ a {
 .SecondHeader {
 	position: sticky;
 	top: 0;
-	/*border-bottom: 1px solid #CECECE;*/
 	margin: 0px 0px 20px 0px;
-	/*background-color: #FFF;*/
 	height: 40px;
 	z-index: 2;
 }
@@ -95,15 +93,14 @@ a {
 	height: 40px;
 }
 .exitButton {
-	margin-right: 10px;
-	margin-left: 15px;
+	margin: 0px 5px;
 	height: 40px;
 	background: #59D;
 	border: none;
 	color: #FFF;
 	font-size: 12pt;
 	float: right;
-
+	cursor: pointer;
 }
 .NBLink {
 	color: #FFF;
@@ -122,41 +119,53 @@ a {
 	height: 40px;
 	border-radius: 3px;
 }
-.SearchBookName, .SButton, .StartSearch, .SAOButton, .SAOInput {
+.SBorder {
+	border: 1px solid #666;
+	border-radius: 3px;
+	background-color: #48C;
+	height: 30px;
+	margin: 4px 0px;
+	float: right;
+	width: calc(100% - 172px);
+}
+.SearchBookName, .SButton, .SAOButton, .SAOInput {
 	outline: none;
 }
 .SearchBookName {
-	width: calc(100% - 150px);
+	width: calc(100% - 74px);
 	height: 30px;
-	border: 1px solid #666;
-	margin: 4px 0px;
+	border: none;
+	margin: 0px;
 	padding: 0px 0px 0px 5px;
 	vertical-align: top;
 	background-color: #48C;
-	float: right;
+	/*float: right;*/
 	min-width: 100px;
 	color: #FFF;
 	font-size: 12pt;
-	border-radius: 3px;
 }
 .SearchBookName::placeholder {
-	color: #CCC;
+	color: #DDD;
 }
+
 .SButton {
 	cursor: pointer;
-}
-.StartSearch, .StartSearch img{
+	height: 30px;
+	width: 30px;
+	align-items: center;
 	border: none;
-	margin: 0px;
 	padding: 0px;
 	background-color: rgba(0,0,0,0);
 }
-.StartSearch {
-	float: right;
-	height: 40px;
+.SButtonIcon {
+	vertical-align: middle;
+	width: 24px;
+	height: 24px;
+	fill: #FFF;
 }
-.StartSearch img{
-	height: 100%;
+.OpenSearch {
+	float: right;
+	margin: 5px 0px;
 }
 
 .SAOButton {

@@ -1,0 +1,68 @@
+body {
+	margin: 0px;
+	background-color: #DDD;
+	min-height: 100vh;
+	font-family: arial;
+}
+ul {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+}
+.Wrapper {
+	width: 1200px;
+	margin: 0px auto;
+	background-color: #FFF;
+	border-left: 1px solid #CECECE;
+	border-right: 1px solid #CECECE;
+	display: flex;
+	flex-direction: row;
+	min-height: 100vh;
+}
+.Sidebar {
+	width: 300px;
+	border-right: 1px solid #CECECE;
+	font-size: 12pt;
+	flex: 1;
+	top: 0px;
+}
+.LogoContainer {
+	
+}
+.Logo {
+	height: 100px;
+	display: block;
+	margin: 0px auto;
+	padding: 10px 0;
+}
+.AdminLinks {
+	padding: 0px;
+	margin: 15px 0 0 0;
+	position: sticky;
+	top: 0px;
+}
+.AdminLinkBox {
+	
+}
+.AdminLink {
+	display: flex;
+	align-items: center;
+	width: 285px;
+	height: 50px;
+	/*border-bottom: 1px solid #CECECE;*/
+	padding-left: 15px;
+	color: #000;
+}
+.AdminLink:hover {
+	background-color: #48C;
+	color: #FFF;
+}
+.Option {
+	width: 890px;
+	height: 1500px;
+	padding: 5px;
+}
+.AdminStart {
+	text-align: center;
+}

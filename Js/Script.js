@@ -15,3 +15,7 @@ function SearchVisible() {
 	document.getElementById('SearchForm').style.display = 'block';
 	document.getElementById('Navigation').style.display = 'none';
 }
+function SearchHide() {
+	document.getElementById('SearchForm').style.display = 'none';
+	document.getElementById('Navigation').style.display = 'block';
+}

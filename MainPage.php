@@ -19,26 +19,37 @@
 			</div>
 		</div>
 			<div class="SecondHeader" id="SecondHeader">
-				<div class="NCentered" id="Navigation">
+			<div class="NCentered">
+				<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
+				<div id="Navigation">
 					<ul class="Navigation">
 						<li class="NButton"><a href="#" class="NBLink">Главная</a></li>
 						<li class="NButton"><a href="#" class="NBLink">Сохраненное</a></li>
 						<li class="NButton"><a href="#" class="NBLink">Авторы</a></li>
 						<li class="NButton"><a href="#" class="NBLink">Направление</a></li>
 					</ul>
-					<button type="button" Class="StartSearch SButton" onclick="SearchVisible()">
-						<img src="img/SearchIMG.png">
-					</button>
-					<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
+					<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
+						<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
+							<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
+						</svg>
+						</button>
 				</div>
 				<form class="SearchForm" id="SearchForm" style="display: none;">
-					<button type="button" Class="StartSearch SButton">
-						<img src="img/SearchIMG.png">
-					</button>
-					<div>
+					<div class="SBorder">
+						<button type="button" Class="StartSearch SButton">
+							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
+								<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
+							</svg>
+						</button>
 						<input type="text" class="SearchBookName" id="BookName" placeholder="Введите название книги">
-						<input type="button" class="SAOButton SButton" onclick="SAOButtonclick()" value="Фильтр">
+						<button type="button" Class="CloseSearch SButton" onclick="SearchHide()">
+							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
+								<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
+							</svg>
+						</button>
 					</div>
+						<input type="button" class="SAOButton SButton" onclick="SAOButtonclick()" value="Фильтр">
+					
 					<div class="SAOOptions" id="SAOOptions" style="display: none;">
 						<div class="SAOOption SAOAutor">
 							<label class="SAOLabel">Авторы (указать через запятую):
@@ -57,6 +68,7 @@
 						</div>
 					</div>
 				</form>
+			</div>
 			</div>
 			
 			<div class="SiteWrapper">

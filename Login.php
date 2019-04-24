@@ -24,7 +24,7 @@
 		if (isset($_SESSION['login'])){
 			$login = $_SESSION['login'];
 			if ($login == 'admin') {
-				header('Location: admin.php');
+				header('Location: AdminPage.php');
 				exit();
 			} else {
 				header('Location: MainPage.php');
