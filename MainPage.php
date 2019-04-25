@@ -48,7 +48,13 @@
 							</svg>
 						</button>
 					</div>
-						<input type="button" class="SAOButton SButton" onclick="SAOButtonclick()" value="Фильтр">
+						<button class="SAOButton SButton" onclick="SAOButtonclick()">
+							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
+							<path d="M116,92h-40l-48,-56h136z"></path>
+							<path d="M116,152l-40,24v-84h40z"></path>
+							<path d="M166,36h-140c-3.20312,0 -6,-2.79688 -6,-6c0,-3.20312 2.79688,-6 6,-6h140c3.20312,0 6,2.79688 6,6c0,3.20312 -2.79688,6 -6,6z"></path>
+							</svg>
+						</button>
 					
 					<div class="SAOOptions" id="SAOOptions" style="display: none;">
 						<div class="SAOOption SAOAutor">
