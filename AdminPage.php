@@ -1,3 +1,6 @@
+<?php
+	require "auth.php";
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,7 +20,7 @@
 						<li class="AdminLinkBox"><a href="#" class="AdminLink">Добавить книгу</a></li>
 						<li class="AdminLinkBox"><a href="#" class="AdminLink">Изменить/удалить книгу</a></li>
 						<li class="AdminLinkBox"><a href="#" class="AdminLink">Пароли, явки</a></li>
-						<li class="AdminLinkBox"><a href="#" class="AdminLink">IDKFA</a></li>
+						<li class="AdminLinkBox"><a href="#" class="AdminLink" onclick="document.location.replace('?exit');">Выход</a></li>
 					</ul>
 			</div>
 			<div class="Option">

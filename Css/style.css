@@ -126,7 +126,7 @@ a {
 	height: 30px;
 	margin: 4px 0px;
 	float: right;
-	width: calc(100% - 172px);
+	width: calc(100% - 112px);
 }
 .SearchBookName, .SButton, .SAOButton, .SAOInput {
 	outline: none;
@@ -169,15 +169,11 @@ a {
 }
 
 .SAOButton {
-	width: 100px;
-	height: 40px;
 	border: none;
 	float: left;
 	background-color: #59D;
-	color: #FFF;
-	font-size: 12pt;
-	padding: 0px;
-	border-radius: 3px 0 0 3px;
+	/*border-radius: 3px 0 0 3px;*/
+	margin: 5px 0px 5px 5px;
 }
 .SAOAutor {
 	border-right: 1px solid #CECECE;
