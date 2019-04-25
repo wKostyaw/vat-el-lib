@@ -21,6 +21,15 @@
 			<div class="SecondHeader" id="SecondHeader">
 			<div class="NCentered">
 				<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
+				<!-- <?php 
+				// if (['admin'] == 1) {
+				// 	echo "<button class='exitButton'>";
+				// 	echo "<a href='adminpage2.php'>";
+				// 	echo "На аднимскую панель";
+				// 	echo "</a>";
+				// 	echo "</button>";
+				// }
+				?> -->
 				<div id="Navigation">
 					<ul class="Navigation">
 						<li class="NButton"><a href="#" class="NBLink">Главная</a></li>

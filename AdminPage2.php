@@ -1,4 +1,9 @@
 <?php
+	require "auth.php";
+	// if (['loginparol_admin'] == 0) {
+	// 	header('Location: MainPage.php');
+	// 	exit();
+	// }
 	if (isset($_POST['login']) and isset($_POST['password'])) {
 		$login = $_POST['login'];
 		$password = $_POST['password'];
@@ -43,7 +48,6 @@
 			<div class="Option">
 				<form method="POST">
 					<h3>Добавить пользователя</h3>
-					<?php if(isset($fsmsg)){ ?><div role="alert"> <?php echo $fsmsg; ?> </div> <?php }?>
 					<input type="text" name="login" placeholder="Логин" required>
 					<input type="password" name="password" placeholder="Пароль" required>
 					<button type="submit">Добавить</button>
