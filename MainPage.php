@@ -185,34 +185,4 @@
 	<script src="js/JQuerry.js" type="text/javascript"></script>
 	<script src="js/Slider.js" type="text/javascript"></script>
 	<script src="js/Script.js" type="text/javascript"></script>
-	<!-- Добавление нового юзера -->
-	<div>
-		<form method="POST">
-			<h3>Добавить пользователя</h3>
-			<?php if(isset($fsmsg)){ ?><div role="alert"> <?php echo $fsmsg; ?> </div> <?php }?>
-			<input type="text" name="login" placeholder="Логин" required>
-			<input type="password" name="password" placeholder="Пароль" required>
-			<button type="submit">Добавить</button>
-		</form>
-	</div>
-	<?php 
-		if (isset($_POST['login']) and isset($_POST['password'])) {
-			$login = $_POST['login'];
-			$password = $_POST['password'];
-			
-			$query = "INSERT INTO loginparol (login, password) VALUES ('$login', '$password')";
-			$result = mysqli_query ($connection, $query);
-
-			if ($result) {
-				echo '<script type="text/javascript">';
-				echo 'alert("Пользователь успешно добавлен")';
-				echo '</script>';
-			} else {
-				echo '<script type="text/javascript">';
-				echo 'alert("Ошибка!")';
-				echo '</script>';
-			}
-		}
-
-	 ?>
-</html>
+	</html>
