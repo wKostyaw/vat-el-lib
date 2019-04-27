@@ -21,15 +21,23 @@
 			<div class="SecondHeader" id="SecondHeader">
 			<div class="NCentered">
 				<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
-				<!-- <?php 
-				// if (['admin'] == 1) {
-				// 	echo "<button class='exitButton'>";
-				// 	echo "<a href='adminpage2.php'>";
-				// 	echo "На аднимскую панель";
-				// 	echo "</a>";
-				// 	echo "</button>";
-				// }
-				?> -->
+				<?php 
+				$username = $_SESSION['login'];
+				$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
+				$result = $connection->query ($admin);
+					if ($result->num_rows > 0) {
+						while ($row = $result->fetch_assoc()) {
+							$kek = $row["admin"] ;
+							}
+					}
+				if ($kek == 1) {
+					echo "<button class='exitButton'>";
+					echo "<a href='adminpage2.php'>";
+					echo "На админскую панель";
+					echo "</a>";
+					echo "</button>";
+				}
+				?> 
 				<div id="Navigation">
 					<ul class="Navigation">
 						<li class="NButton"><a href="#" class="NBLink">Главная</a></li>

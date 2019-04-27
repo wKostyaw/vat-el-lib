@@ -1,9 +1,17 @@
 <?php
 	require "auth.php";
-	// if (['loginparol_admin'] == 0) {
-	// 	header('Location: MainPage.php');
-	// 	exit();
-	// }
+	$username = $_SESSION['login'];
+	$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
+	$result = $connection->query ($admin);
+	if ($result->num_rows > 0) {
+		while ($row = $result->fetch_assoc()) {
+			$kek = $row["admin"] ;
+		}
+	}
+	if ($kek == 0) {
+		header('Location: MainPage.php');
+		exit();
+	}
 	if (isset($_POST['login']) and isset($_POST['password'])) {
 		$login = $_POST['login'];
 		$password = $_POST['password'];
@@ -21,7 +29,6 @@
 			echo '</script>';
 		}
 	}
-	require "auth.php";
 ?>
 <!DOCTYPE html>
 <html>
