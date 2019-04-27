@@ -13,28 +13,53 @@
 	
 }
 .SelectorsGrid {
-	display: grid;
-	grid-auto-rows: 40px;
-	grid-template-areas: "name name name name";
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-row-gap: 15px;
+	
 }
 .CategoryName {
 	grid-area: name;
+	margin: 3px 0px;
 }
 .TextInput {
 	height: 40px;
 	border: 1px solid #CECECE;
 	border-radius: 3px;
 	flex: 1;
+	display: inline-block;
 }
 .BookName {
-	width: 70%;
+	width: 100%;
 }
 .BookYear {
-	width: 30%;
+	width: 200px;
 }
-.Add {
+.File {
+	display: none;
+}
+.LFile {
+	height: 22px;
+	width: 150px;
+	border: 1px solid #CECECE;
+	font-size: 14pt;
+	padding: 8px 25px;
+	display: inline-block;
+}
+.LFName {
+	border-radius: 3px 0px 0px 3px;
+	border-right: none;
+	color: #000;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.LFButton {
+	border-radius: 0px 3px 3px 0px;
+	background-color: #59D;
+	font-weight: 700;
+	color: #FFF;
+	vertical-align: top;
+}
+
+.AddRemove {
 	height: 40px;
 	width: 40px;
 	padding: 0px;
@@ -42,8 +67,30 @@
 	background-color: #59D;
 	border: 1px solid #CECECE;
 	border-radius: 3px;
+	margin-top: 3px;
+}
+.RemoveAutor {
+	visibility: hidden;
+}
+.RemoveCategory {
+	visibility: hidden;
 }
 .Selector {
 	width: 200px;
 	height: 40px;
+	vertical-align: top;
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: 3px;
+}
+.FormButton {
+	height: 40px;
+	width: 400px;
+	background-color: #59D;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	color: #FFF;
+	margin-top: 25px;
+	font-size: 12pt;
+	font-weight: 700;
 }

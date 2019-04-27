@@ -1,5 +1,41 @@
 <?php
 	require "auth.php";
+	/*$connection = mysqli_connect( 'vat', 'root',  '', 'vat');*/
+
+	if ($_POST['submit']) {
+		$BookName = $_POST['BookName'];
+		$BookYear = $_POST['BookYear'];
+		if($_POST['BookAutor']) {
+			$count = count($_POST['BookAutor'])-1;
+			foreach ($_POST['BookAutor'] as $key => $_POST['BookAutor']) {
+    			if ($key != $count) {
+					$BookAutors = $BookAutors.  $_POST['BookAutor']. ', ';
+				} else {
+					$BookAutors = $BookAutors.  $_POST['BookAutor'];
+				}
+			}
+		}
+		if($_POST['BookCategory']) {
+			$count = count($_POST['BookCategory'])-1;
+			foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
+    			if ($key != $count) {
+					$BookCategories = $BookCategories.  $_POST['BookCategory']. ', ';
+				} else {
+					$BookCategories = $BookCategories.  $_POST['BookCategory'];
+				}
+			}
+		}
+		if(is_uploaded_file($_FILES["filename"]["tmp_name"])) {
+			$extension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
+			$new_name = $BookName. $BookYear. '.'. $extension;
+			move_uploaded_file($_FILES["filename"]["tmp_name"], "Files/". $new_name);
+		} else {
+			echo("Ошибка загрузки файла");
+		}
+		$PathToFile = "Files/". $new_name;
+		$query = "INSERT INTO books (BookName, BookYear, BookAutors, BookCategories, PathToFile) VALUES ('$BookName', '$BookYear', '$BookAutors', '$BookCategories', '$PathToFile')";
+		$result = mysqli_query ($connection, $query);
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,38 +62,55 @@
 			</div>
 			<div class="Option">
 				<p class="MainHeader">Добавить книгу</p>
-				<form>
+				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
 					<div class="Category">
-						<label class="CatInner"><p p class="CategoryName">Название Книги</p><input type="text" class="TextInput BookName"></label>
+							<p class="CategoryName">Название Книги</p>
+							<input type="text" class="TextInput BookName" name="BookName">
 					</div>
 					<div class="Category">
-						<label class="CatInner"><p p class="CategoryName">Год</p><input type="text" class="TextInput BookYear"></label>
+							<p class="CategoryName">Год</p>
+							<input type="text" name="BookYear" class="TextInput BookYear">
 					</div>
 					<div class="Category">
-						<label class="CatInner SelectorsGrid"><p p class="CategoryName">Автор(ы)</p>
-							<select class="Selector Autor">
-								<option>Пункт 1</option>
-								<option>Пункт 2</option>
-							</select>
-							<button Class="AddAutor Add" type="button">
-								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;">
-									<path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path>
-								</svg>
+						<p class="CategoryName">Автор(ы)</p>
+						<select name="BookAutor[]" class="Selector Autor">
+							<option>Пункт 1</option>
+							<option>Пункт 2</option>
+						</select>
+						<div>
+							<button Class="AddAutor AddRemove" type="button">
+								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 							</button>
-						</label>
+							<button Class="RemoveAutor AddRemove" type="button">
+								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M24,88v16h144v-16z"></path></svg>
+							</button>
+						</div>
 					</div>
 					<div class="Category">
-						<label class="CatInner SelectorsGrid"><p p class="CategoryName">Категория(и)</p>
-							<select class="Selector BookCategory">
-								<option>Пункт 1</option>
-								<option>Пункт 2</option>
-							</select>
-							<button Class="AddBookCategory Add" type="button">
-								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;">
-									<path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path>
-								</svg>
+						<p class="CategoryName">Категория(и)</p>
+						<select name="BookCategory[]" class="Selector BookCategory" >
+							<option>Пункт 1</option>
+							<option>Пункт 2</option>
+						</select>
+						<div>
+							<button Class="AddBookCategory AddRemove" type="button">
+								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 							</button>
-						</label>
+							<button Class="RemoveCategory AddRemove" type="button">
+							<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M24,88v16h144v-16z"></path></svg>
+							</button>
+						</div>
+					</div>
+					<div class="Category">
+							<p class="CategoryName">Загрузка файла</p>
+							<label>
+							<input name="filename" type="file" class="File" accept=".pdf">
+							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+							</label>
+					</div>
+					<div class="Category">
+						<input type="reset" value="Очистить" class="FormButton ResetButton">
+						<input name="submit" type="submit" value="Добавить" class="FormButton SubmitButton">
 					</div>
 				</form>
 			</div>
