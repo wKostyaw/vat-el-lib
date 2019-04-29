@@ -2,20 +2,20 @@
 	if (isset($_POST['search'])) {
 		$response = "<ul><li>No data found!</li></ul>";
 
-		$connection = new mysqli(host: 'vat', username: 'root', passwd: '', dbname: 'vat');
+		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q = $connection->real_escape_string($_POST['q']);
 
-		$sql = $connection->query( query: "SELECT tags FROM test WHERE tags LIKE '%$q%'");
-		if ($sql->nub_rows > 0) {
+		$sql = $connection->query("SELECT tags FROM test WHERE tags LIKE '%$q%'");
+		if ($sql->num_rows > 0) {
 			$response = "<ul>";
 
 				while ($data = $sql->fetch_array())
-					$response .= "<li>" . $data['name'] . "</li>";
+					$response .= "<li>" . $data['tags'] . "</li>";
 
 			$response .= "</ul>";
 		}
 
-		
+
 		exit($response);
 	}
  ?>
@@ -23,7 +23,22 @@
 <html>
 	<head>
 		<title>Тест</title>
-
+		<style type="text/css">
+			 ul {
+			 	float: left;
+			 	list-style: none;
+			 	padding: 0px;
+			 	border: 1px solid black;
+			 	margin-top: 0px;
+			 }
+			 input, ul {
+			 	width: 250px;
+			 }
+			 li:hover {
+			 	color: white;
+			 	background: #0088cc;
+			 }
+		</style>
 	</head>
 	<body>
 		<input type="text" id="SearchBox">
@@ -35,7 +50,7 @@
 				$("#SearchBox").keyup(function() {
 					var query = $("#SearchBox").val();
 					
-					if (query.length > 2) {
+					if (query.length > 0) {
 						$.ajax (
 							{
 								url: 'test.php',
@@ -52,6 +67,12 @@
 						);			
 					}
 				});
+
+				$(document).on('click', 'li', function (){
+					var author = $(this).text();
+					$("#SearchBox").val(author);
+					$("#response").html("");
+				}) 
 			});
 		</script>
 	</body>
