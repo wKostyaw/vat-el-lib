@@ -2,7 +2,7 @@
 	require "auth.php";
 	/*$connection = mysqli_connect( 'vat', 'root',  '', 'vat');*/
 
-	if ($_POST['submit']) {
+	if (isset($_POST['submit'])) {
 		$BookName = $_POST['BookName'];
 		$BookYear = $_POST['BookYear'];
 		if($_POST['BookAutor']) {
@@ -29,12 +29,27 @@
 			$extension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
 			$new_name = $BookName. $BookYear. '.'. $extension;
 			move_uploaded_file($_FILES["filename"]["tmp_name"], "Files/". $new_name);
+			$i = 1;
 		} else {
-			echo("Ошибка загрузки файла");
+			echo "Ошибка загрузки файла" . "</br>";
+			$i = 0;
 		}
-		$PathToFile = "Files/". $new_name;
-		$query = "INSERT INTO books (BookName, BookYear, BookAutors, BookCategories, PathToFile) VALUES ('$BookName', '$BookYear', '$BookAutors', '$BookCategories', '$PathToFile')";
-		$result = mysqli_query ($connection, $query);
+		if ($i == 1) {
+			$PathToFile = "Files/". $new_name;
+			$query = "INSERT INTO books (BookName, BookYear, BookAutors, BookCategories, PathToFile) VALUES ('$BookName', '$BookYear', '$BookAutors', '$BookCategories', '$PathToFile')";
+			$result = mysqli_query ($connection, $query);
+			if ($result) {
+				echo '<script type="text/javascript">';
+				echo 'alert("Книга успешно добавлена")';
+				echo '</script>';
+			} else {
+				echo '<script type="text/javascript">';
+				echo 'alert("Ошибка!")';
+				echo '</script>';
+			}
+		} else {
+			echo "Загрузите файл";
+		}
 	}
 ?>
 <!DOCTYPE html>
