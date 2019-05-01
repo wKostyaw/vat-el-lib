@@ -1,3 +1,4 @@
+/* Заголовок */
 .MainHeader {
 	text-align: center;
 	font-size: 40pt;
@@ -6,90 +7,91 @@
 	margin: 0px;
 	color: #59D;
 }
+/* Блоки на которые разбита форма */
 .Category {
 	padding: 10px 30px;
 }
-.CatInner {
-	
-}
-.SelectorsGrid {
-	
-}
 .CategoryName {
-	grid-area: name;
 	margin: 3px 0px;
 }
 .TextInput {
-	height: 40px;
+	height: 36px;
 	border: 1px solid #CECECE;
 	border-radius: 3px;
 	flex: 1;
 	display: inline-block;
+	font-size: 14pt;
+	padding-left: 5px;
+}
+.AddTagContainer, .AddFileContainer {
+	display: flex;
+	flex-direction: row;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	overflow: hidden;
+	width: calc(50% - 5px);
+}
+.TagSearch {
+	border: none;
+	height: 36px;
+	width: calc(100% - 41px);
 }
 .BookName {
-	width: 100%;
+	width: calc(100% - 7px);
 }
 .BookYear {
-	width: 200px;
+	width: calc(50% - 10px)
 }
+.Description {
+	width: calc(100% - 12px);
+	height: 200px;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	font-size: 14pt;
+	padding: 5px;
+}
+/* Загрузка файла */
 .File {
 	display: none;
 }
 .LFile {
-	height: 22px;
-	width: 150px;
-	border: 1px solid #CECECE;
+	width: 50%;
 	font-size: 14pt;
-	padding: 8px 25px;
+	padding: 8px 0px;
 	display: inline-block;
+	text-align: center;
 }
 .LFName {
-	border-radius: 3px 0px 0px 3px;
-	border-right: none;
 	color: #000;
 	text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 .LFButton {
-	border-radius: 0px 3px 3px 0px;
 	background-color: #59D;
 	font-weight: 700;
 	color: #FFF;
-	vertical-align: top;
 }
 
-.AddRemove {
-	height: 40px;
-	width: 40px;
+/* Кнопки */
+.Add {
+	width: 38px;
 	padding: 0px;
-	align-items: center;
-	background-color: #59D;
-	border: 1px solid #CECECE;
-	border-radius: 3px;
-	margin-top: 3px;
-}
-.RemoveAutor {
-	visibility: hidden;
-}
-.RemoveCategory {
-	visibility: hidden;
-}
-.Selector {
-	width: 200px;
-	height: 40px;
-	vertical-align: top;
-	display: inline-block;
-	margin-right: 5px;
-	margin-top: 3px;
+	border: none;
 }
 .FormButton {
-	height: 40px;
-	width: 400px;
+	height: 38px;
 	background-color: #59D;
+	color: #FFF;
+	cursor: pointer;
+}
+.FormButton:hover {
+	background-color: #48C;
+}
+.SubmitButton, .ResetButton {
+	width: calc(50% - 3px);
 	border: 1px solid #CECECE;
 	border-radius: 3px;
-	color: #FFF;
 	margin-top: 25px;
 	font-size: 12pt;
 	font-weight: 700;

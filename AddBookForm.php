@@ -76,50 +76,42 @@
 					</ul>
 			</div>
 			<div class="Option">
-				<p class="MainHeader">Добавить книгу</p>
+				<h2 class="MainHeader">Добавить книгу</h2>
 				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
 					<div class="Category">
-							<p class="CategoryName">Название Книги</p>
+							<p class="CategoryName">Название книги:</p>
 							<input type="text" class="TextInput BookName" name="BookName">
 					</div>
 					<div class="Category">
-							<p class="CategoryName">Год</p>
+							<p class="CategoryName">Год:</p>
 							<input type="text" name="BookYear" class="TextInput BookYear">
 					</div>
 					<div class="Category">
-						<p class="CategoryName">Автор(ы)</p>
-						<select name="BookAutor[]" class="Selector Autor">
-							<option>Пункт 1</option>
-							<option>Пункт 2</option>
-						</select>
-						<div>
-							<button Class="AddAutor AddRemove" type="button">
+						<p class="CategoryName">Автор(ы):</p>
+						<div class="AddTagContainer">
+							<input type="text" class="TextInput TagSearch">
+							<button Class="FormButton AddAutor Add" type="button">
 								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-							</button>
-							<button Class="RemoveAutor AddRemove" type="button">
-								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M24,88v16h144v-16z"></path></svg>
 							</button>
 						</div>
 					</div>
 					<div class="Category">
-						<p class="CategoryName">Категория(и)</p>
-						<select name="BookCategory[]" class="Selector BookCategory" >
-							<option>Пункт 1</option>
-							<option>Пункт 2</option>
-						</select>
-						<div>
-							<button Class="AddBookCategory AddRemove" type="button">
-								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-							</button>
-							<button Class="RemoveCategory AddRemove" type="button">
-							<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M24,88v16h144v-16z"></path></svg>
-							</button>
+						<p class="CategoryName">Категория(и):</p>
+						<div class="AddTagContainer">
+								<input type="text" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
 						</div>
+					</div>
+					<div class="Category">
+							<p class="CategoryName">Краткое описание:</p>
+							<textarea class="Description"></textarea>
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Загрузка файла</p>
-							<label>
-							<input name="filename" type="file" class="File" accept=".pdf">
+							<input name="BookFile" id="BookFile" type="File" class="File">
+							<label for="BookFile" class="AddFileContainer">
 							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
 					</div>
