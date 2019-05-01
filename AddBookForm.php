@@ -80,11 +80,11 @@
 				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
 					<div class="Category">
 							<p class="CategoryName">Название Книги</p>
-							<input type="text" class="TextInput BookName" name="BookName">
+							<input type="text" class="TextInput BookName" name="BookName" required>
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Год</p>
-							<input type="text" name="BookYear" class="TextInput BookYear">
+							<input type="text" name="BookYear" class="TextInput BookYear" required>
 					</div>
 					<div class="Category">
 						<p class="CategoryName">Автор(ы)</p>
