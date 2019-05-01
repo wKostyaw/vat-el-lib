@@ -5,12 +5,12 @@
 		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q = $connection->real_escape_string($_POST['q']);
 
-		$sql = $connection->query("SELECT tags FROM test WHERE tags LIKE '%$q%'");
+		$sql = $connection->query("SELECT Name FROM autors WHERE Name LIKE '%$q%'");
 		if ($sql->num_rows > 0) {
 			$response = "<ul>";
 
 				while ($data = $sql->fetch_array())
-					$response .= "<li>" . $data['tags'] . "</li>";
+					$response .= "<li>" . $data['Name'] . "</li>";
 
 			$response .= "</ul>";
 		}
@@ -44,7 +44,8 @@
 		<input type="text" id="SearchBox">
 		<div id="response"></div>
 		<script 
-			src="js/JQuerry.js" type="text/javascript"></script>
+			src="js/JQuerry.js" type="text/javascript">
+		</script>
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#SearchBox").keyup(function() {

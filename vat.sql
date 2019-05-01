@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 29 2019 г., 20:58
+-- Время создания: Май 01 2019 г., 23:07
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -25,12 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `autors`
+-- Структура таблицы `authors`
 --
 
-CREATE TABLE `autors` (
-  `Autors` varchar(255) NOT NULL
+CREATE TABLE `authors` (
+  `AuthorID` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `authors`
+--
+
+INSERT INTO `authors` (`AuthorID`, `Name`) VALUES
+(1, 'Пушкин А. С.');
 
 -- --------------------------------------------------------
 
@@ -39,20 +47,11 @@ CREATE TABLE `autors` (
 --
 
 CREATE TABLE `books` (
-  `BookID` int(9) NOT NULL,
+  `BookID` int(11) NOT NULL,
   `BookName` varchar(255) NOT NULL,
   `BookYear` smallint(4) NOT NULL,
   `PathToFile` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `books`
---
-
-INSERT INTO `books` (`BookID`, `BookName`, `BookYear`, `PathToFile`) VALUES
-(6, 'Ваня', 2018, 'Files/'),
-(7, '43242', 2342, 'Files/'),
-(8, '3123', 123, 'Files/3123123.pdf');
 
 -- --------------------------------------------------------
 
@@ -62,8 +61,8 @@ INSERT INTO `books` (`BookID`, `BookName`, `BookYear`, `PathToFile`) VALUES
 
 CREATE TABLE `books_and_authors` (
   `BookID` int(11) NOT NULL,
-  `BookAuthor` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  `AuthorID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -73,7 +72,7 @@ CREATE TABLE `books_and_authors` (
 
 CREATE TABLE `books_and_categories` (
   `BookID` int(11) NOT NULL,
-  `BookCategory` varchar(255) NOT NULL
+  `CategoryID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -83,8 +82,16 @@ CREATE TABLE `books_and_categories` (
 --
 
 CREATE TABLE `categories` (
-  `Categories` varchar(255) NOT NULL
+  `CategoryID` int(11) NOT NULL,
+  `Category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `categories`
+--
+
+INSERT INTO `categories` (`CategoryID`, `Category`) VALUES
+(1, 'Роман');
 
 -- --------------------------------------------------------
 
@@ -135,39 +142,37 @@ INSERT INTO `test` (`tags`) VALUES
 --
 
 --
--- Индексы таблицы `autors`
+-- Индексы таблицы `authors`
 --
-ALTER TABLE `autors`
-  ADD PRIMARY KEY (`Autors`);
+ALTER TABLE `authors`
+  ADD PRIMARY KEY (`AuthorID`);
 
 --
 -- Индексы таблицы `books`
 --
 ALTER TABLE `books`
-  ADD PRIMARY KEY (`BookID`),
-  ADD UNIQUE KEY `BookID_3` (`BookID`),
-  ADD KEY `BookID` (`BookID`),
-  ADD KEY `BookID_2` (`BookID`);
+  ADD PRIMARY KEY (`BookID`);
 
 --
 -- Индексы таблицы `books_and_authors`
 --
 ALTER TABLE `books_and_authors`
   ADD KEY `BookID` (`BookID`),
-  ADD KEY `BookAuthor` (`BookAuthor`);
+  ADD KEY `AuthorID` (`AuthorID`),
+  ADD KEY `BookID_2` (`BookID`,`AuthorID`);
 
 --
 -- Индексы таблицы `books_and_categories`
 --
 ALTER TABLE `books_and_categories`
-  ADD KEY `BookCategory` (`BookCategory`),
-  ADD KEY `BookID` (`BookID`);
+  ADD KEY `BookID` (`BookID`,`CategoryID`),
+  ADD KEY `CategoryID` (`CategoryID`);
 
 --
 -- Индексы таблицы `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`Categories`);
+  ADD PRIMARY KEY (`CategoryID`);
 
 --
 -- Индексы таблицы `loginparol`
@@ -181,10 +186,22 @@ ALTER TABLE `loginparol`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `authors`
+--
+ALTER TABLE `authors`
+  MODIFY `AuthorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `BookID` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT для таблицы `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `loginparol`
@@ -201,14 +218,14 @@ ALTER TABLE `loginparol`
 --
 ALTER TABLE `books_and_authors`
   ADD CONSTRAINT `books_and_authors_ibfk_1` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`),
-  ADD CONSTRAINT `books_and_authors_ibfk_2` FOREIGN KEY (`BookAuthor`) REFERENCES `autors` (`Autors`);
+  ADD CONSTRAINT `books_and_authors_ibfk_2` FOREIGN KEY (`AuthorID`) REFERENCES `authors` (`AuthorID`);
 
 --
 -- Ограничения внешнего ключа таблицы `books_and_categories`
 --
 ALTER TABLE `books_and_categories`
   ADD CONSTRAINT `books_and_categories_ibfk_1` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`),
-  ADD CONSTRAINT `books_and_categories_ibfk_2` FOREIGN KEY (`BookCategory`) REFERENCES `categories` (`Categories`);
+  ADD CONSTRAINT `books_and_categories_ibfk_2` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`CategoryID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
