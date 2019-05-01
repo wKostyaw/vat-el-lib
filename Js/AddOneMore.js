@@ -1,39 +1,19 @@
-$(document).on('click', '.AddAutor', function(){
-	$('<select name="BookAutor[]" class="Selector Autor">'+
-		'<option>Пункт 1</option>'+
-		'<option>Пункт 2</option>'+
-		'</select>'
-		).insertAfter('.Autor:last');
-		$('.RemoveAutor').css('visibility', 'visible');
-		if ($('.Autor').length == 8) {
-			$('.AddAutor').css('visibility', 'hidden');
-		}
-});
+$(document).ready(), function() {
+$('.File').each(function() {
+		var $input = $(this),
+			$Container = $input.next('.AddFileContainer'),
+			Nothing = $Container.html();
+		$input.on('change', function(e) {
+			var FileName = '';
+			if(this.files && this.files.length > 1)
+				FileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+			else if(e.target.value)
+				FileName = e.target.value.split('\\').pop();
 
-$(document).on('click', '.RemoveAutor', function(){
-		$('.Autor:last').remove();
-		$('.AddAutor').css('visibility', 'visible');
-		if ($('.Autor').length == 1) {
-			$('.RemoveAutor').css('visibility', 'hidden');
-		}
+			if(FileName)
+				$Container.find('.LFName').html(FileName);
+			else
+				$Container.html(Nothing);
+		});
 });
-
-$(document).on('click', '.AddBookCategory', function(){
-	$('<select name="BookCategory[]" class="Selector BookCategory">'+
-		'<option>Пункт 1</option>'+
-		'<option>Пункт 2</option>'+
-		'</select>'
-		).insertAfter('.BookCategory:last');
-		$('.RemoveCategory').css('visibility', 'visible');
-		if ($('.BookCategory').length == 8) {
-			$('.AddBookCategory').css('visibility', 'hidden');
-		}
-});
-
-$(document).on('click', '.RemoveCategory', function(){
-	$('.BookCategory:last').remove();
-	$('.AddBookCategory').css('visibility', 'visible');
-	if ($('.BookCategory').length == 1) {
-		$('.RemoveCategory').css('visibility', 'hidden');
-	}
-});
+}();

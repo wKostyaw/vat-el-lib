@@ -21,29 +21,26 @@
 			<div class="SecondHeader" id="SecondHeader">
 			<div class="NCentered">
 				<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
-				<?php 
-				$username = $_SESSION['login'];
-				$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
-				$result = $connection->query ($admin);
-					if ($result->num_rows > 0) {
-						while ($row = $result->fetch_assoc()) {
-							$kek = $row["admin"] ;
-							}
-					}
-				if ($kek == 1) {
-					echo "<button class='exitButton'>";
-					echo "<a href='adminpage2.php'>";
-					echo "На админскую панель";
-					echo "</a>";
-					echo "</button>";
-				}
-				?> 
+				
 				<div id="Navigation">
 					<ul class="Navigation">
-						<li class="NButton"><a href="#" class="NBLink">Главная</a></li>
+						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
 						<li class="NButton"><a href="#" class="NBLink">Сохраненное</a></li>
 						<li class="NButton"><a href="#" class="NBLink">Авторы</a></li>
-						<li class="NButton"><a href="#" class="NBLink">Направление</a></li>
+						<li class="NButton"><a href="#" class="NBLink">Категории</a></li>
+						<?php 
+							$username = $_SESSION['login'];
+							$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
+							$result = $connection->query ($admin);
+							if ($result->num_rows > 0) {
+								while ($row = $result->fetch_assoc()) {
+									$kek = $row["admin"] ;
+								}
+							}
+							if ($kek == 1) {
+								echo "<li class='NButton'><a href='adminpage2.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
+							}
+						?> 
 					</ul>
 					<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
 						<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
