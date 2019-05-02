@@ -26,10 +26,10 @@
 
 		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
 		if ($sql->num_rows > 0) {
-			$responseAuthors = "<ul>";
+			$responseAuthors = "<ul class='HintList'>";
 
 				while ($data = $sql->fetch_array())
-					$responseAuthors .= "<li id='li1'>" . $data['Name'] . "</li>";
+					$responseAuthors .= "<li id='li1' class='Hint'>" . $data['Name'] . "</li>";
 
 			$responseAuthors .= "</ul>";
 		}
@@ -49,10 +49,10 @@
 
 		$sql1 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q1%'");
 		if ($sql1->num_rows > 0) {
-			$responseCategory = "<ul>";
+			$responseCategory = "<ul class='HintList'>";
 
 				while ($dataa = $sql1->fetch_array())
-					$responseCategory .= "<li id='li2'>" . $dataa['Category'] . "</li>";
+					$responseCategory .= "<li id='li2' class='Hint'>" . $dataa['Category'] . "</li>";
 
 			$responseCategory .= "</ul>";
 		}
@@ -120,7 +120,6 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
 		<link rel="stylesheet" type="text/css" href="css/AddBookForm.css">
-		
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -150,159 +149,35 @@
 							<p class="CategoryName">Год</p>
 							<input type="text" name="BookYear" class="TextInput BookYear" required>
 <!-- ======= -->
-							<p class="CategoryName">Название книги:</p>
-							<input type="text" class="TextInput BookName" name="BookName">
 					</div>
-					<div class="Category">
-							<p class="CategoryName">Год:</p>
-							<input type="text" name="BookYear" class="TextInput BookYear">
-<!-- >>>>>>> e9bce3c924e430104878895ae4a05e4e638e5d8e -->
-					</div>
-
-
-
-
-
-
+					
 					<div class="Category">
 						<p class="CategoryName">Автор(ы):</p>
-						<div class="AddTagContainer">
-
-
-							<style type="text/css">
-								 ul {
-								 	float: left;
-								 	list-style: none;
-								 	padding: 0px;
-								 	border: 1px solid black;
-								 	margin-top: 0px;
-								 }
-								 input, ul {
-								 	width: 250px;
-								 }
-								 li:hover {
-								 	color: white;
-								 	background: #0088cc;
-								 }
-							</style>
-							<input type="text" id="SearchBox">
-							<div id="responseAuthors"></div>
-							<script 
-								src="js/JQuerry.js" type="text/javascript">
-							</script>
-							<script type="text/javascript">
-								$(document).ready(function () {
-									$("#SearchBox").keyup(function() {
-										var query = $("#SearchBox").val();
-										
-										if (query.length > 0) {
-											$.ajax (
-												{
-													url: 'AddBookForm.php',
-													method: 'POST',
-													data: {
-														search: 1,
-														q: query
-													},
-													success: function (data) {
-														$("#responseAuthors").html(data);
-													},
-													dataType: 'text'
-												}
-											);			
-										}
-									});
-
-									$(document).on('click', '#li1', function (){
-										var author = $(this).text();
-										$("#SearchBox").val(author);
-										$("#responseAuthors").html("");
-									}) 
-								});
-							</script>
-
-
-
-
-							<button Class="FormButton AddAutor Add" type="button">
-								<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-							</button>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBox" class="TextInput TagSearch">
+								<button Class="FormButton AddAutor Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+						<div id="responseAuthors" class="HintBox"></div>
 						</div>
 					</div>
-
-
-
-																				<!-- КАТЕГОРИИ -->
-
-
+					
+					<!-- КАТЕГОРИИ -->
 					<div class="Category">
 						<p class="CategoryName">Категория(и):</p>
-						<div class="AddTagContainer">
-
-
-
-
-
-
-
-
-
-
-
-
-
-								<input type="text" id="SearchBoxCategory">
-								<div id="responseCategory"></div>
-								<script 
-									src="js/JQuerry.js" type="text/javascript">
-								</script>
-								<script type="text/javascript">
-									$(document).ready(function () {
-										$("#SearchBoxCategory").keyup(function() {
-											var query1 = $("#SearchBoxCategory").val();
-											
-											if (query1.length > 0) {
-												$.ajax (
-													{
-														url: 'AddBookForm.php',
-														method: 'POST',
-														data: {
-															search1: 1,
-															q1: query1
-														},
-														success: function (data) {
-															$("#responseCategory").html(data);
-														},
-														dataType: 'text'
-													}
-												);			
-											}
-										});
-
-										$(document).on('click', '#li2', function (){
-											var Category = $(this).text();
-											$("#SearchBoxCategory").val(Category);
-											$("#responseCategory").html("");
-										}) 
-									});
-								</script>
-
-
-
-
-
-
-
-
-
-
-
-
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
+							</div>
+							<div id="responseCategory" class="HintBox"></div>
 						</div>
 					</div>
+					
 					<div class="Category">
 							<p class="CategoryName">Краткое описание:</p>
 							<textarea class="Description"></textarea>

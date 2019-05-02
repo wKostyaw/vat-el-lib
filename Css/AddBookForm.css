@@ -96,3 +96,37 @@
 	font-size: 12pt;
 	font-weight: 700;
 }
+
+.Testik {
+	position: relative;
+}
+.HintBox {
+	max-height: 161px;
+	width: calc(50% - 40px);
+	overflow-y: auto;
+	position: absolute;
+	background: #FFF;
+	z-index: 1;
+}
+.HintList {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	margin-top: 0px;
+	width: 99%;
+	border: 1px solid #CECECE;
+}
+.Hint {
+	border-bottom: 1px solid #CECECE;
+	display: flex;
+	padding-left: 5px;
+	height: 39px;
+	align-items: center;
+}
+.Hint:hover {
+	color: white;
+	background: #38C;
+}
+.Hint:last-child {
+	border-bottom: none;
+}

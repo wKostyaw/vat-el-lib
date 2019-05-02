@@ -1,4 +1,62 @@
 $(document).ready(), function() {
+	$("#SearchBoxCategory").keyup(function() {
+		var query1 = $("#SearchBoxCategory").val();
+		
+		if (query1.length > 0) {
+			$.ajax (
+				{
+					url: 'AddBookForm.php',
+					method: 'POST',
+					data: {
+						search1: 1,
+						q1: query1
+					},
+					success: function (data) {
+						$("#responseCategory").html(data);
+					},
+					dataType: 'text'
+				}
+			);			
+		}
+	});
+
+	$(document).on('click', '#li2', function (){
+		var Category = $(this).text();
+		$("#SearchBoxCategory").val(Category);
+		$("#responseCategory").html("");
+	});
+
+
+
+	$("#SearchBox").keyup(function() {
+		var query = $("#SearchBox").val();
+										
+		if (query.length > 0) {
+			$.ajax (
+				{
+					url: 'AddBookForm.php',
+					method: 'POST',
+					data: {
+						search: 1,
+						q: query
+					},
+					success: function (data) {
+					$("#responseAuthors").html(data);
+				},
+					dataType: 'text'
+				}
+			);			
+		}
+	});
+
+	$(document).on('click', '#li1', function (){
+		var author = $(this).text();
+		$("#SearchBox").val(author);
+		$("#responseAuthors").html("");
+	});
+
+
+
 $('.File').each(function() {
 		var $input = $(this),
 			$Container = $input.next('.AddFileContainer'),
@@ -15,5 +73,5 @@ $('.File').each(function() {
 			else
 				$Container.html(Nothing);
 		});
-});
+	});
 }();
