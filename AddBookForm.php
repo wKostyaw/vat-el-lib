@@ -162,8 +162,6 @@
 							</div>
 						<div id="responseAuthors" class="HintBox"></div>
 						</div>
-						<div class="tagPreview">
-						</div>
 					</div>
 					
 					<!-- КАТЕГОРИИ -->
@@ -178,7 +176,6 @@
 							</div>
 							<div id="responseCategory" class="HintBox"></div>
 						</div>
-						<div class="tagPreview"></div>
 					</div>
 					
 					<div class="Category">

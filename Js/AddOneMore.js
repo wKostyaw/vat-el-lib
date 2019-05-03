@@ -55,26 +55,9 @@ $(document).ready(), function() {
 		$("#responseAuthors").html("");
 	});
 
-	// Добавление тега на страницу
-	$(document).on('click', '.Add', function () {
-		var tagName = $(this).prev(".TagSearch").val();
-		if (tagName != '') {
-			$tag = "<span class='tag'>" + tagName +
-						"<button type='button' class='removeTag'>" +
-							"<svg width='10px' height='10px' viewBox='0 0 192 192'><path d='M37.65625,26.34375l-11.3125,11.3125l58.34375,58.34375l-58.34375,58.34375l11.3125,11.3125l58.34375,-58.34375l58.34375,58.34375l11.3125,-11.3125l-58.34375,-58.34375l58.34375,-58.34375l-11.3125,-11.3125l-58.34375,58.34375z'></path></svg>" +
-						"</button>" +
-					"</span>";
-			$(this).parents('.Testik').next('.tagPreview').append($tag);
-		}
-	});
-	
-	// Удаление тега со страницы
-	$(document).on('click', '.removeTag', function () {
-		$(this).parent().remove();
-	});
 
-	// Отображение названия файла
-	$('.File').each(function() {
+
+$('.File').each(function() {
 		var $input = $(this),
 			$Container = $input.next('.AddFileContainer'),
 			Nothing = $Container.html();
