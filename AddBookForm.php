@@ -67,26 +67,28 @@
 	if (isset($_POST['submit'])) {
 		$BookName = $_POST['BookName'];
 		$BookYear = $_POST['BookYear'];
+		// $AuthorName = $_POST['BookAutor'];
+		// $Category = $_POST['BookCategory'];
+		// echo $AuthorName . $Category . 'loil' . '</br>';
 		if($_POST['BookAutor']) {
 			$count = count($_POST['BookAutor'])-1;
 			foreach ($_POST['BookAutor'] as $key => $_POST['BookAutor']) {
     			if ($key != $count) {
-					$BookAutors = $BookAutors.  $_POST['BookAutor']. ', ';
-				} else {
-					$BookAutors = $BookAutors.  $_POST['BookAutor'];
-				}
+					$mysqli->query("INSERT INTO authors (name)
+									SELECT '".$_POST["BookAutor"]."' FROM authors WHERE NOT EXIST (SELECT name FROM authors WHERE name = '".$_POST["BookAutor"]."')");
+				} 
 			}
 		}
-		if($_POST['BookCategory']) {
-			$count = count($_POST['BookCategory'])-1;
-			foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
-    			if ($key != $count) {
-					$BookCategories = $BookCategories.  $_POST['BookCategory']. ', ';
-				} else {
-					$BookCategories = $BookCategories.  $_POST['BookCategory'];
-				}
-			}
-		}
+		// if($_POST['BookCategory']) {
+		// 	$count = count($_POST['BookCategory'])-1;
+		// 	foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
+  //   			if ($key != $count) {
+		// 			$BookCategories = $BookCategories.  $_POST['BookCategory']. ', ';
+		// 		} else {
+		// 			$BookCategories = $BookCategories.  $_POST['BookCategory'];
+		// 		}
+		// 	}
+		// }
 		if(is_uploaded_file($_FILES["filename"]["tmp_name"])) {
 			$extension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
 			$new_name = $BookName. $BookYear. '.'. $extension;
@@ -98,7 +100,7 @@
 		}
 		if ($i == 1) {
 			$PathToFile = "Files/". $new_name;
-			$query = "INSERT INTO books (BookName, BookYear, BookAutors, BookCategories, PathToFile) VALUES ('$BookName', '$BookYear', '$BookAutors', '$BookCategories', '$PathToFile')";
+			$query = "INSERT INTO books (BookName, BookYear, PathToFile) VALUES ('$BookName', '$BookYear', '$PathToFile')";
 			$result = mysqli_query ($connection, $query);
 			if ($result) {
 				echo '<script type="text/javascript">';
@@ -152,6 +154,7 @@
 					</div>
 					
 					<div class="Category">
+						<!-- Авторы -->
 						<p class="CategoryName">Автор(ы):</p>
 						<div class="Testik">
 							<div class="AddTagContainer">
@@ -187,7 +190,7 @@
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Загрузка файла</p>
-							<input name="BookFile" id="BookFile" type="File" class="File">
+							<input name="filename" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
 							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
