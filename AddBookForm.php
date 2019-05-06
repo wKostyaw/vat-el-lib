@@ -37,7 +37,7 @@
 
 		exit($responseAuthors);
 	}
-
+	
 
 
 	//Проверка, есть ли вводимая категория в таблице категорий
@@ -143,44 +143,42 @@
 				<h2 class="MainHeader">Добавить книгу</h2>
 				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
 					<div class="Category">
-<!-- <<<<<<< HEAD -->
 							<p class="CategoryName">Название Книги</p>
 							<input type="text" class="TextInput BookName" name="BookName" required>
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Год</p>
 							<input type="text" name="BookYear" class="TextInput BookYear" required>
-<!-- ======= -->
 					</div>
-					
 					<div class="Category">
 						<!-- Авторы -->
 						<p class="CategoryName">Автор(ы):</p>
-						<div class="Testik">
+						<!--<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBox" class="TextInput TagSearch">
+								<input type="text" id="SearchBox" class="TextInput TagSearch">-->
+								<input class="Selector BookAutor">
 								<button Class="FormButton AddAutor Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							</div>
+						<!-- 	</div> -->
 						<div id="responseAuthors" class="HintBox"></div>
-						</div>
+						<!-- </div>
 						<div class="tagPreview">
-						</div>
+						</div> -->
 					</div>
-					
-					<!-- КАТЕГОРИИ -->
+						<!-- КАТЕГОРИИ -->
 					<div class="Category">
-						<p class="CategoryName">Категория(и):</p>
+						<!--<p class="CategoryName">Категория(и):</p>
 						<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">
+								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">-->
+								<input class="Selector BookCategory">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							</div>
+							<!-- </div> -->
 							<div id="responseCategory" class="HintBox"></div>
-						</div>
+						<!-- </div> -->
 						<div class="tagPreview"></div>
 					</div>
 					
