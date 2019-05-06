@@ -19,7 +19,7 @@
 
 	// Проверка, есть ли вводимый автор в таблице авторов
 	if (isset($_POST['search'])) {
-		$responseAuthors = "<ul><li>No data found!</li></ul>";
+		$responseAuthors = "<ul class='HintList'><li class='Hint'>No data found!</li></ul>";
 
 		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q = $connection->real_escape_string($_POST['q']);
@@ -42,7 +42,7 @@
 
 	//Проверка, есть ли вводимая категория в таблице категорий
 	if (isset($_POST['search1'])) {
-		$responseCategory = "<ul><li>No data found!</li></ul>";
+		$responseCategory = "<ul class='HintList'><li class='Hint'>No data found!</li></ul>";
 
 		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q1 = $connection->real_escape_string($_POST['q1']);
