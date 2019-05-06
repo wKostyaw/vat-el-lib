@@ -37,7 +37,7 @@
 
 		exit($responseAuthors);
 	}
-
+	
 
 
 	//Проверка, есть ли вводимая категория в таблице категорий
@@ -77,6 +77,10 @@
 				}
 			}
 		}
+		
+		foreach ($_POST['BookAutor'] as $item) {
+			echo $item->nodeValue . "\n";
+		}
 		if($_POST['BookCategory']) {
 			$count = count($_POST['BookCategory'])-1;
 			foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
@@ -86,6 +90,7 @@
 					$BookCategories = $BookCategories.  $_POST['BookCategory'];
 				}
 			}
+			echo($BookCategories);
 		}
 		if(is_uploaded_file($_FILES["filename"]["tmp_name"])) {
 			$extension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
@@ -153,32 +158,34 @@
 					
 					<div class="Category">
 						<p class="CategoryName">Автор(ы):</p>
-						<div class="Testik">
+						<!--<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBox" class="TextInput TagSearch">
+								<input type="text" id="SearchBox" class="TextInput TagSearch">-->
+								<input class="Selector BookAutor">
 								<button Class="FormButton AddAutor Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							</div>
+							<!--</div>
 						<div id="responseAuthors" class="HintBox"></div>
 						</div>
 						<div class="tagPreview">
-						</div>
+						</div>-->
 					</div>
 					
 					<!-- КАТЕГОРИИ -->
 					<div class="Category">
-						<p class="CategoryName">Категория(и):</p>
+						<!--<p class="CategoryName">Категория(и):</p>
 						<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">
+								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">-->
+								<input class="Selector BookCategory">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							</div>
+							<!--</div>
 							<div id="responseCategory" class="HintBox"></div>
 						</div>
-						<div class="tagPreview"></div>
+						<div class="tagPreview"></div>-->
 					</div>
 					
 					<div class="Category">
