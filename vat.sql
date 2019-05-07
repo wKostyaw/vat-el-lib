@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 01 2019 г., 23:07
+-- Время создания: Май 07 2019 г., 10:30
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -53,6 +53,15 @@ CREATE TABLE `books` (
   `PathToFile` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `books`
+--
+
+INSERT INTO `books` (`BookID`, `BookName`, `BookYear`, `PathToFile`) VALUES
+(10, 'Капитанская дочка', 1988, 'Files/Капитанская дочка1988.pdf'),
+(11, 'Бауауп', 1512, 'Files/Бауауп1512.pdf'),
+(12, 'Капитанская дочка', 1988, 'Files/Капитанская дочка1988.pdf');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +72,13 @@ CREATE TABLE `books_and_authors` (
   `BookID` int(11) NOT NULL,
   `AuthorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `books_and_authors`
+--
+
+INSERT INTO `books_and_authors` (`BookID`, `AuthorID`) VALUES
+(10, 1);
 
 -- --------------------------------------------------------
 
@@ -195,7 +211,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
