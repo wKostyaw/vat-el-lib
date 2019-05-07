@@ -1,6 +1,5 @@
 <?php
 	require "auth.php";
-
 	// Проверка на админа
 	$username = $_SESSION['login'];
 	$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
@@ -14,81 +13,30 @@
 		header('Location: MainPage.php');
 		exit();
 	}
-
-
-
-	// Проверка, есть ли вводимый автор в таблице авторов
-	if (isset($_POST['search'])) {
-		$responseAuthors = "<ul class='HintList'><li class='Hint'>No data found!</li></ul>";
-
-		$connection = new mysqli('vat', 'root', '', 'vat');
-		$q = $connection->real_escape_string($_POST['q']);
-
-		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
-		if ($sql->num_rows > 0) {
-			$responseAuthors = "<ul class='HintList'>";
-
-				while ($data = $sql->fetch_array())
-					$responseAuthors .= "<li id='li1' class='Hint'>" . $data['Name'] . "</li>";
-
-			$responseAuthors .= "</ul>";
-		}
-
-
-		exit($responseAuthors);
-	}
-	
-
-
-	//Проверка, есть ли вводимая категория в таблице категорий
-	if (isset($_POST['search1'])) {
-		$responseCategory = "<ul class='HintList'><li class='Hint'>No data found!</li></ul>";
-
-		$connection = new mysqli('vat', 'root', '', 'vat');
-		$q1 = $connection->real_escape_string($_POST['q1']);
-
-		$sql1 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q1%'");
-		if ($sql1->num_rows > 0) {
-			$responseCategory = "<ul class='HintList'>";
-
-				while ($dataa = $sql1->fetch_array())
-					$responseCategory .= "<li id='li2' class='Hint'>" . $dataa['Category'] . "</li>";
-
-			$responseCategory .= "</ul>";
-		}
-
-
-		exit($responseCategory);
-	}
-
-
-
 	// Заливка книги
 	if (isset($_POST['submit'])) {
 		$BookName = $_POST['BookName'];
 		$BookYear = $_POST['BookYear'];
-		// $AuthorName = $_POST['BookAutor'];
-		// $Category = $_POST['BookCategory'];
-		// echo $AuthorName . $Category . 'loil' . '</br>';
 		if($_POST['BookAutor']) {
 			$count = count($_POST['BookAutor'])-1;
 			foreach ($_POST['BookAutor'] as $key => $_POST['BookAutor']) {
     			if ($key != $count) {
-					$mysqli->query("INSERT INTO authors (name)
-									SELECT '".$_POST["BookAutor"]."' FROM authors WHERE NOT EXIST (SELECT name FROM authors WHERE name = '".$_POST["BookAutor"]."')");
-				} 
+					$BookAutors = $BookAutors.  $_POST['BookAutor']. ', ';
+				} else {
+					$BookAutors = $BookAutors.  $_POST['BookAutor'];
+				}
 			}
 		}
-		// if($_POST['BookCategory']) {
-		// 	$count = count($_POST['BookCategory'])-1;
-		// 	foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
-  //   			if ($key != $count) {
-		// 			$BookCategories = $BookCategories.  $_POST['BookCategory']. ', ';
-		// 		} else {
-		// 			$BookCategories = $BookCategories.  $_POST['BookCategory'];
-		// 		}
-		// 	}
-		// }
+		if($_POST['BookCategory']) {
+			$count = count($_POST['BookCategory'])-1;
+			foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
+    			if ($key != $count) {
+					$BookCategories = $BookCategories.  $_POST['BookCategory']. ', ';
+				} else {
+					$BookCategories = $BookCategories.  $_POST['BookCategory'];
+				}
+			}
+		}
 		if(is_uploaded_file($_FILES["filename"]["tmp_name"])) {
 			$extension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
 			$new_name = $BookName. $BookYear. '.'. $extension;
@@ -100,7 +48,7 @@
 		}
 		if ($i == 1) {
 			$PathToFile = "Files/". $new_name;
-			$query = "INSERT INTO books (BookName, BookYear, PathToFile) VALUES ('$BookName', '$BookYear', '$PathToFile')";
+			$query = "INSERT INTO books (BookName, BookYear, BookAutors, BookCategories, PathToFile) VALUES ('$BookName', '$BookYear', '$BookAutors', '$BookCategories', '$PathToFile')";
 			$result = mysqli_query ($connection, $query);
 			if ($result) {
 				echo '<script type="text/javascript">';
@@ -150,45 +98,170 @@
 							<p class="CategoryName">Год</p>
 							<input type="text" name="BookYear" class="TextInput BookYear" required>
 					</div>
+					<!-- АВТОРЫ -->
 					<div class="Category">
-						<!-- Авторы -->
 						<p class="CategoryName">Автор(ы):</p>
-						<!--<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBox" class="TextInput TagSearch">-->
-								<input class="Selector BookAutor">
-								<button Class="FormButton AddAutor Add" type="button">
-									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-								</button>
-						<!-- 	</div> -->
-						<div id="responseAuthors" class="HintBox"></div>
-						<!-- </div>
-						<div class="tagPreview">
-						</div> -->
-					</div>
-						<!-- КАТЕГОРИИ -->
-					<div class="Category">
-						<!--<p class="CategoryName">Категория(и):</p>
 						<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">-->
-								<input class="Selector BookCategory">
+								<input type="text" id="SearchBox" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button" >
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseAuthors" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik" id="testik1">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBox1" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button" >
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseAuthors1" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBox2" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button" >
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseAuthors2" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBox3" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button" >
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseAuthors3" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBox4" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button" >
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+						<div id="responseAuthors4" class="HintBox"></div>
+						</div>
+					</div>
+					<!-- КАТЕГОРИИ -->
+					<div class="Category">
+						<p class="CategoryName">Категория(и):</p>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory1" class="TextInput TagSearch">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							<!-- </div> -->
-							<div id="responseCategory" class="HintBox"></div>
-						<!-- </div> -->
-						<div class="tagPreview"></div>
+							</div>
+							<div id="responseCategory1" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory2" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory2" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory3" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory3" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory4" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory4" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory5" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory5" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory6" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory6" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory7" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory7" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory8" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory8" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory9" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory9" class="HintBox"></div>
+							<br>
+						</div>
+						<div class="Testik">
+							<div class="AddTagContainer">
+								<input type="text" id="SearchBoxCategory10" class="TextInput TagSearch">
+								<button Class="FormButton AddBookCategory Add" type="button">
+									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
+								</button>
+							</div>
+							<div id="responseCategory10" class="HintBox"></div>
+							<br>
+						</div>
 					</div>
-					
 					<div class="Category">
 							<p class="CategoryName">Краткое описание:</p>
 							<textarea class="Description"></textarea>
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Загрузка файла</p>
-							<input name="filename" id="BookFile" type="File" class="File">
+							<input name="BookFile" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
 							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
