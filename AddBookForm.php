@@ -61,26 +61,27 @@
 		exit($responseCategory);
 	}
 
-
-
+	var_dump($_POST);
 	// Заливка книги
 	if (isset($_POST['submit'])) {
 		$BookName = $_POST['BookName'];
 		$BookYear = $_POST['BookYear'];
-		if($_POST['BookAutor']) {
-			$count = count($_POST['BookAutor'])-1;
-			foreach ($_POST['BookAutor'] as $key => $_POST['BookAutor']) {
+		$BookAuthors = $_POST['BookAuthors'];
+		$BookCategories = $_POST['BookCategories'];
+
+		$connection = new mysqli('vat', 'root', '', 'vat');
+		// Пока оставим это тут
+		/*if($_POST['BookAuthor']) {
+			$count = count($_POST['BookAuthor'])-1;
+			foreach ($_POST['BookAuthor'] as $key => $_POST['BookAuthor']) {
     			if ($key != $count) {
-					$BookAutors = $BookAutors.  $_POST['BookAutor']. ', ';
+					$BookAuthors = $BookAuthors.  $_POST['BookAuthor']. ', ';
 				} else {
-					$BookAutors = $BookAutors.  $_POST['BookAutor'];
+					$BookAuthors = $BookAuthors.  $_POST['BookAuthor'];
 				}
 			}
 		}
 		
-		foreach ($_POST['BookAutor'] as $item) {
-			echo $item->nodeValue . "\n";
-		}
 		if($_POST['BookCategory']) {
 			$count = count($_POST['BookCategory'])-1;
 			foreach ($_POST['BookCategory'] as $key => $_POST['BookCategory']) {
@@ -91,7 +92,30 @@
 				}
 			}
 			echo($BookCategories);
+		}*/
+		
+
+
+		
+		// Проверка и добавление авторов
+		foreach ($BookAuthors as $BookAuthor) {
+			$sqla = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$BookAuthor%'");
+			if ($sqla->num_rows = 0) {
+				$query = "INSERT INTO authors (Name) VALUES ('$BookAuthor')";
+				$result = mysqli_query ($connection, $query);
+			}
 		}
+
+		// Проверка и добавление категорий
+		/*foreach ($BookCategories as $BookCategory) {
+			$sqlc = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$BookCategory%'");
+			if ($sqlc->num_rows = 0) {
+				$query = "INSERT INTO categories (Category) VALUES ('$BookCategory')";
+				$result = mysqli_query ($connection, $query);
+			}
+		}*/
+
+		// Загрузка файла
 		if(is_uploaded_file($_FILES["filename"]["tmp_name"])) {
 			$extension = pathinfo($_FILES["filename"]["name"], PATHINFO_EXTENSION);
 			$new_name = $BookName. $BookYear. '.'. $extension;
@@ -103,7 +127,7 @@
 		}
 		if ($i == 1) {
 			$PathToFile = "Files/". $new_name;
-			$query = "INSERT INTO books (BookName, BookYear, BookAutors, BookCategories, PathToFile) VALUES ('$BookName', '$BookYear', '$BookAutors', '$BookCategories', '$PathToFile')";
+			$query = "INSERT INTO books (BookName, BookYear, PathToFile) VALUES ('$BookName', '$BookYear', '$PathToFile')";
 			$result = mysqli_query ($connection, $query);
 			if ($result) {
 				echo '<script type="text/javascript">';
@@ -144,7 +168,7 @@
 			</div>
 			<div class="Option">
 				<h2 class="MainHeader">Добавить книгу</h2>
-				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
+				<form name="AddBookForm" id="AddBookForm" class="AddBookForm" method="POST" enctype="multipart/form-data">
 					<div class="Category">
 <!-- <<<<<<< HEAD -->
 							<p class="CategoryName">Название Книги</p>
@@ -158,34 +182,32 @@
 					
 					<div class="Category">
 						<p class="CategoryName">Автор(ы):</p>
-						<!--<div class="Testik">
+						<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBox" class="TextInput TagSearch">-->
-								<input class="Selector BookAutor">
-								<button Class="FormButton AddAutor Add" type="button">
+								<input type="text" id="SearchBox" class="TextInput TagSearch">
+								<button Class="FormButton AddAuthor Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							<!--</div>
+							</div>
 						<div id="responseAuthors" class="HintBox"></div>
 						</div>
 						<div class="tagPreview">
-						</div>-->
+						</div>
 					</div>
 					
 					<!-- КАТЕГОРИИ -->
 					<div class="Category">
-						<!--<p class="CategoryName">Категория(и):</p>
+						<p class="CategoryName">Категория(и):</p>
 						<div class="Testik">
 							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">-->
-								<input class="Selector BookCategory">
+								<input type="text" id="SearchBoxCategory" class="TextInput TagSearch">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
-							<!--</div>
+							</div>
 							<div id="responseCategory" class="HintBox"></div>
 						</div>
-						<div class="tagPreview"></div>-->
+						<div class="tagPreview"></div>
 					</div>
 					
 					<div class="Category">
@@ -194,7 +216,7 @@
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Загрузка файла</p>
-							<input name="BookFile" id="BookFile" type="File" class="File">
+							<input name="filename" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
 							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>

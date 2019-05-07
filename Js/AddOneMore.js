@@ -57,42 +57,59 @@ $(document).ready(), function() {
 	});
 
 	// Добавление тега на страницу 
-	/*$(document).on('click', '.Add', function () {
+	BookAuthors = [];
+	BookCategories = [];
+	$(document).on('click', '.Add', function () {
 		var tagVal = $(this).prev(".TagSearch").val();
 			$tagBox = $(this).parents('.Testik').next('.tagPreview');
 			tagName = '';
 			id = $(this).prev(".TagSearch").attr("id");
-			console.log(id);
 		
-			if (id == "SearchBox") { 
-				tagName = "name='BookAutor[]'";
-			};
-			if (id == "SearchBoxCategory") {
-				tagName = "name='BookCategory[]'";
-			};
-			
+		// Проверка на наличие совпадений в массиве авторов. Если совпадение есть, то функция прерывается
+		if (id == "SearchBox") { 
+			if(BookAuthors.indexOf(tagVal) == -1) {
+				BookAuthors.push(tagVal);
+				tagName = 'class="BookAuthor"';
+			} else {
+				return;
+			}
+		}
+		// Проверка на наличие совпадений в массиве категорий. Если совпадение есть, то функция прерывается
+		if (id == "SearchBoxCategory") {
+			if(BookCategories.indexOf(tagVal) == -1) {
+				BookCategories.push(tagVal);
+				tagName = 'class="BookCategory"';
+			} else {
+				return;
+			}
+		}
+		
+		// Добавление тегов на страницу
 		if (tagVal != '') {
-			$tag = "<span class='tag'><a  " + tagName + ">" + tagVal +
-						"</a><button type='button' class='removeTag'>" +
+			$tag = "<span class='tag'><span " + tagName + ">" + tagVal +
+						"</span><button type='button' class='removeTag'>" +
 							"<svg width='10px' height='10px' viewBox='0 0 192 192'><path d='M37.65625,26.34375l-11.3125,11.3125l58.34375,58.34375l-58.34375,58.34375l11.3125,11.3125l58.34375,-58.34375l58.34375,58.34375l11.3125,-11.3125l-58.34375,-58.34375l58.34375,-58.34375l-11.3125,-11.3125l-58.34375,58.34375z'></path></svg>" +
 						"</button>" +
 					"</span>";
-			console.log($tag);
 			$tagBox.append($tag);
 		}
 	});
 	// Удаление тега со страницы
 	$(document).on('click', '.removeTag', function () {
 		$(this).parent().remove();
-	});*/
-	$(document).on('click', '.AddAutor', function(){
-	$('<input class="Selector Autor">'
-    ).insertBefore(this);
 	});
-	$(document).on('click', '.AddBookCategory', function(){
-	$('<input class="Selector BookCategory">'
-    ).insertBefore(this);
+	// Отправка тегов в php
+	$('.SubmitButton').on('click', function() {
+		$.ajax({
+			method:'POST',
+			url: 'AddBookForm.php',
+			data:{'BookAuthors[]': BookAuthors},
+			success: function(){
+				alert("OK");
+			}
+		});
 	});
+
 	// Отображение названия файла
 	$('.File').each(function() {
 		var $input = $(this),
@@ -111,5 +128,4 @@ $(document).ready(), function() {
 				$Container.html(Nothing);
 		});
 	});
-	
 }();
