@@ -13,6 +13,7 @@
 		header('Location: MainPage.php');
 		exit();
 	}
+	
 	// Заливка книги
 	if (isset($_POST['submit'])) {
 		$BookName = $_POST['BookName'];
