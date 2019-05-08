@@ -432,7 +432,16 @@ $(document).ready(), function() {
 		$("#SearchBox4").val(author4);
 		$("#responseAuthors4").html("");
 	});
-
+	// Отображение слудующего автора/категорий
+	$('.AddBookAuthor').on('click', function() {
+		$(this).css('display', 'none');
+		$(this).parents(".BookAuthorContainer").next(".BookAuthorContainer").css('display', 'block');
+	});
+	$('.AddBookCategory').on('click', function() {
+		$(this).css('display', 'none');
+		$(this).parents(".BookCategoryContainer").next(".BookCategoryContainer").css('display', 'block');
+	});
+	
 	// Добавление тега на страницу 
 	/*$(document).on('click', '.Add', function () {
 		var tagVal = $(this).prev(".TagSearch").val();
