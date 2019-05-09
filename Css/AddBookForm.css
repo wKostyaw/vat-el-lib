@@ -23,7 +23,7 @@
 	font-size: 14pt;
 	padding-left: 5px;
 }
-.AddTagContainer, .AddFileContainer {
+.AddBookCategoryContainer, .AddBookAuthorContainer, .AddFileContainer {
 	display: flex;
 	flex-direction: row;
 	border: 1px solid #CECECE;
@@ -31,10 +31,10 @@
 	overflow: hidden;
 	width: calc(50% - 5px);
 }
-.TagSearch {
+.BookAuthor, .BookCategory {
 	border: none;
 	height: 36px;
-	width: calc(100% - 41px);
+	width: 100%;
 }
 .BookName {
 	width: calc(100% - 7px);
@@ -96,9 +96,12 @@
 	font-size: 12pt;
 	font-weight: 700;
 }
-
-.Testik {
+.BookCategoryContainer, .BookAuthorContainer {
 	position: relative;
+	display: none;
+}
+.BookCategoryContainer:first-of-type, .BookAuthorContainer:first-of-type {
+	display: block;
 }
 .HintBox {
 	max-height: 161px;
