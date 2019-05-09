@@ -1,5 +1,6 @@
 <?php
 	require "auth.php";
+	// Проверка на админа
 	$username = $_SESSION['login'];
 	$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
 	$result = $connection->query ($admin);
@@ -12,6 +13,7 @@
 		header('Location: MainPage.php');
 		exit();
 	}
+	// Добавление пользователя
 	if (isset($_POST['login']) and isset($_POST['password'])) {
 		$login = $_POST['login'];
 		$password = $_POST['password'];
