@@ -36,6 +36,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Добавить пользователя</title>
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
 	</head>
 	<body>
@@ -55,11 +56,20 @@
 					</ul>
 			</div>
 			<div class="Option">
+				<h2 class="MainHeader">Добавить пользователя</h2>
 				<form method="POST">
-					<h3>Добавить пользователя</h3>
-					<input type="text" name="login" placeholder="Логин" required>
-					<input type="password" name="password" placeholder="Пароль" required>
-					<button type="submit">Добавить</button>
+					<div class="FormElemContainer">
+					<p class="CategoryName">Логин</p>
+					<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" required>
+					</div>
+					<div class="FormElemContainer">
+					<p class="CategoryName">Пароль</p>
+					<input type="password" name="password" placeholder="Пароль" class="TextInput HalfWidth" required>
+					</div>
+					<div class="FormElemContainer">
+					<button type="reset" class="FormButton ResetButton">Очистить</button>
+					<button type="submit" class="FormButton SubmitButton">Добавить</button>
+					</div>
 				</form>
 			</div>
 		</div>

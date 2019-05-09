@@ -65,3 +65,49 @@ a {
 .AdminStart {
 	text-align: center;
 }
+/* Заголовок формы */
+.MainHeader {
+	text-align: center;
+	font-size: 40pt;
+	font-weight: bold;
+	padding: 10px 0px 20px 0px;
+	margin: 0px;
+	color: #59D;
+}
+/* Блоки, на которые разбита форма */
+.FormElemContainer {
+	padding: 10px 30px;
+}
+/* Текстовые поля */
+.TextInput {
+	height: 36px;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	flex: 1;
+	display: inline-block;
+	font-size: 14pt;
+	padding-left: 5px;
+}
+.FullWidth {
+	width: calc(100% - 7px);
+}
+.HalfWidth {
+	width: calc(50% - 10px)
+}
+.FormButton {
+	height: 38px;
+	background-color: #59D;
+	color: #FFF;
+	cursor: pointer;
+}
+.FormButton:hover {
+	background-color: #48C;
+}
+.SubmitButton, .ResetButton {
+	width: calc(50% - 3px);
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	margin-top: 25px;
+	font-size: 12pt;
+	font-weight: 700;
+}

@@ -803,6 +803,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Добавить книгу</title>
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
 		<link rel="stylesheet" type="text/css" href="css/AddBookForm.css">
 	</head>
@@ -825,61 +826,61 @@
 			<div class="Option">
 				<h2 class="MainHeader">Добавить книгу</h2>
 				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
-					<div class="Category">
+					<div class="FormElemContainer">
 							<p class="CategoryName">Название Книги</p>
-							<input type="text" class="TextInput BookName" name="BookName" required>
+							<input type="text" class="TextInput FullWidth" name="BookName" required>
 					</div>
-					<div class="Category">
+					<div class="FormElemContainer">
 							<p class="CategoryName">Год</p>
-							<input type="text" class="TextInput BookYear" name="BookYear" required>
+							<input type="text" class="TextInput HalfWidth" name="BookYear" required>
 					</div>
 					<!-- АВТОРЫ -->
-					<div class="Category">
+					<div class="FormElemContainer">
 						<p class="CategoryName">Автор(ы):</p>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBox" class="TextInput TagSearch" name="BookAuthor1" required>
-								<button Class="FormButton AddBookCategory Add" type="button" >
+						<div class="BookAuthorContainer">
+							<div class="AddBookAuthorContainer">
+								<input type="text" id="SearchBox" class="TextInput BookAuthor" name="BookAuthor1" required>
+								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
 							<div id="responseAuthors" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik" id="testik1">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBox1" class="TextInput TagSearch" name="BookAuthor2">
-								<button Class="FormButton AddBookCategory Add" type="button" >
+						<div class="BookAuthorContainer" id="testik1">
+							<div class="AddBookAuthorContainer">
+								<input type="text" id="SearchBox1" class="TextInput BookAuthor" name="BookAuthor2">
+								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
 							<div id="responseAuthors1" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBox2" class="TextInput TagSearch" name="BookAuthor3">
-								<button Class="FormButton AddBookCategory Add" type="button" >
+						<div class="BookAuthorContainer">
+							<div class="AddBookAuthorContainer">
+								<input type="text" id="SearchBox2" class="TextInput BookAuthor" name="BookAuthor3">
+								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
 							<div id="responseAuthors2" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBox3" class="TextInput TagSearch" name="BookAuthor4">
-								<button Class="FormButton AddBookCategory Add" type="button" >
+						<div class="BookAuthorContainer">
+							<div class="AddBookAuthorContainer">
+								<input type="text" id="SearchBox3" class="TextInput BookAuthor" name="BookAuthor4">
+								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
 							<div id="responseAuthors3" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBox4" class="TextInput TagSearch" name="BookAuthor5">
-								<button Class="FormButton AddBookCategory Add" type="button" >
+						<div class="BookAuthorContainer">
+							<div class="AddBookAuthorContainer">
+								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor5">
+								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
@@ -887,11 +888,11 @@
 						</div>
 					</div>
 					<!-- КАТЕГОРИИ -->
-					<div class="Category">
+					<div class="FormElemContainer">
 						<p class="CategoryName">Категория(и):</p>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory1" class="TextInput TagSearch" name="BookCategory1" required>
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory1" class="TextInput BookCategory" name="BookCategory1" required>
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -899,9 +900,9 @@
 							<div id="responseCategory1" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory2" class="TextInput TagSearch" name="BookCategory2">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory2" class="TextInput BookCategory" name="BookCategory2">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -909,9 +910,9 @@
 							<div id="responseCategory2" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory3" class="TextInput TagSearch" name="BookCategory3">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory3" class="TextInput BookCategory" name="BookCategory3">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -919,9 +920,9 @@
 							<div id="responseCategory3" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory4" class="TextInput TagSearch" name="BookCategory4">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory4" class="TextInput BookCategory" name="BookCategory4">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -929,9 +930,9 @@
 							<div id="responseCategory4" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory5" class="TextInput TagSearch" name="BookCategory5">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory5" class="TextInput BookCategory" name="BookCategory5">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -939,9 +940,9 @@
 							<div id="responseCategory5" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory6" class="TextInput TagSearch" name="BookCategory6">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory6" class="TextInput BookCategory" name="BookCategory6">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -949,9 +950,9 @@
 							<div id="responseCategory6" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory7" class="TextInput TagSearch" name="BookCategory7">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory7" class="TextInput BookCategory" name="BookCategory7">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -959,9 +960,9 @@
 							<div id="responseCategory7" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory8" class="TextInput TagSearch" name="BookCategory8">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory8" class="TextInput BookCategory" name="BookCategory8">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -969,9 +970,9 @@
 							<div id="responseCategory8" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory9" class="TextInput TagSearch" name="BookCategory9">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory9" class="TextInput BookCategory" name="BookCategory9">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -979,9 +980,9 @@
 							<div id="responseCategory9" class="HintBox"></div>
 							<br>
 						</div>
-						<div class="Testik">
-							<div class="AddTagContainer">
-								<input type="text" id="SearchBoxCategory10" class="TextInput TagSearch" name="BookCategory10">
+						<div class="BookCategoryContainer">
+							<div class="AddBookCategoryContainer">
+								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory10">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -990,18 +991,18 @@
 							<br>
 						</div>
 					</div>
-					<div class="Category">
+					<div class="FormElemContainer">
 							<p class="CategoryName">Краткое описание:</p>
 							<textarea class="Description" name="Description1"></textarea>
 					</div>
-					<div class="Category">
+					<div class="FormElemContainer">
 							<p class="CategoryName">Загрузка файла</p>
 							<input name="BookFile" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
 							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
 					</div>
-					<div class="Category">
+					<div class="FormElemContainer">
 						<input type="reset" value="Очистить" class="FormButton ResetButton">
 						<input name="submit" type="submit" value="Добавить" class="FormButton SubmitButton">
 					</div>

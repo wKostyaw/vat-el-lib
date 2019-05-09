@@ -1,29 +1,7 @@
-/* Заголовок */
-.MainHeader {
-	text-align: center;
-	font-size: 40pt;
-	font-weight: bold;
-	padding: 10px 0px 20px 0px;
-	margin: 0px;
-	color: #59D;
-}
-/* Блоки на которые разбита форма */
-.Category {
-	padding: 10px 30px;
-}
 .CategoryName {
 	margin: 3px 0px;
 }
-.TextInput {
-	height: 36px;
-	border: 1px solid #CECECE;
-	border-radius: 3px;
-	flex: 1;
-	display: inline-block;
-	font-size: 14pt;
-	padding-left: 5px;
-}
-.AddTagContainer, .AddFileContainer {
+.AddBookCategoryContainer, .AddBookAuthorContainer, .AddFileContainer {
 	display: flex;
 	flex-direction: row;
 	border: 1px solid #CECECE;
@@ -31,16 +9,10 @@
 	overflow: hidden;
 	width: calc(50% - 5px);
 }
-.TagSearch {
+.BookAuthor, .BookCategory {
 	border: none;
 	height: 36px;
 	width: calc(100% - 41px);
-}
-.BookName {
-	width: calc(100% - 7px);
-}
-.BookYear {
-	width: calc(50% - 10px)
 }
 .Description {
 	width: calc(100% - 12px);
@@ -72,37 +44,22 @@
 	font-weight: 700;
 	color: #FFF;
 }
-
 /* Кнопки */
 .Add {
 	width: 38px;
 	padding: 0px;
 	border: none;
 }
-.FormButton {
-	height: 38px;
-	background-color: #59D;
-	color: #FFF;
-	cursor: pointer;
-}
-.FormButton:hover {
-	background-color: #48C;
-}
-.SubmitButton, .ResetButton {
-	width: calc(50% - 3px);
-	border: 1px solid #CECECE;
-	border-radius: 3px;
-	margin-top: 25px;
-	font-size: 12pt;
-	font-weight: 700;
-}
-
-.Testik {
+.BookCategoryContainer, .BookAuthorContainer {
 	position: relative;
+	display: none;
+}
+.BookCategoryContainer:first-of-type, .BookAuthorContainer:first-of-type {
+	display: block;
 }
 .HintBox {
 	max-height: 161px;
-	width: calc(50% - 40px);
+	width: 50%;
 	overflow-y: auto;
 	position: absolute;
 	background: #FFF;
