@@ -17,6 +17,7 @@
 	if (isset($_POST['submit'])) {
 		$BookName = $_POST['BookName'];
 		$BookYear = $_POST['BookYear'];
+		$Description1 = $_POST['Description1'];
 		$BookAuthor = $_POST['BookAuthor1'];
 		$BookAuthor2 = $_POST['BookAuthor2'];
 		$BookAuthor3 = $_POST['BookAuthor3'];
@@ -43,7 +44,7 @@
 		}
 		if ($i == 1) {
 			$PathToFile = "Files/". $new_name;
-			$query = "INSERT INTO books (BookName, BookYear, PathToFile) VALUES ('$BookName', '$BookYear', '$PathToFile')";
+			$query = "INSERT INTO books (BookName, BookYear, Description, PathToFile) VALUES ('$BookName', '$BookYear', '$Description1', '$PathToFile')";
 			$result = mysqli_query ($connection, $query);
 			if ($result) {
 				echo '<script type="text/javascript">';
@@ -304,8 +305,8 @@
 			}
 		//	Обработчики категорий
 		if ($BookCategory != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
+				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory'");
+				$row1 = mysqli_fetch_row($isCategoryExists);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
 					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
@@ -316,7 +317,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -340,7 +341,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -353,8 +354,8 @@
 				}
 			}
 		if ($BookCategory2 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory2'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
+				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory2'");
+				$row1 = mysqli_fetch_row($isCategoryExists);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
 					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
@@ -365,7 +366,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory2'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory2'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -389,7 +390,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory2'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory2'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -402,8 +403,8 @@
 				}
 			}	
 		if ($BookCategory3 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory3'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
+				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory3'");
+				$row1 = mysqli_fetch_row($isCategoryExists);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
 					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
@@ -414,7 +415,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory3'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory3'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -438,7 +439,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory3'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory3'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -451,7 +452,7 @@
 				}
 			}	
 		if ($BookCategory4 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory4'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory4'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -463,7 +464,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory4'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory4'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -487,7 +488,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory4'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory4'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -500,7 +501,7 @@
 				}
 			}
 		if ($BookCategory5 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory5'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory5'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -512,7 +513,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory5'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory5'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -536,7 +537,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory5'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory5'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -549,7 +550,7 @@
 				}
 			}
 		if ($BookCategory6 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory6'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory6'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -561,7 +562,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory6'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory6'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -585,7 +586,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory6'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory6'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -598,7 +599,7 @@
 				}
 			}
 		if ($BookCategory7 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory7'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory7'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -610,7 +611,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory7'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory7'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -634,7 +635,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory7'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory7'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -647,7 +648,7 @@
 				}
 			}
 		if ($BookCategory8 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory8'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory8'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -659,7 +660,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory8'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory8'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -683,7 +684,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory8'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory8'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -696,7 +697,7 @@
 				}
 			}
 		if ($BookCategory9 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory9'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory9'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -708,7 +709,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory9'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory9'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -732,7 +733,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory9'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory9'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -745,7 +746,7 @@
 				}
 			}
 		if ($BookCategory10 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE name = '$BookCategory10'");
+				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory10'");
 				$row1 = mysqli_fetch_row($isCategoryExists1);
 				if ($row1[0] > 0) {
 					// категория уже есть в таблице
@@ -757,7 +758,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory10'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory10'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -781,7 +782,7 @@
 					    	$BookId = $row["BookID"];
 					    }
 					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Name = '$BookCategory10'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory10'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
 					    // подбирает id категории книги
@@ -991,7 +992,7 @@
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Краткое описание:</p>
-							<textarea class="Description"></textarea>
+							<textarea class="Description" name="Description1"></textarea>
 					</div>
 					<div class="Category">
 							<p class="CategoryName">Загрузка файла</p>

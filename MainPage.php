@@ -1,5 +1,21 @@
 <?php
 	require "auth.php";
+	// поиск соответствий в БД
+	if (isset($_POST['search1'])) {
+		$response1 = "<ul><li>Все соответствия <a href='search.php'> </a></li></ul>";
+		$connection = new mysqli('vat', 'root', '', 'vat');
+		$q1 = $connection->real_escape_string($_POST['q1']);
+		$sql = $connection->query("SELECT BookName FROM books WHERE BookName LIKE '%$q1%'");
+		if ($sql->num_rows > 0) {
+			$response1 = "<ul class='HintList'>";
+				while ($data = $sql->fetch_array())
+					$response1 .= "<li id='li1' class='Hint'>" . $data['Name'] . "</li>";
+			$response1 .= "</ul>";
+		}
+		exit($response1);
+	}
+	// поиск 
+	
 ?>
 <!doctype HTML>
 <html>
@@ -48,14 +64,91 @@
 						</svg>
 						</button>
 				</div>
-				<form class="SearchForm" id="SearchForm" style="display: none;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<form class="SearchForm" id="SearchForm" name="Search" method="POST" style="display: none;">
 					<div class="SBorder">
 						<button type="button" Class="StartSearch SButton">
 							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
 								<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
 							</svg>
 						</button>
-						<input type="text" class="SearchBookName" id="BookName" placeholder="Введите название книги">
+						<input type="text" class="SearchBookName" id="BookName" name="SearchAll" placeholder="Введите название книги">
+						<script type="text/javascript">
+							$(document).ready(), function() {
+								$("#BookName").keyup(function() {
+									var query1 = $("#BookName").val();
+									
+									if (query1.length > 0) {
+										$.ajax (
+											{
+												url: 'MainPage.php',
+												method: 'POST',
+												data: {
+													search1: 1,
+													q1: query1
+												},
+												success: function (data) {
+													$("#response1").html(data);
+												},
+												dataType: 'text'
+											}
+										);			
+									}
+								});
+								$(document).on('click', '#li1', function (){
+								var otvet = $(this).text();
+								$("#BookName").val(otvet);
+								$("#response1").html("");
+							});
+						</script>
+						<div id="response1" class="HintBox"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 						<button type="button" Class="CloseSearch SButton" onclick="SearchHide()">
 							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
 								<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
@@ -88,6 +181,36 @@
 						</div>
 					</div>
 				</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 			</div>
 			
