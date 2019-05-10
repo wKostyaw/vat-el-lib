@@ -806,6 +806,7 @@
 		<title>Добавить книгу</title>
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
 		<link rel="stylesheet" type="text/css" href="css/AddBookForm.css">
+		
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -1011,5 +1012,5 @@
 		</div>
 	</body>
 	<script src="js/JQuerry.js" type="text/javascript"></script>
-	<script src="js/AddOneMore.js" type="text/javascript"></script>
+		<script src="js/AddOneMore.js" type="text/javascript"></script>
 </html>
