@@ -48,13 +48,13 @@
 	white-space:nowrap;
 	background-color: #FFF;
 }
-.ExampleSliderItem {
+.SliderItem {
 	position:relative;
-	left: 8px;
+	left: 0;
 	width: 300px;
 	height: 180px;
-	margin: 10px 8px 10px 0px;
-	padding: 0px;
+	margin: 10px 0px;
+	padding: 0px 0px 0px 8px;
 	display: inline-block;
 	vertical-align: top;
 	transition-property: left;
@@ -72,24 +72,24 @@
 .SliderBookName:hover {
 	text-decoration: underline;
 }
-.SliderItemPreview {
+.SliderBookPreview {
 	display: inline-block;
 	vertical-align: top;
 	height: 140px;
 }
-.SliderItemPreview img {
+.SliderBookPreview img {
 	display: block;
 	height: 100%;
 	margin: 0px auto;
 }
-.SliderItemInfo {
+.SliderBookInfo {
 	display: inline-block;
 	vertical-align: top;
 	height: 145px;
 	font-size: 10pt;
 	padding-left: 5px;
 }
-.SliderItemInfo p {
+.SliderBookInfo p {
 	margin: 0px 0px 10px 0px;
 	white-space: normal;
 	width: 150px;
