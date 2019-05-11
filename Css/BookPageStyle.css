@@ -1,0 +1,43 @@
+.bookPage {
+	display: flex;
+	flex-direction: row;
+}
+.coverAndButtons {
+	min-width: 200px;
+	width: 200px;
+}
+.bookCover {
+	/*display: inline-block;*/
+	width: 100%;
+	max-width: 200px;
+}
+.bookButton {
+	width: 100%;
+	height: 34px;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	margin-top: 5px;
+	background-color: #59D;
+	color: #FFF;
+	font-size: 12pt;
+}
+.bookButton:hover {
+	background-color: #48C;
+}
+.bookInfo {
+	/*display: inline-block;*/
+	padding-left: 10px;
+	width: 100%;
+}
+.bookInfoPoint {
+	margin: 0px 0px 20px 0px;
+	font-size: 12pt;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	/*max-width: 100%;*/
+}
+.bookName {
+	margin: 0px 0px 20px 0px;
+	font-size: 24pt;
+	font-weight: bold;
+}
