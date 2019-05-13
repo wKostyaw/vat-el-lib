@@ -9,10 +9,13 @@
 		$sql2 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q%'");
 		if ($sql->num_rows > 0 or  $sql1->num_rows > 0 or  $sql2->num_rows > 0) {
 			$responseAuthors = "<ul class='HintList'>";
+			$responseAuthors .= "<li class='HintHead'>Авторы:</li>";
 				while ($data = $sql->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Name'] . "</li>";
+				$responseAuthors .= "<li class='HintHead'>Книги:</li>";
 				while ($data = $sql1->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['BookName'] . "</li>";
+				$responseAuthors .= "<li class='HintHead'>Категории:</li>";
 				while ($data = $sql2->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Category'] . "</li>";
 			$responseAuthors .= "</ul>";
@@ -79,43 +82,45 @@
 								<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
 							</svg>
 						</button>
-						<input type="search" class="SearchBookName" id="SearchBox" name="SearchAll" placeholder="Введите название книги">
-							<script type="text/javascript">
-								$(document).ready(),function () {
-									$("#SearchBox").keyup(function() {
-										var query = $("#SearchBox").val();							
-										if (query.length > 0) {
-											$.ajax (
-												{
-													url: 'MainPage.php',
-													method: 'POST',
-													data: {
-														search: 1,
-														q: query
+							<input type="search" class="SearchBookName" id="SearchBox" name="SearchAll" placeholder="Введите название книги">
+								<script type="text/javascript">
+									$(document).ready(),function () {
+										$("#SearchBox").keyup(function() {
+											var query = $("#SearchBox").val();							
+											if (query.length > 0) {
+												$.ajax (
+													{
+														url: 'MainPage.php',
+														method: 'POST',
+														data: {
+															search: 1,
+															q: query
+														},
+														success: function (data) {
+														$("#responseAuthors").html(data);
 													},
-													success: function (data) {
-													$("#responseAuthors").html(data);
-												},
-													dataType: 'text'
-												}
-											);			
-										}
-									});
-
-
-									$(document).on('click', '#li0', function (){
-										var author = $(this).text();
-										$("#SearchBox").val(author);
-										$("#responseAuthors").html("");
-									});
-								}();
-							</script>
-							<div id="responseAuthors" class="HintBox"></div>
-						<button type="button" Class="CloseSearch SButton" onclick="SearchHide()">
-							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
-								<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
-							</svg>
-						</button>
+														dataType: 'text'
+													}
+												);			
+											}
+										});
+	
+	
+										$(document).on('click', '#li0', function (){
+											var author = $(this).text();
+											$("#SearchBox").val(author);
+											$("#responseAuthors").html("");
+										});
+									}();
+								</script>
+								
+							<button type="button" Class="CloseSearch SButton" onclick="SearchHide()">
+								<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
+									<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
+								</svg>
+							</button>
+						</div>
+						<div id="responseAuthors" class="HintBox"></div>
 					</div>
 						<button class="SAOButton SButton" onclick="SAOButtonclick()">
 							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
@@ -147,94 +152,28 @@
 			</div>
 			<div class="SiteWrapper">
 				<div class="SiteContent">
-					<div class="Slider">
-						<div Class="SliderLogo">Название того что внутри</div>
-						<div class="SliderButton SliderButtonLeft" onclick="LeftButtonClick()"><img src="img/ArrowL.png"></div>
-						<div class="SliderItems">
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo">
-									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
-									<p>Год: 2007</p>
-								</div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo">
-									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
-									<p>Год: 2007</p>
-								</div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-						</div>
-						<div class="SliderButton SliderButtonRight" onclick="RightButtonClick()"><img src="img/ArrowR.png"></div>
+					
+					<div class="Slider" id="SliderListofLast">
+						<div Class="SliderLogo">Последние загруженные книги</div>
+						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderItems"></div>
+						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
 					</div>
-					<div class="BookBlock">
-						<div class="BookBlockItem">
-							<div class="BookPreview">
-								<img src="img/BookDefault.png">
-							</div>
-							<div class="BookInfo">
-								<span class="BookInfoItem">Название книги: Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку даже тут не влезло</span>
-								<span class="BookInfoItem">Авторы</span>
-								<span class="BookInfoItem">Издательство</span>
-								<span class="BookInfoItem">Год</span>
-								<span class="BookInfoItem">Что-то еще</span>
-							</div>
-						</div>
-						<div class="BookBlockButtons">
-							<button class="BookBlockButton">
-								Читать
-							</button>
-							<button class="BookBlockButton">
-								Сохранить к себе
-							</button>
-							<button class="BookBlockButton">
-								Что-то еще
-							</button>
-						</div>
+					
+					<div class="Slider" id="SliderCategory1">
+						<div Class="SliderLogo">Категория</div>
+						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderItems"></div>
+						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
 					</div>
+					
+					<div class="Slider" id="SliderAuthor1">
+						<div Class="SliderLogo">Автор</div>
+						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderItems"></div>
+						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
+					</div>
+					
 					<ul class="PageNavigation">
 						<li class="Page PreviousPage"><a href="#">◀</a></li>
 						<li class="Page FirstPage"><a href="#">1</a></li>

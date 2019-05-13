@@ -1,45 +1,4 @@
 $(document).ready(), function() {
-	/*var i = 0;
-	var SPosition = 0;
-	var CPosition = 0;
-	var EPosition = 0;
-	var SliderItems = $(".ExampleSliderItem");
-	var  width = $(".ExampleSliderItem").width();*/
-	/*function LeftButtonClick() {
-		if (EPosition < 0) {
-			EPosition = SPosition + width*2;
-			for (CPosition = SPosition; CPosition <= EPosition; CPosition++) {
-				for (i=0; i<=SliderItems.length-1; i++) {
-					SliderItems[i].style.left = CPosition + 'px';
-				}
-			}
-			SPosition = EPosition;
-		}
-	}
-	function RightButtonClick() {
-		if (EPosition > -width*(SliderItems.length-3)) {
-			EPosition = SPosition - width*2;
-			for (CPosition = SPosition; CPosition >= EPosition; CPosition--) {
-				for (i=0; i<=SliderItems.length-1; i++) {
-					SliderItems[i].style.left = CPosition + 'px';
-				}
-			}
-			SPosition = EPosition;
-		}
-	}*/
-	
-	// Последние добавленные книги
-	
-	
-	/*var	$PathToFile = '',
-		$SliderBookName = '',
-		$SliderBookYear  = '',
-		$SliderBookAuthors = '',
-		$SliderBookCategories = '';*/
-	
-	//$(".SliderItems").html(data); //создание элемента внутри слайдера
-	
-	
 	// Кнопки влево/вправо
 	$('.SliderButtonLeft').on('click', function() {
 		var $Item = $(this).siblings('.SliderItems').children('.SliderItem'),
@@ -70,7 +29,7 @@ function SliderWithLastBooks() {
 	//$SliderID = '#ListofLast';
 	$.ajax (
 				{
-					url: 'SliderTest.php',
+					url: 'Slider.php',
 					method: 'POST',
 					data: {
 						SliderLastItemRequest: $RequestSliderItems,
@@ -79,7 +38,7 @@ function SliderWithLastBooks() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#ListofLast';
+							var	$SliderID = '#SliderListofLast';
 								$SliderBookName = book['BookName'];
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
@@ -99,7 +58,7 @@ function SliderWithSelectedCategory() {
 	$RequestSliderItems = 5; // количество выводимых книг
 	$.ajax (
 				{
-					url: 'SliderTest.php',
+					url: 'Slider.php',
 					method: 'POST',
 					data: {
 						SliderCategoryRequest: $RequestSliderItemsCategory,
@@ -109,7 +68,7 @@ function SliderWithSelectedCategory() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#Category1';
+							var	$SliderID = '#SliderCategory1';
 								$SliderBookName = book['BookName'];
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
@@ -128,7 +87,7 @@ function SliderWithSelectedAuthor() {
 	$RequestSliderItems = 5; // количество выводимых книг
 	$.ajax (
 				{
-					url: 'SliderTest.php',
+					url: 'Slider.php',
 					method: 'POST',
 					data: {
 						SliderAuthorRequest: $RequestSliderItemsAuthor,
@@ -138,7 +97,7 @@ function SliderWithSelectedAuthor() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#Author1',
+							var	$SliderID = '#SliderAuthor1',
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
