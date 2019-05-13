@@ -233,7 +233,7 @@ a {
 	border: 1px solid #37C;
 	position: relative;
 	border-radius: 3px;
-	width: calc(100% - 122px);
+	width: calc(100% - 112px);
 	overflow: hidden;
 	margin: 4px 0px;
 }

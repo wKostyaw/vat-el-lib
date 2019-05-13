@@ -31,11 +31,9 @@
     <head>
         <title>Поиск</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/slider.css">
         <link rel="stylesheet" type="text/css" href="css/BooksList.css">
         <link rel="stylesheet" type="text/css" href="css/PageNavigation.css">
         <script src="js/JQuerry.js" type="text/javascript"></script>
-        <script src="js/Slider.js" type="text/javascript"></script>
         <script src="js/Script.js" type="text/javascript"></script>
     </head>
     <body>
@@ -75,9 +73,6 @@
                         </svg>
                         </button>
                 </div>
-                <form class="SearchForm" id="SearchForm" name="Search" method="GET" action="search.php" style="display: none;">
-                    <div class="SBorder">
-                        <button type="submit" Class="StartSearch SButton" formmethod="GET">
                 <form class="SearchForm" id="SearchForm" name="Search" method="POST" action="search.php" style="display: none;">
 				<div class="SBorder">
                     <div class="SearchBook">
