@@ -117,17 +117,16 @@ a {
 	height: 40px;
 	border-radius: 3px;
 }
-.SBorder {
-	border: 1px solid #37C;
-	border-radius: 3px;
+.SearchBook {
+	/*border: 1px solid #37C;
+	border-radius: 3px;*/
 	background-color: #48C;
 	height: 30px;
-	margin: 4px 0px;
-	float: right;
-	width: calc(100% - 112px);
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 }
+
 .SearchBookName, .SButton, .SAOButton, .SAOInput {
 	outline: none;
 }
@@ -206,4 +205,35 @@ a {
 	padding-left:3px;
 	margin-left: 20px;
 	margin-top: 10px;
+}
+.HintList {
+	width: 100%;
+	background-color: #FFF;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.Hint, .HintHead {
+	width: 100%;
+	border-bottom: 1px solid #CECECE;
+	padding: 10px 0px 10px 5px;
+}
+.Hint:hover, .HintHead:hover {
+	background-color: #59D;
+	color: #FFF;
+}
+.Hint:last-child {
+	border-bottom: none;
+}
+.HintHead {
+	font-weight: bold;
+}
+.SBorder {
+	float: right;
+	border: 1px solid #37C;
+	position: relative;
+	border-radius: 3px;
+	width: calc(100% - 122px);
+	overflow: hidden;
+	margin: 4px 0px;
 }
