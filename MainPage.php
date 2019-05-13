@@ -153,94 +153,28 @@
 			</div>
 			<div class="SiteWrapper">
 				<div class="SiteContent">
-					<div class="Slider">
-						<div Class="SliderLogo">Название того что внутри</div>
-						<div class="SliderButton SliderButtonLeft" onclick="LeftButtonClick()"><img src="img/ArrowL.png"></div>
-						<div class="SliderItems">
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo">
-									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
-									<p>Год: 2007</p>
-								</div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo">
-									<p>Авторы: Вася, Петя, Сеня, Остальные аболтусы</p>
-									<p>Год: 2007</p>
-								</div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-							<div class="ExampleSliderItem">
-								<a href="#" Class="SliderBookName">Название книги</a>
-								<div class="SliderItemPreview"><img src="img/BookDefault.png"></div>
-								<div class="SliderItemInfo"></div>
-							</div>
-						</div>
-						<div class="SliderButton SliderButtonRight" onclick="RightButtonClick()"><img src="img/ArrowR.png"></div>
+					
+					<div class="Slider" id="SliderListofLast">
+						<div Class="SliderLogo">Последние загруженные книги</div>
+						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderItems"></div>
+						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
 					</div>
-					<div class="BookBlock">
-						<div class="BookBlockItem">
-							<div class="BookPreview">
-								<img src="img/BookDefault.png">
-							</div>
-							<div class="BookInfo">
-								<span class="BookInfoItem">Название книги: Супер-пупер, прям капец какое длинное название книги, что аж не влезает в одну строчку даже тут не влезло</span>
-								<span class="BookInfoItem">Авторы</span>
-								<span class="BookInfoItem">Издательство</span>
-								<span class="BookInfoItem">Год</span>
-								<span class="BookInfoItem">Что-то еще</span>
-							</div>
-						</div>
-						<div class="BookBlockButtons">
-							<button class="BookBlockButton">
-								Читать
-							</button>
-							<button class="BookBlockButton">
-								Сохранить к себе
-							</button>
-							<button class="BookBlockButton">
-								Что-то еще
-							</button>
-						</div>
+					
+					<div class="Slider" id="SliderCategory1">
+						<div Class="SliderLogo">Категория</div>
+						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderItems"></div>
+						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
 					</div>
+					
+					<div class="Slider" id="SliderAuthor1">
+						<div Class="SliderLogo">Автор</div>
+						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderItems"></div>
+						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
+					</div>
+					
 					<ul class="PageNavigation">
 						<li class="Page PreviousPage"><a href="#">◀</a></li>
 						<li class="Page FirstPage"><a href="#">1</a></li>
