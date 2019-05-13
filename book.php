@@ -33,7 +33,6 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/BookPageStyle.css">
 		<script src="js/JQuerry.js" type="text/javascript"></script>
-		<script src="js/Slider.js" type="text/javascript"></script>
 		<script src="js/Script.js" type="text/javascript"></script>
 	</head>
 	<body>

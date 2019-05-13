@@ -38,13 +38,14 @@ function SliderWithLastBooks() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#SliderListofLast';
-								$SliderBookName = book['BookName'];
+							var	$SliderID = '#SliderListofLast',
+								$SliderBookId = book['BookID'],
+								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
-								makeItem($SliderID, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
+								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
 						})
 					},
 					dataType: 'text'
@@ -68,13 +69,14 @@ function SliderWithSelectedCategory() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#SliderCategory1';
-								$SliderBookName = book['BookName'];
+							var	$SliderID = '#SliderCategory1',
+								$SliderBookId = book['BookID'],
+								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
-								makeItem($SliderID, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
+								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
 						})
 					},
 					dataType: 'text'
@@ -98,24 +100,24 @@ function SliderWithSelectedAuthor() {
 						$.each(LastBooks, function() {
 							book = this;
 							var	$SliderID = '#SliderAuthor1',
+								$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
-								makeItem($SliderID, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
+								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
 						})
 					},
 					dataType: 'text'
 				}
 			);
 };
-
 // Рисуем элементы в слайдер с указанным Id
-function makeItem($SliderID, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories) {
+function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories) {
 	var $SliderItemTemplate = 
 			'<div class="SliderItem">\n'+
-				'<a href="' + $PathToFile + '" Class="SliderBookName">' + $SliderBookName + '</a>\n'+
+				'<a href="book.php?BookInfo='+$SliderBookId+'" Class="SliderBookName">' + $SliderBookName + '</a>\n'+
 				'<div class="SliderBookPreview"><img src="img/BookDefault.png"></div>\n'+
 				'<div class="SliderBookInfo">\n'+
 					'<p>Год: ' + $SliderBookYear + '</p>\n'+

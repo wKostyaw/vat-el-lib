@@ -212,6 +212,9 @@ a {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .Hint, .HintHead {
 	width: 100%;
