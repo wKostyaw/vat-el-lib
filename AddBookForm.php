@@ -1,5 +1,5 @@
 <?php
-	require "auth.php";
+	include_once "auth.php";
 	// Проверка на админа
 	$username = $_SESSION['login'];
 	$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
