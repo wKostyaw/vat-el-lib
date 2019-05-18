@@ -5,28 +5,34 @@
 	}
 	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
 	// 
-	if ($_POST['submit']) {
-		if (isset($_POST['login']) and isset($_POST['password'])){
+	if ($_POST['submit']) 
+	{
+		if (isset($_POST['login']) and isset($_POST['password']))
+		{
 			$login = $_POST['login'];
 			$password = $_POST['password'];
 			$query = "SELECT * FROM loginparol WHERE login='$login' and password='$password'";
 			$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 			$count = mysqli_num_rows($result);
-
-			if ($count == 1) {
+			if ($count == 1) 
+			{
 					$_SESSION['login'] = $login;
-			} else {
+			} else 
+			{
 				echo '<script type="text/javascript">';
 				echo 'alert("Неправильный логин или пароль!")';
 				echo '</script>';
 			}
 		} 
-		if (isset($_SESSION['login'])){
-			$login = $_SESSION['login'];
-			if ($login == 'admin') {
-				header('Location: AdminPage2.php');
+		if (isset($_SESSION['login']))
+		{
+			$isLoginAdmin = $connection->query("SELECT admin FROM loginparol WHERE login='$login'");
+			if ($isLoginAdmin == 1) 
+			{
+				header('Location: AdminPage.php');
 				exit();
-			} else {
+			} else 
+			{
 				header('Location: MainPage.php');
 				exit();
 			} 
