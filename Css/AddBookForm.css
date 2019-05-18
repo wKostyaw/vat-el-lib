@@ -9,6 +9,10 @@
 	overflow: hidden;
 	width: calc(50% - 5px);
 }
+.AddFileContainer {
+	width: /*calc(*/100%/* - 2px)*/;
+	box-sizing: border-box;
+}
 .BookAuthor, .BookCategory {
 	border: none;
 	height: 36px;
@@ -23,11 +27,15 @@
 	padding: 5px;
 }
 /* Загрузка файла */
+.uploadContainer {
+	display: inline-block;
+	width: calc(50% - 3px);
+}
 .File {
 	display: none;
 }
 .LFile {
-	width: 50%;
+	width: 100%;
 	font-size: 14pt;
 	padding: 8px 0px;
 	display: inline-block;
@@ -118,4 +126,23 @@
 }
 .removeTag:hover svg {
 	fill: #222;
+}
+
+/* Поиск книги на изменение/удаление */
+.flexContainer {
+	display: flex;
+}
+.SBorder {
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.BSearchName, .BSearchBtn {
+	border: none;
+}
+.BSearchBtn {
+	fill: #FFF;
+}
+.findBook {
+	width: 100%;
 }

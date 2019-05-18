@@ -201,11 +201,14 @@ a {
 	flex-wrap: wrap;
 	justify-content: space-around;
 }
+.listContainer {
+	margin: 10px auto;
+	border: 1px solid #CECECE;
+}
 .authorList, .categoryList {
 	padding-left: 0px;
 	list-style: none;
-	margin: 10px auto;
-	border: 1px solid #CECECE;
+	margin: 0px;
 }
 .categoryListItem, .authorListItem {
 	border-bottom: 1px solid #CECECE;
@@ -219,4 +222,12 @@ a {
 .categoryListItem a:hover, .authorListItem a:hover {
 	color: #FFF;
 	background-color: #59D;
+}
+.listHeader {
+	display: block;
+	width: 300px;
+	text-align: center;
+	padding: 5px 0px;
+	background-color: #59D;
+	color: #FFF;
 }

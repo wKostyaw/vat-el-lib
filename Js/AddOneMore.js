@@ -1,4 +1,4 @@
-$(document).ready(), function() {
+$(document).ready(function(){
 	// autocomplete для категорий
 	// 1
 	$("#SearchBoxCategory1").keyup(function() {
@@ -433,6 +433,12 @@ $(document).ready(), function() {
 		$("#responseAuthors4").html("");
 	});
 
+	// Скрытие строки поика и показ формы для изменения
+	$('.BSearchBtn').on('click', function() {
+		$('.findBook').css('display', 'none');
+		$('.AddBookForm').css('display', 'block');
+	});
+	
 	// Отображение следующего автора/категории
 	$('.AddBookAuthor').on('click', function() {
 		$(this).css('display', 'none');
@@ -443,43 +449,6 @@ $(document).ready(), function() {
 		$(this).parents(".BookCategoryContainer").next(".BookCategoryContainer").css('display', 'block');
 	});
 	
-	// Добавление тега на страницу 
-	/*$(document).on('click', '.Add', function () {
-		var tagVal = $(this).prev(".TagSearch").val();
-			$tagBox = $(this).parents('.Testik').next('.tagPreview');
-			tagName = '';
-			id = $(this).prev(".TagSearch").attr("id");
-			console.log(id);
-		
-			if (id == "SearchBox") { 
-				tagName = "name='BookAutor[]'";
-			};
-			if (id == "SearchBoxCategory") {
-				tagName = "name='BookCategory[]'";
-			};
-			
-		if (tagVal != '') {
-			$tag = "<span class='tag'><a  " + tagName + ">" + tagVal +
-						"</a><button type='button' class='removeTag'>" +
-							"<svg width='10px' height='10px' viewBox='0 0 192 192'><path d='M37.65625,26.34375l-11.3125,11.3125l58.34375,58.34375l-58.34375,58.34375l11.3125,11.3125l58.34375,-58.34375l58.34375,58.34375l11.3125,-11.3125l-58.34375,-58.34375l58.34375,-58.34375l-11.3125,-11.3125l-58.34375,58.34375z'></path></svg>" +
-						"</button>" +
-					"</span>";
-			console.log($tag);
-			$tagBox.append($tag);
-		}
-	});
-	// Удаление тега со страницы
-	$(document).on('click', '.removeTag', function () {
-		$(this).parent().remove();
-	});*/
-	// $(document).on('click', '.AddAutor', function(){
-	// $('<input class="Selector Autor">'
- //    ).insertBefore(this);
-	// });
-	// $(document).on('click', '.AddBookCategory', function(){
-	// $('<input class="Selector BookCategory">'
- //    ).insertBefore(this);
-	// });
 	// Отображение названия файла
 	$('.File').each(function() {
 		var $input = $(this),
@@ -498,5 +467,5 @@ $(document).ready(), function() {
 				$Container.html(Nothing);
 		});
 	});
-	
-}();
+		
+});

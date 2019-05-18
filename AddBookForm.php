@@ -806,7 +806,8 @@
 		<title>Добавить книгу</title>
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
 		<link rel="stylesheet" type="text/css" href="css/AddBookForm.css">
-		
+		<script src="js/JQuerry.js" type="text/javascript"></script>
+		<script src="js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -997,11 +998,20 @@
 							<textarea class="Description" name="Description1"></textarea>
 					</div>
 					<div class="FormElemContainer">
-							<p class="CategoryName">Загрузка файла</p>
+						<div class="uploadContainer">
+							<p class="CategoryName">Файл книги</p>
 							<input name="BookFile" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
-							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
+						</div>
+						<div class="uploadContainer">
+							<p class="CategoryName">Превью книги</p>
+							<input name="BookPreview" id="BookPreview" type="File" class="File">
+							<label for="BookPreview" class="AddFileContainer">
+								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+							</label>
+						</div>
 					</div>
 					<div class="FormElemContainer">
 						<input type="reset" value="Очистить" class="FormButton ResetButton">
@@ -1011,6 +1021,4 @@
 			</div>
 		</div>
 	</body>
-	<script src="js/JQuerry.js" type="text/javascript"></script>
-		<script src="js/AddOneMore.js" type="text/javascript"></script>
 </html>

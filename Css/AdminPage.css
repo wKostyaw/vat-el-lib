@@ -103,7 +103,7 @@ a {
 .FormButton:hover {
 	background-color: #48C;
 }
-.SubmitButton, .ResetButton {
+.SubmitButton, .ResetButton, .DeleteButton {
 	width: calc(50% - 3px);
 	border: 1px solid #CECECE;
 	border-radius: 3px;

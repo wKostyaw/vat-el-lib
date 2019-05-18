@@ -5,7 +5,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Изменить/удалить книгу</title>
+		
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
+		<link rel="stylesheet" type="text/css" href="css/AddBookForm.css">
+		
+		<script src="js/JQuerry.js" type="text/javascript"></script>
+		<script src="js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -24,8 +30,35 @@
 					</ul>
 			</div>
 			<div class="Option">
-				<h2 class="MainHeader">Добавить книгу</h2>
-				<form class="AddBookForm" method="POST" enctype="multipart/form-data">
+				<h2 class="MainHeader">Изменить/удалить книгу</h2>
+				
+				
+				<form class="findBook" name="findBook">
+					<div class="FormElemContainer">
+						<p class="CategoryName">Поиск по названию(надо придумать нормальную подпись)</p>
+						<div class="flexContainer SBorder">
+						
+						
+							<input type="text" class="TextInput FullWidth BSearchName">
+							
+							
+							<button Class="FormButton BSearchBtn" type="button">
+								<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
+									<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
+								</svg>
+							</button>
+							
+							
+							<!-- Автокомплит сюда -->
+							<div class="HintBox"></div>
+							
+							
+						</div>
+					</div>
+				</form>
+				
+				
+				<form class="AddBookForm" method="POST" enctype="multipart/form-data" style="display: none;">
 					<div class="FormElemContainer">
 							<p class="CategoryName">Название Книги</p>
 							<input type="text" class="TextInput FullWidth" name="BookName" required>
@@ -201,14 +234,19 @@
 							<label for="BookFile" class="AddFileContainer">
 							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
+							
+							<p class="CategoryName">Загрузка файла</p>
+							<input name="BookFile" id="BookFile" type="File" class="File">
+							<label for="BookFile" class="AddFileContainer">
+							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+							</label>
 					</div>
 					<div class="FormElemContainer">
-						<input type="reset" value="Очистить" class="FormButton ResetButton">
-						<input name="submit" type="submit" value="Добавить" class="FormButton SubmitButton">
+						<input type="button" value="Удалить" class="FormButton DeleteButton">
+						<input name="submit" type="submit" value="Изменить" class="FormButton SubmitButton">
 					</div>
 				</form>
 			</div>
 		</div>
 	</body>
-	<script src="js/JQuerry.js" type="text/javascript"></script>
 </html>

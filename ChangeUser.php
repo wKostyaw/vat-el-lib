@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Изменить/удалить пользователя</title>
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
 	</head>
 	<body>

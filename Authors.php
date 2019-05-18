@@ -125,34 +125,56 @@
 				<div class="SiteContent">
 					<h2>Авторы</h2>
 					<div class="flexContainer">
-						<ul class="authorList">
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-						</ul>
-						<ul class="authorList">
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-						</ul>
-						<ul class="authorList">
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-						</ul>
-						<ul class="authorList">
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-							<li class="authorListItem"><a href="#">Автор</a></li>
-						</ul>
+						<div class="listContainer">
+							<span class="listHeader">А</span>
+							<ul class="authorList">
+								<li class="authorListItem"><a href="#">Автор</a></li>
+								<li class="authorListItem"><a href="#">Автор</a></li>
+								<li class="authorListItem"><a href="#">Автор</a></li>
+								<li class="authorListItem"><a href="#">Автор</a></li>
+								<li class="authorListItem"><a href="#">Автор</a></li>
+							</ul>
+						</div>
+						<div class="listContainer">
+							<span class="listHeader">Б</span>
+							<ul class="authorList">
+								<li class="authorListItem"><a href="#">Бавтор</a></li>
+								<li class="authorListItem"><a href="#">Бавтор</a></li>
+								<li class="authorListItem"><a href="#">Бавтор</a></li>
+								<li class="authorListItem"><a href="#">Бавтор</a></li>
+								<li class="authorListItem"><a href="#">Бавтор</a></li>
+							</ul>
+						</div>
+						<div class="listContainer">
+							<span class="listHeader">В</span>
+							<ul class="authorList">
+								<li class="authorListItem"><a href="#">Вавтор</a></li>
+								<li class="authorListItem"><a href="#">Вавтор</a></li>
+								<li class="authorListItem"><a href="#">Вавтор</a></li>
+								<li class="authorListItem"><a href="#">Вавтор</a></li>
+								<li class="authorListItem"><a href="#">Вавтор</a></li>
+							</ul>
+						</div>
+						<div class="listContainer">
+							<span class="listHeader">Г</span>
+							<ul class="authorList">
+								<li class="authorListItem"><a href="#">Извековтор</a></li>
+								<li class="authorListItem"><a href="#">Извековтор</a></li>
+								<li class="authorListItem"><a href="#">Извековтор</a></li>
+								<li class="authorListItem"><a href="#">Извековтор</a></li>
+								<li class="authorListItem"><a href="#">Извековтор</a></li>
+							</ul>
+						</div>
+						<div class="listContainer">
+							<span class="listHeader">В</span>
+							<ul class="authorList">
+								<li class="authorListItem"><a href="#">Давтор</a></li>
+								<li class="authorListItem"><a href="#">Давтор</a></li>
+								<li class="authorListItem"><a href="#">Давтор</a></li>
+								<li class="authorListItem"><a href="#">Давтор</a></li>
+								<li class="authorListItem"><a href="#">Давтор</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
