@@ -14,19 +14,18 @@ a {
 .Logo {
 	height: 40px;
 	padding: 5px 0px;
-	float: left;
 }
 .SiteName {
 	font-size: 24pt;
 	padding: 7px;
 	margin: 0;
-	float: left;
 }
 .HeaderContent, .SiteWrapper, .FooterContent, .SearchForm, .NCentered {
 	width: 100%;
 	max-width: 1000px;
 	min-width: 700px;
 	margin: 0px auto;
+	display: flex;
 }
 .SiteHeader {
 	width: 100%;
@@ -82,7 +81,6 @@ a {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
-	float: left;
 	height: 40px;
 }
 .NButton {
@@ -97,8 +95,8 @@ a {
 	border: none;
 	color: #FFF;
 	font-size: 12pt;
-	float: right;
 	cursor: pointer;
+	/*align-self: flex-end;*/
 }
 .NBLink {
 	color: #FFF;
@@ -114,8 +112,9 @@ a {
 
 .SearchForm {
 	background-color: #59D;
-	height: 40px;
+	height: 32px;
 	border-radius: 3px;
+	padding: 4px 0px 4px 4px;
 }
 .SearchBook {
 	/*border: 1px solid #37C;
@@ -162,49 +161,7 @@ a {
 	fill: #FFF;
 }
 .OpenSearch {
-	float: right;
-	margin: 5px 0px;
-}
-
-.SAOButton {
-	border: none;
-	float: left;
-	background-color: #59D;
-	margin: 5px 0px 5px 5px;
-}
-.SAOAutor {
-	border-right: 1px solid #CECECE;
-}
-.SAOYear {
-	
-}
-.SAOGenre {
-	border-left: 1px solid #CECECE;
-}
-.SAOLabel {
-	margin-left: 20px;
-	font-size: 10pt;
-}
-.SAOOptions {
-	position: relative;
-	display: flex;
-	background-color: #FFF;
-	border: 1px solid #CECECE;
-	z-index: 2;
-	width: 100%;
-}
-.SAOOption {
-	vertical-align: top;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	width: calc(100%/3);
-}
-.SAOInput {
-	display: block;
-	width: 250px;
-	padding-left:3px;
-	margin-left: 20px;
-	margin-top: 10px;
+	margin: 5px 0px 5px auto;
 }
 .HintList {
 	width: 100%;
@@ -216,27 +173,50 @@ a {
 	overflow-y: auto;
 	overflow-x: hidden;
 }
-.Hint, .HintHead {
+.Hint {
 	width: 100%;
 	border-bottom: 1px solid #CECECE;
 	padding: 10px 0px 10px 5px;
 }
-.Hint:hover, .HintHead:hover {
+.Hint:hover {
 	background-color: #59D;
 	color: #FFF;
 }
 .Hint:last-child {
 	border-bottom: none;
 }
-.HintHead {
-	font-weight: bold;
-}
 .SBorder {
-	float: right;
 	border: 1px solid #37C;
 	position: relative;
 	border-radius: 3px;
-	width: calc(100% - 112px);
+	width: 100%;
 	overflow: hidden;
-	margin: 4px 0px;
+	margin: 0px;
+}
+
+/* Стили для списка авторов и категорий */
+.flexContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.authorList, .categoryList {
+	padding-left: 0px;
+	list-style: none;
+	margin: 10px auto;
+	border: 1px solid #CECECE;
+}
+.categoryListItem, .authorListItem {
+	border-bottom: 1px solid #CECECE;
+	width: 300px;
+}
+.categoryListItem a, .authorListItem a {
+	display: block;
+	padding: 10px;
+	color: #000;
+}
+.categoryListItem a:hover, .authorListItem a:hover {
+	color: #FFF;
+	background-color: #59D;
 }

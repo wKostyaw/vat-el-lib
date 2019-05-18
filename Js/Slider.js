@@ -1,31 +1,32 @@
-$(document).ready(), function() {
+jQuery(document).ready(function(){
 	// Кнопки влево/вправо
-	$('.SliderButtonLeft').on('click', function() {
-		var $Item = $(this).siblings('.SliderItems').children('.SliderItem'),
-			$Step = $Item.width() * 2;
-			if(parseInt($Item.css('left')) < 0) {
-				$Item.css('left', '+=' + $Step);
-			};
-	});
-	$('.SliderButtonRight').on('click', function() {
-		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
-			$Step = $Item.width() * 2 /*+ 'px'*/,
-			$SliderEnd = -(($Item.width() * $Item.length) - ($Step * 2));
-			if(parseInt($Item.css('left')) >= $SliderEnd) {
-				$Item.css('left', '-=' + $Step);
-			};
-	});
-	
-	
-	
 	SliderWithLastBooks();
 	SliderWithSelectedCategory();
 	SliderWithSelectedAuthor();
-}();
+	
+	
+	$('.SliderButtonLeft').on('click', function() {
+		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
+			$Step = $Item.width() * 2;
+			//if(parseInt($Item.css('left')) < 0) {
+				$Item.css('left', '+=' + $Step);
+				console.log("work");
+			//};
+	});
+	$('.SliderButtonRight').on('click', function() {
+		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
+			$Step = $Item.width() * 2;
+			$SliderEnd = -(($Item.width() * $Item.length) - ($Step));
+			//if(parseInt($Item.css('left')) >= $SliderEnd) {
+				$Item.css('left', '-=' + $Step);
+				console.log("work");
+			//};
+	});	
+});
 
 /* Функция выводящая последние добавленные книги */
 function SliderWithLastBooks() {
-	$RequestSliderItems = 5; // количество выводимых книг
+	$RequestSliderItems = 10; // количество выводимых книг
 	//$SliderID = '#ListofLast';
 	$.ajax (
 				{
@@ -56,7 +57,7 @@ function SliderWithLastBooks() {
 function SliderWithSelectedCategory() {
 	//$SliderID = '#Category1';
 	$RequestSliderItemsCategory = 'Роман'; // категория выводимых книг
-	$RequestSliderItems = 5; // количество выводимых книг
+	$RequestSliderItems = 20; // количество выводимых книг
 	$.ajax (
 				{
 					url: 'Slider.php',
@@ -85,7 +86,7 @@ function SliderWithSelectedCategory() {
 };
 // Функция, выводящая книги определенного автора
 function SliderWithSelectedAuthor() {
-	$RequestSliderItemsAuthor = 'Автор 13'; // категория выводимых книг
+	$RequestSliderItemsAuthor = 'Пушкин А. С.'; // категория выводимых книг
 	$RequestSliderItems = 5; // количество выводимых книг
 	$.ajax (
 				{
