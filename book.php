@@ -2,7 +2,6 @@
 	include_once "auth.php";
 ?>
 <?php
-	include_once "auth.php";
 	// поиск соответствий в БД
 	if (isset($_POST['search'])) 
 	{
@@ -29,7 +28,7 @@
 <html>
 	<meta charset="utf-8">
 	<head>
-		<title>Шаблон персональной странички книги</title>
+		
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/BookPageStyle.css">
 		<script src="js/JQuerry.js" type="text/javascript"></script>
@@ -58,19 +57,23 @@
 									$kek = $row["admin"] ;
 								}
 							}
-							if ($kek == 1) {
-								echo "<li class='NButton'><a href='adminpage2.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
+
+							if ($kek == 1) 
+							{
+								echo "<li class='NButton'><a href='adminpage.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
 							}
 						?> 
 					</ul>
-				<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
-					<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
-						<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
-					</svg>
-				</button>
+					<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
+						<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
+							<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
+						</svg>
+					</button>
+				</div>
 				<form class="SearchForm" id="SearchForm" name="Search" method="GET" action="search.php" style="display: none;">
 					<div class="SBorder">
 						<div class="SearchBook">
+
 						<button type="submit" Class="StartSearch SButton" formmethod="GET">
 							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
 								<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
@@ -162,7 +165,7 @@
                                     $AuthorID = 'Авторов нет';
                                 }
 					    }
-
+					    echo "<title>" . $row[1] . "</title>";
 						echo "<div class='bookInfo'>";
 							echo "<p class='bookName'>" . $row[1] ." </p>";
 							echo "<p class='bookInfoPoint'><b>Год: </b>" . $row[2] . "</p>";
