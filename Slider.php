@@ -2,7 +2,7 @@
 	include_once "auth.php";
 	function sliderBookAuthors($connection, $BookIdValue) 
 	{ // Авторы книги
-		$sqlbookauthors = $connection->query("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE $BookIdValue");
+		$sqlbookauthors = $connection->query("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$BookIdValue'");
 		$BookAuthors = array();
 		$i = 0;
 		while ($BookAuthorsId = $sqlbookauthors -> fetch_assoc()) {
@@ -39,19 +39,18 @@
 		$LastBooks = array();
 		$j = 0;
 		
-		$sqlbook = $connection->query("SELECT * FROM books ORDER BY BookID DESC LIMIT $Amount");
+		$sqlbook = $connection->query("SELECT * FROM books ORDER BY BookID DESC LIMIT $Amount") or die;
 		while($BookInfo = $sqlbook-> fetch_assoc())
 		{
 			$BookIdValue = $BookInfo["BookID"];
-			$BookInfo[BookAuthors] = sliderBookAuthors($connection, $BookIdValue);
-			$BookInfo[BookCategories] = sliderBookCategories($connection, $BookIdValue);
+			$BookInfo['BookAuthors'] = sliderBookAuthors($connection, $BookIdValue);
+			$BookInfo['BookCategories'] = sliderBookCategories($connection, $BookIdValue);
 			$LastBooks[$j] = $BookInfo;
 			$j = $j + 1;
 		}
 		$LastBooks = json_encode($LastBooks);
 		exit($LastBooks);
 	}
-		
 		
 	if (isset($_POST['SliderCategoryRequest'])) 
 	{
@@ -62,14 +61,14 @@
 		
 		$sqlbookcategory = $connection->query("SELECT CategoryID FROM categories WHERE Category LIKE '$CategoryName'");
 		$SelectedCategoryId = ($sqlbookcategory -> fetch_assoc())['CategoryID'];
-		$sqlbookIds = $connection->query("SELECT BookID FROM books_and_categories WHERE CategoryID LIKE $SelectedCategoryId LIMIT $Amount");
+		$sqlbookIds = $connection->query("SELECT BookID FROM books_and_categories WHERE CategoryID LIKE '$SelectedCategoryId' LIMIT $Amount") or die;
 		while($BookId = $sqlbookIds-> fetch_assoc()) 
 		{
 			$BookIdValue = $BookId['BookID'];
-			$sqlbook = $connection->query("SELECT * FROM books WHERE BookID LIKE $BookIdValue");
+			$sqlbook = $connection->query("SELECT * FROM books WHERE BookID LIKE '$BookIdValue'");
 			$BookInfo = $sqlbook-> fetch_assoc();
-			$BookInfo[BookAuthors] = sliderBookAuthors($connection, $BookIdValue);
-			$BookInfo[BookCategories] = sliderBookCategories($connection, $BookIdValue);
+			$BookInfo['BookAuthors'] = sliderBookAuthors($connection, $BookIdValue);
+			$BookInfo['BookCategories'] = sliderBookCategories($connection, $BookIdValue);
 			$ListOfBooks[$j] = $BookInfo;
 			$j = $j + 1;
 		}
@@ -85,14 +84,14 @@
 		
 		$sqlbookcategory = $connection->query("SELECT AuthorID FROM authors WHERE Name LIKE '$AuthorName'");
 		$SelectedAuthorId = ($sqlbookcategory -> fetch_assoc())['AuthorID'];
-		$sqlbookIds = $connection->query("SELECT BookID FROM books_and_authors WHERE AuthorID LIKE $SelectedAuthorId LIMIT $Amount");
+		$sqlbookIds = $connection->query("SELECT BookID FROM books_and_authors WHERE AuthorID LIKE '$SelectedAuthorId' LIMIT $Amount") or die;
 		while($BookId = $sqlbookIds-> fetch_assoc()) 
 		{
 			$BookIdValue = $BookId['BookID'];
-			$sqlbook = $connection->query("SELECT * FROM books WHERE BookID LIKE $BookIdValue");
+			$sqlbook = $connection->query("SELECT * FROM books WHERE BookID LIKE '$BookIdValue'");
 			$BookInfo = $sqlbook-> fetch_assoc();
-			$BookInfo[BookAuthors] = sliderBookAuthors($connection, $BookIdValue);
-			$BookInfo[BookCategories] = sliderBookCategories($connection, $BookIdValue);
+			$BookInfo['BookAuthors'] = sliderBookAuthors($connection, $BookIdValue);
+			$BookInfo['BookCategories'] = sliderBookCategories($connection, $BookIdValue);
 			$ListOfBooks[$j] = $BookInfo;
 			$j = $j + 1;
 		}
