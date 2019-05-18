@@ -11,14 +11,16 @@
         $sql2 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q%'");
         if ($sql->num_rows > 0 or  $sql1->num_rows > 0 or  $sql2->num_rows > 0) {
             $responseAuthors = "<ul class='HintList'>";
-				$responseAuthors .= "<li id='li0' class='Hint'>Авторы</li>";
+				
                 while ($data = $sql->fetch_array())
+                    
                     $responseAuthors .= "<li id='li0' class='Hint'>" . $data['Name'] . "</li>";
-				$responseAuthors .= "<li id='li0' class='Hint'>Названия книг::</li>";
                 while ($data = $sql1->fetch_array())
+                    
                     $responseAuthors .= "<li id='li0' class='Hint'>" . $data['BookName'] . "</li>";
-				$responseAuthors .= "<li id='li0' class='Hint'>Категории:</li>";
+				
                 while ($data = $sql2->fetch_array())
+                    
                     $responseAuthors .= "<li id='li0' class='Hint'>" . $data['Category'] . "</li>";
             $responseAuthors .= "</ul>";
         }
@@ -73,7 +75,7 @@
                         </svg>
                         </button>
                 </div>
-                <form class="SearchForm" id="SearchForm" name="Search" method="POST" action="search.php" style="display: none;">
+                <form class="SearchForm" id="SearchForm" name="Search" method="GET"  style="display: none;">
 				<div class="SBorder">
                     <div class="SearchBook">
                         <button type="submit" Class="StartSearch SButton">
@@ -316,13 +318,14 @@
                                             for ($i = 0 ; $i < $rows ; ++$i) 
                                             {
                                                 $row = mysqli_fetch_row($book);
-                                                echo "<form action='book.php' method='POST'>";
+                                                echo "<form action='book.php' method='GET'>";
                                                     echo "<div class='BookBlockItem'>";
                                                         echo "<div class='BookPreview'>";
-                                                            echo "<img src='img/BookDefault.png'>";
+                                                            echo "<input type='image' class='BookPreview' src='img/BookDefault.png'>";
                                                         echo "</div>";
                                                         echo "<div class='BookInfo'>";
-                                                            echo "<span class='BookInfoItem'>" . "Название: " . $row[1] . "</span>";
+                                                            echo "<span hidden=''>" . "<input type='text' value='$row[0]' name='BookInfo'> " . "</span>";
+                                                            echo "<span class='BookInfoItem'>" . "Название: " . "<input type='submit' value='$row[1]' >  </input>" . "</span>";
                                                             $AuthorName = array();
                                                             $whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
                                                             $result = $connection->query ($whoisauthor);
@@ -450,13 +453,14 @@
                                             for ($i = 0 ; $i < $rows ; ++$i) 
                                             {
                                                 $row = mysqli_fetch_row($book);
-                                                echo "<form action='book.php' method='POST'>";
+                                                echo "<form action='book.php' method='GET'>";
                                                     echo "<div class='BookBlockItem'>";
                                                         echo "<div class='BookPreview'>";
-                                                            echo "<img src='img/BookDefault.png'>";
+                                                            echo "<input type='image' class='BookPreview' src='img/BookDefault.png'>";
                                                         echo "</div>";
                                                         echo "<div class='BookInfo'>";
-                                                            echo "<span class='BookInfoItem'>" . "Название: " . $row[1] . "</span>";
+                                                            echo "<span hidden=''>" . "<input type='text' value='$row[0]' name='BookInfo'> " . "</span>";
+                                                            echo "<span class='BookInfoItem'>" . "Название: " . "<input type='submit' value='$row[1]' >  </input>" . "</span>";
                                                             $AuthorName = array();
                                                             $whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
                                                             $result = $connection->query ($whoisauthor);

@@ -1,5 +1,6 @@
 <?php
 	include_once "auth.php";
+
 	// поиск соответствий в БД
 	if (isset($_POST['search'])) {
 		$connection = new mysqli('vat', 'root', '', 'vat');
@@ -9,13 +10,13 @@
 		$sql2 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q%'");
 		if ($sql->num_rows > 0 or  $sql1->num_rows > 0 or  $sql2->num_rows > 0) {
 			$responseAuthors = "<ul class='HintList'>";
-			$responseAuthors .= "<li class='HintHead'>Авторы:</li>";
+				// $responseAuthors .= "<li class='HintHead'>Авторы:</li>";
 				while ($data = $sql->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Name'] . "</li>";
-				$responseAuthors .= "<li class='HintHead'>Книги:</li>";
+				// $responseAuthors .= "<li class='HintHead'>Книги:</li>";
 				while ($data = $sql1->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['BookName'] . "</li>";
-				$responseAuthors .= "<li class='HintHead'>Категории:</li>";
+				// $responseAuthors .= "<li class='HintHead'>Категории:</li>";
 				while ($data = $sql2->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Category'] . "</li>";
 			$responseAuthors .= "</ul>";
@@ -25,7 +26,7 @@
 	// поиск 
 	
 ?>
-<!doctype HTML>
+<!DOCTYPE HTML>
 <html>
 	<meta charset="utf-8">
 	<head>
@@ -130,7 +131,6 @@
 							<path d="M166,36h-140c-3.20312,0 -6,-2.79688 -6,-6c0,-3.20312 2.79688,-6 6,-6h140c3.20312,0 6,2.79688 6,6c0,3.20312 -2.79688,6 -6,6z"></path>
 							</svg>
 						</button>
-					
 					<div class="SAOOptions" id="SAOOptions" style="display: none;">
 						<div class="SAOOption SAOAutor">
 							<label class="SAOLabel">Авторы (указать через запятую):
@@ -156,23 +156,23 @@
 					
 					<div class="Slider" id="SliderListofLast">
 						<div Class="SliderLogo">Последние загруженные книги</div>
-						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>
 						<div class="SliderItems"></div>
-						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
+						<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>
 					</div>
 					
 					<div class="Slider" id="SliderCategory1">
 						<div Class="SliderLogo">Категория</div>
-						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>
 						<div class="SliderItems"></div>
-						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
+						<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>
 					</div>
 					
 					<div class="Slider" id="SliderAuthor1">
 						<div Class="SliderLogo">Автор</div>
-						<div class="SliderButton SliderButtonLeft""><img src="img/ArrowL.png"></div>
+						<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>
 						<div class="SliderItems"></div>
-						<div class="SliderButton SliderButtonRight""><img src="img/ArrowR.png"></div>
+						<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>
 					</div>
 					
 					<ul class="PageNavigation">
