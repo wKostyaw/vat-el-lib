@@ -48,14 +48,11 @@
 		</div>
 			<div class="SecondHeader" id="SecondHeader">
 			<div class="NCentered">
-				<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
-				
-				<div id="Navigation">
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
 						<li class="NButton"><a href="#" class="NBLink">Сохраненное</a></li>
-						<li class="NButton"><a href="#" class="NBLink">Авторы</a></li>
-						<li class="NButton"><a href="#" class="NBLink">Категории</a></li>
+						<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
+						<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>
 						<?php 
 							$username = $_SESSION['login'];
 							$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
@@ -124,31 +121,8 @@
 						</div>
 						<div id="responseAuthors" class="HintBox"></div>
 					</div>
-						<button class="SAOButton SButton" onclick="SAOButtonclick()">
-							<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
-							<path d="M116,92h-40l-48,-56h136z"></path>
-							<path d="M116,152l-40,24v-84h40z"></path>
-							<path d="M166,36h-140c-3.20312,0 -6,-2.79688 -6,-6c0,-3.20312 2.79688,-6 6,-6h140c3.20312,0 6,2.79688 6,6c0,3.20312 -2.79688,6 -6,6z"></path>
-							</svg>
-						</button>
-					<div class="SAOOptions" id="SAOOptions" style="display: none;">
-						<div class="SAOOption SAOAutor">
-							<label class="SAOLabel">Авторы (указать через запятую):
-								<input class="SAOInput" type="text">
-							</label>
-						</div>	
-						<div class="SAOOption SAOYear">
-							<label class="SAOLabel">Года (пример: 2019/2005-2009/2012, 2014):
-								<input class="SAOInput" type="text">
-							</label>
-						</div>
-						<div class="SAOOption SAOGenre">
-							<label class="SAOLabel">Жанры (указать через запятую):
-								<input class="SAOInput" type="text">
-							</label>
-						</div>
-					</div>
 				</form>
+				<button class="exitButton" onclick="document.location.replace('?exit');">Выход</button>
 			</div>
 			</div>
 			<div class="SiteWrapper">

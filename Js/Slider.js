@@ -8,19 +8,19 @@ jQuery(document).ready(function(){
 	$('.SliderButtonLeft').on('click', function() {
 		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
 			$Step = $Item.width() * 2;
-			//if(parseInt($Item.css('left')) < 0) {
+			if(parseInt($Item.css('left')) < 0) {
 				$Item.css('left', '+=' + $Step);
 				console.log("work");
-			//};
+			};
 	});
 	$('.SliderButtonRight').on('click', function() {
 		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
 			$Step = $Item.width() * 2;
 			$SliderEnd = -(($Item.width() * $Item.length) - ($Step));
-			//if(parseInt($Item.css('left')) >= $SliderEnd) {
+			if(parseInt($Item.css('left')) >= $SliderEnd) {
 				$Item.css('left', '-=' + $Step);
 				console.log("work");
-			//};
+			};
 	});	
 });
 
