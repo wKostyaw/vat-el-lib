@@ -111,3 +111,21 @@ a {
 	font-size: 12pt;
 	font-weight: 700;
 }
+/* Поиск на изменение/удаление */
+.BSearchName, .BSearchBtn, .USearchName, .USearchBtn {
+	border: none;
+}
+.findBook, .findUser {
+	width: 100%;
+}
+.flexContainer {
+	display: flex;
+}
+.SBorder {
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.BSearchBtn, .USearchBtn {
+	fill: #FFF;
+}

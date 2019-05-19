@@ -433,7 +433,7 @@ $(document).ready(function(){
 		$("#responseAuthors4").html("");
 	});
 
-	// Скрытие строки поика и показ формы для изменения
+	// Скрытие строки поиска и показ формы для изменения
 	$('.BSearchBtn').on('click', function() {
 		$('.findBook').css('display', 'none');
 		$('.AddBookForm').css('display', 'block');

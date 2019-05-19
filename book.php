@@ -221,6 +221,9 @@
 						echo "</div>";
 					 ?>
 				</div>
+				<object data="Files/kniga.pdf" type="application/pdf" width="100%" height="1000px" style="margin-top: 20px;">
+					alt: Что-то пошло не так
+				</object>
 				</div>
 			</div>
 		<div class="SiteFooter">

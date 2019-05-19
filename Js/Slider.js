@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
 	$('.SliderButtonRight').on('click', function() {
 		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
 			$Step = $Item.width() * 2;
-			$SliderEnd = -(($Item.width() * $Item.length) - ($Step));
+			$SliderEnd = -(($Item.width() * $Item.length) - ($Step * 2));
 			if(parseInt($Item.css('left')) >= $SliderEnd) {
 				$Item.css('left', '-=' + $Step);
 				console.log("work");

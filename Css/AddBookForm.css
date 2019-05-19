@@ -127,22 +127,3 @@
 .removeTag:hover svg {
 	fill: #222;
 }
-
-/* Поиск книги на изменение/удаление */
-.flexContainer {
-	display: flex;
-}
-.SBorder {
-	border: 1px solid #CECECE;
-	border-radius: 3px;
-	overflow: hidden;
-}
-.BSearchName, .BSearchBtn {
-	border: none;
-}
-.BSearchBtn {
-	fill: #FFF;
-}
-.findBook {
-	width: 100%;
-}
