@@ -20,10 +20,11 @@
             $responseAuthors .= "</ul>";
         }
         exit($responseAuthors);
-    }
-    function izvekov_nauchilsya_uzat_funktsii($row, $connection) {
-        echo "<form action='book.php' method='POST'>";
-            echo "<div class='BookBlockItem'>";
+    }  
+    function izvekov_nauchilsya_uzat_funktsii($row, $connection, $BookIDabc) 
+    {
+        // echo "<form action='book.php' method='POST'>";
+            echo "<div class='BookBlockItem' id='". $row[0] . "' name='divsavebook'>";
                 echo "<div class='BookPreview'>";
                     echo "<a href='book.php?BookInfo=$row[0]'> <img src='img/BookDefault.png'> </a>";
                 echo "</div>";
@@ -46,7 +47,8 @@
                                 {
                                     array_push($AuthorName, $rowauthor2["Name"]);
                                 }
-                            } else 
+                            } 
+                            else 
                             {
                                 $AuthorName = 'Авторов нет';
                             }
@@ -62,7 +64,7 @@
                         {
                             echo $value;
                         }
-                            else 
+                        else 
                         {
                             echo $value . ", ";
                         }
@@ -87,12 +89,14 @@
                                 {
                                     array_push($Categories, $rowcategory2["Category"]);
                                 }
-                            } else 
+                            } 
+                            else 
                             {
                                 $Categories = 'Авторов нет';
                             }
                         }
-                    } else 
+                    } 
+                    else 
                     {
                         $CategoryID = 'Авторов нет';
                     }
@@ -103,7 +107,7 @@
                         {
                             echo $value;
                         }
-                            else 
+                        else 
                         {
                             echo $value . ", ";
                         }
@@ -112,12 +116,33 @@
                     echo "</span>";
                 echo "</div>";
             echo "</div>";
-            echo "<div class='BookBlockButtons'>";
-                echo "<button class='BookBlockButton'>" . 'Читать' . '</button>';
-                echo "<button class='BookBlockButton' name>" . 'Сохранить к себе' . '</button>';
-            echo "</div>";
-        echo "</form>";
+            echo "<form method='POST' >";
+                echo "<div class='BookBlockButtons'>";
+                    echo "<button class='BookBlockButton' formmethod='post'>" . 'Читать' . '</button>';
+                    echo "<input type='submit' class='BookBlockButton' id='savebook".$row[0]."' name='savebook' value='Сохранить к себе'>";
+                echo "</div>";
+            echo "</form>"; 
+
+        // echo "</form>";    
     }
+    // сохранение книги 
+    $BookIDabc = $_POST['BookID1'];
+    if (isset($_POST['savebook'])) 
+    {
+        echo $BookIDabc . " kjk" ;
+        $username = $_SESSION['login'];
+        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
+        while ($rowUserID = $getUserID->fetch_assoc()) 
+        {
+            $UserID = $rowUserID["id"];
+        }
+        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$BookIDabc'");
+        if ($isLinkExist->num_rows == 0 ) 
+        {
+            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$BookIDabc')");
+        } 
+    }
+    
 ?>
 <!doctype HTML>
 <html>
@@ -193,8 +218,6 @@
 												);			
 											}
 										});
-	
-	
 										$(document).on('click', '#li0', function (){
 											var author = $(this).text();
 											$("#SearchBox").val(author);
@@ -246,7 +269,8 @@
                                     for ($i = 0 ; $i < $rows ; ++$i) 
                                     {
                                         $row = mysqli_fetch_row($sql);
-                                        izvekov_nauchilsya_uzat_funktsii($row, $connection);
+
+                                        izvekov_nauchilsya_uzat_funktsii($row, $connection, $BookIDabc);
                                     }       
                                 } else 
                                 {   
@@ -288,7 +312,7 @@
                                             for ($i = 0 ; $i < $rows ; ++$i) 
                                             {
                                                 $row = mysqli_fetch_row($book);
-                                                izvekov_nauchilsya_uzat_funktsii($row, $connection);
+                                                izvekov_nauchilsya_uzat_funktsii($row, $connection, $BookIDabc);
                                             } 
                                         }
                                     } 
@@ -329,7 +353,7 @@
                                             for ($i = 0 ; $i < $rows ; ++$i) 
                                             {
                                                 $row = mysqli_fetch_row($book);
-                                                izvekov_nauchilsya_uzat_funktsii($row, $connection);
+                                                izvekov_nauchilsya_uzat_funktsii($row, $connection, $BookIDabc);
                                             } 
                                         }
                                     } 
