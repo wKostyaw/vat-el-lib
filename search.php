@@ -119,17 +119,18 @@
             echo "<form method='POST' >";
                 echo "<div class='BookBlockButtons'>";
                     echo "<button class='BookBlockButton' formmethod='post'>" . 'Читать' . '</button>';
-                    echo "<input type='submit' class='BookBlockButton' id='savebook".$row[0]."' name='savebook' value='Сохранить к себе'>";
+                    echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе'>";
                 echo "</div>";
             echo "</form>"; 
 
         // echo "</form>";    
     }
     // сохранение книги 
-    $BookIDabc = $_POST['BookID1'];
-    if (isset($_POST['savebook'])) 
+    
+    if (isset($_POST['BookID'])) 
     {
-        echo $BookIDabc . " kjk" ;
+		$BookIDabc = $_POST['BookID'];
+        /*echo $BookIDabc . " kjk" ;*/
         $username = $_SESSION['login'];
         $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
         while ($rowUserID = $getUserID->fetch_assoc()) 
@@ -140,7 +141,8 @@
         if ($isLinkExist->num_rows == 0 ) 
         {
             $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$BookIDabc')");
-        } 
+        }
+		exit($BookIDabc);
     }
     
 ?>
@@ -154,6 +156,30 @@
         <link rel="stylesheet" type="text/css" href="css/PageNavigation.css">
         <script src="js/JQuerry.js" type="text/javascript"></script>
         <script src="js/Script.js" type="text/javascript"></script>
+		
+		<script>
+			$(document).on('click', '.saveBook', function () {
+				var SavedBookID = $(this).attr('id'),
+				SavedBookID = SavedBookID.replace(/[^\d]/g, '');
+				
+				$.ajax (
+				{
+					url: 'search.php',
+					method: 'POST',
+					data: {
+						BookID: SavedBookID
+					},
+					success: function (data) {
+						alert('Сохранено');
+						alert(data);
+					},
+					dataType: 'text'
+				}
+				);
+				
+			});
+		</script>
+		
     </head>
     <body>
         <div class="SiteHeader">

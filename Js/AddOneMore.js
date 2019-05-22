@@ -432,11 +432,78 @@ $(document).ready(function(){
 		$("#SearchBox4").val(author4);
 		$("#responseAuthors4").html("");
 	});
-
-	// Скрытие строки поиска и показ формы для изменения
-	$('.BSearchBtn').on('click', function() {
+	
+	// Поиск подходящих книг
+	$("#BSearchName").keyup(function() {
+		var searchValue = $("#BSearchName").val();
+										
+		if (searchValue.length > 0) {
+			$.ajax (
+				{
+					url: 'ChangeBook.php',
+					method: 'POST',
+					data: {
+						nameValue: searchValue
+					},
+					success: function (data) {
+					$("#BookHints").html(data);
+				},
+					dataType: 'text'
+				}
+			);
+		}
+	});
+	
+	
+	// Клик по названию книги
+	$(document).on('click', '.bookHint', function (){
+		var BookId = $(this).attr('id'),
+			BookName = $('input[name="BookName"]'),
+			BookYear = $('input[name="BookYear"]'),
+			BookDescription = $('textarea[name="Description1"]'),
+			BookAuthors = $('input[name="BookAuthor[]"]'),
+			BookCategories = $('input[name="BookCategory[]"]');
+			
+			
+		$.ajax (
+				{
+					url: 'ChangeBook.php',
+					method: 'POST',
+					data: {
+						BookId: BookId
+					},
+					success: function (data) {
+						var BookInfo = JSON.parse(data),
+							i = 0;
+						BookName.val(BookInfo['BookName']);
+						BookYear.val(BookInfo['BookYear']);
+						BookDescription.val(BookInfo['Description']);
+						BookInfo['BookAuthors'].forEach(function(Autor) {
+							$(BookAuthors[i]).val(Autor);
+							//alert(BookInfo['BookAuthors'])
+							i++;
+						});
+						i = 0;
+						BookInfo['BookCategories'].forEach(function(Category) {
+							$(BookCategories[i]).val(Category);
+							i++;
+						});
+					},
+					dataType: 'text'
+				}
+			);			
 		$('.findBook').css('display', 'none');
 		$('.AddBookForm').css('display', 'block');
+		$(BookAuthors).forEach(function() {
+			if ($(this).val != '') {
+				$(this).parents(".BookAuthorContainer").css('display', 'block');
+			};
+		});
+		$(BookCategories).forEach(function() {
+			if ($(this).val != '') {
+				$(this).parents(".BookCategoryContainer").css('display', 'block');
+			};
+		});
 	});
 	
 	// Отображение следующего автора/категории

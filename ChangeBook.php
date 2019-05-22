@@ -1,5 +1,57 @@
 <?php
 	include_once "auth.php";
+	
+	if (isset($_POST['nameValue'])) {
+		$nameValue = $connection->real_escape_string($_POST['nameValue']);
+		$sqlRequest = $connection->query("SELECT BookID, BookName, BookYear FROM books WHERE BookName LIKE '%$nameValue%'");
+	if ($sqlRequest->num_rows > 0) {
+		$responseBooks = "<ul class='HintList'>";
+			while ($data = $sqlRequest->fetch_array()) {
+				$responseBooks .= "<li class='bookHint Hint' id='" . $data['BookID'] . "'>" . $data['BookName'] . " - " . $data['BookYear'] . " год" . "</li>";
+			}
+		$responseBooks .= "</ul>";
+	}
+	exit($responseBooks);
+	}
+	
+	if (isset($_POST['BookId'])) {
+		$BookId = $_POST['BookId'];
+		
+		// Название, год, описание
+		$sqlBookInfo = $connection->query("SELECT BookName, BookYear, Description FROM books WHERE BookID LIKE $BookId");
+		$data = $sqlBookInfo->fetch_assoc();
+		
+		// Авторы
+		$sqlbookauthors = $connection->query("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$BookId'");
+		$BookAuthors = array();
+		$i = 0;
+		while ($BookAuthorsId = $sqlbookauthors -> fetch_assoc()) {
+			$AuthorID = $BookAuthorsId["AuthorID"];
+			$sqlauthors = $connection->query("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
+				$AuthorName = $sqlauthors->fetch_assoc();
+				$BookAuthors[$i] = $AuthorName["Name"];
+				$i = $i + 1;
+		} 
+		$data['BookAuthors'] = $BookAuthors;
+		
+		// Категории
+		$sqlbookcategories = $connection->query("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$BookId'");
+		$BookCategories = array();
+		$i = 0;
+		while ($BookCategoriesId = $sqlbookcategories -> fetch_assoc()) 
+		{
+			$CategoryID = $BookCategoriesId["CategoryID"];
+			$sqlcategory = $connection->query("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
+				$CategoryName = $sqlcategory->fetch_assoc();
+				$BookCategories[$i] = $CategoryName["Category"];
+				$i = $i + 1;
+		}
+		$data['BookCategories'] = $BookCategories;
+		
+		$data = json_encode($data);
+		exit($data);
+	}
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,23 +88,11 @@
 				<form class="findBook" name="findBook">
 					<div class="FormElemContainer">
 						<p class="CategoryName">Поиск по названию(надо придумать нормальную подпись)</p>
-						<div class="flexContainer SBorder">
-						
-						
-							<input type="text" class="TextInput FullWidth BSearchName">
-							
-							
-							<button Class="FormButton BSearchBtn" type="button">
-								<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
-									<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
-								</svg>
-							</button>
-							
-							
-							<!-- Автокомплит сюда -->
-							<div class="HintBox"></div>
-							
-							
+						<div class="SBorder">
+							<div class="flexContainer">
+								<input type="text" class="TextInput FullWidth BSearchName" id="BSearchName">
+							</div>
+							<div class="HintBox" Id="BookHints"></div>
 						</div>
 					</div>
 				</form>
@@ -72,7 +112,7 @@
 						<p class="CategoryName">Автор(ы):</p>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox" class="TextInput BookAuthor" name="BookAuthor1" required>
+								<input type="text" id="SearchBox" class="TextInput BookAuthor" name="BookAuthor[]" required>
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -82,7 +122,7 @@
 						</div>
 						<div class="BookAuthorContainer" id="testik1">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox1" class="TextInput BookAuthor" name="BookAuthor2">
+								<input type="text" id="SearchBox1" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -92,7 +132,7 @@
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox2" class="TextInput BookAuthor" name="BookAuthor3">
+								<input type="text" id="SearchBox2" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -102,7 +142,7 @@
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox3" class="TextInput BookAuthor" name="BookAuthor4">
+								<input type="text" id="SearchBox3" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -112,10 +152,7 @@
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor5">
-								<button Class="FormButton AddBookAuthor Add" type="button" >
-									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-								</button>
+								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor[]">
 							</div>
 						<div id="responseAuthors4" class="HintBox"></div>
 						</div>
@@ -125,7 +162,7 @@
 						<p class="CategoryName">Категория(и):</p>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory1" class="TextInput BookCategory" name="BookCategory1" required>
+								<input type="text" id="SearchBoxCategory1" class="TextInput BookCategory" name="BookCategory[]" required>
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -135,7 +172,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory2" class="TextInput BookCategory" name="BookCategory2">
+								<input type="text" id="SearchBoxCategory2" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -145,7 +182,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory3" class="TextInput BookCategory" name="BookCategory3">
+								<input type="text" id="SearchBoxCategory3" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -155,7 +192,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory4" class="TextInput BookCategory" name="BookCategory4">
+								<input type="text" id="SearchBoxCategory4" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -165,7 +202,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory5" class="TextInput BookCategory" name="BookCategory5">
+								<input type="text" id="SearchBoxCategory5" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -175,7 +212,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory6" class="TextInput BookCategory" name="BookCategory6">
+								<input type="text" id="SearchBoxCategory6" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -185,7 +222,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory7" class="TextInput BookCategory" name="BookCategory7">
+								<input type="text" id="SearchBoxCategory7" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -195,7 +232,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory8" class="TextInput BookCategory" name="BookCategory8">
+								<input type="text" id="SearchBoxCategory8" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -205,7 +242,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory9" class="TextInput BookCategory" name="BookCategory9">
+								<input type="text" id="SearchBoxCategory9" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -215,7 +252,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory10">
+								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>

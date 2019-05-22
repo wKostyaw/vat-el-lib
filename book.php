@@ -221,9 +221,15 @@
 						echo "</div>";
 					 ?>
 				</div>
-				<object data="Files/kniga.pdf" type="application/pdf" width="100%" height="1000px" style="margin-top: 20px;">
+				<!--<object data="Files/kniga.pdf" type="application/pdf" width="100%" height="1000px" style="margin-top: 20px;">
 					alt: Что-то пошло не так
-				</object>
+				</object>-->
+				<!--<embed  src="Files/kniga.pdf"
+						hspace="0"
+						width="100%" 
+						height="1000px"
+						type="application/pdf">
+				</embed>-->
 				</div>
 			</div>
 		<div class="SiteFooter">

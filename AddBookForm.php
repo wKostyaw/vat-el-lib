@@ -18,21 +18,10 @@
 		$BookName = $_POST['BookName'];
 		$BookYear = $_POST['BookYear'];
 		$Description1 = $_POST['Description1'];
-		$BookAuthor = $_POST['BookAuthor1'];
-		$BookAuthor2 = $_POST['BookAuthor2'];
-		$BookAuthor3 = $_POST['BookAuthor3'];
-		$BookAuthor4 = $_POST['BookAuthor4'];
-		$BookAuthor5 = $_POST['BookAuthor5'];
-		$BookCategory = $_POST['BookCategory1'];
-		$BookCategory2 = $_POST['BookCategory2'];
-		$BookCategory3 = $_POST['BookCategory3'];
-		$BookCategory4 = $_POST['BookCategory4'];
-		$BookCategory5 = $_POST['BookCategory5'];
-		$BookCategory6 = $_POST['BookCategory6'];
-		$BookCategory7 = $_POST['BookCategory7'];
-		$BookCategory8 = $_POST['BookCategory8'];
-		$BookCategory9 = $_POST['BookCategory9'];
-		$BookCategory10 = $_POST['BookCategory10'];
+		$BookAuthors = $_POST['BookAuthor'];
+		$BookCategories = $_POST['BookCategory'];
+		print_r($BookCategories);
+		print_r($BookAuthors);
 		if(is_uploaded_file($_FILES["BookFile"]["tmp_name"])) {
 			$extension = pathinfo($_FILES["BookFile"]["name"], PATHINFO_EXTENSION);
 			$new_name = $BookName. $BookYear. '.'. $extension;
@@ -55,745 +44,68 @@
 				echo 'alert("Ошибка!")';
 				echo '</script>';
 			}
-			// Обработчик связи таблиц авторов и книг для первого инпута авторов
-			$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$BookAuthor'");
-			$row1 = mysqli_fetch_row($isAuthorExists1);
-			if ($row1[0] > 0) {
-				// автор уже есть в таблице
-				$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-				$result = $connection->query($fatchBookId);
-				if ($result->num_rows > 0) {
-				    // подбирает id заливаемой книги
-				    while($row = $result->fetch_assoc()) {
-				    	$BookId = $row["BookID"];
-				    }
-				} 
-				$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor'");
-				$result = $connection->query($fatchAuthorId);
-				if ($result->num_rows > 0) {
-				    // подбирает id автора книги
-				    while($row = $result->fetch_assoc()) {
-				    	$AuthorId = $row["AuthorID"];
-				    }
-				} 
-				$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-				$result = $connection->query($link);
-			} else {
-				// автора нет в талице
-				// заливка нового автора
-				$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$BookAuthor')";
-				$result = $connection->query($insertNewAuthor);
-				// связь
-				$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-				$result = $connection->query($fatchBookId);
-				if ($result->num_rows > 0) {
-				    // подбирает id заливаемой книги
-				    while($row = $result->fetch_assoc()) {
-				    	$BookId = $row["BookID"];
-				    }
-				} 
-				$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor'");
-				$result = $connection->query($fatchAuthorId);
-				if ($result->num_rows > 0) {
-				    // подбирает id автора книги
-				    while($row = $result->fetch_assoc()) {
-				    	$AuthorId = $row["AuthorID"];
-				    }
-				} 
-				$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-				$result = $connection->query($link);
-			}
-			// Обработчик связи для второго интупа авторов
-			if ($BookAuthor2 != '') {
-				$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$BookAuthor2'");
-				$row1 = mysqli_fetch_row($isAuthorExists1);
-				if ($row1[0] > 0) {
-					// автор уже есть в таблице
+			
+			// Обработчик связи таблиц авторов и книг для инпута авторов
+			foreach ($BookAuthors as $BookAutor => $Value) {
+				if ($Value != '') {
+					$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$Value'");
+					$row1 = mysqli_fetch_row($isAuthorExists1);
+					
+					// Если совпадений имен авторов не найдено добавляем нового автора
+					if ($row1[0] == 0) {
+						$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$Value')";
+						$result = $connection->query($insertNewAuthor);
+					}
+					// Связка таблиц
 					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
 					$result = $connection->query($fatchBookId);
 					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
+						// подбирает id заливаемой книги
+						while($row = $result->fetch_assoc()) {
+							$BookId = $row["BookID"];
+						}
 					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor2'");
+					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$Value'");
 					$result = $connection->query($fatchAuthorId);
 					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				} else {
-					// автора нет в талице
-					// заливка нового автора
-					$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$BookAuthor2')";
-					$result = $connection->query($insertNewAuthor);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor2'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
+						// подбирает id автора книги
+						while($row = $result->fetch_assoc()) {
+							$AuthorId = $row["AuthorID"];
+						}
 					} 
 					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
 					$result = $connection->query($link);
 				}
 			}
-			// Обработчик связи для третьего интупа авторов
-			if ($BookAuthor3 != '') {
-				$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$BookAuthor3'");
-				$row1 = mysqli_fetch_row($isAuthorExists1);
-				if ($row1[0] > 0) {
-					// автор уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor3'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				} else {
-					// автора нет в талице
-					// заливка нового автора
-					$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$BookAuthor3')";
-					$result = $connection->query($insertNewAuthor);
+			foreach ($BookCategories as $BookCategory => $Value) {
+				if ($Value != '') {
+					$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$Value'");
+					$row1 = mysqli_fetch_row($isCategoryExists);
+					if ($row1[0] == 0) {
+						$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$Value')";
+						$result = $connection->query($insertNewCategory);
+					}
 					// связь
 					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
 					$result = $connection->query($fatchBookId);
 					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
+						// подбирает id заливаемой книги
+						while($row = $result->fetch_assoc()) {
+							$BookId = $row["BookID"];
+						}
 					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor3'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				}
-			}
-			// Обработчик связи для четвертого интупа авторов
-			if ($BookAuthor4 != '') {
-				$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$BookAuthor4'");
-				$row1 = mysqli_fetch_row($isAuthorExists1);
-				if ($row1[0] > 0) {
-					// автор уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor4'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				} else {
-					// автора нет в талице
-					// заливка нового автора
-					$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$BookAuthor4')";
-					$result = $connection->query($insertNewAuthor);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor4'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				}
-			}
-			// Обработчик связи для пятого интупа авторов
-			if ($BookAuthor5 != '') {
-				$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$BookAuthor5'");
-				$row1 = mysqli_fetch_row($isAuthorExists1);
-				if ($row1[0] > 0) {
-					// автор уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor5'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				} else {
-					// автора нет в талице
-					// заливка нового автора
-					$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$BookAuthor5')";
-					$result = $connection->query($insertNewAuthor);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$BookAuthor5'");
-					$result = $connection->query($fatchAuthorId);
-					if ($result->num_rows > 0) {
-					    // подбирает id автора книги
-					    while($row = $result->fetch_assoc()) {
-					    	$AuthorId = $row["AuthorID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
-					$result = $connection->query($link);
-				}
-			}
-		//	Обработчики категорий
-		if ($BookCategory != '') {
-				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory'");
-				$row1 = mysqli_fetch_row($isCategoryExists);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory'");
+					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$Value'");
 					$result = $connection->query($fatchCategoryId);
 					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
+						// подбирает id категории книги
+						while($row = $result->fetch_assoc()) {
+							$CategoryId = $row["CategoryID"];
+						}
 					} 
 					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
 					$result = $connection->query($link);
 				}
-			}
-		if ($BookCategory2 != '') {
-				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory2'");
-				$row1 = mysqli_fetch_row($isCategoryExists);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory2'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory2')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory2'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}	
-		if ($BookCategory3 != '') {
-				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory3'");
-				$row1 = mysqli_fetch_row($isCategoryExists);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory3'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory3')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory3'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}	
-		if ($BookCategory4 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory4'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory4'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory4')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory4'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
-		if ($BookCategory5 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory5'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory5'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory5')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory5'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
-		if ($BookCategory6 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory6'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory6'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory6')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory6'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
-		if ($BookCategory7 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory7'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory7'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory7')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory7'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
-		if ($BookCategory8 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory8'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory8'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory8')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory8'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
-		if ($BookCategory9 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory9'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory9'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory9')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory9'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
-		if ($BookCategory10 != '') {
-				$isCategoryExists1 = $connection->query("SELECT count(*) FROM categories WHERE Category = '$BookCategory10'");
-				$row1 = mysqli_fetch_row($isCategoryExists1);
-				if ($row1[0] > 0) {
-					// категория уже есть в таблице
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory10'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				} else {
-					// категории нет в талице
-					// заливка новой категории
-					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$BookCategory10')";
-					$result = $connection->query($insertNewCategory);
-					// связь
-					$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
-					$result = $connection->query($fatchBookId);
-					if ($result->num_rows > 0) {
-					    // подбирает id заливаемой книги
-					    while($row = $result->fetch_assoc()) {
-					    	$BookId = $row["BookID"];
-					    }
-					} 
-					$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$BookCategory10'");
-					$result = $connection->query($fatchCategoryId);
-					if ($result->num_rows > 0) {
-					    // подбирает id категории книги
-					    while($row = $result->fetch_assoc()) {
-					    	$CategoryId = $row["CategoryID"];
-					    }
-					} 
-					$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
-					$result = $connection->query($link);
-				}
-			}
+			}		
 		} else {
 			echo "Загрузите файл";
 		}
@@ -841,7 +153,7 @@
 						<p class="CategoryName">Автор(ы):</p>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox" class="TextInput BookAuthor" name="BookAuthor1" required>
+								<input type="text" id="SearchBox" class="TextInput BookAuthor" name="BookAuthor[]" required>
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -851,7 +163,7 @@
 						</div>
 						<div class="BookAuthorContainer" id="testik1">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox1" class="TextInput BookAuthor" name="BookAuthor2">
+								<input type="text" id="SearchBox1" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -861,7 +173,7 @@
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox2" class="TextInput BookAuthor" name="BookAuthor3">
+								<input type="text" id="SearchBox2" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -871,7 +183,7 @@
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox3" class="TextInput BookAuthor" name="BookAuthor4">
+								<input type="text" id="SearchBox3" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -881,7 +193,7 @@
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor5">
+								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor[]">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -894,7 +206,7 @@
 						<p class="CategoryName">Категория(и):</p>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory1" class="TextInput BookCategory" name="BookCategory1" required>
+								<input type="text" id="SearchBoxCategory1" class="TextInput BookCategory" name="BookCategory[]" required>
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -904,7 +216,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory2" class="TextInput BookCategory" name="BookCategory2">
+								<input type="text" id="SearchBoxCategory2" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -914,7 +226,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory3" class="TextInput BookCategory" name="BookCategory3">
+								<input type="text" id="SearchBoxCategory3" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -924,7 +236,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory4" class="TextInput BookCategory" name="BookCategory4">
+								<input type="text" id="SearchBoxCategory4" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -934,7 +246,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory5" class="TextInput BookCategory" name="BookCategory5">
+								<input type="text" id="SearchBoxCategory5" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -944,7 +256,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory6" class="TextInput BookCategory" name="BookCategory6">
+								<input type="text" id="SearchBoxCategory6" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -954,7 +266,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory7" class="TextInput BookCategory" name="BookCategory7">
+								<input type="text" id="SearchBoxCategory7" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -964,7 +276,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory8" class="TextInput BookCategory" name="BookCategory8">
+								<input type="text" id="SearchBoxCategory8" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -974,7 +286,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory9" class="TextInput BookCategory" name="BookCategory9">
+								<input type="text" id="SearchBoxCategory9" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
@@ -984,7 +296,7 @@
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory10">
+								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory[]">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>

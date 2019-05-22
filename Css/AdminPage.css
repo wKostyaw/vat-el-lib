@@ -120,11 +120,14 @@ a {
 }
 .flexContainer {
 	display: flex;
+	width: 100%;
+	flex-direction: row;
 }
 .SBorder {
 	border: 1px solid #CECECE;
 	border-radius: 3px;
 	overflow: hidden;
+	height: auto;
 }
 .BSearchBtn, .USearchBtn {
 	fill: #FFF;
