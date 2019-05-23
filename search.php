@@ -127,9 +127,9 @@
     }
     // сохранение книги 
     
-    if (isset($_POST['BookID'])) 
+    if (isset($_POST['BookIDajax'])) 
     {
-		$BookIDabc = $_POST['BookID'];
+		$BookIDabc = $_POST['BookIDajax'];
         /*echo $BookIDabc . " kjk" ;*/
         $username = $_SESSION['login'];
         $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
@@ -167,11 +167,11 @@
 					url: 'search.php',
 					method: 'POST',
 					data: {
-						BookID: SavedBookID
+						BookIDajax: SavedBookID
 					},
 					success: function (data) {
 						alert('Сохранено');
-						alert(data);
+						// alert(data);
 					},
 					dataType: 'text'
 				}
