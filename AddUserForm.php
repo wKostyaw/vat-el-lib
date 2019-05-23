@@ -14,23 +14,42 @@
 		exit();
 	}
 	// Добавление пользователя
-	if (isset($_POST['login']) and isset($_POST['password'])) {
-		$login = $_POST['login'];
-		$password = $_POST['password'];
+	// if (isset($_POST['login']) and isset($_POST['password'])) 
+	// {
+	// 	$login = $_POST['login'];
+	// 	$password = $_POST['password'];
 		
-		$query = "INSERT INTO loginparol (login, password) VALUES ('$login', '$password')";
-		$result = mysqli_query ($connection, $query);
+	// 	$query = "INSERT INTO loginparol (login, password) VALUES ('$login', '$password')";
+	// 	$result = mysqli_query ($connection, $query);
 
-		if ($result) {
-			echo '<script type="text/javascript">';
-			echo 'alert("Пользователь успешно добавлен")';
-			echo '</script>';
-		} else {
-			echo '<script type="text/javascript">';
-			echo 'alert("Ошибка!")';
-			echo '</script>';
-		}
+	// 	if ($result) {
+	// 		echo '<script type="text/javascript">';
+	// 		echo 'alert("Пользователь успешно добавлен")';
+	// 		echo '</script>';
+	// 	} else {
+	// 		echo '<script type="text/javascript">';
+	// 		echo 'alert("Ошибка!")';
+	// 		echo '</script>';
+	// 	}
+	// }
+	// генератор паролей 
+
+	if (isset($_POST['pswrdgnrtr'])) 
+	{
+		$otvet = "<p>";
+		$otvet .= "класс, даа";
+		$otvet .= "</p>";
+		// $chars="qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP"; 
+		// $max=10; 
+		// $size=StrLen($chars)-1; 
+		// $password=null; 
+		// while($max--) 
+		// {
+		// $password.=$chars[rand(0,$size)];
+		// }
+		// exit($_POST['pswrdgnrtr']);
 	}
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,6 +57,26 @@
 		<meta charset="utf-8">
 		<title>Добавить пользователя</title>
 		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
+		<script src="js/JQuerry.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(document).on('click', '#passwordGenerator', function(){
+					$.ajax({
+							url: 'AddUserForm.php',
+							method: 'POST',
+							data: {
+								pswrdgnrtr: 1
+							}, 
+							success: function (data) {
+								alert('Класс!');
+								alert(data);
+							},
+							dataType: 'text'
+						}
+					)
+				})
+			});
+		</script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -64,7 +103,8 @@
 					</div>
 					<div class="FormElemContainer">
 					<p class="CategoryName">Пароль</p>
-					<input type="password" name="password" placeholder="Пароль" class="TextInput HalfWidth" required>
+					<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth" required >
+					<input type="button" id="passwordGenerator" value="Сгенерировать пароль">
 					</div>
 					<div class="FormElemContainer">
 					<button type="reset" class="FormButton ResetButton">Очистить</button>
@@ -74,5 +114,5 @@
 			</div>
 		</div>
 	</body>
-	<script src="js/JQuerry.js" type="text/javascript"></script>
+	
 </html>
