@@ -23,6 +23,22 @@
 		}
 		exit($responseAuthors);
 	}
+	$bookinfo = $_GET['BookInfo'];
+	// if (isset($_POST[''])) 
+ //    {
+ //        $username = $_SESSION['login'];
+ //        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
+ //        while ($rowUserID = $getUserID->fetch_assoc()) 
+ //        {
+ //            $UserID = $rowUserID["id"];
+ //        }
+ //        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$bookinfo'");
+ //        if ($isLinkExist->num_rows == 0 ) 
+ //        {
+ //            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$bookinfo')");
+ //        }
+	// 	exit($BookIDabc);
+ //    }
 ?>
 <!doctype HTML>
 <html>
@@ -123,13 +139,15 @@
 				<div class="SiteContent">
 				<div class="bookPage">
 					<div class="coverAndButtons">
-						<img src="Img/BookDefault.png" class="bookCover">
-						<button class="bookButton">Читать</button>
-						<button class="bookButton">Сохранить</button>
+						<form method="POST" action="book.php">
+							<img src="Img/BookDefault.png" class="bookCover">
+							<button class="bookButton">Читать</button>
+							<button type="submit" class="bookButton" id="savebook">Сохранить</button>
+						</form>
 					</div>
 					<!-- ВЫВОД ИНФОРМАЦИИ О КНИГЕ -->
 					<?php 
-						$bookinfo = $_GET['BookInfo'];
+						
 						$sql4 = $connection->query("SELECT * FROM books WHERE BookID LIKE '$bookinfo'");
 						$rows = mysqli_num_rows($sql4);
 						for ($i = 0 ; $i < $rows ; ++$i) 
