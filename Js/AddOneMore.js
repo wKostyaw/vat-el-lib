@@ -481,12 +481,18 @@ $(document).ready(function(){
 						BookInfo['BookAuthors'].forEach(function(Autor) {
 							$(BookAuthors[i]).val(Autor);
 							$(BookAuthors[i]).parents(".BookAuthorContainer").css('display', 'block');
+							if (i != BookInfo['BookAuthors'].length-1) {
+								$(BookAuthors[i]).next(".AddBookAuthor").css('display', 'none');
+							}
 							i++;
 						});
 						i = 0;
 						BookInfo['BookCategories'].forEach(function(Category) {
 							$(BookCategories[i]).val(Category);
 							$(BookCategories[i]).parents(".BookCategoryContainer").css('display', 'block');
+							if (i != BookInfo['BookCategories'].length-1) {
+								$(BookCategories[i]).next(".AddBookCategory").css('display', 'none');
+							}
 							i++;
 						});
 					},

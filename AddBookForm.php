@@ -194,9 +194,6 @@
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
 								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor[]">
-								<button Class="FormButton AddBookAuthor Add" type="button" >
-									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-								</button>
 							</div>
 						<div id="responseAuthors4" class="HintBox"></div>
 						</div>
@@ -297,9 +294,6 @@
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
 								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory[]">
-								<button Class="FormButton AddBookCategory Add" type="button">
-									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
-								</button>
 							</div>
 							<div id="responseCategory10" class="HintBox"></div>
 							<br>
