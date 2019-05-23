@@ -39,15 +39,15 @@
 		$otvet = "<p>";
 		$otvet .= "класс, даа";
 		$otvet .= "</p>";
-		// $chars="qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP"; 
-		// $max=10; 
-		// $size=StrLen($chars)-1; 
-		// $password=null; 
-		// while($max--) 
-		// {
-		// $password.=$chars[rand(0,$size)];
-		// }
-		// exit($_POST['pswrdgnrtr']);
+		$chars="qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP"; 
+		$max=10; 
+		$size=StrLen($chars)-1; 
+		$password=null; 
+		while($max--) 
+		{
+		$password.=$chars[rand(0,$size)];
+		}
+		exit($password);
 	}
 	
 ?>
@@ -60,6 +60,7 @@
 		<script src="js/JQuerry.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				var passField = $('input[name="password"]');
 				$(document).on('click', '#passwordGenerator', function(){
 					$.ajax({
 							url: 'AddUserForm.php',
@@ -68,8 +69,9 @@
 								pswrdgnrtr: 1
 							}, 
 							success: function (data) {
-								alert('Класс!');
-								alert(data);
+								/*alert('Класс!');
+								alert(data);*/
+								passField.val(data);
 							},
 							dataType: 'text'
 						}
