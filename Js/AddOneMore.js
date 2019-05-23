@@ -480,30 +480,22 @@ $(document).ready(function(){
 						BookDescription.val(BookInfo['Description']);
 						BookInfo['BookAuthors'].forEach(function(Autor) {
 							$(BookAuthors[i]).val(Autor);
-							//alert(BookInfo['BookAuthors'])
+							$(BookAuthors[i]).parents(".BookAuthorContainer").css('display', 'block');
 							i++;
 						});
 						i = 0;
 						BookInfo['BookCategories'].forEach(function(Category) {
 							$(BookCategories[i]).val(Category);
+							$(BookCategories[i]).parents(".BookCategoryContainer").css('display', 'block');
 							i++;
 						});
 					},
 					dataType: 'text'
 				}
-			);			
+			);
 		$('.findBook').css('display', 'none');
 		$('.AddBookForm').css('display', 'block');
-		$(BookAuthors).forEach(function() {
-			if ($(this).val != '') {
-				$(this).parents(".BookAuthorContainer").css('display', 'block');
-			};
-		});
-		$(BookCategories).forEach(function() {
-			if ($(this).val != '') {
-				$(this).parents(".BookCategoryContainer").css('display', 'block');
-			};
-		});
+		
 	});
 	
 	// Отображение следующего автора/категории
