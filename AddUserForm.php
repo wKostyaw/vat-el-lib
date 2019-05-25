@@ -14,24 +14,26 @@
 		exit();
 	}
 	// Добавление пользователя
-	// if (isset($_POST['login']) and isset($_POST['password'])) 
-	// {
-	// 	$login = $_POST['login'];
-	// 	$password = $_POST['password'];
-		
-	// 	$query = "INSERT INTO loginparol (login, password) VALUES ('$login', '$password')";
-	// 	$result = mysqli_query ($connection, $query);
+	if (isset($_POST['login']) and isset($_POST['password'])) 
+	{
+		$login = $_POST['login'];
+		$password = $_POST['password'];
+		$isAdmin = $_POST['isAdmin'];
+		$query = "INSERT INTO loginparol (login, password, admin) VALUES ('$login', '$password', '$isAdmin')";
+		$result = mysqli_query ($connection, $query);
 
-	// 	if ($result) {
-	// 		echo '<script type="text/javascript">';
-	// 		echo 'alert("Пользователь успешно добавлен")';
-	// 		echo '</script>';
-	// 	} else {
-	// 		echo '<script type="text/javascript">';
-	// 		echo 'alert("Ошибка!")';
-	// 		echo '</script>';
-	// 	}
-	// }
+		if ($result) 
+		{
+			echo '<script type="text/javascript">';
+			echo 'alert("Пользователь успешно добавлен")';
+			echo '</script>';
+		} else 
+		{
+			echo '<script type="text/javascript">';
+			echo 'alert("Ошибка!")';
+			echo '</script>';
+		}
+	}
 	// генератор паролей 
 
 	if (isset($_POST['pswrdgnrtr'])) 
@@ -102,6 +104,9 @@
 					<div class="FormElemContainer">
 					<p class="CategoryName">Логин</p>
 					<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" required>
+					<p>Будет ли администратором?</p>
+					<p><input type="radio" name="isAdmin" value="1">Да
+					<input type="radio" name="isAdmin" value="0" checked="">Нет</p>
 					</div>
 					<div class="FormElemContainer">
 					<p class="CategoryName">Пароль</p>

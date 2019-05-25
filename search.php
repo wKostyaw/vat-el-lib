@@ -4,6 +4,7 @@
 <?php
     // поиск соответствий в БД
     if (isset($_POST['search'])) {
+        
         $connection = new mysqli('vat', 'root', '', 'vat');
         $q = $connection->real_escape_string($_POST['q']);
         $sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
