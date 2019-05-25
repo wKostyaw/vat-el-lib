@@ -475,9 +475,11 @@ $(document).ready(function(){
 					success: function (data) {
 						var BookInfo = JSON.parse(data),
 							i = 0;
+						$('.AddBookForm').prepend("<input type='hidden' name='Id' value="+ BookInfo['BookID'] + ">")
 						BookName.val(BookInfo['BookName']);
 						BookYear.val(BookInfo['BookYear']);
 						BookDescription.val(BookInfo['Description']);
+						// Авторы
 						BookInfo['BookAuthors'].forEach(function(Autor) {
 							$(BookAuthors[i]).val(Autor);
 							$(BookAuthors[i]).parents(".BookAuthorContainer").css('display', 'block');
@@ -486,6 +488,7 @@ $(document).ready(function(){
 							}
 							i++;
 						});
+						// Категории
 						i = 0;
 						BookInfo['BookCategories'].forEach(function(Category) {
 							$(BookCategories[i]).val(Category);
@@ -501,7 +504,45 @@ $(document).ready(function(){
 			);
 		$('.findBook').css('display', 'none');
 		$('.AddBookForm').css('display', 'block');
-		
+	});
+	
+	// Проверка расширения загружаемого файла книги
+	$('#BookFile').on('change', function checkFile() {
+		var FileName = this.files.item(0).name,
+			whiteList = /(\.pdf)$/i, // Какие файлы нам нужны?
+			Container = $(this).next('.AddFileContainer');
+			
+		$('#submit').prop('disabled', !whiteList.test(FileName));
+		if(whiteList.test(FileName)) { 
+			alert('Все ок');
+			Container.find('.LFButton').css('backgroundColor', '#59D');
+		} else {
+			alert('Файл инвалид, грузите другой');
+			Container.find('.LFButton').css('backgroundColor', '#D33');
+		}
+	});
+	
+	// Проверка расширения загружаемой обложки
+	$('#BookCover').on('change', function checkCover() {
+		var FileName = this.files.item(0).name,
+			whiteList = /(\.png|\.jpeg|\.jpg)$/i, // Какие файлы принимаются
+			Container = $(this).next('.AddFileContainer');
+			
+		$('#submit').prop('disabled', !whiteList.test(FileName));
+		if(whiteList.test(FileName)) { 
+			alert('Все ок');
+		} else {
+			alert('Файл инвалид, грузите другой');
+			this.val(null);
+		}
+	});
+	
+	
+	$('#submit').on('click', function() {
+		if (checkCover()) {
+			preventDefault;
+			alert('Ты шо делаешь?');
+		}
 	});
 	
 	// Отображение следующего автора/категории
