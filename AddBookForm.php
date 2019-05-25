@@ -312,16 +312,16 @@
 							</label>
 						</div>
 						<div class="uploadContainer">
-							<p class="CategoryName">Превью книги</p>
-							<input name="BookPreview" id="BookPreview" type="File" class="File">
-							<label for="BookPreview" class="AddFileContainer">
+							<p class="CategoryName">Обложка книги</p>
+							<input name="BookCover" id="BookCover" type="File" class="File">
+							<label for="BookCover" class="AddFileContainer">
 								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
 						</div>
 					</div>
 					<div class="FormElemContainer">
 						<input type="reset" value="Очистить" class="FormButton ResetButton">
-						<input name="submit" type="submit" value="Добавить" class="FormButton SubmitButton">
+						<input id="submit" name="submit" type="submit" value="Добавить" class="FormButton SubmitButton">
 					</div>
 				</form>
 			</div>

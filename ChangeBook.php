@@ -16,11 +16,9 @@
 	
 	if (isset($_POST['BookId'])) {
 		$BookId = $_POST['BookId'];
-		
 		// Название, год, описание
-		$sqlBookInfo = $connection->query("SELECT BookName, BookYear, Description FROM books WHERE BookID LIKE $BookId");
+		$sqlBookInfo = $connection->query("SELECT BookID, BookName, BookYear, Description FROM books WHERE BookID LIKE $BookId");
 		$data = $sqlBookInfo->fetch_assoc();
-		
 		// Авторы
 		$sqlbookauthors = $connection->query("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$BookId'");
 		$BookAuthors = array();
@@ -50,6 +48,130 @@
 		
 		$data = json_encode($data);
 		exit($data);
+	}
+	
+	
+	
+	if (isset($_POST['change'])) {
+		$BookName = $_POST['BookName'];
+		$BookYear = $_POST['BookYear'];
+		$Description1 = $_POST['Description1'];
+		$BookAuthors = $_POST['BookAuthor'];
+		$BookCategories = $_POST['BookCategory'];
+		$BookId = $_POST['Id'];
+		
+		// Обновление названия, года, описания
+		$sql = $connection->query(
+			"UPDATE `books` 
+			SET 
+			BookName = '$BookName', 
+			BookYear = '$BookYear', 
+			Description = '$Description1' 
+			WHERE 
+			BookID = $BookId"
+		);
+		// Обновление авторов
+		
+		$sql = $connection->query (
+			"DELETE FROM books_and_authors
+			WHERE
+			BookID = $BookId"
+		);
+		
+		foreach ($BookAuthors as $BookAutor => $Value) {
+			if ($Value != '') {
+				$isAuthorExists1 = $connection->query("SELECT count(*) FROM authors WHERE name = '$Value'");
+				$row1 = mysqli_fetch_row($isAuthorExists1);
+				
+				// Если совпадений имен авторов не найдено добавляем нового автора
+				if ($row1[0] == 0) {
+					$insertNewAuthor = "INSERT INTO authors (Name) VALUES ('$Value')";
+					$result = $connection->query($insertNewAuthor);
+				}
+				// Связка таблиц
+				$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
+				$result = $connection->query($fatchBookId);
+				if ($result->num_rows > 0) {
+					// подбирает id заливаемой книги
+					while($row = $result->fetch_assoc()) {
+						$BookId = $row["BookID"];
+					}
+				} 
+				$fatchAuthorId =  ("SELECT AuthorID FROM authors WHERE Name = '$Value'");
+				$result = $connection->query($fatchAuthorId);
+				if ($result->num_rows > 0) {
+					// подбирает id автора книги
+					while($row = $result->fetch_assoc()) {
+						$AuthorId = $row["AuthorID"];
+					}
+				} 
+				$link = "INSERT INTO books_and_authors (BookID, AuthorID) VALUES ('$BookId', '$AuthorId')";
+				$result = $connection->query($link);
+			}
+		}
+		
+		// Обновление категорий
+		
+		$sql = $connection->query (
+			"DELETE FROM books_and_categories
+			WHERE BookID = $BookId"
+		);
+		
+		foreach ($BookCategories as $BookCategory => $Value) {
+			if ($Value != '') {
+				$isCategoryExists = $connection->query("SELECT count(*) FROM categories WHERE Category = '$Value'");
+				$row1 = mysqli_fetch_row($isCategoryExists);
+				if ($row1[0] == 0) {
+					$insertNewCategory = "INSERT INTO categories (Category) VALUES ('$Value')";
+					$result = $connection->query($insertNewCategory);
+				}
+				// связь
+				$fatchBookId =  "SELECT BookID FROM books WHERE BookName = '$BookName'";
+				$result = $connection->query($fatchBookId);
+				if ($result->num_rows > 0) {
+					// подбирает id заливаемой книги
+					while($row = $result->fetch_assoc()) {
+						$BookId = $row["BookID"];
+					}
+				} 
+				$fatchCategoryId =  ("SELECT CategoryID FROM categories WHERE Category = '$Value'");
+				$result = $connection->query($fatchCategoryId);
+				if ($result->num_rows > 0) {
+					// подбирает id категории книги
+					while($row = $result->fetch_assoc()) {
+						$CategoryId = $row["CategoryID"];
+					}
+				} 
+				$link = "INSERT INTO books_and_categories (BookID, CategoryID) VALUES ('$BookId', '$CategoryId')";
+				$result = $connection->query($link);
+			}
+		}
+		
+	}
+	if (isset($_POST['remove'])) {
+		$BookId = $_POST['Id'];
+		
+		// Удаление из промежуточной таблицы авторов
+		
+		$sql = $connection->query (
+			"DELETE FROM books_and_authors
+			WHERE BookID = $BookId"
+		);
+		
+		// Удаление из промежуточной таблицы категорий
+		
+		$sql = $connection->query (
+			"DELETE FROM books_and_categories
+			WHERE BookID = $BookId"
+		);
+		
+		// Удаление книги
+		
+		$sql = $connection->query (
+			"DELETE FROM books
+			WHERE BookID = $BookId"
+		);
+		
 	}
 	
 ?>
@@ -263,21 +385,24 @@
 							<textarea class="Description" name="Description1"></textarea>
 					</div>
 					<div class="FormElemContainer">
-							<p class="CategoryName">Загрузка файла</p>
+						<div class="uploadContainer">
+							<p class="CategoryName">Файл книги</p>
 							<input name="BookFile" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
-							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
-							
-							<p class="CategoryName">Загрузка файла</p>
-							<input name="BookFile" id="BookFile" type="File" class="File">
-							<label for="BookFile" class="AddFileContainer">
-							<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+						</div>
+						<div class="uploadContainer">
+							<p class="CategoryName">Обложка книги</p>
+							<input name="BookCover" id="BookCover" type="File" class="File">
+							<label for="BookCover" class="AddFileContainer">
+								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
 							</label>
+						</div>
 					</div>
 					<div class="FormElemContainer">
-						<input type="button" value="Удалить" class="FormButton DeleteButton">
-						<input name="submit" type="submit" value="Изменить" class="FormButton SubmitButton">
+						<input name="remove" type="submit" value="Удалить" class="FormButton DeleteButton">
+						<input id="submit" name="change" type="submit" value="Изменить" class="FormButton SubmitButton">
 					</div>
 				</form>
 			</div>
