@@ -57,7 +57,7 @@
 				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
 			</div>
 		</div>
-			<div class="SecondHeader" id="SecondHeader">
+			<div class="SecondHeaderNotSticky" id="SecondHeader">
 			<div class="NCentered">
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
@@ -236,17 +236,9 @@
 							echo "</p>";
 							echo "<p class='bookInfoPoint'><b>Краткое описание: </b>". $row[3] ." </p>";
 						echo "</div>";
-					 ?>
-				</div>
-				<!--<object data="Files/kniga.pdf" type="application/pdf" width="100%" height="1000px" style="margin-top: 20px;">
-					alt: Что-то пошло не так
-				</object>-->
-				<!--<embed  src="Files/kniga.pdf"
-						hspace="0"
-						width="100%" 
-						height="1000px"
-						type="application/pdf">
-				</embed>-->
+					echo "</div>";
+					echo "<embed src='" . $row[4] . "' width='100%' vspace='10' style='height: 98vh;'>";
+				 ?>
 				</div>
 			</div>
 		<div class="SiteFooter">

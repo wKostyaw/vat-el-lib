@@ -38,13 +38,18 @@ a {
 	height: 40px;
 	z-index: 2;
 }
+.SecondHeaderNotSticky {
+	display: block;
+	margin: 0px 0px 20px 0px;
+	height: 40px;
+}
 .NCentered {
 	background-color: #59D;
 	height: 40px;
 	border-radius: 3px;
 }
 .SiteWrapper {
-	margin-bottom: 25px;
+	margin-bottom: 6px;
 	min-height: 100%;
 	height: 100%;
 	flex: 1;

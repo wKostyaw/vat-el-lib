@@ -99,14 +99,20 @@ a {
 	background-color: #59D;
 	color: #FFF;
 	cursor: pointer;
+	box-sizing: content-box;
+	border-radius: 3px;
 }
 .FormButton:hover {
 	background-color: #48C;
 }
+.RandPassBtn {
+	width: 100px;
+	border: none;
+}
 .SubmitButton, .ResetButton, .DeleteButton {
-	width: calc(50% - 3px);
+	width: calc(50% - 21px);
 	border: 1px solid #CECECE;
-	border-radius: 3px;
+	
 	margin-top: 25px;
 	font-size: 12pt;
 	font-weight: 700;
@@ -118,9 +124,11 @@ a {
 .findBook, .findUser {
 	width: 100%;
 }
+.changeBook, .changeUser {
+	/*display: none;*/
+}
 .flexContainer {
-	display: flex;
-	width: 100%;
+	display: flex; 
 	flex-direction: row;
 }
 .SBorder {
@@ -131,4 +139,41 @@ a {
 }
 .BSearchBtn, .USearchBtn {
 	fill: #FFF;
+}
+
+/* Подсказки для автокомплита */
+.HintBox {
+	max-height: 161px;
+	width: 100%;
+	overflow-y: auto;
+	background: #FFF;
+	z-index: 1;
+}
+.HintList {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	margin-top: 0px;
+	width: 100%;
+	/*border: 1px solid #CECECE;*/
+}
+.Hint {
+	border-bottom: 1px solid #CECECE;
+	display: flex;
+	padding-left: 5px;
+	height: 39px;
+	align-items: center;
+}
+.Hint:hover {
+	color: white;
+	background: #38C;
+}
+.Hint:first-child {
+	border-top: 1px solid #CECECE;
+}
+.Hint:last-child {
+	border-bottom: none;
+}
+.noBorder {
+	border: none;
 }

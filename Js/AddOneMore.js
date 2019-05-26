@@ -509,13 +509,13 @@ $(document).ready(function(){
 	// Проверка расширения загружаемого файла книги
 	$('#BookFile').on('change', function checkFile() {
 		var FileName = this.files.item(0).name,
-			whiteList = /(\.pdf)$/i, // Какие файлы нам нужны?
+			whiteList = /(\.pdf|\.txt)$/i, // Какие файлы нам нужны?
 			Container = $(this).next('.AddFileContainer');
 			
 		$('#submit').prop('disabled', !whiteList.test(FileName));
 		if(!whiteList.test(FileName)) { 
 			this.value = "";
-			alert('Неверный тип файла, принимаются: pdf');
+			alert('Неверный тип файла, принимаются: pdf, txt');
 		}
 	});
 	

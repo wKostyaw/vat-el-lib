@@ -90,8 +90,6 @@
 								pswrdgnrtr: 1
 							}, 
 							success: function (data) {
-								/*alert('Класс!');
-								alert(data);*/
 								passField.val(data);
 							},
 							dataType: 'text'
@@ -101,6 +99,39 @@
 				$(document).on('click', 'input[name="change"]', function(){
 					
 				})
+				$("#SearchBox").keyup(function() {
+					var query = $("#SearchBox").val();							
+					// if (query.length > 1) 
+					// {
+						$.ajax (
+							{
+								url: 'ChangeUser.php',
+								method: 'POST',
+								data: {
+									search: 1,
+									q: query
+								},
+								success: function (data) {
+								$("#response").html(data);
+								},
+								dataType: 'text'
+							}
+						);			
+					// }
+				});
+				$(document).on('click', '#li0', function (){
+					var login = $(this).text();
+					var password = $("#hiddenPassword").val();
+					var id = $("#hiddenID").val();
+					$("#usersID").val(id);
+					$("#SearchBox").val('');
+					$('input[name="login"]').val(login);
+					$('input[name="password"]').val(password);
+					$("#response").html("");
+					$('.findUser').css('display', 'none');
+					$('.changeUser').css('display', 'block');
+				});
+									
 			});
 		</script>
 	</head>
@@ -124,54 +155,17 @@
 				<h2 class="MainHeader">Изменить/удалить пользователя</h2>
 				<form class="findUser" name="findUser">
 					<div class="FormElemContainer">
-						<p class="CategoryName">Логин разыскиваемого</p>
-						<div class="flexContainer SBorder">
+						<p class="CategoryName">Логин пользоваетеля</p>
+						<div class="SBorder">
+						<div class="flexContainer">
 							<input type="text" class="TextInput HalfWidth USearchName" id="SearchBox">
-							<button Class="FormButton USearchBtn" type="button">
-								<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
-									<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
-								</svg>
-							</button>
-							<!-- Автокомплит сюда(если нужен) -->
-							<script type="text/javascript">
-								$(document).ready(),function () {
-									$("#SearchBox").keyup(function() {
-										var query = $("#SearchBox").val();							
-										// if (query.length > 1) 
-										// {
-											$.ajax (
-												{
-													url: 'ChangeUser.php',
-													method: 'POST',
-													data: {
-														search: 1,
-														q: query
-													},
-													success: function (data) {
-													$("#response").html(data);
-													},
-													dataType: 'text'
-												}
-											);			
-										// }
-									});
-									$(document).on('click', '#li0', function (){
-										var login = $(this).text();
-										var password = $("#hiddenPassword").val();
-										var id = $("#hiddenID").val();
-										$("#usersID").val(id);
-										$("#SearchBox").val('');
-										$('input[name="login"]').val(login);
-										$('input[name="password"]').val(password);
-										$("#response").html("");
-									});
-								}();
-							</script>
-							<div id="response" class="HintBox"></div>
+						</div>
+						<div id="response" class="HintBox"></div>
 						</div>
 					</div>
 				</form>
-				<form method="POST">
+				
+				<form method="POST" class="changeUser">
 					<div class="FormElemContainer">
 						<p class="CategoryName">Логин</p>
 						<input type="text" name="usersID" id="usersID" hidden="">
@@ -179,8 +173,10 @@
 					</div>
 					<div class="FormElemContainer">
 						<p class="CategoryName">Пароль</p>
-						<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth" required>
-						<input type="button" id="passwordGenerator" value="Сгенерировать новый пароль">
+						<div class="flexContainer SBorder HalfWidth">
+						<input type="text" name="password" placeholder="Пароль" class="TextInput noBorder" required>
+						<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
+						</div>
 					</div>
 					<div class="FormElemContainer">
 						<input type="submit" class="FormButton DeleteButton" name="delete" value="Удалить">   
