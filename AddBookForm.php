@@ -170,7 +170,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors" class="HintBox"></div>
+							<div class="HintBox responseAuthors"></div>
 							<br>
 						</div>
 						<div class="BookAuthorContainer" id="testik1">
@@ -180,7 +180,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors1" class="HintBox"></div>
+							<div class="HintBox responseAuthors"></div>
 							<br>
 						</div>
 						<div class="BookAuthorContainer">
@@ -190,7 +190,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors2" class="HintBox"></div>
+							<div class="HintBox responseAuthors"></div>
 							<br>
 						</div>
 						<div class="BookAuthorContainer">
@@ -200,14 +200,14 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors3" class="HintBox"></div>
+							<div class="HintBox"></div>
 							<br>
 						</div>
 						<div class="BookAuthorContainer">
 							<div class="AddBookAuthorContainer">
 								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor[]">
 							</div>
-						<div id="responseAuthors4" class="HintBox"></div>
+						<div class="HintBox responseAuthors"></div>
 						</div>
 					</div>
 					<!-- КАТЕГОРИИ -->
@@ -220,7 +220,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory1" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -230,7 +230,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory2" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -240,7 +240,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory3" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -250,7 +250,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory4" class="HintBox"></div>
+							<div  class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -260,7 +260,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory5" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -270,7 +270,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory6" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -280,7 +280,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory7" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -290,7 +290,7 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory8" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
@@ -300,14 +300,14 @@
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory9" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 						<div class="BookCategoryContainer">
 							<div class="AddBookCategoryContainer">
 								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory[]">
 							</div>
-							<div id="responseCategory10" class="HintBox"></div>
+							<div class="HintBox responseCategory"></div>
 							<br>
 						</div>
 					</div>
