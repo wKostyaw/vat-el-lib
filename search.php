@@ -290,7 +290,7 @@
                                 //поиск книг по названию
                                 $sql = $connection->query("SELECT * FROM books WHERE bookName LIKE '%$search_q%'");
                                 $rows = mysqli_num_rows($sql);
-                                echo "<span class='BookInfoItem'>" . "Книги, содержащие в названии \"" . $search_q . "\", по вашему запросу: " . "</span>";
+                                echo "<span class='BookInfoItem textPadding'>" . "Книги, содержащие в названии \"" . $search_q . "\", по вашему запросу: " . "</span>";
                                 if ($rows > 0 )
                                 {
                                     for ($i = 0 ; $i < $rows ; ++$i) 
@@ -301,14 +301,14 @@
                                     }       
                                 } else 
                                 {   
-                                    echo "<p> Не найдено </p>";
+                                    echo "<p class='textPadding borderBottom'> Не найдено </p>";
                                 }
                                 // поиск книги по автору
                                 $sql = $connection->query("SELECT * FROM authors WHERE Name LIKE '%$search_q%'");
                                 $rows = mysqli_num_rows($sql);
                                 if ($rows > 0 )
                                 {
-                                    echo "<span class='BookInfoItem'>" . "Книги автора \"" . $search_q . "\", по вашему запросу: " . "</span>";
+                                    echo "<span class='BookInfoItem textPadding'>" . "Книги автора \"" . $search_q . "\", по вашему запросу: " . "</span>";
                                     $GetAuthorID = ("SELECT AuthorID FROM authors WHERE Name LIKE '%$search_q%'");
                                     $result1 = $connection->query ($GetAuthorID);
                                     $authorslist = array();
@@ -349,7 +349,7 @@
                                 $rows = mysqli_num_rows($sql);
                                 if ($rows > 0 )
                                 {
-                                    echo "<span class='BookInfoItem'>" . "Книги в категори \"" . $search_q . "\", по вашему запросу: " . "</span>";
+                                    echo "<span class='BookInfoItem textPadding'>" . "Книги в категори \"" . $search_q . "\", по вашему запросу: " . "</span>";
                                     $GetCategoryID = ("SELECT CategoryID FROM categories WHERE Category LIKE '%$search_q%'");
                                     $result1 = $connection->query ($GetCategoryID);
                                     $categorieslist = array();

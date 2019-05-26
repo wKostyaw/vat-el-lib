@@ -513,12 +513,9 @@ $(document).ready(function(){
 			Container = $(this).next('.AddFileContainer');
 			
 		$('#submit').prop('disabled', !whiteList.test(FileName));
-		if(whiteList.test(FileName)) { 
-			alert('Все ок');
-			Container.find('.LFButton').css('backgroundColor', '#59D');
-		} else {
-			alert('Файл инвалид, грузите другой');
-			Container.find('.LFButton').css('backgroundColor', '#D33');
+		if(!whiteList.test(FileName)) { 
+			this.value = "";
+			alert('Неверный тип файла, принимаются: pdf');
 		}
 	});
 	
@@ -529,21 +526,12 @@ $(document).ready(function(){
 			Container = $(this).next('.AddFileContainer');
 			
 		$('#submit').prop('disabled', !whiteList.test(FileName));
-		if(whiteList.test(FileName)) { 
-			alert('Все ок');
-		} else {
-			alert('Файл инвалид, грузите другой');
-			this.val(null);
+		if(!whiteList.test(FileName)) { 
+			this.value = "";
+			alert('Неверный тип файла, принимаются: png, jpeg');
 		}
 	});
 	
-	
-	$('#submit').on('click', function() {
-		if (checkCover()) {
-			preventDefault;
-			alert('Ты шо делаешь?');
-		}
-	});
 	
 	// Отображение следующего автора/категории
 	$('.AddBookAuthor').on('click', function() {
