@@ -1,10 +1,12 @@
 <?php 
 // Проверка, есть ли вводимый автор в таблице авторов
-	if (isset($_POST['search'])) {
+	if (isset($_POST['search'])) 
+	{
 		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q = $connection->real_escape_string($_POST['q']);
 		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
-		if ($sql->num_rows > 0) {
+		if ($sql->num_rows > 0) 
+		{
 			$responseAuthors = "<ul class='HintList'>";
 				while ($data = $sql->fetch_array())
 					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Name'] . "</li>";
@@ -12,54 +14,54 @@
 		}
 		exit($responseAuthors);
 	}
-	if (isset($_POST['search1'])) {
-		$connection = new mysqli('vat', 'root', '', 'vat');
-		$q1 = $connection->real_escape_string($_POST['q1']);
-		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q1%'");
-		if ($sql->num_rows > 0) {
-			$responseAuthors1 = "<ul class='HintList'>";
-				while ($data = $sql->fetch_array())
-					$responseAuthors1 .= "<li id='li1' class='Hint'>" . $data['Name'] . "</li>";
-			$responseAuthors1 .= "</ul>";
-		}
-		exit($responseAuthors1);
-	}
-	if (isset($_POST['search2'])) {
-		$connection = new mysqli('vat', 'root', '', 'vat');
-		$q2 = $connection->real_escape_string($_POST['q2']);
-		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q2%'");
-		if ($sql->num_rows > 0) {
-			$responseAuthors2 = "<ul class='HintList'>";
-				while ($data = $sql->fetch_array())
-					$responseAuthors2 .= "<li id='li2' class='Hint'>" . $data['Name'] . "</li>";
-			$responseAuthors2 .= "</ul>";
-		}
-		exit($responseAuthors2);
-	}
-	if (isset($_POST['search3'])) {
-		$connection = new mysqli('vat', 'root', '', 'vat');
-		$q3 = $connection->real_escape_string($_POST['q3']);
-		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q3%'");
-		if ($sql->num_rows > 0) {
-			$responseAuthors3 = "<ul class='HintList'>";
-				while ($data = $sql->fetch_array())
-					$responseAuthors3 .= "<li id='li3' class='Hint'>" . $data['Name'] . "</li>";
-			$responseAuthors3 .= "</ul>";
-		}
-		exit($responseAuthors3);
-	}
-	if (isset($_POST['search4'])) {
-		$connection = new mysqli('vat', 'root', '', 'vat');
-		$q4 = $connection->real_escape_string($_POST['q4']);
-		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q4%'");
-		if ($sql->num_rows > 0) {
-			$responseAuthors4 = "<ul class='HintList'>";
-				while ($data = $sql->fetch_array())
-					$responseAuthors4 .= "<li id='li4' class='Hint'>" . $data['Name'] . "</li>";
-			$responseAuthors4 .= "</ul>";
-		}
-		exit($responseAuthors4);
-	}
+	// if (isset($_POST['search1'])) {
+	// 	$connection = new mysqli('vat', 'root', '', 'vat');
+	// 	$q1 = $connection->real_escape_string($_POST['q1']);
+	// 	$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q1%'");
+	// 	if ($sql->num_rows > 0) {
+	// 		$responseAuthors1 = "<ul class='HintList'>";
+	// 			while ($data = $sql->fetch_array())
+	// 				$responseAuthors1 .= "<li id='li1' class='Hint'>" . $data['Name'] . "</li>";
+	// 		$responseAuthors1 .= "</ul>";
+	// 	}
+	// 	exit($responseAuthors1);
+	// }
+	// if (isset($_POST['search2'])) {
+	// 	$connection = new mysqli('vat', 'root', '', 'vat');
+	// 	$q2 = $connection->real_escape_string($_POST['q2']);
+	// 	$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q2%'");
+	// 	if ($sql->num_rows > 0) {
+	// 		$responseAuthors2 = "<ul class='HintList'>";
+	// 			while ($data = $sql->fetch_array())
+	// 				$responseAuthors2 .= "<li id='li2' class='Hint'>" . $data['Name'] . "</li>";
+	// 		$responseAuthors2 .= "</ul>";
+	// 	}
+	// 	exit($responseAuthors2);
+	// }
+	// if (isset($_POST['search3'])) {
+	// 	$connection = new mysqli('vat', 'root', '', 'vat');
+	// 	$q3 = $connection->real_escape_string($_POST['q3']);
+	// 	$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q3%'");
+	// 	if ($sql->num_rows > 0) {
+	// 		$responseAuthors3 = "<ul class='HintList'>";
+	// 			while ($data = $sql->fetch_array())
+	// 				$responseAuthors3 .= "<li id='li3' class='Hint'>" . $data['Name'] . "</li>";
+	// 		$responseAuthors3 .= "</ul>";
+	// 	}
+	// 	exit($responseAuthors3);
+	// }
+	// if (isset($_POST['search4'])) {
+	// 	$connection = new mysqli('vat', 'root', '', 'vat');
+	// 	$q4 = $connection->real_escape_string($_POST['q4']);
+	// 	$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q4%'");
+	// 	if ($sql->num_rows > 0) {
+	// 		$responseAuthors4 = "<ul class='HintList'>";
+	// 			while ($data = $sql->fetch_array())
+	// 				$responseAuthors4 .= "<li id='li4' class='Hint'>" . $data['Name'] . "</li>";
+	// 		$responseAuthors4 .= "</ul>";
+	// 	}
+	// 	exit($responseAuthors4);
+	// }
 	//Проверка, есть ли вводимая категория в таблице категорий
 	if (isset($_POST['search5'])) {
 		$connection = new mysqli('vat', 'root', '', 'vat');

@@ -27,7 +27,7 @@
         // echo "<form action='book.php' method='POST'>";
             echo "<div class='BookBlockItem' id='". $row[0] . "' name='divsavebook'>";
                 echo "<div class='BookPreview'>";
-                    echo "<a href='book.php?BookInfo=$row[0]'> <img src='img/BookDefault.png'> </a>";
+                    echo "<a href='book.php?BookInfo=$row[0]'> <img src='" . $row[5] . "'> </a>";
                 echo "</div>";
                 echo "<div class='BookInfo'>";
                     //название книги

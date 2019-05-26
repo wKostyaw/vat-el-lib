@@ -138,16 +138,8 @@
 			<div class="SiteWrapper">
 				<div class="SiteContent">
 				<div class="bookPage">
-					<div class="coverAndButtons">
-						<form method="POST" action="book.php">
-							<img src="Img/BookDefault.png" class="bookCover">
-							<button class="bookButton">Читать</button>
-							<button type="submit" class="bookButton" id="savebook">Сохранить</button>
-						</form>
-					</div>
 					<!-- ВЫВОД ИНФОРМАЦИИ О КНИГЕ -->
 					<?php 
-						
 						$sql4 = $connection->query("SELECT * FROM books WHERE BookID LIKE '$bookinfo'");
 						$rows = mysqli_num_rows($sql4);
 						for ($i = 0 ; $i < $rows ; ++$i) 
@@ -180,6 +172,13 @@
                                 }
 					    }
 					    echo "<title>" . $row[1] . "</title>";
+					    echo "<div class='coverAndButtons'>";
+							echo "<form method='POST' action='book.php'>";
+								echo "<img src='" . $row[5] . "' class='bookCover'>";
+								echo "<button class='bookButton'>Читать</button>";
+								echo "<button type='submit' class='bookButton' id='savebook'>Сохранить</button>";
+							echo "</form>";
+						echo "</div>";
 						echo "<div class='bookInfo'>";
 							echo "<p class='bookName'>" . $row[1] ." </p>";
 							echo "<p class='bookInfoPoint'><b>Год: </b>" . $row[2] . "</p>";

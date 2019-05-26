@@ -22,18 +22,30 @@
 		$BookCategories = $_POST['BookCategory'];
 		print_r($BookCategories);
 		print_r($BookAuthors);
+		// заливка обложки
+		if(is_uploaded_file($_FILES["BookCover"]["tmp_name"])) {
+			$extension_cover = pathinfo($_FILES["BookCover"]["name"], PATHINFO_EXTENSION);
+			$new_cover_name = $BookName. $BookYear. '.'. $extension_cover;
+			move_uploaded_file($_FILES["BookCover"]["tmp_name"], "Covers/". $new_cover_name);
+			$PathToCover = "Covers/". $new_cover_name;
+		} else {
+			echo "Ошибка загрузки обложки" . "</br>";
+			$PathToCover = "Img/BookDefault.png";
+		}
+		// заливка файла книги
 		if(is_uploaded_file($_FILES["BookFile"]["tmp_name"])) {
 			$extension = pathinfo($_FILES["BookFile"]["name"], PATHINFO_EXTENSION);
 			$new_name = $BookName. $BookYear. '.'. $extension;
 			move_uploaded_file($_FILES["BookFile"]["tmp_name"], "Files/". $new_name);
+			$PathToFile = "Files/". $new_name;
 			$i = 1;
 		} else {
 			echo "Ошибка загрузки файла" . "</br>";
 			$i = 0;
 		}
 		if ($i == 1) {
-			$PathToFile = "Files/". $new_name;
-			$query = "INSERT INTO books (BookName, BookYear, Description, PathToFile) VALUES ('$BookName', '$BookYear', '$Description1', '$PathToFile')";
+			
+			$query = "INSERT INTO books (BookName, BookYear, Description, PathToFile, PathToCover) VALUES ('$BookName', '$BookYear', '$Description1', '$PathToFile', '$PathToCover')";
 			$result = mysqli_query ($connection, $query);
 			if ($result) {
 				echo '<script type="text/javascript">';

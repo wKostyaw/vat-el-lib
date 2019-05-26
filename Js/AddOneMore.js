@@ -293,8 +293,8 @@ $(document).ready(function(){
 
 
 	// autocomplete для авторов
-	$("#SearchBox").keyup(function() {
-		var query = $("#SearchBox").val();
+	$(".BookAuthor").keyup(function() {
+		var query = $(".BookAuthor").val();
 										
 		if (query.length > 0) {
 			$.ajax (
@@ -306,7 +306,7 @@ $(document).ready(function(){
 						q: query
 					},
 					success: function (data) {
-					$("#responseAuthors").html(data);
+					$(".responseAuthors").html(data);
 				},
 					dataType: 'text'
 				}
@@ -317,121 +317,121 @@ $(document).ready(function(){
 
 	$(document).on('click', '#li0', function (){
 		var author = $(this).text();
-		$("#SearchBox").val(author);
-		$("#responseAuthors").html("");
+		$(".BookAuthor").val(author);
+		$(".responseAuthors").html("");
 	});
-	// №2
-	$("#SearchBox1").keyup(function() {
-		var query1 = $("#SearchBox1").val();
+	// // №2
+	// $("#SearchBox1").keyup(function() {
+	// 	var query1 = $("#SearchBox1").val();
 										
-		if (query1.length > 0) {
-			$.ajax (
-				{
-					url: 'autocomplete.php',
-					method: 'POST',
-					data: {
-						search1: 1,
-						q1: query1
-					},
-					success: function (data) {
-					$("#responseAuthors1").html(data);
-				},
-					dataType: 'text'
-				}
-			);			
-		}
-	});
+	// 	if (query1.length > 0) {
+	// 		$.ajax (
+	// 			{
+	// 				url: 'autocomplete.php',
+	// 				method: 'POST',
+	// 				data: {
+	// 					search1: 1,
+	// 					q1: query1
+	// 				},
+	// 				success: function (data) {
+	// 				$("#responseAuthors1").html(data);
+	// 			},
+	// 				dataType: 'text'
+	// 			}
+	// 		);			
+	// 	}
+	// });
 	
 
-	$(document).on('click', '#li1', function (){
-		var author1 = $(this).text();
-		$("#SearchBox1").val(author1);
-		$("#responseAuthors1").html("");
-	});
-	// №3
-	$("#SearchBox2").keyup(function() {
-		var query2 = $("#SearchBox2").val();
+	// $(document).on('click', '#li1', function (){
+	// 	var author1 = $(this).text();
+	// 	$("#SearchBox1").val(author1);
+	// 	$("#responseAuthors1").html("");
+	// });
+	// // №3
+	// $("#SearchBox2").keyup(function() {
+	// 	var query2 = $("#SearchBox2").val();
 										
-		if (query2.length > 0) {
-			$.ajax (
-				{
-					url: 'autocomplete.php',
-					method: 'POST',
-					data: {
-						search2: 1,
-						q2: query2
-					},
-					success: function (data) {
-					$("#responseAuthors2").html(data);
-				},
-					dataType: 'text'
-				}
-			);			
-		}
-	});
+	// 	if (query2.length > 0) {
+	// 		$.ajax (
+	// 			{
+	// 				url: 'autocomplete.php',
+	// 				method: 'POST',
+	// 				data: {
+	// 					search2: 1,
+	// 					q2: query2
+	// 				},
+	// 				success: function (data) {
+	// 				$("#responseAuthors2").html(data);
+	// 			},
+	// 				dataType: 'text'
+	// 			}
+	// 		);			
+	// 	}
+	// });
 	
 
-	$(document).on('click', '#li2', function (){
-		var author2 = $(this).text();
-		$("#SearchBox2").val(author2);
-		$("#responseAuthors2").html("");
-	});
-	// №4
-	$("#SearchBox3").keyup(function() {
-		var query3 = $("#SearchBox3").val();
+	// $(document).on('click', '#li2', function (){
+	// 	var author2 = $(this).text();
+	// 	$("#SearchBox2").val(author2);
+	// 	$("#responseAuthors2").html("");
+	// });
+	// // №4
+	// $("#SearchBox3").keyup(function() {
+	// 	var query3 = $("#SearchBox3").val();
 										
-		if (query3.length > 0) {
-			$.ajax (
-				{
-					url: 'autocomplete.php',
-					method: 'POST',
-					data: {
-						search3: 1,
-						q3: query3
-					},
-					success: function (data) {
-					$("#responseAuthors3").html(data);
-				},
-					dataType: 'text'
-				}
-			);			
-		}
-	});
+	// 	if (query3.length > 0) {
+	// 		$.ajax (
+	// 			{
+	// 				url: 'autocomplete.php',
+	// 				method: 'POST',
+	// 				data: {
+	// 					search3: 1,
+	// 					q3: query3
+	// 				},
+	// 				success: function (data) {
+	// 				$("#responseAuthors3").html(data);
+	// 			},
+	// 				dataType: 'text'
+	// 			}
+	// 		);			
+	// 	}
+	// });
 	
 
-	$(document).on('click', '#li3', function (){
-		var author3 = $(this).text();
-		$("#SearchBox3").val(author3);
-		$("#responseAuthors3").html("");
-	});
-	// №5
-	$("#SearchBox4").keyup(function() {
-		var query4 = $("#SearchBox4").val();
+	// $(document).on('click', '#li3', function (){
+	// 	var author3 = $(this).text();
+	// 	$("#SearchBox3").val(author3);
+	// 	$("#responseAuthors3").html("");
+	// });
+	// // №5
+	// $("#SearchBox4").keyup(function() {
+	// 	var query4 = $("#SearchBox4").val();
 										
-		if (query4.length > 0) {
-			$.ajax (
-				{
-					url: 'autocomplete.php',
-					method: 'POST',
-					data: {
-						search4: 1,
-						q4: query4
-					},
-					success: function (data) {
-					$("#responseAuthors4").html(data);
-				},
-					dataType: 'text'
-				}
-			);			
-		}
-	});
+	// 	if (query4.length > 0) {
+	// 		$.ajax (
+	// 			{
+	// 				url: 'autocomplete.php',
+	// 				method: 'POST',
+	// 				data: {
+	// 					search4: 1,
+	// 					q4: query4
+	// 				},
+	// 				success: function (data) {
+	// 				$("#responseAuthors4").html(data);
+	// 			},
+	// 				dataType: 'text'
+	// 			}
+	// 		);			
+	// 	}
+	// });
 	
 
-	$(document).on('click', '#li4', function (){
-		var author4 = $(this).text();
-		$("#SearchBox4").val(author4);
-		$("#responseAuthors4").html("");
-	});
+	// $(document).on('click', '#li4', function (){
+	// 	var author4 = $(this).text();
+	// 	$("#SearchBox4").val(author4);
+	// 	$("#responseAuthors4").html("");
+	// });
 	
 	// Поиск подходящих книг
 	$("#BSearchName").keyup(function() {
