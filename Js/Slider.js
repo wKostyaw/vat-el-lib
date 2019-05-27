@@ -44,9 +44,10 @@ function SliderWithLastBooks() {
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
+								$Cover = book['PathToСover'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
-								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
+								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories);
 						})
 					},
 					dataType: 'text'
@@ -55,7 +56,6 @@ function SliderWithLastBooks() {
 };
 // Функция, выводящая книги определенной категории
 function SliderWithSelectedCategory() {
-	//$SliderID = '#Category1';
 	$RequestSliderItemsCategory = 'Роман'; // категория выводимых книг
 	$RequestSliderItems = 20; // количество выводимых книг
 	$.ajax (
@@ -75,9 +75,10 @@ function SliderWithSelectedCategory() {
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
+								$Cover = book['PathToСover'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
-								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
+								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories);
 						})
 					},
 					dataType: 'text'
@@ -105,9 +106,10 @@ function SliderWithSelectedAuthor() {
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
+								$Cover = book['PathToСover'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
-								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories);
+								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories);
 						})
 					},
 					dataType: 'text'
@@ -115,11 +117,11 @@ function SliderWithSelectedAuthor() {
 			);
 };
 // Рисуем элементы в слайдер с указанным Id
-function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $SliderBookAuthors, $SliderBookCategories) {
+function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories) {
 	var $SliderItemTemplate = 
 			'<div class="SliderItem">\n'+
 				'<a href="book.php?BookInfo='+$SliderBookId+'" Class="SliderBookName">' + $SliderBookName + '</a>\n'+
-				'<div class="SliderBookPreview"><img src="img/BookDefault.png"></div>\n'+
+				'<div class="SliderBookPreview"><img src="'+$Cover+'"></div>\n'+
 				'<div class="SliderBookInfo">\n'+
 					'<p>Год: ' + $SliderBookYear + '</p>\n'+
 					'<p>Авторы: ' + $SliderBookAuthors + '</p>\n'+
