@@ -24,21 +24,29 @@
 		exit($responseAuthors);
 	}
 	$bookinfo = $_GET['BookInfo'];
-	// if (isset($_POST[''])) 
- //    {
- //        $username = $_SESSION['login'];
- //        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
- //        while ($rowUserID = $getUserID->fetch_assoc()) 
- //        {
- //            $UserID = $rowUserID["id"];
- //        }
- //        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$bookinfo'");
- //        if ($isLinkExist->num_rows == 0 ) 
- //        {
- //            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$bookinfo')");
- //        }
-	// 	exit($BookIDabc);
- //    }
+	if (isset($_POST['save'])) 
+    {	
+    	$bookid = $bookinfo;
+        $username = $_SESSION['login'];
+        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
+        while ($rowUserID = $getUserID->fetch_assoc()) 
+        {
+            $UserID = $rowUserID["id"];
+        }
+        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$bookid'");
+        if ($isLinkExist->num_rows == 0 ) 
+        {
+            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$bookid')");
+            if ($addLinkBetweenUserAndBook) {
+            	echo "дадада";
+            } else {
+            	echo "говно";
+            }
+        } else {
+        	echo "meh";
+        }
+        exit($_POST['save']);
+    }
 ?>
 <!doctype HTML>
 <html>
@@ -49,6 +57,24 @@
 		<link rel="stylesheet" type="text/css" href="css/BookPageStyle.css">
 		<script src="js/JQuerry.js" type="text/javascript"></script>
 		<script src="js/Script.js" type="text/javascript"></script>
+		<script>
+			$(document).on('click', '.savebook', function () {			
+				$.ajax (
+				{
+					url: 'book.php',
+					method: 'POST',
+					data: {
+						save: 1
+					},
+					success: function (data) {
+						alert('Сохранено');
+						alert(data);
+					},
+					dataType: 'text'
+				}
+				);
+			});
+		</script>
 	</head>
 	<body>
 		<div class="SiteHeader">
@@ -176,7 +202,7 @@
 							echo "<form method='POST' action='book.php'>";
 								echo "<img src='" . $row[5] . "' class='bookCover'>";
 								echo "<button class='bookButton'>Читать</button>";
-								echo "<button type='submit' class='bookButton' id='savebook'>Сохранить</button>";
+								echo "<input type='button' class='bookButton savebook' value='Сохранить'>";
 							echo "</form>";
 						echo "</div>";
 						echo "<div class='bookInfo'>";
