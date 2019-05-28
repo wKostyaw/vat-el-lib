@@ -117,17 +117,17 @@
                     echo "</span>";
                 echo "</div>";
             echo "</div>";
-            echo "<form method='POST' >";
+            echo "<form method='POST'>";
                 echo "<div class='BookBlockButtons'>";
                     echo "<button class='BookBlockButton' formmethod='post'>" . 'Читать' . '</button>';
-                    echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе'>";
+                    echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе' >";
+                    echo "<input type='button' class='BookBlockButton deleteBook' id='deletebook".$row[0]."' name='deletebook[]' value='Удалить от себя' >";
                 echo "</div>";
             echo "</form>"; 
 
         // echo "</form>";    
     }
     // сохранение книги 
-    
     if (isset($_POST['BookIDajax'])) 
     {
 		$BookIDabc = $_POST['BookIDajax'];
@@ -144,6 +144,23 @@
             $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$BookIDabc')");
         }
 		exit($BookIDabc);
+    }
+    if (isset($_POST['DeleteBookID'])) 
+    {
+        $DeleteBookID = $_POST['DeleteBookID'];
+        // echo $DeleteBookID . " kjk" ;
+        $username = $_SESSION['login'];
+        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
+        while ($rowUserID = $getUserID->fetch_assoc()) 
+        {
+            $UserID = $rowUserID["id"];
+        }
+        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$DeleteBookID'");
+        if ($isLinkExist->num_rows > 0 ) 
+        {
+            $deleteLinkBetweenUserAndBook = $connection->query("DELETE FROM users_and_books  WHERE id = '$UserID' and BookID = '$DeleteBookID'");
+        }
+        exit($DeleteBookID);
     }
     
 ?>
@@ -179,6 +196,26 @@
 				);
 				
 			});
+            $(document).on('click', '.deleteBook', function () {
+                var DeleteBookID = $(this).attr('id'),
+                DeleteBookID = DeleteBookID.replace(/[^\d]/g, '');
+                
+                $.ajax (
+                {
+                    url: 'search.php',
+                    method: 'POST',
+                    data: {
+                        DeleteBookID: DeleteBookID
+                    },
+                    success: function (data) {
+                        alert('Удалено');
+                        alert(data);
+                    },
+                    dataType: 'text'
+                }
+                );
+                
+            });
 		</script>
 		
     </head>

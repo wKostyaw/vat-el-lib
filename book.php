@@ -26,7 +26,7 @@
 	$bookinfo = $_GET['BookInfo'];
 	if (isset($_POST['save'])) 
     {	
-    	$bookid = $bookinfo;
+    	$bookid = $_POST['save'];
         $username = $_SESSION['login'];
         $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
         while ($rowUserID = $getUserID->fetch_assoc()) 
@@ -38,14 +38,37 @@
         {
             $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$bookid')");
             if ($addLinkBetweenUserAndBook) {
-            	echo "дадада";
+            	echo "Сохранено ";
             } else {
-            	echo "говно";
+            	echo "Не сохранено ";
             }
         } else {
-        	echo "meh";
+        	echo "Уже сохранена";
         }
         exit($_POST['save']);
+    }
+    if (isset($_POST['delete'])) 
+    {	
+    	$bookid = $_POST['delete'];
+        $username = $_SESSION['login'];
+        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
+        while ($rowUserID = $getUserID->fetch_assoc()) 
+        {
+            $UserID = $rowUserID["id"];
+        }
+        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$bookid'");
+        if ($isLinkExist->num_rows > 0 ) 
+        {
+            $deleteLinkBetweenUserAndBook = $connection->query("DELETE FROM users_and_books  WHERE id = '$UserID' and BookID = '$bookid'");
+            if ($deleteLinkBetweenUserAndBook) {
+            	echo "Удалено ";
+            } else {
+            	echo "Не удалено ";
+            }
+        } else {
+        	echo "Уже удалена";
+        }
+        exit($_POST['delete']);
     }
 ?>
 <!doctype HTML>
@@ -59,15 +82,33 @@
 		<script src="js/Script.js" type="text/javascript"></script>
 		<script>
 			$(document).on('click', '.savebook', function () {			
+				var SavedBookID = $(this).attr('id'),
+				SavedBookID = SavedBookID.replace(/[^\d]/g, '');
 				$.ajax (
 				{
 					url: 'book.php',
 					method: 'POST',
 					data: {
-						save: 1
+						save: SavedBookID
 					},
 					success: function (data) {
-						alert('Сохранено');
+						alert(data);
+					},
+					dataType: 'text'
+				}
+				);
+			});
+			$(document).on('click', '.deletebook', function () {			
+				var deleteBookID = $(this).attr('id'),
+				deleteBookID = deleteBookID.replace(/[^\d]/g, '');
+				$.ajax (
+				{
+					url: 'book.php',
+					method: 'POST',
+					data: {
+						delete: deleteBookID
+					},
+					success: function (data) {
 						alert(data);
 					},
 					dataType: 'text'
@@ -202,7 +243,8 @@
 							echo "<form method='POST' action='book.php'>";
 								echo "<img src='" . $row[5] . "' class='bookCover'>";
 								echo "<button class='bookButton'>Читать</button>";
-								echo "<input type='button' class='bookButton savebook' value='Сохранить'>";
+								echo "<input type='button' class='bookButton savebook' id='savebook".$row[0]."' value='Сохранить'>";
+								echo "<input type='button' class='bookButton deletebook' id='deletebook".$row[0]."' value='Удалить'>";
 							echo "</form>";
 						echo "</div>";
 						echo "<div class='bookInfo'>";
