@@ -210,9 +210,10 @@
 				<form class="findBook" name="findBook">
 					<div class="FormElemContainer">
 						<p class="CategoryName">Поиск по названию(надо придумать нормальную подпись)</p>
+						
 						<div class="SBorder">
 							<div class="flexContainer">
-								<input type="text" class="TextInput FullWidth BSearchName" id="BSearchName">
+								<input type="text" class="TextInput FullWidth BSearchName" autocomplete="off" id="BSearchName">
 							</div>
 							<div class="HintBox" Id="BookHints"></div>
 						</div>
@@ -223,161 +224,156 @@
 				<form class="AddBookForm" method="POST" enctype="multipart/form-data" style="display: none;">
 					<div class="FormElemContainer">
 							<p class="CategoryName">Название Книги</p>
-							<input type="text" class="TextInput FullWidth" name="BookName" required>
+							<input type="text" class="TextInput FullWidth" name="BookName" autocomplete="off" required>
 					</div>
 					<div class="FormElemContainer">
 							<p class="CategoryName">Год</p>
-							<input type="text" class="TextInput HalfWidth" name="BookYear" required>
+							<input type="text" class="TextInput HalfWidth" name="BookYear" autocomplete="off" required>
 					</div>
+					
+					
+					
 					<!-- АВТОРЫ -->
 					<div class="FormElemContainer">
 						<p class="CategoryName">Автор(ы):</p>
-						<div class="BookAuthorContainer">
-							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox" class="TextInput BookAuthor" name="BookAuthor[]" required>
+						
+						<div class="BookAuthorContainer SBorder HalfWidth">
+							<div class="AddBookAuthorContainer flexContainer">
+								<input type="text" class="TextInput BookAuthor" name="BookAuthor[]" autocomplete="off" required>
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors" class="HintBox responseAuthors"></div>
-							<br>
+							<div class="HintBox responseAuthors"></div>
 						</div>
-						<div class="BookAuthorContainer" id="testik1">
-							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox1" class="TextInput BookAuthor" name="BookAuthor[]">
+						<div class="BookAuthorContainer SBorder HalfWidth">
+							<div class="AddBookAuthorContainer flexContainer">
+								<input type="text" class="TextInput BookAuthor" name="BookAuthor[]" autocomplete="off">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors1" class="HintBox responseAuthors"></div>
-							<br>
+							<div class="HintBox responseAuthors"></div>
 						</div>
-						<div class="BookAuthorContainer">
-							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox2" class="TextInput BookAuthor" name="BookAuthor[]">
+						<div class="BookAuthorContainer SBorder HalfWidth">
+							<div class="AddBookAuthorContainer flexContainer">
+								<input type="text" class="TextInput BookAuthor" name="BookAuthor[]" autocomplete="off">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors2" class="HintBox responseAuthors"></div>
-							<br>
+							<div class="HintBox responseAuthors"></div>
 						</div>
-						<div class="BookAuthorContainer">
-							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox3" class="TextInput BookAuthor" name="BookAuthor[]">
+						
+						<div class="BookAuthorContainer SBorder HalfWidth">
+							<div class="AddBookAuthorContainer flexContainer">
+								<input type="text" class="TextInput BookAuthor" name="BookAuthor[]" autocomplete="off">
 								<button Class="FormButton AddBookAuthor Add" type="button" >
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseAuthors3" class="HintBox responseAuthors"></div>
-							<br>
+							<div class="HintBox responseAuthors"></div>
 						</div>
-						<div class="BookAuthorContainer">
-							<div class="AddBookAuthorContainer">
-								<input type="text" id="SearchBox4" class="TextInput BookAuthor" name="BookAuthor[]">
+						
+						<div class="BookAuthorContainer SBorder HalfWidth">
+							<div class="AddBookAuthorContainer flexContainer">
+								<input type="text" class="TextInput BookAuthor" name="BookAuthor[]" autocomplete="off">
 							</div>
-						<div id="responseAuthors4" class="HintBox responseAuthors"></div>
+							<div class="HintBox responseAuthors"></div>
 						</div>
 					</div>
+					
+					
+					
 					<!-- КАТЕГОРИИ -->
 					<div class="FormElemContainer">
 						<p class="CategoryName">Категория(и):</p>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory1" class="TextInput BookCategory" name="BookCategory[]" required>
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off" required>
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory1" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory2" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory2" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory3" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory3" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory4" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory4" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory5" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory5" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory6" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory6" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory7" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory7" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory8" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory8" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory9" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 								<button Class="FormButton AddBookCategory Add" type="button">
 									<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 192 192" style=" fill:#FFF;"><path d="M88,24v64h-64v16h64v64h16v-64h64v-16h-64v-64z"></path></svg>
 								</button>
 							</div>
-							<div id="responseCategory9" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
-						<div class="BookCategoryContainer">
-							<div class="AddBookCategoryContainer">
-								<input type="text" id="SearchBoxCategory10" class="TextInput BookCategory" name="BookCategory[]">
+						<div class="BookCategoryContainer SBorder HalfWidth">
+							<div class="AddBookCategoryContainer flexContainer">
+								<input type="text" class="TextInput BookCategory" name="BookCategory[]" autocomplete="off">
 							</div>
-							<div id="responseCategory10" class="HintBox responseCategory"></div>
-							<br>
+							<div class="HintBox responseCategory"></div>
 						</div>
 					</div>
 					<div class="FormElemContainer">

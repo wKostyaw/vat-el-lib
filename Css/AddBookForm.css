@@ -4,14 +4,13 @@
 .AddBookCategoryContainer, .AddBookAuthorContainer, .AddFileContainer {
 	display: flex;
 	flex-direction: row;
-	border: 1px solid #CECECE;
-	border-radius: 3px;
+	/*border-radius: 3px;*/
 	overflow: hidden;
-	width: calc(50% - 5px);
 }
 .AddFileContainer {
-	width: /*calc(*/100%/* - 2px)*/;
+	width: 100%;
 	box-sizing: border-box;
+	border: 1px solid #CECECE;
 }
 .BookAuthor, .BookCategory {
 	border: none;
@@ -57,10 +56,12 @@
 	width: 38px;
 	padding: 0px;
 	border: none;
+	border-radius: 0;
 }
 .BookCategoryContainer, .BookAuthorContainer {
 	position: relative;
 	display: none;
+	margin-bottom: 5px;
 }
 .BookCategoryContainer:first-of-type, .BookAuthorContainer:first-of-type {
 	display: block;

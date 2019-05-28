@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	// autocomplete для категорий
-	// 1
 	$('.BookCategory').each(function() {
 		$(this).keyup(function() {
 			
@@ -34,26 +33,6 @@ $(document).ready(function(){
 	});
 
 	// autocomplete для авторов
-	/*$(".BookAuthor").keyup(function() {
-		var query = $(".BookAuthor").val();
-										
-		if (query.length > 0) {
-			$.ajax (
-				{
-					url: 'autocomplete.php',
-					method: 'POST',
-					data: {
-						search: 1,
-						q: query
-					},
-					success: function (data) {
-					$(".responseAuthors").html(data);
-				},
-					dataType: 'text'
-				}
-			);			
-		}
-	});*/
 	$('.BookAuthor').each(function() {
 		$(this).keyup(function() {
 			
@@ -87,6 +66,17 @@ $(document).ready(function(){
 	});
 	
 	
+	// Прячет автокомплит при клике вне границ его текстового поля
+	$(".HintBox").each(function () {
+		var hintbox = $(this),
+			autocompletecontainer = hintbox.parents(".SBorder");
+		
+		$(document).mouseup(function (a) {
+			if (autocompletecontainer.has(a.target).length === 0) {
+				$(hintbox).html("");
+			}
+		});
+	});
 	
 	// Поиск подходящих книг
 	$("#BSearchName").keyup(function() {
@@ -161,13 +151,21 @@ $(document).ready(function(){
 		$('.AddBookForm').css('display', 'block');
 	});
 	
+	// Отображение следующего автора/категории
+	$('.AddBookAuthor').on('click', function() {
+		$(this).css('display', 'none');
+		$(this).parents(".BookAuthorContainer").next(".BookAuthorContainer").css('display', 'block');
+	});
+	$('.AddBookCategory').on('click', function() {
+		$(this).css('display', 'none');
+		$(this).parents(".BookCategoryContainer").next(".BookCategoryContainer").css('display', 'block');
+	});
+	
 	// Проверка расширения загружаемого файла книги
 	$('#BookFile').on('change', function checkFile() {
 		var FileName = this.files.item(0).name,
-			whiteList = /(\.pdf|\.txt)$/i, // Какие файлы нам нужны?
+			whiteList = /(\.pdf)$/i,
 			Container = $(this).next('.AddFileContainer');
-			
-		$('#submit').prop('disabled', !whiteList.test(FileName));
 		if(!whiteList.test(FileName)) { 
 			this.value = "";
 			alert('Неверный тип файла, принимаются: pdf, txt');
@@ -177,25 +175,12 @@ $(document).ready(function(){
 	// Проверка расширения загружаемой обложки
 	$('#BookCover').on('change', function checkCover() {
 		var FileName = this.files.item(0).name,
-			whiteList = /(\.png|\.jpeg|\.jpg)$/i, // Какие файлы принимаются
+			whiteList = /(\.png|\.jpeg|\.jpg)$/i,
 			Container = $(this).next('.AddFileContainer');
-			
-		$('#submit').prop('disabled', !whiteList.test(FileName));
 		if(!whiteList.test(FileName)) { 
 			this.value = "";
 			alert('Неверный тип файла, принимаются: png, jpeg');
 		}
-	});
-	
-	
-	// Отображение следующего автора/категории
-	$('.AddBookAuthor').on('click', function() {
-		$(this).css('display', 'none');
-		$(this).parents(".BookAuthorContainer").next(".BookAuthorContainer").css('display', 'block');
-	});
-	$('.AddBookCategory').on('click', function() {
-		$(this).css('display', 'none');
-		$(this).parents(".BookCategoryContainer").next(".BookCategoryContainer").css('display', 'block');
 	});
 	
 	// Отображение названия файла
@@ -216,5 +201,4 @@ $(document).ready(function(){
 				$Container.html(Nothing);
 		});
 	});
-		
 });

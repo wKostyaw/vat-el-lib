@@ -5,7 +5,7 @@ body {
 	font-family: arial;
 }
 ul {
-	list-style-type: none;
+	list-style: none;
 }
 a {
 	text-decoration: none;
@@ -24,7 +24,6 @@ a {
 	width: 300px;
 	border-right: 1px solid #CECECE;
 	font-size: 12pt;
-	flex: 1;
 	top: 0px;
 }
 .LogoContainer {
@@ -112,7 +111,6 @@ a {
 .SubmitButton, .ResetButton, .DeleteButton {
 	width: calc(50% - 21px);
 	border: 1px solid #CECECE;
-	
 	margin-top: 25px;
 	font-size: 12pt;
 	font-weight: 700;
@@ -123,9 +121,6 @@ a {
 }
 .findBook, .findUser {
 	width: 100%;
-}
-.changeBook, .changeUser {
-	/*display: none;*/
 }
 .flexContainer {
 	display: flex; 
@@ -147,15 +142,12 @@ a {
 	width: 100%;
 	overflow-y: auto;
 	background: #FFF;
-	z-index: 1;
 }
 .HintList {
 	padding: 0px;
 	margin: 0px;
-	list-style: none;
-	margin-top: 0px;
+	/*list-style: none;*/
 	width: 100%;
-	/*border: 1px solid #CECECE;*/
 }
 .Hint {
 	border-bottom: 1px solid #CECECE;

@@ -158,7 +158,7 @@
 						<p class="CategoryName">Логин пользоваетеля</p>
 						<div class="SBorder">
 						<div class="flexContainer">
-							<input type="text" class="TextInput HalfWidth USearchName" id="SearchBox">
+							<input type="text" class="TextInput HalfWidth USearchName" autocomplete="off" id="SearchBox">
 						</div>
 						<div id="response" class="HintBox"></div>
 						</div>
@@ -169,13 +169,13 @@
 					<div class="FormElemContainer">
 						<p class="CategoryName">Логин</p>
 						<input type="text" name="usersID" id="usersID" hidden="">
-						<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" required>
+						<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
 					</div>
 					<div class="FormElemContainer">
 						<p class="CategoryName">Пароль</p>
 						<div class="flexContainer SBorder HalfWidth">
-						<input type="text" name="password" placeholder="Пароль" class="TextInput noBorder" required>
-						<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
+							<input type="text" name="password" placeholder="Пароль" class="TextInput noBorder" autocomplete="off" required>
+							<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
 						</div>
 					</div>
 					<div class="FormElemContainer">

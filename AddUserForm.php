@@ -103,15 +103,17 @@
 				<form method="POST">
 					<div class="FormElemContainer">
 					<p class="CategoryName">Логин</p>
-					<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" required>
+					<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
 					<p>Будет ли администратором?</p>
 					<p><input type="radio" name="isAdmin" value="1">Да
 					<input type="radio" name="isAdmin" value="0" checked="">Нет</p>
 					</div>
 					<div class="FormElemContainer">
 					<p class="CategoryName">Пароль</p>
-					<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth" required >
-					<input type="button" id="passwordGenerator" value="Сгенерировать пароль">
+					<div class="flexContainer SBorder HalfWidth">
+					<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth noBorder" autocomplete="off" required>
+					<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
+					</div>
 					</div>
 					<div class="FormElemContainer">
 					<button type="reset" class="FormButton ResetButton">Очистить</button>
