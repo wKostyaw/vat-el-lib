@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 27 2019 г., 18:23
+-- Время создания: Май 29 2019 г., 23:03
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -160,6 +160,10 @@ CREATE TABLE `loginparol` (
   `id` int(11) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `imya` varchar(255) NOT NULL,
+  `familiya` varchar(255) NOT NULL,
+  `otchestvo` varchar(255) NOT NULL,
+  `grupa` varchar(255) NOT NULL,
   `admin` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -167,11 +171,14 @@ CREATE TABLE `loginparol` (
 -- Дамп данных таблицы `loginparol`
 --
 
-INSERT INTO `loginparol` (`id`, `login`, `password`, `admin`) VALUES
-(1, 'admin', '1', 1),
-(2, 'izvekov', '6WKpAJ3IKj', 1),
-(10, 'lox', 'IduHGtGGrY', 1),
-(11, 'lox-sequel', 'utVlg0AwBo', 0);
+INSERT INTO `loginparol` (`id`, `login`, `password`, `imya`, `familiya`, `otchestvo`, `grupa`, `admin`) VALUES
+(1, 'admin', '1', '', '', '', '', 1),
+(2, 'izvekov', '6WKpAJ3IKj', '', '', '', '', 1),
+(10, 'lox', 'IduHGtGGrY', '', '', '', '', 1),
+(11, 'lox-sequel', 'utVlg0AwBo', '', '', '', '', 0),
+(14, 'hjlkhgled', 'zHikhnPbty', '', '', '', '', 1),
+(15, 'lhewlkhve', 'BfcbvxKZye', '', '', '', '', 0),
+(17, 'lksedhgjklh3', '79BrpTFeAq', 'Илья', 'Извеков', 'Георгиевич', 'КС. 151', 0);
 
 -- --------------------------------------------------------
 
@@ -210,7 +217,7 @@ CREATE TABLE `users_and_books` (
 --
 
 INSERT INTO `users_and_books` (`id`, `BookID`) VALUES
-(1, 71);
+(1, 74);
 
 --
 -- Индексы сохранённых таблиц
@@ -291,7 +298,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `loginparol`
 --
 ALTER TABLE `loginparol`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
