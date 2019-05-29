@@ -38,7 +38,6 @@
 		}
 	}
 	// генератор паролей 
-
 	if (isset($_POST['pswrdgnrtr'])) 
 	{
 		$otvet = "<p>";
@@ -127,10 +126,9 @@
 						<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth noBorder" autocomplete="off" required>
 						<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
 					</div>
-					</div>
 					<div class="FormElemContainer">
-					<button type="reset" class="FormButton ResetButton">Очистить</button>
-					<button type="submit" class="FormButton SubmitButton">Добавить</button>
+						<button type="reset" class="FormButton ResetButton">Очистить</button>
+						<button type="submit" class="FormButton SubmitButton">Добавить</button>
 					</div>
 				</form>
 			</div>

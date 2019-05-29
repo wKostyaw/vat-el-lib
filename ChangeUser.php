@@ -52,6 +52,16 @@
 	{
 		$new_login = $_POST['login'];
 		$new_password = $_POST['password'];
+		
+		
+		// ФИО и группа
+		$new_imya = $_POST['imya'];
+		$new_familia = $_POST['familia'];
+		$new_otchestvo = $_POST['otchestvo'];
+		$new_gruppa = $_POST['gruppa'];
+		
+		
+		
 		$sql = $connection->query("UPDATE loginparol SET login='$new_login', password='$new_password' WHERE id = '$id'");
 		if ($sql) {
 			echo "<script> alert('Данные пользователя " . $_POST['login'] . " изменены')</script>";
@@ -177,6 +187,39 @@
 							<input type="text" name="password" placeholder="Пароль" class="TextInput noBorder" autocomplete="off" required>
 							<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
 						</div>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Права пользователя:</p>
+						
+						
+						
+						
+						<!--<p>-->
+						<input type="radio" name="isAdmin" value="0" checked=""> Читатель<br>
+						<input type="radio" name="isAdmin" value="1"> Администратор<br>
+						<input type="radio" name="isAdmin" value="2"> Заблокирован
+						<!--</p>-->
+						
+						
+						
+						
+						
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Имя</p>
+						<input type="text" name="imya" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Фамилия</p>
+						<input type="text" name="familia" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Отчество</p>
+						<input type="text" name="otchestvo" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Группа</p>
+						<input type="text" name="gruppa" class="TextInput HalfWidth" autocomplete="off">
 					</div>
 					<div class="FormElemContainer">
 						<input type="submit" class="FormButton DeleteButton" name="delete" value="Удалить">   
