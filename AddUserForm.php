@@ -19,9 +19,12 @@
 		$login = $_POST['login'];
 		$password = $_POST['password'];
 		$isAdmin = $_POST['isAdmin'];
-		$query = "INSERT INTO loginparol (login, password, admin) VALUES ('$login', '$password', '$isAdmin')";
+		$imya = $_POST['imya'];
+		$familiya = $_POST['familiya'];
+		$otchestvo = $_POST['otchestvo'];
+		$grupa = $_POST['grupa'];
+		$query = "INSERT INTO loginparol (login, password, admin, imya, familiya, otchestvo, grupa) VALUES ('$login', '$password', '$isAdmin', '$imya', '$familiya', '$otchestvo', '$grupa')";
 		$result = mysqli_query ($connection, $query);
-
 		if ($result) 
 		{
 			echo '<script type="text/javascript">';
@@ -94,7 +97,7 @@
 						<li class="AdminLinkBox"><a href="ChangeUser.php" class="AdminLink">Изменить/удалить пользователя</a></li>
 						<li class="AdminLinkBox"><a href="AddBookForm.php" class="AdminLink">Добавить книгу</a></li>
 						<li class="AdminLinkBox"><a href="ChangeBook.php" class="AdminLink">Изменить/удалить книгу</a></li>
-						<li class="AdminLinkBox"><a href="#" class="AdminLink">Пароли, явки</a></li>
+						<li class="AdminLinkBox"><a href="InfoAboutUsers.php" class="AdminLink">Информация о пользователях</a></li>
 						<li class="AdminLinkBox"><a href="#" class="AdminLink" onclick="document.location.replace('?exit');">Выход</a></li>
 					</ul>
 			</div>
@@ -102,17 +105,27 @@
 				<h2 class="MainHeader">Добавить пользователя</h2>
 				<form method="POST">
 					<div class="FormElemContainer">
-					<p class="CategoryName">Логин</p>
-					<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
-					<p>Будет ли администратором?</p>
-					<p><input type="radio" name="isAdmin" value="1">Да
-					<input type="radio" name="isAdmin" value="0" checked="">Нет</p>
+						<p class="CategoryName">Логин</p>
+						<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
+						<p class="CategoryName">Имя</p>
+						<input type="text" name="imya" placeholder="Имя" class="TextInput HalfWidth" autocomplete="off" required>
+						<p class="CategoryName">Фамилия</p>
+						<input type="text" name="familiya" placeholder="Фамилия" class="TextInput HalfWidth" autocomplete="off" required>
+						<p class="CategoryName">Отчество</p>
+						<input type="text" name="otchestvo" placeholder="Отчество" class="TextInput HalfWidth" autocomplete="off" required>
+						<p class="CategoryName">Группа</p>
+						<input type="text" name="grupa" placeholder="Группа" class="TextInput HalfWidth" autocomplete="off" required>
+						<p>Будет ли администратором?</p>
+						<p>
+							<input type="radio" name="isAdmin" value="1">Да
+							<input type="radio" name="isAdmin" value="0" checked="">Нет
+						</p>
 					</div>
 					<div class="FormElemContainer">
-					<p class="CategoryName">Пароль</p>
-					<div class="flexContainer SBorder HalfWidth">
-					<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth noBorder" autocomplete="off" required>
-					<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
+						<p class="CategoryName">Пароль</p>
+						<div class="flexContainer SBorder HalfWidth">
+						<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth noBorder" autocomplete="off" required>
+						<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
 					</div>
 					</div>
 					<div class="FormElemContainer">

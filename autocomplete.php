@@ -1,8 +1,8 @@
 <?php 
+	include_once "auth.php";
 // Проверка, есть ли вводимый автор в таблице авторов
 	if (isset($_POST['searchAuthor'])) 
 	{
-		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q = $connection->real_escape_string($_POST['q']);
 		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
 		if ($sql->num_rows > 0) 
@@ -17,7 +17,6 @@
 	
 	//Проверка, есть ли вводимая категория в таблице категорий
 	if (isset($_POST['searchCategory'])) {
-		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q5 = $connection->real_escape_string($_POST['q5']);
 		$sql = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q5%'");
 		if ($sql->num_rows > 0) {
