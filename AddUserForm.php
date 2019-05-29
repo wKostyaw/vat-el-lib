@@ -18,7 +18,17 @@
 	{
 		$login = $_POST['login'];
 		$password = $_POST['password'];
-		$isAdmin = $_POST['isAdmin'];
+		$isAdmin = $_POST['isAdmin']; // Тут теперь 3: 0 - пользователь/читатель/как угодно Уварову, 1 - администратор, 2 - заблокирован
+		
+		// ФИО и группа ---------------------------------------------------------------------------\\
+		
+		$imya = $_POST['imya'];
+		$familia = $_POST['familia'];
+		$otchestvo = $_POST['otchestvo'];
+		$gruppa = $_POST['gruppa'];
+		
+		//-----------------------------------------------------------------------------------------\\
+		
 		$query = "INSERT INTO loginparol (login, password, admin) VALUES ('$login', '$password', '$isAdmin')";
 		$result = mysqli_query ($connection, $query);
 
@@ -104,16 +114,48 @@
 					<div class="FormElemContainer">
 					<p class="CategoryName">Логин</p>
 					<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
-					<p>Будет ли администратором?</p>
-					<p><input type="radio" name="isAdmin" value="1">Да
-					<input type="radio" name="isAdmin" value="0" checked="">Нет</p>
+					
+						
+						</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Права пользователя:</p>
+						
+						
+						
+						
+						<!--<p>-->
+						<input type="radio" name="isAdmin" value="0" checked=""> Читатель<br>
+						<input type="radio" name="isAdmin" value="1"> Администратор<br>
+						<input type="radio" name="isAdmin" value="2"> Заблокирован
+						<!--</p>-->
+						
+						
+						
+						
+						
 					</div>
 					<div class="FormElemContainer">
-					<p class="CategoryName">Пароль</p>
-					<div class="flexContainer SBorder HalfWidth">
-					<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth noBorder" autocomplete="off" required>
-					<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
+						<p class="CategoryName">Пароль</p>
+						<div class="flexContainer SBorder HalfWidth">
+							<input type="text" name="password" placeholder="Пароль" class="TextInput HalfWidth noBorder" autocomplete="off" required>
+							<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать пароль">
+						</div>
 					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Имя</p>
+						<input type="text" name="imya" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Фамилия</p>
+						<input type="text" name="familia" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Отчество</p>
+						<input type="text" name="otchestvo" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Группа</p>
+						<input type="text" name="gruppa" class="TextInput HalfWidth" autocomplete="off">
 					</div>
 					<div class="FormElemContainer">
 					<button type="reset" class="FormButton ResetButton">Очистить</button>
