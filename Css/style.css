@@ -243,3 +243,45 @@ a {
 	background-color: #59D;
 	color: #FFF;
 }
+
+/* Страница сорраненного */
+
+/* Форма добавления полки */
+.addNewShelfBox {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+
+
+
+/* Блок полок */
+.shelvesContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.shelf {
+	width: 100px;
+	/*border: 1px solid #CECECE;*/
+	margin: 10px 10px 10px 0px;
+}
+.shelfIcon {
+	border: 1px solid #CECECE;
+	stroke: #000;
+	fill: #FFF;
+}
+.shelfIcon:hover {
+	border: 1px solid #33D;
+	stroke: #33D;
+}
+.shelfName {
+	text-align: center;
+	display: block;
+	word-wrap: break-word;
+	hyphens: auto;
+}

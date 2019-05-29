@@ -21,8 +21,7 @@
 		$sqlbookcategories = $connection->query("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$BookIdValue'");
 		$BookCategories = array();
 		$i = 0;
-		while ($BookCategoriesId = $sqlbookcategories -> fetch_assoc()) 
-		{
+		while ($BookCategoriesId = $sqlbookcategories -> fetch_assoc()) {
 			$CategoryID = $BookCategoriesId["CategoryID"];
 			$sqlcategory = $connection->query("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
 				$CategoryName = $sqlcategory->fetch_assoc();

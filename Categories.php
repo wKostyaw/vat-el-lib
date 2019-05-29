@@ -41,9 +41,9 @@
 			<div class="NCentered">				
 				<ul class="Navigation">
 					<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
-					<li class="NButton"><a href="#" class="NBLink">Сохраненное</a></li>
-					<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
-					<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>
+						<li class="NButton"><a href="Saved.php" class="NBLink">Сохраненное</a></li>
+						<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
+						<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>
 					<?php 
 						$username = $_SESSION['login'];
 						$admin = ("SELECT admin FROM loginparol WHERE login='$username'");

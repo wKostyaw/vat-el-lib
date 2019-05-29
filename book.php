@@ -128,7 +128,7 @@
 			<div class="NCentered">
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
-						<li class="NButton"><a href="#" class="NBLink">Сохраненное</a></li>
+						<li class="NButton"><a href="Saved.php" class="NBLink">Сохраненное</a></li>
 						<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
 						<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>
 						<?php 
@@ -305,7 +305,7 @@
 							echo "<p class='bookInfoPoint'><b>Краткое описание: </b>". $row[3] ." </p>";
 						echo "</div>";
 					echo "</div>";
-					echo "<embed src='" . $row[4] . "' width='100%' vspace='10' style='height: 98vh;'>";
+					echo "<embed id='bookFile' src='" . $row[4] . "' width='100%' vspace='10' style='height: 98vh;'>";
 				 ?>
 				</div>
 			</div>
