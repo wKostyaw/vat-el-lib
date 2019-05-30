@@ -81,7 +81,7 @@ function SliderWithLastBooks($SliderID, $RequestSliderItems) {
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
-								$Cover = book['PathToСover'],
+								$Cover = book['PathToCover'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
 								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories);
@@ -112,7 +112,7 @@ function SliderWithSelectedCategory($SliderID, $RequestSliderItems, $RequestSlid
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
-								$Cover = book['PathToСover'],
+								$Cover = book['PathToCover'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
 								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories);
@@ -143,7 +143,7 @@ function SliderWithSelectedAuthor($SliderID, $RequestSliderItems, $RequestSlider
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
-								$Cover = book['PathToСover'],
+								$Cover = book['PathToCover'],
 								$SliderBookAuthors = book['BookAuthors'],
 								$SliderBookCategories = book['BookCategories'];
 								makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories);

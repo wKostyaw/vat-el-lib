@@ -60,10 +60,16 @@
 		}
 	}
 	
+	if (isset($_POST['delSlider'])) {
+		$SliderId = $_POST['SliderId'];
+		$SqlDel = $connection->query("DELETE FROM slideroptions WHERE Sliderid = $SliderId");
+	}
+	
 	if (isset($_POST['addNewSlider'])) {
 		$whatToDo = $_POST['whatToDo'];
 		$amount = $_POST['amount'];
 		$sliderName = $_POST['sliderName'];
+		
 		if ($whatToDo == 0) {
 			$catOrAutId = 0;
 		} else if ($whatToDo == 1) {
@@ -73,14 +79,14 @@
 			$sqlcatOrAutId = $connection->query("SELECT CategoryID FROM categories WHERE Category LIKE '$sliderName'");
 			$catOrAutId = $sqlcatOrAutId->fetch_assoc()['CategoryID'];
 		}
-		$sqlSlider = $connection->query("INSERT INTO slideroptions 'amount', 'whatToDo', 'categoryOrAuthorID' VALUES '$amount', '$whatToDo', '$catOrAutId'");
-		exit ($debug);
+		$amount = $connection->real_escape_string($amount);
+		$whatToDo = $connection->real_escape_string($whatToDo);
+		$catOrAutId = $connection->real_escape_string($catOrAutId);
+		$query = "INSERT INTO slideroptions (amount, whatToDo, categoryOrAuthorID) VALUES ('$amount', '$whatToDo', '$catOrAutId')";
+		$sqlSlider = mysqli_query ($connection, $query);
 	}
 	
-	if (isset($_POST['delSlider'])) {
-		$SliderId = $_POST['SliderId'];
-		$sql = $connection->query("DELETE FROM slideroptions WHERE sliderId LIKE $SliderId");
-	}
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -133,7 +139,7 @@
 					</div>
 					<div class="FormElemContainer">
 						<p>Максимальное количество элементов: </p>
-						<input type="text" name="amount" class="TextInput sliderOptField HalfWidth">
+						<input type="text" name="amount" class="TextInput amount sliderOptField HalfWidth">
 					</div>
 					<div class="FormElemContainer">
 						<button type="reset" class="FormButton ResetButton">Очистить</button>

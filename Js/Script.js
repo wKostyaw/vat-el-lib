@@ -24,14 +24,6 @@ $(document).ready(function() {
 		});
 		location.reload();
 	});
-	$(document).on('click', '#openLoginForm', function () {
-		$('.LoginForm').css("display", "block");
-		$('.glass').css("display", "block");
-	});
-	$(document).on('click', '#closeLoginForm', function () {
-		$('.LoginForm').css("display", "none");
-		$('.glass').css("display", "none");
-	});
 });
 function insertShelf(shelfLink, shelfName) {
 var shelfIconTemplate = '<div class="shelf">\n'+

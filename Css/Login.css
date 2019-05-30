@@ -84,14 +84,18 @@ body {
 	background-color: #37B;
 }
 .hello {
-	width: 1000px;
+	width: 1200px;
 	background-color: #FFF;
 	height: 100%;
 	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .helloText {
-	text-wrap: wrap;
-	width: 700px;
+	word-wrap: wrap;
+	width: 900px;
+	text-align: justify;
 }
 .glass {
 	width: 100vw;
