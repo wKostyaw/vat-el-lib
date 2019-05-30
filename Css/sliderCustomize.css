@@ -1,0 +1,47 @@
+.sliderOptions {
+	width: 100%;
+	border-bottom: 1px solid #CECECE;
+	
+	/*display: flex;
+	flex-direction: column;*/
+}
+/*.SOContainer {
+	margin-bottom: 20px;
+}*/
+.sliderOptField {
+	height: 40px;
+	box-sizing: border-box;
+	font-size: 12pt;
+}
+.sliderName {
+	border: none;
+}
+.sliderBox {
+	width: 100%;
+	border: 1px solid #CECECE;
+	margin-bottom: 10px;
+	font-size: 12pt;
+	/*padding: 5px;*/
+	box-sizing: border-box;
+	overflow: hidden;
+	border-radius: 3px;
+}
+.SBCell {
+	width: 350px;
+	margin: auto 5px;
+}
+.deleteSlider {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	margin: auto 0px auto auto;
+	border: none;
+	background: none;
+}
+.deleteSlider:hover {
+	cursor: pointer;
+	background: #48C;
+}
+.SOHide {
+	display: none;
+}

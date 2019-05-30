@@ -111,7 +111,7 @@ a {
 .SubmitButton, .ResetButton, .DeleteButton {
 	width: calc(50% - 21px);
 	border: 1px solid #CECECE;
-	margin-top: 25px;
+	/*margin-top: 25px;*/
 	font-size: 12pt;
 	font-weight: 700;
 }
