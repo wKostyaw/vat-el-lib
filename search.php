@@ -93,13 +93,13 @@
                             } 
                             else 
                             {
-                                $Categories = 'Авторов нет';
+                                $Categories = 'Категорий нет';
                             }
                         }
                     } 
                     else 
                     {
-                        $CategoryID = 'Авторов нет';
+                        $CategoryID = 'Категорий нет';
                     }
                     echo "<span class='BookInfoItem'>" . "Категории: ";
                     foreach ($Categories as $key => $value) 
@@ -314,11 +314,11 @@
                             {   
                                 echo "Введите поисковой запрос!";
                             } 
-                            else if (strlen($search_q) < 3)
+                            else if (iconv_strlen($search_q) < 3)
                             { 
                                 echo "Слишком короткий поисковый запрос";
                             } 
-                            else if (strlen($search_q) > 128) 
+                            else if (iconv_strlen($search_q) > 128) 
                             {
                                 echo "Слишком длинный поисковый запрос";
                             }

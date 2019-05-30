@@ -33,6 +33,7 @@
 						<li class="AdminLinkBox"><a href="AddBookForm.php" class="AdminLink">Добавить книгу</a></li>
 						<li class="AdminLinkBox"><a href="ChangeBook.php" class="AdminLink">Изменить/удалить книгу</a></li>
 						<li class="AdminLinkBox"><a href="InfoAboutUsers.php" class="AdminLink">Информация о пользователях</a></li>
+						<li class="AdminLinkBox"><a href="InfoAboutBooks.php" class="AdminLink">Информация о книгах</a></li>
 						<li class="AdminLinkBox"><a href="CustomizeSlider.php" class="AdminLink">Настройка главной страницы</a></li>
 						<li class="AdminLinkBox"><a href="#" class="AdminLink" onclick="document.location.replace('?exit');">Выход</a></li>
 					</ul>
@@ -51,7 +52,7 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<table>"; 
+						    echo "<table border='1' >"; 
 						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Является ли администратором (1 - да, 0 - нет)</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
@@ -74,7 +75,7 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<table>"; 
+						    echo "<table border='1'>"; 
 						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Является ли администратором (1 - да, 0 - нет)</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
@@ -97,7 +98,7 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<table>"; 
+						    echo "<table border='1'>"; 
 						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Является ли администратором (1 - да, 0 - нет)</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
