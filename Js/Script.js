@@ -19,10 +19,10 @@ $(document).ready(function() {
 			},
 			success: function (data) {
 				alert('Удалено');
-				location.reload();
 			},
 			dataType: 'text'
 		});
+		location.reload();
 	});
 });
 function insertShelf(shelfLink, shelfName) {

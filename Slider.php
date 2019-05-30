@@ -32,6 +32,31 @@
 		return $BookCategories;
 	}
 	
+	if (isset($_POST['SliderRequest'])) {
+		$sqlSliderInfo = $connection->query("SELECT * FROM slideroptions");
+		$slidersInfo = array();
+		$i = 0;
+		while ($sliderInfo = $sqlSliderInfo->fetch_assoc()) {
+			$sliderId = $sliderInfo['sliderId'];
+			$whatToDo = $sliderInfo['whatToDo'];
+			$catOrAutId = $sliderInfo['categoryOrAuthorID'];
+			$catOrAutName = 'Последние добавленные книги';
+			
+			if ($whatToDo == 1) {
+				$sqlAuthorInfo = $connection->query("SELECT Name FROM authors WHERE AuthorID LIKE $catOrAutId");
+				$catOrAutName = 'Автор: ' . $sqlAuthorInfo->fetch_assoc()['Name'];
+			} else if ($whatToDo == 2) {
+				$sqlCategoryInfo = $connection->query("SELECT Category FROM categories WHERE CategoryID LIKE $catOrAutId");
+				$catOrAutName = 'Категория: ' .$sqlCategoryInfo->fetch_assoc()['Category'];
+			}
+			$sliderInfo['catOrAutName'] = $catOrAutName;
+			$slidersInfo[$i] = $sliderInfo;
+			$i = $i + 1;
+		}
+		$slidersInfo = json_encode($slidersInfo);
+		exit ($slidersInfo);
+	}
+	
 	if (isset($_POST['SliderLastItemRequest'])) 
 	{
 		$Amount = $_POST['SliderLastItemRequest'];
@@ -54,12 +79,9 @@
 	if (isset($_POST['SliderCategoryRequest'])) 
 	{
 		$Amount = ($_POST['SliderAmountOfItems']);
-		$CategoryName = ($_POST['SliderCategoryRequest']);
+		$SelectedCategoryId = ($_POST['SliderCategoryRequest']);
 		$ListOfBooks = array();
 		$j = 0;
-		
-		$sqlbookcategory = $connection->query("SELECT CategoryID FROM categories WHERE Category LIKE '$CategoryName'");
-		$SelectedCategoryId = ($sqlbookcategory -> fetch_assoc())['CategoryID'];
 		$sqlbookIds = $connection->query("SELECT BookID FROM books_and_categories WHERE CategoryID LIKE '$SelectedCategoryId' LIMIT $Amount") or die;
 		while($BookId = $sqlbookIds-> fetch_assoc()) 
 		{
@@ -77,12 +99,9 @@
 	if (isset($_POST['SliderAuthorRequest'])) 
 	{
 		$Amount = ($_POST['SliderAmountOfItems']);
-		$AuthorName = ($_POST['SliderAuthorRequest']);
+		$SelectedAuthorId = ($_POST['SliderAuthorRequest']);
 		$ListOfBooks = array();
 		$j = 0;
-		
-		$sqlbookcategory = $connection->query("SELECT AuthorID FROM authors WHERE Name LIKE '$AuthorName'");
-		$SelectedAuthorId = ($sqlbookcategory -> fetch_assoc())['AuthorID'];
 		$sqlbookIds = $connection->query("SELECT BookID FROM books_and_authors WHERE AuthorID LIKE '$SelectedAuthorId' LIMIT $Amount") or die;
 		while($BookId = $sqlbookIds-> fetch_assoc()) 
 		{
@@ -97,6 +116,9 @@
 		$ListOfBooks = json_encode($ListOfBooks);
 		exit($ListOfBooks);
 	}
+	
+	
+	
 	header('Location: MainPage.php');
 	exit();
 ?>

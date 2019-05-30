@@ -126,7 +126,6 @@
 		<link rel="stylesheet" type="text/css" href="Css/BooksList.css">
 		<link rel="stylesheet" type="text/css" href="Css/PageNavigation.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
-		<script src="Js/Slider.js" type="text/javascript"></script>
 		<script src="Js/Script.js" type="text/javascript"></script>
 	</head>
 	<body>

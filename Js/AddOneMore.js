@@ -1,27 +1,24 @@
 $(document).ready(function(){
 	// autocomplete для категорий
-	$('.BookCategory').each(function() {
-		$(this).keyup(function() {
-			
-			var query5 = $(this).val(),
-				hintBox = $(this).parents(".BookCategoryContainer").find(".responseCategory");
-			if (query5.length > 0) {
-				$.ajax (
-					{
-						url: 'autocomplete.php',
-						method: 'POST',
-						data: {
-							searchCategory: 1,
-							q5: query5
-						},
-						success: function (data) {
-							hintBox.html(data);
-						},
-						dataType: 'text'
-					}
-				);			
-			}
-		});
+	$(document).on('keyup' ,'.BookCategory', function() {
+		var query5 = $(this).val(),
+			hintBox = $(this).parents(".BookCategoryContainer").find(".responseCategory");
+		if (query5.length > 0) {
+			$.ajax (
+				{
+					url: 'autocomplete.php',
+					method: 'POST',
+					data: {
+						searchCategory: 1,
+						q5: query5
+					},
+					success: function (data) {
+						hintBox.html(data);
+					},
+					dataType: 'text'
+				}
+			);			
+		}
 	});
 	
 	$(document).on('click', '.categoryHint', function (){
@@ -31,32 +28,28 @@ $(document).ready(function(){
 		targetInput.val(Category);
 		$(".responseCategory").html("");
 	});
-
-	// autocomplete для авторов
-	$('.BookAuthor').each(function() {
-		$(this).keyup(function() {
-			
-			var query = $(this).val(),
-				hintBox = $(this).parents(".BookAuthorContainer").find(".responseAuthors");
-			if (query.length > 0) {
-				$.ajax (
-					{
-						url: 'autocomplete.php',
-						method: 'POST',
-						data: {
-							searchAuthor: 1,
-							q: query
-						},
-						success: function (data) {
-						hintBox.html(data);
-					},
-						dataType: 'text'
-					}
-				);			
-			}
-		});
-	});
 	
+	// autocomplete для авторов
+	$(document).on('keyup','.BookAuthor', function() {
+		var query = $(this).val(),
+			hintBox = $(this).parents(".BookAuthorContainer").find(".responseAuthors");
+		if (query.length > 0) {
+			$.ajax (
+				{
+					url: 'autocomplete.php',
+					method: 'POST',
+					data: {
+						searchAuthor: 1,
+						q: query
+					},
+					success: function (data) {
+					hintBox.html(data);
+				},
+					dataType: 'text'
+				}
+			);			
+		}
+	});
 	$(document).on('click', '.authorHint', function (){
 		var author = $(this).text(),
 			targetInput = $(this).parents(".BookAuthorContainer").find(".BookAuthor");

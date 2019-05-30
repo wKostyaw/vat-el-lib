@@ -1,9 +1,9 @@
 jQuery(document).ready(function(){
 	// Кнопки влево/вправо
-	SliderWithLastBooks();
+	/*SliderWithLastBooks();
 	SliderWithSelectedCategory();
-	SliderWithSelectedAuthor();
-	
+	SliderWithSelectedAuthor();*/
+	SliderRequest();
 	
 	$('.SliderButtonLeft').on('click', function() {
 		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
@@ -23,10 +23,47 @@ jQuery(document).ready(function(){
 			};
 	});	
 });
-
+function SliderRequest() {
+	$.ajax ({
+		url: 'Slider.php',
+		method: 'POST',
+		data: {
+			SliderRequest: 1,
+		},
+		success: function (data) {
+			var SlidersInfo = JSON.parse(data);
+			$.each(SlidersInfo, function() {
+				var SliderInfo = this;
+					$SliderID = "Slider" + SliderInfo['sliderId'],
+					$whatToDo = SliderInfo['whatToDo'],
+					$amount = SliderInfo['amount'],
+					$catOrAutId = SliderInfo['categoryOrAuthorID'],
+					$catOrAutName = SliderInfo['catOrAutName'],
+					$SliderTemplate = '<div class="Slider" id="' + $SliderID + '">\n'+
+						'<div Class="SliderLogo">' + $catOrAutName + '</div>\n'+
+						'<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>\n'+
+						'<div class="SliderItems"></div>\n'+
+						'<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>\n'+
+					'</div>\n';
+					
+					$('.SiteContent').append($SliderTemplate);
+					$SliderID = '#' + $SliderID;
+					
+					if ($whatToDo == 0) {
+						SliderWithLastBooks($SliderID, $amount)
+					} else if ($whatToDo == 1) {
+						SliderWithSelectedAuthor($SliderID ,$amount, $catOrAutId)
+					} else if ($whatToDo == 2) {
+						SliderWithSelectedCategory($SliderID ,$amount, $catOrAutId)
+					}
+			});
+		},
+		dataType: 'text'
+	});
+}
 /* Функция выводящая последние добавленные книги */
-function SliderWithLastBooks() {
-	$RequestSliderItems = 10; // количество выводимых книг
+function SliderWithLastBooks($SliderID, $RequestSliderItems) {
+	//$RequestSliderItems = 10; // количество выводимых книг
 	//$SliderID = '#ListofLast';
 	$.ajax (
 				{
@@ -39,7 +76,7 @@ function SliderWithLastBooks() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#SliderListofLast',
+							var	//$SliderID = '#SliderListofLast',
 								$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
@@ -55,9 +92,9 @@ function SliderWithLastBooks() {
 			);
 };
 // Функция, выводящая книги определенной категории
-function SliderWithSelectedCategory() {
-	$RequestSliderItemsCategory = 'Роман'; // категория выводимых книг
-	$RequestSliderItems = 20; // количество выводимых книг
+function SliderWithSelectedCategory($SliderID, $RequestSliderItems, $RequestSliderItemsCategory) {
+	//$RequestSliderItemsCategory = 1; // категория выводимых книг
+	//$RequestSliderItems = 20; // количество выводимых книг
 	$.ajax (
 				{
 					url: 'Slider.php',
@@ -70,7 +107,7 @@ function SliderWithSelectedCategory() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#SliderCategory1',
+							var	//$SliderID = '#SliderCategory1',
 								$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
@@ -86,9 +123,9 @@ function SliderWithSelectedCategory() {
 			);
 };
 // Функция, выводящая книги определенного автора
-function SliderWithSelectedAuthor() {
-	$RequestSliderItemsAuthor = 'Пушкин А. С.'; // категория выводимых книг
-	$RequestSliderItems = 5; // количество выводимых книг
+function SliderWithSelectedAuthor($SliderID, $RequestSliderItems, $RequestSliderItemsAuthor) {
+	//$RequestSliderItemsAuthor = 1; // категория выводимых книг
+	//$RequestSliderItems = 5; // количество выводимых книг
 	$.ajax (
 				{
 					url: 'Slider.php',
@@ -101,7 +138,7 @@ function SliderWithSelectedAuthor() {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	$SliderID = '#SliderAuthor1',
+							var	//$SliderID = '#SliderAuthor1',
 								$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
@@ -128,5 +165,5 @@ function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $P
 					'<p>Категории: ' + $SliderBookCategories + '</p>\n'
 				'</div>\n'+
 			'</div>\n';
-	$($SliderID).children('.SliderItems').append($SliderItemTemplate);
+	$($SliderID).find('.SliderItems').append($SliderItemTemplate);
 };

@@ -127,28 +127,7 @@
 			<div class="SiteWrapper">
 				<div class="SiteContent">
 					
-					<div class="Slider" id="SliderListofLast">
-						<div Class="SliderLogo">Последние загруженные книги</div>
-						<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>
-						<div class="SliderItems"></div>
-						<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>
-					</div>
-					
-					<div class="Slider" id="SliderCategory1">
-						<div Class="SliderLogo">Категория</div>
-						<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>
-						<div class="SliderItems"></div>
-						<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>
-					</div>
-					
-					<div class="Slider" id="SliderAuthor1">
-						<div Class="SliderLogo">Автор</div>
-						<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>
-						<div class="SliderItems"></div>
-						<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>
-					</div>
-					
-					<ul class="PageNavigation">
+					<!--<ul class="PageNavigation">
 						<li class="Page PreviousPage"><a href="#">◀</a></li>
 						<li class="Page FirstPage"><a href="#">1</a></li>
 						<li class="PageEmptySpace"></li>
@@ -160,7 +139,8 @@
 						<li class="PageEmptySpace"></li>
 						<li class="Page LastPage"><a href="#">999</a></li>
 						<li class="Page NextPage"><a href="#">▶</a></li>
-					</ul>
+					</ul>-->
+					
 				</div>
 			</div>
 		<div class="SiteFooter">
