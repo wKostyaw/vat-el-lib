@@ -242,7 +242,7 @@
 					    echo "<div class='coverAndButtons'>";
 							echo "<form method='POST' action='book.php'>";
 								echo "<img src='" . $row[5] . "' class='bookCover'>";
-								echo "<button class='bookButton'>Читать</button>";
+								echo "<input type='button' class='bookButton' value='Читать'>";
 								echo "<input type='button' class='bookButton savebook' id='savebook".$row[0]."' value='Сохранить'>";
 								echo "<input type='button' class='bookButton deletebook' id='deletebook".$row[0]."' value='Удалить'>";
 							echo "</form>";

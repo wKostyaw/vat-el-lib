@@ -79,9 +79,7 @@
 			$sqlcatOrAutId = $connection->query("SELECT CategoryID FROM categories WHERE Category LIKE '$sliderName'");
 			$catOrAutId = $sqlcatOrAutId->fetch_assoc()['CategoryID'];
 		}
-		$amount = $connection->real_escape_string($amount);
-		$whatToDo = $connection->real_escape_string($whatToDo);
-		$catOrAutId = $connection->real_escape_string($catOrAutId);
+
 		$query = "INSERT INTO slideroptions (amount, whatToDo, categoryOrAuthorID) VALUES ('$amount', '$whatToDo', '$catOrAutId')";
 		$sqlSlider = mysqli_query ($connection, $query);
 	}
@@ -112,6 +110,7 @@
 						<li class="AdminLinkBox"><a href="AddBookForm.php" class="AdminLink">Добавить книгу</a></li>
 						<li class="AdminLinkBox"><a href="ChangeBook.php" class="AdminLink">Изменить/удалить книгу</a></li>
 						<li class="AdminLinkBox"><a href="InfoAboutUsers.php" class="AdminLink">Информация о пользователях</a></li>
+						<li class="AdminLinkBox"><a href="InfoAboutBooks.php" class="AdminLink">Информация о книгах</a></li>
 						<li class="AdminLinkBox"><a href="CustomizeSlider.php" class="AdminLink">Настройка главной страницы</a></li>
 						<li class="AdminLinkBox"><a href="#" class="AdminLink" onclick="document.location.replace('?exit');">Выход</a></li>
 					</ul>
@@ -165,7 +164,7 @@
 							</svg>
 						</button>
 					</div>-->
-					<?
+					<?php
 						collectInfo($connection);
 					?>
 				</div>
