@@ -40,7 +40,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1' >"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Является ли администратором (1 - да, 0 - нет)</th></tr>";
+						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Права пользователя: 0 - читатель, 1 - администратор, 2 - заблокирован</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
@@ -63,7 +63,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Является ли администратором (1 - да, 0 - нет)</th></tr>";
+						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Права пользователя: 0 - читатель, 1 - администратор, 2 - заблокирован</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
@@ -86,7 +86,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Является ли администратором (1 - да, 0 - нет)</th></tr>";
+						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Права пользователя: 0 - читатель, 1 - администратор, 2 - заблокирован</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
