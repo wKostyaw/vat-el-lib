@@ -194,4 +194,12 @@ $(document).ready(function(){
 				$Container.html(Nothing);
 		});
 	});
+	
+	$(document).on('click', '[class ^= knigi]', function() {
+		var $toggleButton = $(this),
+			ClassNumber = $toggleButton.attr('class'),
+			ClassNumber = ClassNumber.replace(/[^\d]/g, ''),
+			toggleElement = ('.kniga' + ClassNumber);
+		$(toggleElement).toggle( 'display' );
+	});
 });
