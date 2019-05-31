@@ -132,7 +132,7 @@
 										array_push($booklist, $bookid['BookID']);	
 									}
 									if (!empty($booklist)) {
-										echo "<tr class='knigi'><td colspan='8' >Книги на полке пользователя:</td></tr>";
+										echo "<tr class='knigi".$row[0]."'><td colspan='8' class='openBookList'>Книги на полке пользователя:</td></tr>";
 										foreach ($booklist as $key => $valueBookID) 
 										{
 											$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
@@ -141,8 +141,8 @@
 											for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
 	                                        {
 	                                        	$rowOfGetBook = mysqli_fetch_row($getBook);
-	                                        	echo "<tr class='kniga'>";
-	                                        		echo "<td border='none'></td>";
+	                                        	echo "<tr class='kniga".$row[0]."'>";
+	                                        		echo "<td class='noBorder'></td>";
 		                                            echo "<td colspan='7'>$rowOfGetBook[1], $rowOfGetBook[2]</td>";
 	                                            echo "</tr>";
 											} 
@@ -164,4 +164,5 @@
 		</div>
 	</body>
 	<script src="Js/JQuerry.js" type="text/javascript"></script>
+	<script src="Js/AddOneMore.js" type="text/javascript"></script>
 </html>
