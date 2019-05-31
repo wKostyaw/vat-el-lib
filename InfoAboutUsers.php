@@ -20,13 +20,6 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
-		<script type="text/javascript">
-	    $(document).ready(),function(){
-	    	$(document).on('click', '.knigi', function(){
-	    		$(".kniga" ).toggle( display );
-	    	})
-	    }
-	    </script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -48,7 +41,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Права пользователя</th></tr>";
+						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Группа</th><th>Права пользователя</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
@@ -97,7 +90,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Группа</th><th>Права пользователя</th></tr>";
+						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Группа</th><th>Права пользователя</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);

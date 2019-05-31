@@ -72,7 +72,7 @@
 	                                    }
 	                                }
 	                                echo "<table border='1'>"; 
-							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th><th>Путь к обложке</th></tr>";
+							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 		                                $book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID'");
@@ -81,7 +81,7 @@
 		                                {
 		                                	$row = mysqli_fetch_row($book);
 		                                	echo "<tr>";
-									            for ($j = 0 ; $j < 6 ; ++$j) 
+									            for ($j = 0 ; $j < 5 ; ++$j) 
 									            {
 									            	if ($j == 2) 
 									            	{
@@ -208,7 +208,7 @@
 									    }
 	                                }
 	                                echo "<table border='1'>"; 
-							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th><th>Путь к обложке</th></tr>";
+							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 	                                	$book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID'");
@@ -217,7 +217,7 @@
 	                                    {
 	                                    	$row = mysqli_fetch_row($book);
 	                                        echo "<tr>";
-									            for ($j = 0 ; $j < 6 ; ++$j) 
+									            for ($j = 0 ; $j < 5 ; ++$j) 
 									            {
 									            	if ($j == 2) 
 									            	{
@@ -326,12 +326,12 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th><th>Путь к обложке</th></tr>";
+						    echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
 						    	echo "<tr>";
-						            for ($j = 0 ; $j < 6 ; ++$j) 
+						            for ($j = 0 ; $j < 5 ; ++$j) 
 						            {
 						            	if ($j == 2) 
 						            	{
