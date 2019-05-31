@@ -332,7 +332,7 @@
 					} else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros']))
 					{
 						echo "Введите запрос!";	
-					} else 
+					} else if (!isset($_GET['otpravit-sql-zapros'])) 
 					{
 						$sql = $connection->query("SELECT * FROM books ORDER BY BookID");
 						if($sql)
@@ -441,8 +441,10 @@
 						    echo "</table>";
 						} else 
 						{
-							echo "Не удалось поулчить данные из базы данных";
+							echo "Не удалось получить данные из базы данных";
 						}
+					} else {
+						echo "Ничего не найдено";
 					}
 				?>
 
