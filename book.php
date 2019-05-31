@@ -76,10 +76,10 @@
 	<meta charset="utf-8">
 	<head>
 		
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/BookPageStyle.css">
-		<script src="js/JQuerry.js" type="text/javascript"></script>
-		<script src="js/Script.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="Css/style.css">
+		<link rel="stylesheet" type="text/css" href="Css/BookPageStyle.css">
+		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/Script.js" type="text/javascript"></script>
 		<script>
 			$(document).on('click', '.savebook', function () {			
 				var SavedBookID = $(this).attr('id'),
@@ -120,7 +120,7 @@
 	<body>
 		<div class="SiteHeader">
 			<div class="HeaderContent">
-				<img src="img/WorkInProgress.png" class="Logo">
+				<img src="Img/WorkInProgress.png" class="Logo">
 				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
 			</div>
 		</div>
@@ -242,7 +242,7 @@
 					    echo "<div class='coverAndButtons'>";
 							echo "<form method='POST' action='book.php'>";
 								echo "<img src='" . $row[5] . "' class='bookCover'>";
-								echo "<input type='button' class='bookButton' value='Читать'>";
+								echo '<a href="#bookFile"><button type="button" class="bookButton readbook">Читать</button></a>';
 								echo "<input type='button' class='bookButton savebook' id='savebook".$row[0]."' value='Сохранить'>";
 								echo "<input type='button' class='bookButton deletebook' id='deletebook".$row[0]."' value='Удалить'>";
 							echo "</form>";

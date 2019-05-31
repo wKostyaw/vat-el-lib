@@ -119,7 +119,7 @@
             echo "</div>";
             echo "<form method='POST'>";
                 echo "<div class='BookBlockButtons'>";
-                    echo "<button class='BookBlockButton' formmethod='post'>" . 'Читать' . '</button>';
+                    echo '<a href="book.php?BookInfo=' . $row[0] . '#bookFile"><button type="button" class="BookBlockButton readBook">Читать</button></a>';
                     echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе' >";
                     echo "<input type='button' class='BookBlockButton deleteBook' id='deletebook".$row[0]."' name='deletebook[]' value='Удалить от себя' >";
                 echo "</div>";
@@ -169,11 +169,11 @@
     <meta charset="utf-8">
     <head>
         <title>Поиск</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/BooksList.css">
-        <link rel="stylesheet" type="text/css" href="css/PageNavigation.css">
-        <script src="js/JQuerry.js" type="text/javascript"></script>
-        <script src="js/Script.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="Css/style.css">
+        <link rel="stylesheet" type="text/css" href="Css/BooksList.css">
+        <link rel="stylesheet" type="text/css" href="Css/PageNavigation.css">
+        <script src="Js/JQuerry.js" type="text/javascript"></script>
+        <script src="Js/Script.js" type="text/javascript"></script>
 		
 		<script>
 			$(document).on('click', '.saveBook', function () {
@@ -222,7 +222,7 @@
     <body>
         <div class="SiteHeader">
             <div class="HeaderContent">
-                <img src="img/WorkInProgress.png" class="Logo">
+                <img src="Img/WorkInProgress.png" class="Logo">
                 <p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
             </div>
         </div>

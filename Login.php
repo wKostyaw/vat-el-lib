@@ -38,6 +38,17 @@
 			} 
 		}
 	}
+	if (isset($_POST['RequestSummaryInfo'])) {
+		$summary = array();
+		$sqlBookCount = $connection->query("SELECT COUNT(1) FROM books");
+		$sqlAuthorsCount = $connection->query("SELECT COUNT(1) FROM authors");
+		$sqlCategoriesCount = $connection->query("SELECT COUNT(1) FROM categories");
+		$summary['books'] = mysqli_fetch_assoc($sqlBookCount)['COUNT(1)'];
+		$summary['authors'] = mysqli_fetch_assoc($sqlAuthorsCount)['COUNT(1)'];
+		$summary['categories'] = mysqli_fetch_assoc($sqlCategoriesCount)['COUNT(1)'];
+		$summary = json_encode($summary);
+		exit($summary);
+	}
 ?>
 <!doctype HTML>
 <html>
@@ -45,14 +56,22 @@
 	<meta charset="utf-8">
 	<head>
 		<title>Авторизация</title>
-		<link rel="stylesheet" type="text/css" href="css/login.css">
+		<link rel="stylesheet" type="text/css" href="Css/Login.css">
+		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/Login.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div class="SiteHeader">
-			<img src="img/WorkInProgress.png" class="Logo">
+		<!--<div class="SiteHeader">
+			<img src="Img/WorkInProgress.png" class="Logo">
 			<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
-		</div>
+		</div>-->
+		<div class="glass">
 			<form class="LoginForm" method="POST">
+				<button type="button" id="closeLoginForm" class="closeLoginForm">
+					<svg x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
+						<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
+					</svg>
+				</button>
 				<label class="LFormHeader">Авторизация</label>
 				<label class="LFormLabel">Логин<input type="text" name="login" class="TextField" required></label>
 				<label class="LFormLabel">Пароль<input type="password" name="password" class="TextField" required></label>
@@ -60,5 +79,21 @@
 				<br>
 				<span>Если вы забыли пароль обратитесь в службу газа</span>
 			</form>
+		</div>
+		<div class="hello">
+			<h1 class="helloHeader">ДОБРО ПОЖАЛОВАТЬ В ЭЛЕКТРОННУЮ БИБЛИЕОТЕКУ ВАТ ИМ В. П. ЧКАЛОВА</h1>
+			<p class="helloText">
+			
+			</p>
+			<p class="helloText">В нашей библиотеке собраны 
+				<span id="BookAmount"></span> умопомрачительных произведений классической литературы от 
+				<span id="AuthorAmount"></span> величайших авторов в 
+				<span id="CategoryAmount"></span> отборных категориях, после прочтения которых вы поднимите уровень своих знаний до небес. 
+				С каждой прочтенной строчкой ваш уровень эрудированности будет расти в геометрической прогрессии.
+			</p>
+			<p class="helloText">Для того, чтобы ознакомится с представленными на сайте каталогом литературы вам необходимо войти, используя логин и пароль, полученные от вашего [человек выдающий логины и пароли].</p>
+			<p class="helloText">Приятного чтения.</p>
+		</div>
+		<button class="LButton" id="openLoginForm">Войти</button>
 	</body>
 </html>

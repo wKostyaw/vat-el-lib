@@ -44,7 +44,7 @@
 		<input type="text" name="SearchBox">			
 		<div id="response"></div>
 		<script 
-			src="js/JQuerry.js" type="text/javascript">
+			src="Js/JQuerry.js" type="text/javascript">
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function() {

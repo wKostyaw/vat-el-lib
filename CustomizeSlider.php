@@ -101,7 +101,7 @@
 		<div class="Wrapper">
 			<div class="Sidebar">
 				<div class="LogoContainer">
-					<img src="img/workinprogress.png" class="Logo">
+					<img src="Img/WorkInProgress.png" class="Logo">
 				</div>
 					<ul class="AdminLinks">
 						<li class="AdminLinkBox"><a href="mainpage.php" class="AdminLink">На сайт</a></li>
