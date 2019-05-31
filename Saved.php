@@ -41,7 +41,7 @@
 				echo '</div>';
 			echo '</div>';
 			echo '<div class="BookBlockButtons">';
-					echo '<a href="book.php?BookInfo=' . $SavedBookId . '#bookFile"><button class="BookBlockButton">Читать</button></a>';
+					echo '<a href="book.php?BookInfo=' . $SavedBookId . '#bookFile"><button type="button" class="BookBlockButton">Читать</button></a>';
 					echo '<button class="BookBlockButton deleteBook" name="deletebook[]" id="' . $SavedBookId . '">Удалить из сохраненных</button>';
 			echo '</div>';
 		echo '</div>';
@@ -57,14 +57,13 @@
 		$sqlSavedBookIds = $connection->query("SELECT BookID FROM users_and_books WHERE id LIKE '$UserId'");
 		
 		while ($SavedBookId = $sqlSavedBookIds->fetch_assoc()['BookID']) {
-						
-			$sqlBookInfo = $connection->query("SELECT BookName, BookYear, Description, PathToСover FROM books WHERE BookID LIKE $SavedBookId");
+			$sqlBookInfo = $connection->query("SELECT BookName, BookYear, Description, PathToCover FROM books WHERE BookID LIKE '$SavedBookId'");
 			
 			$BookInfo = $sqlBookInfo->fetch_assoc();
 			$BookName = $BookInfo['BookName'];
 			$BookYear = $BookInfo['BookYear'];
 			$Description = $BookInfo['Description'];
-			$PathToCover = $BookInfo['PathToСover'];
+			$PathToCover = $BookInfo['PathToCover'];
 			
 			
 			
@@ -131,7 +130,7 @@
 	<body>
 		<div class="SiteHeader">
 			<div class="HeaderContent">
-				<img src="img/WorkInProgress.png" class="Logo">
+				<img src="Img/WorkInProgress.png" class="Logo">
 				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
 			</div>
 		</div>

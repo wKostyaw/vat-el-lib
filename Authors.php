@@ -28,17 +28,16 @@
 	<meta charset="utf-8">
 	<head>
 		<title>Авторы</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/slider.css">
-		<link rel="stylesheet" type="text/css" href="css/BooksList.css">
-		<link rel="stylesheet" type="text/css" href="css/PageNavigation.css">
-		<script src="js/JQuerry.js" type="text/javascript"></script>
-		<script src="js/Script.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="Css/style.css">
+		<link rel="stylesheet" type="text/css" href="Css/slider.css">
+		<link rel="stylesheet" type="text/css" href="Css/PageNavigation.css">
+		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/Script.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="SiteHeader">
 			<div class="HeaderContent">
-				<img src="img/WorkInProgress.png" class="Logo">
+				<img src="Img/WorkInProgress.png" class="Logo">
 				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
 			</div>
 		</div>

@@ -18,13 +18,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
+		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 	</head>
 	<body>
 		<div class="Wrapper">
 			<div class="Sidebar">
 				<div class="LogoContainer">
-					<img src="img/workinprogress.png" class="Logo">
+					<img src="Img/WorkInProgress.png" class="Logo">
 				</div>
 					<ul class="AdminLinks">
 						<li class="AdminLinkBox"><a href="mainpage.php" class="AdminLink">На сайт</a></li>
@@ -121,5 +121,5 @@
 			</div>
 		</div>
 	</body>
-	<script src="js/JQuerry.js" type="text/javascript"></script>
+	<script src="Js/JQuerry.js" type="text/javascript"></script>
 </html>

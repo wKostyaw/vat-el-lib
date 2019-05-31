@@ -60,8 +60,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Добавить пользователя</title>
-		<link rel="stylesheet" type="text/css" href="css/AdminPage.css">
-		<script src="js/JQuerry.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
+		<script src="Js/JQuerry.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var passField = $('input[name="password"]');
@@ -88,7 +88,7 @@
 		<div class="Wrapper">
 			<div class="Sidebar">
 				<div class="LogoContainer">
-					<img src="img/workinprogress.png" class="Logo">
+					<img src="Img/WorkInProgress.png" class="Logo">
 				</div>
 					<ul class="AdminLinks">
 						<li class="AdminLinkBox"><a href="mainpage.php" class="AdminLink">На сайт</a></li>
