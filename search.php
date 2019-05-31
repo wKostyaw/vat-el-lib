@@ -243,7 +243,7 @@
 								}
 							}
 							if ($kek == 1) {
-								echo "<li class='NButton'><a href='adminpage.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
+								echo "<li class='NButton'><a href='AdminPage.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
 							}
 						?> 
 					</ul>

@@ -4,25 +4,24 @@ jQuery(document).ready(function(){
 	SliderWithSelectedCategory();
 	SliderWithSelectedAuthor();*/
 	SliderRequest();
-	
-	$('.SliderButtonLeft').on('click', function() {
-		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
-			$Step = $Item.width() * 2;
-			if(parseInt($Item.css('left')) < 0) {
-				$Item.css('left', '+=' + $Step);
-				console.log("work");
-			};
-	});
-	$('.SliderButtonRight').on('click', function() {
-		var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
-			$Step = $Item.width() * 2;
-			$SliderEnd = -(($Item.width() * $Item.length) - ($Step * 2));
-			if(parseInt($Item.css('left')) >= $SliderEnd) {
-				$Item.css('left', '-=' + $Step);
-				console.log("work");
-			};
-	});	
 });
+$(document).on('click', '.SliderButtonLeft', function() {
+	var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
+		$Step = $Item.width() * 2;
+		if(parseInt($Item.css('left')) < 0) {
+			$Item.css('left', '+=' + $Step);
+			console.log("work");
+	};
+});
+$(document).on('click', '.SliderButtonRight', function() {
+	var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
+		$Step = $Item.width() * 2;
+		$SliderEnd = -(($Item.width() * $Item.length) - ($Step * 2));
+		if(parseInt($Item.css('left')) >= $SliderEnd) {
+			$Item.css('left', '-=' + $Step);
+			console.log("work");
+	};
+});	
 function SliderRequest() {
 	$.ajax ({
 		url: 'Slider.php',
@@ -41,9 +40,9 @@ function SliderRequest() {
 					$catOrAutName = SliderInfo['catOrAutName'],
 					$SliderTemplate = '<div class="Slider" id="' + $SliderID + '">\n'+
 						'<div Class="SliderLogo">' + $catOrAutName + '</div>\n'+
-						'<div class="SliderButton SliderButtonLeft"><img src="img/ArrowL.png"></div>\n'+
+						'<div class="SliderButton SliderButtonLeft"><img src="Img/ArrowL.png"></div>\n'+
 						'<div class="SliderItems"></div>\n'+
-						'<div class="SliderButton SliderButtonRight"><img src="img/ArrowR.png"></div>\n'+
+						'<div class="SliderButton SliderButtonRight"><img src="Img/ArrowR.png"></div>\n'+
 					'</div>\n';
 					
 					$('.SiteContent').append($SliderTemplate);

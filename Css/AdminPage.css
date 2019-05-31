@@ -41,21 +41,43 @@ a {
 	position: sticky;
 	top: 0px;
 }
+.SecondaryLinksContainer {
+	padding: 0;
+	margin: 0;
+	border: 1px solid #CECECE;
+	margin: 5px;
+	overflow: hidden;
+}
 .AdminLinkBox {
 	
 }
-.AdminLink {
+.AdminLink, .SecondaryLinkHeader, .SecondaryAdminLink {
 	display: flex;
 	align-items: center;
-	width: 285px;
-	height: 50px;
 	/*border-bottom: 1px solid #CECECE;*/
 	padding-left: 15px;
 	color: #000;
+	
 }
-.AdminLink:hover {
+.AdminLink, .SecondaryLinkHeader {
+	height: 50px;
+	font-size: 14pt;
+}
+.AdminLink {
+	width: 285px;
+}
+.AdminLink:hover, .SecondaryAdminLink:hover {
 	background-color: #48C;
 	color: #FFF;
+}
+.SecondaryLinkHeader {
+	border-bottom: 1px solid #CECECE;
+	width: 275px;
+}
+.SecondaryAdminLink {
+	height: 35px;
+	background-color: #EEE;
+	width: 275px;
 }
 .Option {
 	width: 890px;
