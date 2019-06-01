@@ -26,11 +26,11 @@
 			$response = "<ul class='HintList'>";
 				while ($data = $sql->fetch_array()) 
 				{
-					$response .= "<a href='ChangeUser.php?old_login=".$data['login']."&old_password=".$data['password']."&old_familiya=".$data['familiya']."&old_imya=".$data['imya']."&old_otchestvo=".$data['otchestvo']."&old_status=".$data['admin']."&old_grupa=".$data['grupa']."'><li id='li0' class='Hint'>" . $data['login'] . "</li></a>";
+					$response .= "<a href='ChangeUser.php?id=".$data['id']."&old_login=".$data['login']."&old_password=".$data['password']."&old_familiya=".$data['familiya']."&old_imya=".$data['imya']."&old_otchestvo=".$data['otchestvo']."&old_status=".$data['admin']."&old_grupa=".$data['grupa']."'><li id='li0' class='Hint'>" . $data['login'] . "</li></a>";
 				}
 				while ($data2 = $sql2->fetch_array()) 
 				{
-					$response .= "<a href='ChangeUser.php?old_login=".$data2['login']."&old_password=".$data2['password']."&old_familiya=".$data2['familiya']."&old_imya=".$data2['imya']."&old_otchestvo=".$data2['otchestvo']."&old_status=".$data2['admin']."&old_grupa=".$data2['grupa']."'><li id='li0' class='Hint'>" . $data2['familiya'] . " " . $data2['imya'] . " " . $data2['otchestvo'] . "</li></a>";
+					$response .= "<a href='ChangeUser.php?id=".$data2['id']."&old_login=".$data2['login']."&old_password=".$data2['password']."&old_familiya=".$data2['familiya']."&old_imya=".$data2['imya']."&old_otchestvo=".$data2['otchestvo']."&old_status=".$data2['admin']."&old_grupa=".$data2['grupa']."'><li id='li0' class='Hint'>" . $data2['familiya'] . " " . $data2['imya'] . " " . $data2['otchestvo'] . "</li></a>";
 				}
 			$response .= "</ul>";
 		}
@@ -50,6 +50,7 @@
 		exit($password);
 	}
 	// обработчик кнопки "изменить"
+	$id = $_GET['id'];
 	$old_login = $_GET['old_login'];
 	$old_password = $_GET['old_password'];
 	$old_familiya = $_GET['old_familiya'];
@@ -67,6 +68,7 @@
 		$new_otchestvo = $_POST['otchestvo'];
 		$new_gruppa = $_POST['gruppa'];
 		$new_status = $_POST['status'];
+		echo $new_status;
 		$sql = $connection->query("UPDATE loginparol SET login='$new_login', password='$new_password', familiya='$new_familiya', imya='$new_imya', otchestvo='$new_otchestvo', grupa='$new_gruppa', admin='$new_status' WHERE id = '$id'");
 		if ($sql) {
 			echo "<script> alert('Данные пользователя " . $_POST['login'] . " изменены')</script>";
