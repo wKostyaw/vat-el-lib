@@ -11,7 +11,9 @@ function SearchHide() {
 $(document).ready(function() {
 	$(document).on('click', '.deleteBook', function () {
 		var DeleteBookID = $(this).attr('id');
-			DeleteBookID = DeleteBookID.replace(/[^\d]/g, '');
+			DeleteBookID = DeleteBookID.replace(/[^\d]/g, ''),
+			$thisPage = window.location.pathname,
+			DelBookBlock = $(this).parents(".BookBlock");
 			
 		$.ajax ({
 			url: 'SaveAndDeleteBooksFromShelves.php',
@@ -20,11 +22,12 @@ $(document).ready(function() {
 				DeleteBookID: DeleteBookID
 			},
 			success: function (data) {
-				alert('Удалено');
+				if ($thisPage == "/Saved.php") {
+					DelBookBlock.remove();
+				}
 			},
 			dataType: 'text'
 		});
-		//location.reload();
 		$(this).parent().append("<input type='button' class='BookBlockButton bookButton saveBook' id='savebook" + DeleteBookID + "' name='savebook[]' value='Сохранить к себе' >");
 		$(this).remove();
 	});
@@ -39,12 +42,9 @@ $(document).ready(function() {
 				BookIDajax: SavedBookID
 			},
 			success: function (data) {
-				alert('Сохранено');
-				// alert(data);
 			},
 			dataType: 'text'
 		});
-		//location.reload();
 		$(this).parent().append("<input type='button' class='BookBlockButton bookButton deleteBook' id='deletebook"+ SavedBookID +"' name='deletebook[]' value='Удалить из сохраненных' >");
 		$(this).remove();
 	});
