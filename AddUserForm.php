@@ -40,9 +40,6 @@
 	// генератор паролей 
 	if (isset($_POST['pswrdgnrtr'])) 
 	{
-		$otvet = "<p>";
-		$otvet .= "класс, даа";
-		$otvet .= "</p>";
 		$chars="qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP"; 
 		$max=10; 
 		$size=StrLen($chars)-1; 

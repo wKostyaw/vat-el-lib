@@ -41,7 +41,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Группа</th><th>Права пользователя</th></tr>";
+						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Группа</th><th>Статус пользователя</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
@@ -75,7 +75,6 @@
 											echo  "<td>". $row[$j] . "</td>";
 										}
 									}
-									
 									$booklist = array();
 									$getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[0]'");
 									while ($bookid = $getBooksID->fetch_assoc()) 
@@ -88,7 +87,6 @@
 										{
 											$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
 											$rowsOfGetBook = mysqli_num_rows($getBook);
-
 											for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
 	                                        {
 	                                        	$rowOfGetBook = mysqli_fetch_row($getBook);
@@ -107,9 +105,13 @@
 						{
 							echo "Произошла ошибка";
 						}
-					} else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) {
+					} 
+					else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
+					{
 						echo "Введите запрос!";
-					} else if (!isset($_GET['otpravit-sql-zapros'])) {
+					} 
+					else if (!isset($_GET['otpravit-sql-zapros'])) 
+					{
 						$sql = $connection->query("SELECT * FROM loginparol ORDER BY id");
 						if($sql)
 						{
