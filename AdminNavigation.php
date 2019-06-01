@@ -30,6 +30,7 @@ function AdminNavigation() {
 			echo '<li class="AdminLinkBox"><a href="AddBookForm.php" class="SecondaryAdminLink">Добавить</a></li>';
 			echo '<li class="AdminLinkBox"><a href="ChangeBook.php" class="SecondaryAdminLink">Изменить/удалить</a></li>';
 			echo '<li class="AdminLinkBox"><a href="InfoAboutBooks.php" class="SecondaryAdminLink">Информация о книгах</a></li>';
+			echo '<li class="AdminLinkBox"><a href="InfoAboutCategories.php" class="SecondaryAdminLink">Информация о категориях</a></li>';
 		echo '</ul>';
 		
 		echo '<li class="AdminLinkBox"><a href="CustomizeSlider.php" class="AdminLink">Настройка главной страницы</a></li>';

@@ -46,34 +46,59 @@
 						    {
 						    	$row = mysqli_fetch_row($sql);
 								echo "<tr>";
-						        for ($j = 0 ; $j < 8 ; ++$j) 
-						        {
-									$data = $row[$j];
-									if ($data == '') 
-									{
-										echo "<td><p><font color='LightGray'>Нет данных</font></p></td>";
-									} 
-									else if ($j == 7)
-									{	
-										$data1 = $row[$j];
-										if ($data1 == '0') 
+							        for ($j = 0 ; $j < 8 ; ++$j) 
+							        {
+
+										$data = $row[$j];
+										if ($data == '') 
 										{
-											echo "<td>Читатель</td>";
+											echo "<td><p><font color='LightGray'>Нет данных</font></p></td>";
+										} 
+										else if ($j == 7)
+										{	
+											$data1 = $row[$j];
+											if ($data1 == '0') 
+											{
+												echo "<td>Читатель</td>";
+											}
+											else if ($data1 == '1')
+											{
+												echo "<td>Администратор</td>";
+											}
+											else if ($data1 == '2')
+											{
+												echo "<td>Заблокирован</td>";
+											}
 										}
-										else if ($data1 == '1')
+										else 
 										{
-											echo "<td>Администратор</td>";
-										}
-										else if ($data1 == '2')
-										{
-											echo "<td>Заблокирован</td>";
+											echo  "<td>". $row[$j] . "</td>";
 										}
 									}
-									else 
+									
+									$booklist = array();
+									$getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[0]'");
+									while ($bookid = $getBooksID->fetch_assoc()) 
 									{
-										echo  "<td>". $row[$j] . "</td>";
+										array_push($booklist, $bookid['BookID']);	
 									}
-								}
+									if (!empty($booklist)) {
+										echo "<tr class='knigi".$row[0]."'><td colspan='8' class='openBookList'>Книги на полке пользователя:</td></tr>";
+										foreach ($booklist as $key => $valueBookID) 
+										{
+											$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
+											$rowsOfGetBook = mysqli_num_rows($getBook);
+
+											for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
+	                                        {
+	                                        	$rowOfGetBook = mysqli_fetch_row($getBook);
+	                                        	echo "<tr class='kniga".$row[0]."' style='display:none;'>";
+	                                        		echo "<td class='noBorder'></td>";
+		                                            echo "<td colspan='7'>$rowOfGetBook[1], $rowOfGetBook[2]</td>";
+	                                            echo "</tr>";
+											} 
+										}
+									}
 					            echo "</tr>";
 						    }
 						    echo "</table>";
@@ -141,14 +166,13 @@
 											for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
 	                                        {
 	                                        	$rowOfGetBook = mysqli_fetch_row($getBook);
-	                                        	echo "<tr class='kniga".$row[0]."'>";
+	                                        	echo "<tr class='kniga".$row[0]."' style='display:none;'>";
 	                                        		echo "<td class='noBorder'></td>";
 		                                            echo "<td colspan='7'>$rowOfGetBook[1], $rowOfGetBook[2]</td>";
 	                                            echo "</tr>";
 											} 
 										}
 									}
-										
 					            echo "</tr>";
 						    }
 						    echo "</table>";
