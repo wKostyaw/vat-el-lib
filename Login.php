@@ -1,8 +1,5 @@
 <?php
 	session_start();
-	if($_SESSION['login']) {
-		header("Location: MainPage.php");
-	}
 	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
 	// 
 	if ($_POST['submit']) 
@@ -31,10 +28,23 @@
 			{
 				header('Location: AdminPage.php');
 				exit();
-			} else 
+			}
+			else if ($isLoginAdmin == 2) 
+			{	
+				echo '<script type="text/javascript">';
+				echo 'alert("Ваш профиль был заблокирован и Вам отказано в доступе к сайту. Обратитесь к администратору")';
+				echo '</script>';
+			} 
+			else if ($isLoginAdmin == 0) 
 			{
 				header('Location: MainPage.php');
 				exit();
+			}
+			else
+			{
+				echo '<script type="text/javascript">';
+				echo 'alert("В ходе перехода на сайт библиотеки произошла ошибка")';
+				echo '</script>';
 			} 
 		}
 	}
