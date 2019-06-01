@@ -4,8 +4,6 @@
 <?php
     // поиск соответствий в БД
     if (isset($_POST['search'])) {
-        
-        $connection = new mysqli('vat', 'root', '', 'vat');
         $q = $connection->real_escape_string($_POST['q']);
         $sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
         $sql1 = $connection->query("SELECT BookName FROM books WHERE BookName LIKE '%$q%'");
@@ -24,41 +22,71 @@
     }  
     function izvekov_nauchilsya_uzat_funktsii($row, $connection, $BookIDabc) 
     {
-        // echo "<form action='book.php' method='POST'>";
-            echo "<div class='BookBlockItem' id='". $row[0] . "' name='divsavebook'>";
-                echo "<div class='BookPreview'>";
-                    echo "<a href='book.php?BookInfo=$row[0]'> <img src='" . $row[5] . "'> </a>";
-                echo "</div>";
-                echo "<div class='BookInfo'>";
-                    //название книги
-                    echo "<span class='BookInfoItem'>" . "Название: " . "<a href='book.php?BookInfo=$row[0]'>". $row[1] . "</a>" . "</span>";
-                    $AuthorName = array();
-                    $whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
-                    $result = $connection->query ($whoisauthor);
-                    if ($result->num_rows > 0) 
+        // получение списка авторов
+        $AuthorName = array();
+        $whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
+        $result = $connection->query ($whoisauthor);
+        if ($result->num_rows > 0) 
+        {
+            while ($rowauthor = $result->fetch_assoc())
+            {
+                $AuthorID = $rowauthor["AuthorID"];
+                $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
+                $result2 = $connection->query ($whoisauthor2);
+                if ($result2->num_rows > 0) 
+                {
+                    while ($rowauthor2 = $result2->fetch_assoc())
                     {
-                        while ($rowauthor = $result->fetch_assoc())
-                        {
-                            $AuthorID = $rowauthor["AuthorID"];
-                            $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
-                            $result2 = $connection->query ($whoisauthor2);
-                            if ($result2->num_rows > 0) 
-                            {
-                                while ($rowauthor2 = $result2->fetch_assoc())
-                                {
-                                    array_push($AuthorName, $rowauthor2["Name"]);
-                                }
-                            } 
-                            else 
-                            {
-                                $AuthorName = 'Авторов нет';
-                            }
-                        }
-                    } else 
-                    {
-                        $AuthorID = 'Авторов нет';
+                        array_push($AuthorName, $rowauthor2["Name"]);
                     }
-                    echo "<span class='BookInfoItem'>" . "Авторы: ";
+                } 
+                else 
+                {
+                    $AuthorName = 'Авторов нет';
+                }
+            }
+        } 
+        else 
+        {
+            $AuthorID = 'Авторов нет';
+        }
+        // получение списка категорий
+        $Categories = array();
+        $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[0]'");
+        $result = $connection->query ($whatiscategory);
+        if ($result->num_rows > 0) 
+        {
+            while ($rowcategory = $result->fetch_assoc())
+            {
+                $CategoryID = $rowcategory["CategoryID"];
+                $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
+                $result2 = $connection->query ($whatiscategory2);
+                if ($result2->num_rows > 0) 
+                {
+                    while ($rowcategory2 = $result2->fetch_assoc())
+                    {
+                        array_push($Categories, $rowcategory2["Category"]);
+                    }
+                } 
+                else 
+                {
+                    $Categories = 'Категорий нет';
+                }
+            }
+        } 
+        else 
+        {
+            $CategoryID = 'Категорий нет';
+        }
+        // рисование книги
+        echo "<div class='BookBlockItem' id='". $row[0] . "' name='divsavebook'>";
+            echo "<div class='BookPreview'>";
+                echo "<a href='book.php?BookInfo=$row[0]'> <img src='" . $row[5] . "'> </a>";
+            echo "</div>";
+            echo "<div class='BookInfo'>";
+                echo "<span class='BookInfoItem'>" . "Название: " . "<a href='book.php?BookInfo=$row[0]'>". $row[1] . "</a>" . "</span>";
+                // рисование списка авторов, тут без foreach никак, хочешь, засунь в функцию foreach
+                echo "<span class='BookInfoItem'>" . "Авторы: ";
                     foreach ($AuthorName as $key => $value) 
                     { 
                         if($value == end($AuthorName)) 
@@ -71,37 +99,11 @@
                         }
                     }
                     unset($key);
-                    echo "</span>";
-                    echo "<span class='BookInfoItem'>" . "Год: " . $row[2] . "</span>";
-                    echo "<span class='BookInfoItem'>" . "Описание: " . $row[3] . "</span>";
-                    $Categories = array();
-                    $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[0]'");
-                    $result = $connection->query ($whatiscategory);
-                    if ($result->num_rows > 0) 
-                    {
-                        while ($rowcategory = $result->fetch_assoc())
-                        {
-                            $CategoryID = $rowcategory["CategoryID"];
-                            $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
-                            $result2 = $connection->query ($whatiscategory2);
-                            if ($result2->num_rows > 0) 
-                            {
-                                while ($rowcategory2 = $result2->fetch_assoc())
-                                {
-                                    array_push($Categories, $rowcategory2["Category"]);
-                                }
-                            } 
-                            else 
-                            {
-                                $Categories = 'Категорий нет';
-                            }
-                        }
-                    } 
-                    else 
-                    {
-                        $CategoryID = 'Категорий нет';
-                    }
-                    echo "<span class='BookInfoItem'>" . "Категории: ";
+                echo "</span>";
+                echo "<span class='BookInfoItem'>" . "Год: " . $row[2] . "</span>";
+                echo "<span class='BookInfoItem'>" . "Описание: " . $row[3] . "</span>";
+                // рисование списка категорий
+                echo "<span class='BookInfoItem'>" . "Категории: ";
                     foreach ($Categories as $key => $value) 
                     { 
                         if($value == end($Categories)) 
@@ -114,18 +116,16 @@
                         }
                     }
                     unset($key);
-                    echo "</span>";
-                echo "</div>";
+                echo "</span>";
             echo "</div>";
-            echo "<form method='POST'>";
-                echo "<div class='BookBlockButtons'>";
-                    echo '<a href="book.php?BookInfo=' . $row[0] . '#bookFile"><button type="button" class="BookBlockButton readBook">Читать</button></a>';
-                    echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе' >";
-                    echo "<input type='button' class='BookBlockButton deleteBook' id='deletebook".$row[0]."' name='deletebook[]' value='Удалить от себя' >";
-                echo "</div>";
-            echo "</form>"; 
-
-        // echo "</form>";    
+        echo "</div>";        
+        echo "<form method='POST'>";
+            echo "<div class='BookBlockButtons'>";
+                echo '<a href="book.php?BookInfo=' . $row[0] . '#bookFile"><button type="button" class="BookBlockButton readBook">Читать</button></a>';
+                echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе' >";
+                echo "<input type='button' class='BookBlockButton deleteBook' id='deletebook".$row[0]."' name='deletebook[]' value='Удалить от себя' >";
+             echo "</div>";
+        echo "</form>";    
     }
     // сохранение книги 
     if (isset($_POST['BookIDajax'])) 
@@ -161,8 +161,7 @@
             $deleteLinkBetweenUserAndBook = $connection->query("DELETE FROM users_and_books  WHERE id = '$UserID' and BookID = '$DeleteBookID'");
         }
         exit($DeleteBookID);
-    }
-    
+    }    
 ?>
 <!doctype HTML>
 <html>
