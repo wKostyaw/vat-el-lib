@@ -174,7 +174,6 @@
         <link rel="stylesheet" type="text/css" href="Css/PageNavigation.css">
         <script src="Js/JQuerry.js" type="text/javascript"></script>
         <script src="Js/Script.js" type="text/javascript"></script>
-		
 		<script>
 			$(document).on('click', '.saveBook', function () {
 				var SavedBookID = $(this).attr('id'),
@@ -217,7 +216,6 @@
                 
             });
 		</script>
-		
     </head>
     <body>
         <div class="SiteHeader">
