@@ -11,8 +11,10 @@ function SearchHide() {
 $(document).ready(function() {
 	$(document).on('click', '.deleteBook', function () {
 		var DeleteBookID = $(this).attr('id');
+			DeleteBookID = DeleteBookID.replace(/[^\d]/g, '');
+			
 		$.ajax ({
-			url: 'Saved.php',
+			url: 'SaveAndDeleteBooksFromShelves.php',
 			method: 'POST',
 			data: {
 				DeleteBookID: DeleteBookID
@@ -22,7 +24,29 @@ $(document).ready(function() {
 			},
 			dataType: 'text'
 		});
-		location.reload();
+		//location.reload();
+		$(this).parent().append("<input type='button' class='BookBlockButton bookButton saveBook' id='savebook" + DeleteBookID + "' name='savebook[]' value='Сохранить к себе' >");
+		$(this).remove();
+	});
+	$(document).on('click', '.saveBook', function () {
+		var SavedBookID = $(this).attr('id'),
+			SavedBookID = SavedBookID.replace(/[^\d]/g, '');
+				
+		$.ajax ({
+			url: 'SaveAndDeleteBooksFromShelves.php',
+			method: 'POST',
+			data: {
+				BookIDajax: SavedBookID
+			},
+			success: function (data) {
+				alert('Сохранено');
+				// alert(data);
+			},
+			dataType: 'text'
+		});
+		//location.reload();
+		$(this).parent().append("<input type='button' class='BookBlockButton bookButton deleteBook' id='deletebook"+ SavedBookID +"' name='deletebook[]' value='Удалить из сохраненных' >");
+		$(this).remove();
 	});
 });
 function insertShelf(shelfLink, shelfName) {

@@ -78,6 +78,17 @@
         {
             $CategoryID = 'Категорий нет';
         }
+		
+		
+		
+		// Определяем сохранена ли книга
+		$username = $_SESSION['login'];
+		$sqlUserId = $connection->query("SELECT id FROM loginparol where login = '$username'");
+		$UserId = $sqlUserId->fetch_assoc()['id'];		
+		$sqlUsersAndBooks = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserId' and BookID = '$row[0]'");
+		
+		
+		
         // рисование книги
         echo "<div class='BookBlockItem' id='". $row[0] . "' name='divsavebook'>";
             echo "<div class='BookPreview'>";
@@ -122,46 +133,16 @@
         echo "<form method='POST'>";
             echo "<div class='BookBlockButtons'>";
                 echo '<a href="book.php?BookInfo=' . $row[0] . '#bookFile"><button type="button" class="BookBlockButton readBook">Читать</button></a>';
-                echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе' >";
-                echo "<input type='button' class='BookBlockButton deleteBook' id='deletebook".$row[0]."' name='deletebook[]' value='Удалить от себя' >";
-             echo "</div>";
+				if ($sqlUsersAndBooks->num_rows == 0) {
+					echo "<input type='button' class='BookBlockButton saveBook' id='savebook".$row[0]."' name='savebook[]' value='Сохранить к себе' >";
+                } else {
+					echo "<input type='button' class='BookBlockButton deleteBook' id='deletebook".$row[0]."' name='deletebook[]' value='Удалить из сохраненных' >";
+				}
+			 echo "</div>";
         echo "</form>";    
     }
-    // сохранение книги 
-    if (isset($_POST['BookIDajax'])) 
-    {
-		$BookIDabc = $_POST['BookIDajax'];
-        /*echo $BookIDabc . " kjk" ;*/
-        $username = $_SESSION['login'];
-        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
-        while ($rowUserID = $getUserID->fetch_assoc()) 
-        {
-            $UserID = $rowUserID["id"];
-        }
-        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$BookIDabc'");
-        if ($isLinkExist->num_rows == 0 ) 
-        {
-            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$BookIDabc')");
-        }
-		exit($BookIDabc);
-    }
-    if (isset($_POST['DeleteBookID'])) 
-    {
-        $DeleteBookID = $_POST['DeleteBookID'];
-        // echo $DeleteBookID . " kjk" ;
-        $username = $_SESSION['login'];
-        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
-        while ($rowUserID = $getUserID->fetch_assoc()) 
-        {
-            $UserID = $rowUserID["id"];
-        }
-        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$DeleteBookID'");
-        if ($isLinkExist->num_rows > 0 ) 
-        {
-            $deleteLinkBetweenUserAndBook = $connection->query("DELETE FROM users_and_books  WHERE id = '$UserID' and BookID = '$DeleteBookID'");
-        }
-        exit($DeleteBookID);
-    }    
+    
+    
 ?>
 <!doctype HTML>
 <html>
@@ -173,48 +154,6 @@
         <link rel="stylesheet" type="text/css" href="Css/PageNavigation.css">
         <script src="Js/JQuerry.js" type="text/javascript"></script>
         <script src="Js/Script.js" type="text/javascript"></script>
-		<script>
-			$(document).on('click', '.saveBook', function () {
-				var SavedBookID = $(this).attr('id'),
-				SavedBookID = SavedBookID.replace(/[^\d]/g, '');
-				
-				$.ajax (
-				{
-					url: 'search.php',
-					method: 'POST',
-					data: {
-						BookIDajax: SavedBookID
-					},
-					success: function (data) {
-						alert('Сохранено');
-						// alert(data);
-					},
-					dataType: 'text'
-				}
-				);
-				
-			});
-            $(document).on('click', '.deleteBook', function () {
-                var DeleteBookID = $(this).attr('id'),
-                DeleteBookID = DeleteBookID.replace(/[^\d]/g, '');
-                
-                $.ajax (
-                {
-                    url: 'search.php',
-                    method: 'POST',
-                    data: {
-                        DeleteBookID: DeleteBookID
-                    },
-                    success: function (data) {
-                        alert('Удалено');
-                        alert(data);
-                    },
-                    dataType: 'text'
-                }
-                );
-                
-            });
-		</script>
     </head>
     <body>
         <div class="SiteHeader">

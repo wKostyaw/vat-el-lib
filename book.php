@@ -5,7 +5,6 @@
 	// поиск соответствий в БД
 	if (isset($_POST['search'])) 
 	{
-		$connection = new mysqli('vat', 'root', '', 'vat');
 		$q = $connection->real_escape_string($_POST['q']);
 		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
 		$sql1 = $connection->query("SELECT BookName FROM books WHERE BookName LIKE '%$q%'");
@@ -24,52 +23,6 @@
 		exit($responseAuthors);
 	}
 	$bookinfo = $_GET['BookInfo'];
-	if (isset($_POST['save'])) 
-    {	
-    	$bookid = $_POST['save'];
-        $username = $_SESSION['login'];
-        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
-        while ($rowUserID = $getUserID->fetch_assoc()) 
-        {
-            $UserID = $rowUserID["id"];
-        }
-        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$bookid'");
-        if ($isLinkExist->num_rows == 0 ) 
-        {
-            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$bookid')");
-            if ($addLinkBetweenUserAndBook) {
-            	echo "Сохранено ";
-            } else {
-            	echo "Не сохранено ";
-            }
-        } else {
-        	echo "Уже сохранена";
-        }
-        exit($_POST['save']);
-    }
-    if (isset($_POST['delete'])) 
-    {	
-    	$bookid = $_POST['delete'];
-        $username = $_SESSION['login'];
-        $getUserID = $connection->query("SELECT id FROM loginparol WHERE login = '$username'");
-        while ($rowUserID = $getUserID->fetch_assoc()) 
-        {
-            $UserID = $rowUserID["id"];
-        }
-        $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$bookid'");
-        if ($isLinkExist->num_rows > 0 ) 
-        {
-            $deleteLinkBetweenUserAndBook = $connection->query("DELETE FROM users_and_books  WHERE id = '$UserID' and BookID = '$bookid'");
-            if ($deleteLinkBetweenUserAndBook) {
-            	echo "Удалено ";
-            } else {
-            	echo "Не удалено ";
-            }
-        } else {
-        	echo "Уже удалена";
-        }
-        exit($_POST['delete']);
-    }
 ?>
 <!doctype HTML>
 <html>
@@ -80,42 +33,6 @@
 		<link rel="stylesheet" type="text/css" href="Css/BookPageStyle.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
 		<script src="Js/Script.js" type="text/javascript"></script>
-		<script>
-			$(document).on('click', '.savebook', function () {			
-				var SavedBookID = $(this).attr('id'),
-				SavedBookID = SavedBookID.replace(/[^\d]/g, '');
-				$.ajax (
-				{
-					url: 'book.php',
-					method: 'POST',
-					data: {
-						save: SavedBookID
-					},
-					success: function (data) {
-						alert(data);
-					},
-					dataType: 'text'
-				}
-				);
-			});
-			$(document).on('click', '.deletebook', function () {			
-				var deleteBookID = $(this).attr('id'),
-				deleteBookID = deleteBookID.replace(/[^\d]/g, '');
-				$.ajax (
-				{
-					url: 'book.php',
-					method: 'POST',
-					data: {
-						delete: deleteBookID
-					},
-					success: function (data) {
-						alert(data);
-					},
-					dataType: 'text'
-				}
-				);
-			});
-		</script>
 	</head>
 	<body>
 		<div class="SiteHeader">
@@ -209,6 +126,7 @@
 					<?php 
 						$sql4 = $connection->query("SELECT * FROM books WHERE BookID LIKE '$bookinfo'");
 						$rows = mysqli_num_rows($sql4);
+						
 						for ($i = 0 ; $i < $rows ; ++$i) 
 					    {
 					    	$row = mysqli_fetch_row($sql4);
@@ -238,13 +156,27 @@
                                     $AuthorID = 'Авторов нет';
                                 }
 					    }
+						
+						
+						
+						// Определяем, сохранена ли книга
+						$username = $_SESSION['login'];
+						$sqlUserId = $connection->query("SELECT id FROM loginparol where login = '$username'");
+						$UserId = $sqlUserId->fetch_assoc()['id'];		
+						$sqlUsersAndBooks = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserId' and BookID = '$row[0]'");
+						
+						
+						
 					    echo "<title>" . $row[1] . "</title>";
 					    echo "<div class='coverAndButtons'>";
 							echo "<form method='POST' action='book.php'>";
 								echo "<img src='" . $row[5] . "' class='bookCover'>";
 								echo '<a href="#bookFile"><button type="button" class="bookButton readbook">Читать</button></a>';
-								echo "<input type='button' class='bookButton savebook' id='savebook".$row[0]."' value='Сохранить'>";
-								echo "<input type='button' class='bookButton deletebook' id='deletebook".$row[0]."' value='Удалить'>";
+								if ($sqlUsersAndBooks->num_rows == 0) {
+									echo "<input type='button' class='bookButton saveBook' id='savebook".$row[0]."' value='Сохранить к себе'>";
+								} else {
+									echo "<input type='button' class='bookButton deleteBook' id='deletebook".$row[0]."' value='Удалить из сохраненных'>";
+								}
 							echo "</form>";
 						echo "</div>";
 						echo "<div class='bookInfo'>";
