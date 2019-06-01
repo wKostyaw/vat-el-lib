@@ -40,6 +40,10 @@
 		<script src="Js/Script.js" type="text/javascript"></script>
 	</head>
 	<body>
+		<div class="notificationWindow">
+			<span class="notificationHeader">Заголовок уведомления</span>
+			<span class="notificationText">Текст уведомления (Супер важный текст, созданный только для того, чтобы посмотреть как он будет выглядеть, если строк много)</span>
+		</div>
 		<div class="SiteHeader">
 			<div class="HeaderContent">
 				<img src="Img/WorkInProgress.png" class="Logo">
