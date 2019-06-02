@@ -25,6 +25,9 @@ $(document).ready(function() {
 				if ($thisPage == "/Saved.php") {
 					DelBookBlock.remove();
 				}
+				var notificationHeader = 'Удалено',
+					notificationTime = 3000;
+					notification(notificationTime, notificationHeader);
 			},
 			dataType: 'text'
 		});
@@ -42,12 +45,34 @@ $(document).ready(function() {
 				BookIDajax: SavedBookID
 			},
 			success: function (data) {
+				var notificationHeader = 'Сохранено',
+					notificationTime = 3000;
+					notification(notificationTime, notificationHeader);
 			},
 			dataType: 'text'
 		});
 		$(this).parent().append("<input type='button' class='BookBlockButton bookButton deleteBook' id='deletebook"+ SavedBookID +"' name='deletebook[]' value='Удалить из сохраненных' >");
 		$(this).remove();
 	});
+	$(document).on('click', '.notificationCall', function() {
+		var notificationHeader = 'Заголовок уведомления',
+			notificationText = 'Текст уведомления (Супер важный текст, созданный только для того, чтобы посмотреть как он будет выглядеть, если строк много)',
+			notificationTime = 6000;
+		notification(notificationTime, notificationHeader, notificationText);
+	});
+	function notification(notificationTime, notificationHeader, notificationText) {
+		var notificationText = notificationText || '';
+			nWindow = '<div class="notificationWindow" style="animation: showNotification ' + notificationTime + 'ms 1;">\n'+
+						'<span class="notificationHeader">' + notificationHeader + '</span>\n'+
+						'<span class="notificationText">' + notificationText + '</span>\n'+
+						'</div>\n',
+		$('.notificationWindow').remove();	
+		$('body').append(nWindow);
+		setTimeout( function() {
+			$('.notificationWindow').remove();
+			clearTimeout();
+		}, (notificationTime - 10));
+	}
 });
 function insertShelf(shelfLink, shelfName) {
 var shelfIconTemplate = '<div class="shelf">\n'+
