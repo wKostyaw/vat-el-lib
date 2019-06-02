@@ -45,9 +45,9 @@
 						} else 
 						{
 							$sql = $connection->query("SELECT * FROM authors WHERE Name LIKE '%$q%'");
-							$rows = mysqli_num_rows($sql);
-	                        if ($rows > 0 )
-	                        {
+	                        if ($sql)
+	                        {	
+	                        	$rowsAuthors = mysqli_num_rows($sql);
 	                        	$GetAuthorID = ("SELECT AuthorID FROM authors WHERE Name LIKE '%$q%'");
 	                            $result1 = $connection->query ($GetAuthorID);
 	                        	$authorslist = array();
@@ -75,9 +75,9 @@
 							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
-		                                $book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID'");
-		                                $rows = mysqli_num_rows($book);
-		                                for ($i = 0 ; $i < $rows ; ++$i) 
+		                                $book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID' ORDER BY BookID");
+		                                $rowsBooksAuthors = mysqli_num_rows($book);
+		                                for ($i = 0 ; $i < $rowsBooksAuthors ; ++$i) 
 		                                {
 		                                	$row = mysqli_fetch_row($book);
 		                                	echo "<tr>";
@@ -180,9 +180,9 @@
 	                            }
 	                        }
 	                        $sql = $connection->query("SELECT * FROM categories WHERE Category LIKE '%$q%'");
-	                        $rows = mysqli_num_rows($sql);
-	                        if ($rows > 0 )
-	                        {
+	                        if ($sql)
+	                        {	
+	                        	$rowsCategories = mysqli_num_rows($sql);
 	                         	$GetCategoryID = ("SELECT CategoryID FROM categories WHERE Category LIKE '%$q%'");
 	                            $result1 = $connection->query ($GetCategoryID);
 	                            $categorieslist = array();
@@ -212,8 +212,8 @@
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 	                                	$book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID'");
-	                                    $rows = mysqli_num_rows($book);
-	                                    for ($i = 0 ; $i < $rows ; ++$i) 
+	                                    $rowsBooksCategories = mysqli_num_rows($book);
+	                                    for ($i = 0 ; $i < $rowsBooksCategories ; ++$i) 
 	                                    {
 	                                    	$row = mysqli_fetch_row($book);
 	                                        echo "<tr>";
@@ -314,17 +314,19 @@
 	                                }
 	                            } 
 	                        }
-						}
-							
-					} else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros']))
+						}	
+					} 
+					else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros']))
 					{
 						echo "Введите запрос!";	
-					} else if (!isset($_GET['otpravit-sql-zapros'])) 
+					} 
+					else if (!isset($_GET['otpravit-sql-zapros'])) 
 					{
 						$sql = $connection->query("SELECT * FROM books ORDER BY BookID");
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
+						    echo "Всего книг в библиотеке: ".$rows."";
 						    echo "<table border='1'>"; 
 						    echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)

@@ -28,25 +28,25 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Информация о категориях</h1>
+				<h1 class="AdminStart">Информация о авторах</h1>
 				<!-- <form method="GET" action="InfoAboutBooks.php">
 					<input type="text" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
 					<input type="submit" name="otpravit-sql-zapros" value="Отправить">
 				</form> -->
 				<?php 
-					$sql = $connection->query("SELECT * FROM categories");
+					$sql = $connection->query("SELECT * FROM authors");
 					if ($sql) 
 					{
 						$rows = mysqli_num_rows($sql);
 						echo "<table border='1'>"; 
-						    echo "<tr><th>Категория</th><th>Книги</th></tr>";
+						    echo "<tr><th>Автор</th><th>Книги</th></tr>";
 							for ($i = 0; $i < $rows; $i++) 
 							{ 
 								$row = $sql->fetch_assoc();
 								echo "<tr>";
-									echo "<td>".$row['Category']."</td>";
+									echo "<td>".$row['Name']."</td>";
 									echo "<td>";
-									$sql2 = $connection->query("SELECT * FROM books_and_categories WHERE CategoryID = $row[CategoryID] ");
+									$sql2 = $connection->query("SELECT * FROM books_and_authors WHERE AuthorID = $row[AuthorID] ");
 									$rows2 = mysqli_num_rows($sql2);
 									for ($j = 0; $j < $rows2; $j++) 
 									{ 
@@ -56,6 +56,7 @@
 											echo "<table>";
 												for ($k = 0; $k < $rows3 ; $k++) { 
 													$row3 = $sql3->fetch_assoc();
+													
 													echo "<tr>$row3[BookName], $row3[BookYear]</tr>";
 												}
 											echo "</table>";
