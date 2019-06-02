@@ -40,10 +40,10 @@
 		<script src="Js/Script.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div class="notificationWindow">
+		<!--<div class="notificationWindow">
 			<span class="notificationHeader">Заголовок уведомления</span>
 			<span class="notificationText">Текст уведомления (Супер важный текст, созданный только для того, чтобы посмотреть как он будет выглядеть, если строк много)</span>
-		</div>
+		</div>-->
 		<div class="SiteHeader">
 			<div class="HeaderContent">
 				<img src="Img/WorkInProgress.png" class="Logo">
@@ -67,9 +67,10 @@
 								}
 							}
 							if ($kek == 1) {
-								echo "<li class='NButton'><a href='AdminPage.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
+								echo "<li class='NButton'><a href='AdminPage.php' class='NBLink'>Панель администрирования</a></li>";
 							}
-						?> 
+						?>
+						<li class="NButton"><span class="NBLink notificationCall">Вызвать уведомление</span></li>
 					</ul>
 				<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
 					<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">

@@ -32,8 +32,10 @@ function AdminNavigation() {
 			echo '<li class="AdminLinkBox"><a href="InfoAboutBooks.php" class="SecondaryAdminLink">Информация о книгах</a></li>';
 			echo '<li class="AdminLinkBox"><a href="InfoAboutCategories.php" class="SecondaryAdminLink">Информация о категориях</a></li>';
 		echo '</ul>';
-		
-		echo '<li class="AdminLinkBox"><a href="CustomizeSlider.php" class="AdminLink">Настройка главной страницы</a></li>';
+		echo '<ul class="SecondaryLinksContainer">';
+			echo '<li class="AdminLinkBox"><span class="SecondaryLinkHeader">Настройки сайта</span></li>';
+			echo '<li class="AdminLinkBox"><a href="CustomizeSlider.php" class="SecondaryAdminLink">Настройка главной страницы</a></li>';
+		echo '</ul>';	
 		echo '<li class="AdminLinkBox"><a href="#" class="AdminLink" onclick="document.location.replace("?exit");">Выход</a></li>';
 	echo '</ul>';
 }
