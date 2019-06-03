@@ -26,11 +26,11 @@
 			$response = "<ul class='HintList'>";
 				while ($data = $sql->fetch_array()) 
 				{
-					$response .= "<a href='ChangeUser.php?id=".$data['id']."&old_login=".$data['login']."&old_password=".$data['password']."&old_familiya=".$data['familiya']."&old_imya=".$data['imya']."&old_otchestvo=".$data['otchestvo']."&old_status=".$data['admin']."&old_grupa=".$data['grupa']."'><li id='li0' class='Hint'>" . $data['login'] . "</li></a>";
+					$response .= "<a style='color: #000;' href='ChangeUser.php?id=".$data['id']."&old_login=".$data['login']."&old_password=".$data['password']."&old_familiya=".$data['familiya']."&old_imya=".$data['imya']."&old_otchestvo=".$data['otchestvo']."&old_status=".$data['admin']."&old_grupa=".$data['grupa']."'><li id='li0' class='Hint'>" . $data['login'] . "</li></a>";
 				}
 				while ($data2 = $sql2->fetch_array()) 
 				{
-					$response .= "<a href='ChangeUser.php?id=".$data2['id']."&old_login=".$data2['login']."&old_password=".$data2['password']."&old_familiya=".$data2['familiya']."&old_imya=".$data2['imya']."&old_otchestvo=".$data2['otchestvo']."&old_status=".$data2['admin']."&old_grupa=".$data2['grupa']."'><li id='li0' class='Hint'>" . $data2['familiya'] . " " . $data2['imya'] . " " . $data2['otchestvo'] . "</li></a>";
+					$response .= "<a style='color: #000;' href='ChangeUser.php?id=".$data2['id']."&old_login=".$data2['login']."&old_password=".$data2['password']."&old_familiya=".$data2['familiya']."&old_imya=".$data2['imya']."&old_otchestvo=".$data2['otchestvo']."&old_status=".$data2['admin']."&old_grupa=".$data2['grupa']."'><li id='li0' class='Hint'>" . $data2['familiya'] . " " . $data2['imya'] . " " . $data2['otchestvo'] . "</li></a>";
 				}
 			$response .= "</ul>";
 		}

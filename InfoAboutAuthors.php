@@ -21,6 +21,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -38,14 +39,14 @@
 					if ($sql) 
 					{
 						$rows = mysqli_num_rows($sql);
-						echo "<table border='1'>"; 
-						    echo "<tr><th>Автор</th><th>Книги</th></tr>";
+						echo "<table class='reportTable'>"; 
+						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>Автор</th><th class='reportTableHeaderCell'>Книги</th></tr>";
 							for ($i = 0; $i < $rows; $i++) 
 							{ 
 								$row = $sql->fetch_assoc();
-								echo "<tr>";
-									echo "<td>".$row['Name']."</td>";
-									echo "<td>";
+								echo "<tr class='reportTableRow'>";
+									echo "<td class='reportTableCell'>".$row['Name']."</td>";
+									echo "<td class='reportTableCell'>";
 									$sql2 = $connection->query("SELECT * FROM books_and_authors WHERE AuthorID = $row[AuthorID] ");
 									$rows2 = mysqli_num_rows($sql2);
 									for ($j = 0; $j < $rows2; $j++) 
@@ -53,11 +54,11 @@
 										$row2 = $sql2->fetch_assoc();
 										$sql3 = $connection->query("SELECT * FROM books WHERE BookID = $row2[BookID]");
 										$rows3 = mysqli_num_rows($sql3);
-											echo "<table>";
+											echo "<table class='reportTable'>";
 												for ($k = 0; $k < $rows3 ; $k++) { 
 													$row3 = $sql3->fetch_assoc();
 													
-													echo "<tr>$row3[BookName], $row3[BookYear]</tr>";
+													echo "<tr class='reportTableRow'>$row3[BookName], $row3[BookYear]</tr>";
 												}
 											echo "</table>";
 									}
@@ -69,6 +70,4 @@
 				 ?>
 			</div>
 	</body>
-	<script src="Js/JQuerry.js" type="text/javascript"></script>
-	<script src="Js/AddOneMore.js" type="text/javascript"></script>
 </html>

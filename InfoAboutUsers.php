@@ -29,8 +29,10 @@
 			<div class="Option">
 				<h1 class="AdminStart">Информация о пользователях</h1>
 				<form method="GET" action="InfoAboutUsers.php">
-					<input type="text" name="sql-zapros" placeholder="Введите группу" autocomplete="off" >
-					<input type="submit" name="otpravit-sql-zapros" value="Отправить">
+					<div class="SearchInReport">
+						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите группу" autocomplete="off" >
+						<input type="submit" name="otpravit-sql-zapros" value="Отправить">
+					</div>
 				</form>
 				<br>
 				<?php 
@@ -40,39 +42,39 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Группа</th><th>Статус пользователя</th></tr>";
+						    echo "<table class='reportTable'>"; 
+						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>Фамилия</th><th class='reportTableHeaderCell'>Имя</th><th class='reportTableHeaderCell'>Отчество</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Статус пользователя</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
-								echo "<tr>";
+								echo "<tr class='reportTableRow'>";
 							        for ($j = 0 ; $j < 8 ; ++$j) 
 							        {
 
 										$data = $row[$j];
 										if ($data == '') 
 										{
-											echo "<td><p><font color='LightGray'>Нет данных</font></p></td>";
+											echo "<td class='reportTableCell'><font color='LightGray'>Нет данных</font></td>";
 										} 
 										else if ($j == 7)
 										{	
 											$data1 = $row[$j];
 											if ($data1 == '0') 
 											{
-												echo "<td>Читатель</td>";
+												echo "<td class='reportTableCell'>Читатель</td>";
 											}
 											else if ($data1 == '1')
 											{
-												echo "<td>Администратор</td>";
+												echo "<td class='reportTableCell'>Администратор</td>";
 											}
 											else if ($data1 == '2')
 											{
-												echo "<td>Заблокирован</td>";
+												echo "<td class='reportTableCell'>Заблокирован</td>";
 											}
 										}
 										else 
 										{
-											echo  "<td>". $row[$j] . "</td>";
+											echo  "<td class='reportTableCell'>". $row[$j] . "</td>";
 										}
 									}
 									$booklist = array();
@@ -116,39 +118,39 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Логин</th><th>Пароль</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Группа</th><th>Права пользователя</th></tr>";
+						    echo "<table class='reportTable'>"; 
+						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>Фамилия</th><th class='reportTableHeaderCell'>Имя</th><th class='reportTableHeaderCell'>Отчество</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Права пользователя</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
-								echo "<tr>";
+								echo "<tr class='reportTableRow'>";
 							        for ($j = 0 ; $j < 8 ; ++$j) 
 							        {
 
 										$data = $row[$j];
 										if ($data == '') 
 										{
-											echo "<td><p><font color='LightGray'>Нет данных</font></p></td>";
+											echo "<td class='reportTableCell'><font color='LightGray'>Нет данных</font></td>";
 										} 
 										else if ($j == 7)
 										{	
 											$data1 = $row[$j];
 											if ($data1 == '0') 
 											{
-												echo "<td>Читатель</td>";
+												echo "<td class='reportTableCell'>Читатель</td>";
 											}
 											else if ($data1 == '1')
 											{
-												echo "<td>Администратор</td>";
+												echo "<td class='reportTableCell'>Администратор</td>";
 											}
 											else if ($data1 == '2')
 											{
-												echo "<td>Заблокирован</td>";
+												echo "<td class='reportTableCell'>Заблокирован</td>";
 											}
 										}
 										else 
 										{
-											echo  "<td>". $row[$j] . "</td>";
+											echo  "<td class='reportTableCell'>". $row[$j] . "</td>";
 										}
 									}
 									

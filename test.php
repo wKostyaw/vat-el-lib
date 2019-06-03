@@ -1,4 +1,11 @@
 <?php 
+	/*$file1 = 'book.pdf';
+		header('Content-type: application/pdf');
+		header('Content-Disposition: inline; filename="' . $file1 . '"');
+		header('Content-Transfer-Encoding: binary');
+		header('Accept-Ranges: bytes');
+		@readfile($file1);*/
+
 	if (isset($_POST['search'])) {
 		$response = "<ul><li>No data found!</li></ul>";
 
@@ -79,5 +86,7 @@
 				});
 			}();
 		</script>
+		<a href="PDFjs/web/viewer.html?file=../../Files/kniga.pdf">read</a>
+		<iframe src="PDFjs/web/viewer.html?file=../../Files/Пособие для занятий по русскому языку в старших классах2002.pdf" width="1000px" height="1000px;"></iframe>
 	</body>
 </html>

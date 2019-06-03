@@ -9,6 +9,34 @@ function SearchHide() {
 	$('.OpenSearch').css('display', 'block');
 }
 $(document).ready(function() {
+	
+	
+	$("#SearchBox").keyup(function() {
+		var query = $("#SearchBox").val();							
+		if (query.length > 0) {
+			$.ajax (
+				{
+					url: 'MainPage.php',
+					method: 'POST',
+					data: {
+						search: 1,
+						q: query
+					},
+					success: function (data) {
+					$("#responseAuthors").html(data);
+				},
+					dataType: 'text'
+				}
+			);			
+		}
+	});
+	$(document).on('click', '#li0', function (){
+		var author = $(this).text();
+		$("#SearchBox").val(author);
+		$("#responseAuthors").html("");
+	});
+	
+	
 	$(document).on('click', '.deleteBook', function () {
 		var DeleteBookID = $(this).attr('id');
 			DeleteBookID = DeleteBookID.replace(/[^\d]/g, ''),
