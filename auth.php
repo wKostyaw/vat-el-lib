@@ -9,7 +9,7 @@
 	}
 	if(isset($_GET['exit'])) {
 		session_destroy(); 
-		header('Location: login.php');
+		header('Location: Login.php');
 		exit;
 	}
 	function ifAdminShowButton($connection) {
