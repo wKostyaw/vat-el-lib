@@ -114,12 +114,11 @@
 	margin: 5px 0;
 	width: 100%;
 	display: flex;
-	overflow: hidden;
+	overflow-y: hidden;
 	overflow-x: auto;
+	scrollbar-width: none;
 }
 .NewSliderItemsContainer::-webkit-scrollbar {
-
-	width: 0px;
 	display: none;
 }
 .NewSliderItemsContainer:hover ~ .NewSliderButton {
