@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 	SliderWithSelectedAuthor();*/
 	SliderRequest();
 });
-$(document).on('click', '.SliderButtonLeft', function() {
+/*$(document).on('click', '.SliderButtonLeft', function() {
 	var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
 		$Step = $Item.width() * 2;
 		if(parseInt($Item.css('left')) < 0) {
@@ -21,7 +21,19 @@ $(document).on('click', '.SliderButtonRight', function() {
 			$Item.css('left', '-=' + $Step);
 			console.log("work");
 	};
-});	
+});	*/
+
+$(document).on('click', '.NewSliderButtonLeft', function() {
+	var $NewItem = $(this).siblings('.NewSliderItemsContainer');
+	$NewItem.animate( { scrollLeft: '-=476' }, 500);
+});
+$(document).on('click', '.NewSliderButtonRight', function() {
+	var $NewItem = $(this).siblings('.NewSliderItemsContainer');
+	$NewItem.animate( { scrollLeft: '+=476' }, 500);
+});
+
+
+
 function SliderRequest() {
 	$.ajax ({
 		url: 'Slider.php',
@@ -38,12 +50,18 @@ function SliderRequest() {
 					$amount = SliderInfo['amount'],
 					$catOrAutId = SliderInfo['categoryOrAuthorID'],
 					$catOrAutName = SliderInfo['catOrAutName'],
-					$SliderTemplate = '<div class="Slider" id="' + $SliderID + '">\n'+
+					/*$SliderTemplate = '<div class="Slider" id="' + $SliderID + '">\n'+
 						'<div Class="SliderLogo">' + $catOrAutName + '</div>\n'+
 						'<div class="SliderButton SliderButtonLeft"><img src="Img/ArrowL.png"></div>\n'+
 						'<div class="SliderItems"></div>\n'+
 						'<div class="SliderButton SliderButtonRight"><img src="Img/ArrowR.png"></div>\n'+
-					'</div>\n';
+					'</div>\n';*/
+					$SliderTemplate = '<div class="NewSlider"id="' + $SliderID + '">\n'+
+										  '<div class="NewSliderHeader">' + $catOrAutName + '</div>\n'+
+										  '<div class="NewSliderItemsContainer"></div>\n'+
+										  '<button class="NewSliderButton NewSliderButtonLeft"><</button>\n'+
+										  '<button class="NewSliderButton NewSliderButtonRight">></button>\n'+
+									  '</div>\n';
 					
 					$('.SiteContent').append($SliderTemplate);
 					$SliderID = '#' + $SliderID;
@@ -154,7 +172,7 @@ function SliderWithSelectedAuthor($SliderID, $RequestSliderItems, $RequestSlider
 };
 // Рисуем элементы в слайдер с указанным Id
 function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories) {
-	var $SliderItemTemplate = 
+	/*var $SliderItemTemplate = 
 			'<div class="SliderItem">\n'+
 				'<a href="book.php?BookInfo='+$SliderBookId+'" Class="SliderBookName">' + $SliderBookName + '</a>\n'+
 				'<div class="SliderBookPreview"><img src="'+$Cover+'"></div>\n'+
@@ -164,5 +182,13 @@ function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $P
 					'<p>Категории: ' + $SliderBookCategories + '</p>\n'
 				'</div>\n'+
 			'</div>\n';
-	$($SliderID).find('.SliderItems').append($SliderItemTemplate);
+	$($SliderID).find('.SliderItems').append($SliderItemTemplate);*/
+	var	$SliderItemTemplate = '<div class="NewSliderItem">\n' +
+								'<a href="book.php?BookInfo=' + $SliderBookId + '" title="' + $SliderBookName + '"><img class="NewSliderBookCover" src="' + $Cover + '"></a>\n' +
+									//'<span class="NewSliderBookName">\n' +
+									'<a href="book.php?BookInfo=' + $SliderBookId + '" Class="NewSliderBookName">' + $SliderBookName + '</a>\n' +
+									//'</span>\n' +
+								'</div>\n';
+	$($SliderID).find('.NewSliderItemsContainer').append($SliderItemTemplate);
+	/*$($SliderID).find('.NewSliderButtonLeft').hide();*/
 };

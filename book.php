@@ -46,20 +46,10 @@
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
 						<li class="NButton"><a href="Saved.php" class="NBLink">Сохраненное</a></li>
-						<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
-						<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>
+						<!--<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
+						<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>-->
 						<?php 
-							$username = $_SESSION['login'];
-							$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
-							$result = $connection->query ($admin);
-							if ($result->num_rows > 0) {
-								while ($row = $result->fetch_assoc()) {
-									$kek = $row["admin"] ;
-								}
-							}
-							if ($kek == 1) {
-								echo "<li class='NButton'><a href='AdminPage.php' class='NBLink'>&#128081 Панель администрирования &#128081</a></li>";
-							}
+							ifAdminShowButton($connection);
 						?> 
 					</ul>
 				<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
@@ -75,38 +65,7 @@
 								<path d="M88.2,12.6c-39.47344,0 -71.4,31.92656 -71.4,71.4c0,39.47344 31.92656,71.4 71.4,71.4c14.09297,0 27.13594,-4.13438 38.19375,-11.15625l51.58125,51.58125l17.85,-17.85l-50.925,-50.79375c9.15469,-12.00938 14.7,-26.88984 14.7,-43.18125c0,-39.47344 -31.92656,-71.4 -71.4,-71.4zM88.2,29.4c30.23672,0 54.6,24.36328 54.6,54.6c0,30.23672 -24.36328,54.6 -54.6,54.6c-30.23672,0 -54.6,-24.36328 -54.6,-54.6c0,-30.23672 24.36328,-54.6 54.6,-54.6z"></path>
 							</svg>
 						</button>
-							<input type="search" class="SearchBookName" id="SearchBox" name="SearchAll" placeholder="Введите название книги">
-								<script type="text/javascript">
-									$(document).ready(),function () {
-										$("#SearchBox").keyup(function() {
-											var query = $("#SearchBox").val();							
-											if (query.length > 0) {
-												$.ajax (
-													{
-														url: 'MainPage.php',
-														method: 'POST',
-														data: {
-															search: 1,
-															q: query
-														},
-														success: function (data) {
-														$("#responseAuthors").html(data);
-													},
-														dataType: 'text'
-													}
-												);			
-											}
-										});
-	
-	
-										$(document).on('click', '#li0', function (){
-											var author = $(this).text();
-											$("#SearchBox").val(author);
-											$("#responseAuthors").html("");
-										});
-									}();
-								</script>
-								
+							<input type="text" autocomplete="off" class="SearchBookName" id="SearchBox" name="SearchAll" placeholder="Введите название книги">
 							<button type="button" Class="CloseSearch SButton" onclick="SearchHide()">
 								<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 192 192">
 									<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
@@ -237,7 +196,8 @@
 							echo "<p class='bookInfoPoint'><b>Краткое описание: </b>". $row[3] ." </p>";
 						echo "</div>";
 					echo "</div>";
-					echo "<embed id='bookFile' src='" . $row[4] . "' width='100%' vspace='10' style='height: 98vh;'>";
+					//echo "<embed id='bookFile' src='" . $row[4] . "' width='100%' vspace='10' style='height: 98vh;'>";
+					echo "<iframe id='bookFile' src='PDFjs/web/viewer.html?file=../../". $row[4] ."' width='100%' style='height: 98vh;'></iframe>"
 				 ?>
 				</div>
 			</div>

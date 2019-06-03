@@ -19,6 +19,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
+		<script src="Js/JQuerry.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -28,8 +29,10 @@
 			<div class="Option">
 				<h1 class="AdminStart">Информация о книгах</h1>
 				<form method="GET" action="InfoAboutBooks.php">
-					<input type="text" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
-					<input type="submit" name="otpravit-sql-zapros" value="Отправить">
+					<div class="SearchInReport">
+						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
+						<input type="submit" name="otpravit-sql-zapros" value="Отправить">
+					</div>
 				</form>
 				<br>
 				<?php 
@@ -71,8 +74,8 @@
 	                                        array_push($bookslist, $BookID);
 	                                    }
 	                                }
-	                                echo "<table border='1'>"; 
-							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
+	                                echo "<table class='reportTable'>"; 
+							    	echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 		                                $book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID' ORDER BY BookID");
@@ -80,12 +83,12 @@
 		                                for ($i = 0 ; $i < $rowsBooksAuthors ; ++$i) 
 		                                {
 		                                	$row = mysqli_fetch_row($book);
-		                                	echo "<tr>";
+		                                	echo "<tr class='reportTableRow'>";
 									            for ($j = 0 ; $j < 5 ; ++$j) 
 									            {
 									            	if ($j == 2) 
 									            	{
-									            		echo "<td>". $row[$j]. "</td>";
+									            		echo "<td class='reportTableCell'>". $row[$j]. "</td>";
 									            		$AuthorName = array();
 				          								$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
 									                    $result = $connection->query ($whoisauthor);
@@ -112,7 +115,7 @@
 									                    {
 									                        $AuthorID = 'Авторов нет';
 									                    }
-									                    echo "<td>";
+									                    echo "<td class='reportTableCell'>";
 									                    foreach ($AuthorName as $key => $value) 
 									                    { 
 									                        if($value == end($AuthorName)) 
@@ -153,7 +156,7 @@
 									                    {
 									                        $CategoryID = 'Категорий нет';
 									                    }
-									                    echo "<td>";
+									                    echo "<td class='reportTableCell'>";
 									                    foreach ($Categories as $key => $value) 
 									                    { 
 									                        if($value == end($Categories)) 
@@ -170,7 +173,7 @@
 				                    					
 									            	} else 
 									            	{
-										            	echo "<td>". $row[$j]. "</td>";
+										            	echo "<td class='reportTableCell'>". $row[$j]. "</td>";
 									            	}
 									            } 
 									        echo "</tr>";
@@ -207,8 +210,8 @@
 	                                        array_push($bookslist, $BookID);
 									    }
 	                                }
-	                                echo "<table border='1'>"; 
-							    	echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
+	                                echo "<table class='reportTable'>"; 
+							    	echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 	                                	$book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID'");
@@ -216,12 +219,12 @@
 	                                    for ($i = 0 ; $i < $rowsBooksCategories ; ++$i) 
 	                                    {
 	                                    	$row = mysqli_fetch_row($book);
-	                                        echo "<tr>";
+	                                        echo "<tr class='reportTableRow'>";
 									            for ($j = 0 ; $j < 5 ; ++$j) 
 									            {
 									            	if ($j == 2) 
 									            	{
-									            		echo "<td>". $row[$j]. "</td>";
+									            		echo "<td class='reportTableCell'>". $row[$j]. "</td>";
 									            		$AuthorName = array();
 				          								$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
 									                    $result = $connection->query ($whoisauthor);
@@ -248,7 +251,7 @@
 									                    {
 									                        $AuthorID = 'Авторов нет';
 									                    }
-									                    echo "<td>";
+									                    echo "<td class='reportTableCell'>";
 									                    foreach ($AuthorName as $key => $value) 
 									                    { 
 									                        if($value == end($AuthorName)) 
@@ -289,7 +292,7 @@
 									                    {
 									                        $CategoryID = 'Категорий нет';
 									                    }
-									                    echo "<td>";
+									                    echo "<td class='reportTableCell'>";
 									                    foreach ($Categories as $key => $value) 
 									                    { 
 									                        if($value == end($Categories)) 
@@ -306,7 +309,7 @@
 				                    					
 									            	} else 
 									            	{
-										            	echo "<td>". $row[$j]. "</td>";
+										            	echo "<td class='reportTableCell'>". $row[$j]. "</td>";
 									            	}
 									            } 
 									        echo "</tr>";
@@ -326,18 +329,18 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "Всего книг в библиотеке: ".$rows."";
-						    echo "<table border='1'>"; 
-						    echo "<tr><th>id</th><th>Название книги</th><th>Год написания</th><th>Авторы</th><th>Категории</th><th>Описание</th><th>Путь к файлу</th></tr>";
+						    echo "<span class='totalAmount'>Всего книг в библиотеке: ".$rows."<span>";
+						    echo "<table class='reportTable'>"; 
+						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
 						    {
 						    	$row = mysqli_fetch_row($sql);
-						    	echo "<tr>";
+						    	echo "<tr class='reportTableRow'>";
 						            for ($j = 0 ; $j < 5 ; ++$j) 
 						            {
 						            	if ($j == 2) 
 						            	{
-						            		echo "<td>". $row[$j]. "</td>";
+						            		echo "<td class='reportTableCell'>". $row[$j]. "</td>";
 						            		$AuthorName = array();
 	          								$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
 						                    $result = $connection->query ($whoisauthor);
@@ -364,7 +367,7 @@
 						                    {
 						                        $AuthorID = 'Авторов нет';
 						                    }
-						                    echo "<td>";
+						                    echo "<td class='reportTableCell'>";
 						                    foreach ($AuthorName as $key => $value) 
 						                    { 
 						                        if($value == end($AuthorName)) 
@@ -405,7 +408,7 @@
 						                    {
 						                        $CategoryID = 'Категорий нет';
 						                    }
-						                    echo "<td>";
+						                    echo "<td class='reportTableCell'>";
 						                    foreach ($Categories as $key => $value) 
 						                    { 
 						                        if($value == end($Categories)) 
@@ -422,7 +425,7 @@
 	                    					
 						            	} else 
 						            	{
-							            	echo "<td>". $row[$j]. "</td>";
+							            	echo "<td class='reportTableCell'>". $row[$j]. "</td>";
 						            	}
 						            } 
 						        echo "</tr>";
@@ -440,5 +443,4 @@
 			</div>
 		</div>
 	</body>
-	<script src="Js/JQuerry.js" type="text/javascript"></script>
 </html>
