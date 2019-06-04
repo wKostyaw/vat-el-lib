@@ -11,7 +11,8 @@ function SearchHide() {
 $(document).ready(function() {
 	
 	
-	$("#SearchBox").keyup(function() {
+	$("#SearchBox").keyup(function(au) {
+		if (au.keyCode != 40 & au.keyCode != 38 & au.keyCode != 13) {
 		var query = $("#SearchBox").val();							
 		if (query.length > 0) {
 			$.ajax (
@@ -27,16 +28,49 @@ $(document).ready(function() {
 				},
 					dataType: 'text'
 				}
-			);			
+			);
+		}
 		}
 	});
 	$(document).on('click', '#li0', function (){
 		var author = $(this).text();
 		$("#SearchBox").val(author);
+		$("#SearchBox").focus();;
 		$("#responseAuthors").html("");
 	});
 	
 	
+	// Перемещение по подсказкам при помощи стрелок 
+	$(document).on('mouseenter', 'li.Hint', function() {
+		$('li.Hint').removeClass('activeitm');
+		$(this).addClass('activeitm');
+		$(this).siblings().removeClass('activeitm');
+	});
+	/*$(document).on('mouseleave', 'li.Hint', function() {
+		$(this).removeClass('activeitm');
+	});*/
+	$('div#responseAuthors').on('focus', 'li', function() {
+		$this = $(this);
+		$this.addClass('activeitm').siblings().removeClass('activeitm');
+	}).on('keydown', 'li.activeitm', function(ev) {
+		if (ev.keyCode == 40) {
+			$this.next().find('a').focus()
+			return false;
+		} else if (ev.keyCode == 38) {
+			$this.prev().find('a').focus();
+			return false;
+		} else if (ev.keyCode == 13) {
+			$('li.hint.activeitm').click();
+		}
+	});
+	$(".SearchForm").keydown(function (ev) {
+		if (ev.keyCode == 40 || ev.keyCode == 38) {
+			$('#responseAuthors li.Hint:nth-of-type(1)').addClass('activeitm');
+			$('li.activeitm > a').focus();
+			return false;
+		}
+	});
+    
 	$(document).on('click', '.deleteBook', function () {
 		var DeleteBookID = $(this).attr('id');
 			DeleteBookID = DeleteBookID.replace(/[^\d]/g, ''),
@@ -82,12 +116,14 @@ $(document).ready(function() {
 		$(this).parent().append("<input type='button' class='BookBlockButton bookButton deleteBook' id='deletebook"+ SavedBookID +"' name='deletebook[]' value='Удалить из сохраненных' >");
 		$(this).remove();
 	});
+	
 	$(document).on('click', '.notificationCall', function() {
 		var notificationHeader = 'Заголовок уведомления',
 			notificationText = 'Текст уведомления (Супер важный текст, созданный только для того, чтобы посмотреть как он будет выглядеть, если строк много)',
 			notificationTime = 6000;
 		notification(notificationTime, notificationHeader, notificationText);
 	});
+	
 	function notification(notificationTime, notificationHeader, notificationText) {
 		var notificationText = notificationText || '';
 			nWindow = '<div class="notificationWindow" style="animation: showNotification ' + notificationTime + 'ms 1;">\n'+

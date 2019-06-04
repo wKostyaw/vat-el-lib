@@ -30,7 +30,8 @@ a {
 	
 }
 .Logo {
-	height: 100px;
+	/*height: 120px;*/
+	width: 250px;
 	display: block;
 	margin: 0px auto;
 	padding: 10px 0;
@@ -64,7 +65,9 @@ a {
 	font-size: 14pt;
 }
 .AdminLink {
-	width: 285px;
+	width: 273px;
+	border: 1px solid #CECECE;
+	margin: 5px;
 }
 .AdminLink:hover, .SecondaryAdminLink:hover {
 	background-color: #48C;
@@ -128,6 +131,10 @@ a {
 }
 .RandPassBtn {
 	width: 100px;
+	border: none;
+}
+.NewRandPassBtn {
+	width: 140px;
 	border: none;
 }
 .SubmitButton, .ResetButton, .DeleteButton {

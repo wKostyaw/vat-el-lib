@@ -19,7 +19,7 @@ $(document).ready(function () {
 			},
 			dataType: 'text'
 		});
-		location.reload();
+		//location.reload();
 	});
 	
 	$(document).on('click', '.deleteSlider', function() {
@@ -36,7 +36,7 @@ $(document).ready(function () {
 			},
 			dataType: 'text'
 		});
-		location.reload();
+		//location.reload();
 	});
 	
 	$('.whatToDo').change(function() {

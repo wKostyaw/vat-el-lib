@@ -1,7 +1,7 @@
 <?
 function AdminNavigation() {
 	echo '<div class="LogoContainer">';
-		echo '<img src="Img/WorkInProgress.png" class="Logo">';
+		echo '<img src="Img/Logo.png" class="Logo">';
 	echo '</div>';
 	/*echo '<ul class="AdminLinks">';
 		echo '<li class="AdminLinkBox"><a href="mainpage.php" class="AdminLink">На сайт</a></li>';

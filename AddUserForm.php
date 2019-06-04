@@ -70,8 +70,6 @@
 								pswrdgnrtr: 1
 							}, 
 							success: function (data) {
-								/*alert('Класс!');
-								alert(data);*/
 								passField.val(data);
 							},
 							dataType: 'text'
@@ -90,21 +88,31 @@
 				<h2 class="MainHeader">Добавить пользователя</h2>
 				<form method="POST">
 					<div class="FormElemContainer">
-						<p class="CategoryName">Логин</p>
-						<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
-						<p class="CategoryName">Имя</p>
-						<input type="text" name="imya" placeholder="Имя" class="TextInput HalfWidth" autocomplete="off" required>
 						<p class="CategoryName">Фамилия</p>
 						<input type="text" name="familiya" placeholder="Фамилия" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Имя</p>
+						<input type="text" name="imya" placeholder="Имя" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
 						<p class="CategoryName">Отчество</p>
 						<input type="text" name="otchestvo" placeholder="Отчество" class="TextInput HalfWidth" autocomplete="off" required>
+					</div>
+					<div class="FormElemContainer">
 						<p class="CategoryName">Группа</p>
 						<input type="text" name="grupa" placeholder="Группа" class="TextInput HalfWidth" autocomplete="off" required>
-						<p>Будет ли администратором?</p>
+					</div>
+					<div class="FormElemContainer">
+						<p>Роль пользователя</p>
 						<p>
-							<input type="radio" name="isAdmin" value="1">Да
-							<input type="radio" name="isAdmin" value="0" checked="">Нет
+							<input type="radio" name="isAdmin" value="1">Администратор<br>
+							<input type="radio" name="isAdmin" value="0" checked="">Читатель
 						</p>
+					</div>
+					<div class="FormElemContainer">
+						<p class="CategoryName">Логин</p>
+						<input type="text" name="login" placeholder="Логин" class="TextInput HalfWidth" autocomplete="off" required>
 					</div>
 					<div class="FormElemContainer">
 						<p class="CategoryName">Пароль</p>

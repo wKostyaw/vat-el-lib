@@ -37,11 +37,12 @@
 	<body>
 		<div class="SiteHeader">
 			<div class="HeaderContent">
-				<img src="Img/WorkInProgress.png" class="Logo">
-				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
+				<!--<img src="Img/WorkInProgress.png" class="Logo">-->
+				<a href="MainPage.php" title="На главную"><img src="Img/LogoBWStroke.png" class="Logo"></a>
+				<h1 class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</h1>
 			</div>
 		</div>
-			<div class="SecondHeaderNotSticky" id="SecondHeader">
+			<div class="SecondHeader SecondHeaderNotSticky" id="SecondHeader">
 			<div class="NCentered">
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>

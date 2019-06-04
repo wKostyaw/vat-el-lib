@@ -132,7 +132,7 @@
 						<button type="button" id="AddSlider" class="FormButton SubmitButton">Добавить</button>
 					</div>
 				</form>
-				<div class="FormElemContainer">
+				<div class="FormElemContainer" id="SliderPreview">
 					<!-- Шаблон строки
 					
 						<div class="sliderBox flexContainer">

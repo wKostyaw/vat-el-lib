@@ -169,18 +169,23 @@
 					?>
 					<form method="POST" class="changeUser">
 						<div class="FormElemContainer">
-							<p class="CategoryName">Логин</p>
-							<?echo "<input type='text' name='login' placeholder='Логин' class='TextInput HalfWidth' autocomplete='off' value='".$old_login."' required >"?>
+							<p class="CategoryName">Фамилия</p>
+							<? echo "<input type='text' name='familiya' class='TextInput HalfWidth' value='".$old_familiya."' autocomplete='off'>"?>
 						</div>
 						<div class="FormElemContainer">
-							<p class="CategoryName">Пароль</p>
-							<div class="flexContainer SBorder HalfWidth">
-								<?echo "<input type='text' name='password' placeholder='Пароль' class='TextInput noBorder' autocomplete='off' value='".$old_password."' required>"?>
-								<input type="button" id="passwordGenerator" class="FormButton RandPassBtn" value="Создать новый пароль">
-							</div>
+							<p class="CategoryName">Имя</p>
+							<? echo "<input type='text' name='imya' class='TextInput HalfWidth' value='".$old_imya."' autocomplete='off'>"?>
 						</div>
 						<div class="FormElemContainer">
-							<p class="CategoryName">Статус пользователя:</p>
+							<p class="CategoryName">Отчество</p>
+							<? echo "<input type='text' name='otchestvo' class='TextInput HalfWidth' value='".$old_otchestvo."' autocomplete='off'>"?>
+						</div>
+						<div class="FormElemContainer">
+							<p class="CategoryName">Группа</p>
+							<? echo "<input type='text' name='gruppa' class='TextInput HalfWidth' value='".$old_grupa."' autocomplete='off'>"?>
+						</div>
+						<div class="FormElemContainer">
+							<p class="CategoryName">Роль пользователя:</p>
 							<?php 
 								if ($old_status == 0) {
 									echo "<input type='radio' name='status' value='0' checked=''> Читатель<br>";
@@ -198,20 +203,15 @@
 							?>
 						</div>
 						<div class="FormElemContainer">
-							<p class="CategoryName">Имя</p>
-							<? echo "<input type='text' name='imya' class='TextInput HalfWidth' value='".$old_imya."' autocomplete='off'>"?>
+							<p class="CategoryName">Логин</p>
+							<?echo "<input type='text' name='login' placeholder='Логин' class='TextInput HalfWidth' autocomplete='off' value='".$old_login."' required >"?>
 						</div>
 						<div class="FormElemContainer">
-							<p class="CategoryName">Фамилия</p>
-							<? echo "<input type='text' name='familiya' class='TextInput HalfWidth' value='".$old_familiya."' autocomplete='off'>"?>
-						</div>
-						<div class="FormElemContainer">
-							<p class="CategoryName">Отчество</p>
-							<? echo "<input type='text' name='otchestvo' class='TextInput HalfWidth' value='".$old_otchestvo."' autocomplete='off'>"?>
-						</div>
-						<div class="FormElemContainer">
-							<p class="CategoryName">Группа</p>
-							<? echo "<input type='text' name='gruppa' class='TextInput HalfWidth' value='".$old_grupa."' autocomplete='off'>"?>
+							<p class="CategoryName">Пароль</p>
+							<div class="flexContainer SBorder HalfWidth">
+								<?echo "<input type='text' name='password' placeholder='Пароль' class='TextInput noBorder' autocomplete='off' value='".$old_password."' required>"?>
+								<input type="button" id="passwordGenerator" class="FormButton NewRandPassBtn" value="Создать новый пароль">
+							</div>
 						</div>
 						<div class="FormElemContainer">
 							<input type="submit" class="FormButton DeleteButton" name="delete" value="Удалить">   
