@@ -20,6 +20,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -67,26 +68,7 @@
 										echo "<td class='reportTableCell'>$row[reg_date]</td>";
 										echo "<td class='reportTableCell'>$row[last_visit]</td>";
 										echo "<td class='reportTableCell'>$row[visits]</td>";
-										// $booklist = array();
-										// $getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[id]'");
-										// while ($bookid = $getBooksID->fetch_assoc()) 
-										// {
-										// 	array_push($booklist, $bookid['BookID']);	
-										// }
-										// if (!empty($booklist)) {
-										// 	echo "<td class='reportTableCell'>";
-										// 	foreach ($booklist as $key => $valueBookID) 
-										// 	{
-										// 		$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
-										// 		$rowsOfGetBook = mysqli_num_rows($getBook);
-										// 			for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
-			       //                                  {
-			       //                                  	$rowOfGetBook = mysqli_fetch_row($getBook);
-				      //                                   echo "$rowOfGetBook[1], $rowOfGetBook[2] <br>";
-										// 			} 
-										// 	}
-										// 	echo "</td>";
-										// }
+										
 						            echo "</tr>";
 							    }
 						    echo "</table>";
@@ -165,6 +147,4 @@
 			</div>
 		</div>
 	</body>
-	<script src="Js/JQuerry.js" type="text/javascript"></script>
-	<script src="Js/AddOneMore.js" type="text/javascript"></script>
 </html>
