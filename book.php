@@ -28,6 +28,17 @@
 	while ($rowID = $getUserID->fetch_assoc()) {
 		$UserID = $rowID['id'];
 	}
+
+
+	// количество прочтений книги вообще
+	$getAllReadings = $connection->query("SELECT reading FROM books WHERE  BookID ='$bookinfo'");
+	while ($rowAllReadings = $getAllReadings->fetch_assoc()) {
+		$AllReadingsValues = $rowAllReadings['reading'];
+	}
+	$AllReadingsValues++;
+	$updateAllReadings = $connection->query("UPDATE books SET reading='$AllReadingsValues' WHERE BookID ='$bookinfo'");
+
+
 	// проверка, сохранена ли книга. Если нет, то считаться кол-во прочтений будет в users_and_unsaved_books
 	$isSaved = $connection->query("SELECT * FROM users_and_books WHERE id ='$UserID' and BookID='$bookinfo'");
 	$rowsSaved = mysqli_num_rows($isSaved);

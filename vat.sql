@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 03 2019 г., 11:35
+-- Время создания: Июн 05 2019 г., 00:01
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -60,19 +60,20 @@ CREATE TABLE `books` (
   `BookYear` smallint(4) NOT NULL,
   `Description` text NOT NULL,
   `PathToFile` varchar(255) NOT NULL,
-  `PathToCover` varchar(255) NOT NULL DEFAULT 'Img/BookDefault.png'
+  `PathToCover` varchar(255) NOT NULL DEFAULT 'Img/BookDefault.png',
+  `reading` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `books`
 --
 
-INSERT INTO `books` (`BookID`, `BookName`, `BookYear`, `Description`, `PathToFile`, `PathToCover`) VALUES
-(71, 'Капитанская дочка', 1836, '«Капита́нская до́чка» — исторический роман Александра Пушкина, действие которого происходит во время восстания Емельяна Пугачёва. Впервые опубликован без указания имени автора в 4-й книжке журнала «Современник», поступившей в продажу в последней декаде 1836 года', 'Files/Капитанская дочка1836.pdf', 'Img/BookDefault.png'),
-(72, 'Отцы и дети', 1862, '«Отцы́ и де́ти» — роман русского писателя Ивана Сергеевича Тургенева, написанный в 60-е годы XIX века. Роман стал знаковым для своего времени, а образ главного героя Евгения Базарова был воспринят молодёжью как пример для подражания', 'Files/Отцы и дети1862.pdf', 'Img/BookDefault.png'),
-(73, 'Пособие для занятий по русскому языку в старших классах', 2002, 'Пособие поможет учащимся систематизировать и обобщить полученные знания по русскому языку.\r\nВ книге значительное место отводится работе с текстами из художественных произведений, которые в настоящее время изучаются на уроках литературы и входят в школьную программу. ', 'Files/Пособие для занятий по русскому языку в старших классах2002.pdf', 'Img/BookDefault.png'),
-(74, 'Руслан и Людмила', 1820, '«Русла́н и Людми́ла» — первая законченная поэма Александра Сергеевича Пушкина; волшебная сказка, вдохновлённая древнерусскими былинами.', 'Files/Руслан и Людмила1820.pdf', 'Img/BookDefault.png'),
-(75, 'Пиковая дама', 1834, '«Пи́ковая да́ма» — повесть Александра Сергеевича Пушкина с мистическими элементами, послужившая источником сюжета одноимённой оперы П. И. Чайковского.', 'Files/Пиковая дама1834.pdf', 'Covers/Пиковая дама1834.png');
+INSERT INTO `books` (`BookID`, `BookName`, `BookYear`, `Description`, `PathToFile`, `PathToCover`, `reading`) VALUES
+(71, 'Капитанская дочка', 1836, '«Капита́нская до́чка» — исторический роман Александра Пушкина, действие которого происходит во время восстания Емельяна Пугачёва. Впервые опубликован без указания имени автора в 4-й книжке журнала «Современник», поступившей в продажу в последней декаде 1836 года', 'Files/Капитанская дочка1836.pdf', 'Img/BookDefault.png', 0),
+(72, 'Отцы и дети', 1862, '«Отцы́ и де́ти» — роман русского писателя Ивана Сергеевича Тургенева, написанный в 60-е годы XIX века. Роман стал знаковым для своего времени, а образ главного героя Евгения Базарова был воспринят молодёжью как пример для подражания', 'Files/Отцы и дети1862.pdf', 'Img/BookDefault.png', 0),
+(73, 'Пособие для занятий по русскому языку в старших классах', 2002, 'Пособие поможет учащимся систематизировать и обобщить полученные знания по русскому языку.\r\nВ книге значительное место отводится работе с текстами из художественных произведений, которые в настоящее время изучаются на уроках литературы и входят в школьную программу. ', 'Files/Пособие для занятий по русскому языку в старших классах2002.pdf', 'Img/BookDefault.png', 0),
+(74, 'Руслан и Людмила', 1820, '«Русла́н и Людми́ла» — первая законченная поэма Александра Сергеевича Пушкина; волшебная сказка, вдохновлённая древнерусскими былинами.', 'Files/Руслан и Людмила1820.pdf', 'Img/BookDefault.png', 7),
+(75, 'Пиковая дама', 1834, '«Пи́ковая да́ма» — повесть Александра Сергеевича Пушкина с мистическими элементами, послужившая источником сюжета одноимённой оперы П. И. Чайковского.', 'Files/Пиковая дама1834.pdf', 'Covers/Пиковая дама1834.png', 2);
 
 -- --------------------------------------------------------
 
@@ -164,21 +165,25 @@ CREATE TABLE `loginparol` (
   `imya` varchar(255) NOT NULL,
   `otchestvo` varchar(255) NOT NULL,
   `grupa` varchar(255) NOT NULL,
-  `admin` int(1) DEFAULT 0
+  `admin` int(1) DEFAULT 0,
+  `reg_date` varchar(255) NOT NULL,
+  `last_visit` varchar(255) NOT NULL,
+  `visits` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `loginparol`
 --
 
-INSERT INTO `loginparol` (`id`, `login`, `password`, `familiya`, `imya`, `otchestvo`, `grupa`, `admin`) VALUES
-(1, 'admin', '1', '', '', '', '', 1),
-(2, 'izvekov', '6WKpAJ3IKj', '', '', '', '', 1),
-(10, 'lox', 'IduHGtGGrY', '', '', '', '', 2),
-(11, 'lox-sequel', 'utVlg0AwBo', '', '', '', '', 0),
-(14, 'hjlkhgled', 'zHikhnPbty', '', '', '', '', 1),
-(15, 'lhewlkhve', 'BfcbvxKZye', '', '', '', '', 0),
-(17, 'lksedhgjklh3', '79BrpTFeAq', 'Извеков', 'Илья', 'Георгиевич', 'КС. 151', 2);
+INSERT INTO `loginparol` (`id`, `login`, `password`, `familiya`, `imya`, `otchestvo`, `grupa`, `admin`, `reg_date`, `last_visit`, `visits`) VALUES
+(1, 'admin', '1', '', '', '', '', 1, '', '04-06-2019 22:27:51', 14),
+(2, 'izvekov', '6WKpAJ3IKj', '', '', '', '', 1, '', '04-06-2019 21:59:51', 2),
+(10, 'lox', 'IduHGtGGrY', '', '', '', '', 2, '', '', 0),
+(11, 'lox-sequel', 'utVlg0AwBo', '', '', '', '', 0, '', '', 0),
+(14, 'hjlkhgled', 'zHikhnPbty', '', '', '', '', 1, '', '', 0),
+(15, 'lhewlkhve', 'BfcbvxKZye', '', '', '', '', 0, '', '', 0),
+(17, 'lksedhgjklh3', '79BrpTFeAq', 'Извеков', 'Илья', 'Георгиевич', 'КС. 151', 2, '', '', 0),
+(18, 'alina_pavlova', 'V7rep9qfba', 'Павлова', 'Алина', 'Никитична ', 'АП. 171', 0, '04-06-2019 13:44:11', '04-06-2019 17:00:56', 2);
 
 -- --------------------------------------------------------
 
@@ -205,47 +210,36 @@ INSERT INTO `slideroptions` (`sliderId`, `amount`, `whatToDo`, `categoryOrAuthor
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `test`
---
-
-CREATE TABLE `test` (
-  `tags` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `test`
---
-
-INSERT INTO `test` (`tags`) VALUES
-('Толстой'),
-('Пушкин'),
-('Лермонтов'),
-('Чехов'),
-('sobaka');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `users_and_books`
 --
 
 CREATE TABLE `users_and_books` (
   `id` int(11) NOT NULL,
-  `BookID` int(11) NOT NULL
+  `BookID` int(11) NOT NULL,
+  `reading_by_user` int(11) NOT NULL,
+  `last_time_reading` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users_and_books`
 --
 
-INSERT INTO `users_and_books` (`id`, `BookID`) VALUES
-(2, 71),
-(2, 72),
-(2, 73),
-(2, 74),
-(1, 71),
-(1, 74),
-(1, 75);
+INSERT INTO `users_and_books` (`id`, `BookID`, `reading_by_user`, `last_time_reading`) VALUES
+(1, 75, 2, '04-06-2019 22:51:22'),
+(1, 74, 7, '04-06-2019 22:51:47');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_and_unsaved_books`
+--
+
+CREATE TABLE `users_and_unsaved_books` (
+  `id` int(11) NOT NULL,
+  `BookID` int(11) NOT NULL,
+  `reading_by_user` int(11) NOT NULL,
+  `last_time_reading` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Индексы сохранённых таблиц
@@ -307,6 +301,13 @@ ALTER TABLE `users_and_books`
   ADD KEY `BookID` (`BookID`);
 
 --
+-- Индексы таблицы `users_and_unsaved_books`
+--
+ALTER TABLE `users_and_unsaved_books`
+  ADD KEY `id` (`id`,`BookID`),
+  ADD KEY `users_and_unsaved_books_ibfk_2` (`BookID`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -332,7 +333,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `loginparol`
 --
 ALTER TABLE `loginparol`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `slideroptions`
@@ -348,15 +349,15 @@ ALTER TABLE `slideroptions`
 -- Ограничения внешнего ключа таблицы `books_and_authors`
 --
 ALTER TABLE `books_and_authors`
-  ADD CONSTRAINT `books_and_authors_ibfk_1` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `books_and_authors_ibfk_2` FOREIGN KEY (`AuthorID`) REFERENCES `authors` (`AuthorID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `books_and_authors_ibfk_1` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `books_and_authors_ibfk_2` FOREIGN KEY (`AuthorID`) REFERENCES `authors` (`AuthorID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `books_and_categories`
 --
 ALTER TABLE `books_and_categories`
-  ADD CONSTRAINT `books_and_categories_ibfk_1` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `books_and_categories_ibfk_2` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`CategoryID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `books_and_categories_ibfk_1` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `books_and_categories_ibfk_2` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`CategoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `users_and_books`
@@ -364,6 +365,13 @@ ALTER TABLE `books_and_categories`
 ALTER TABLE `users_and_books`
   ADD CONSTRAINT `users_and_books_ibfk_1` FOREIGN KEY (`id`) REFERENCES `loginparol` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `users_and_books_ibfk_2` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `users_and_unsaved_books`
+--
+ALTER TABLE `users_and_unsaved_books`
+  ADD CONSTRAINT `users_and_unsaved_books_ibfk_1` FOREIGN KEY (`id`) REFERENCES `loginparol` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_and_unsaved_books_ibfk_2` FOREIGN KEY (`BookID`) REFERENCES `books` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

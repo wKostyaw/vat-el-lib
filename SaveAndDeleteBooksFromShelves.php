@@ -14,7 +14,13 @@
         $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$BookIDabc'");
         if ($isLinkExist->num_rows == 0 ) 
         {
-            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID) VALUES ('$UserID', '$BookIDabc')");
+            $getOldReadingAndTime = $connection->query("SELECT * FROM users_and_unsaved_books WHERE id = '$UserID' and BookID = '$BookIDabc'");
+            while ($rowoldreadingandtime = $getOldReadingAndTime->fetch_assoc()) {
+                $OldReading = $rowoldreadingandtime['reading_by_user'];
+                $OldTime = $rowoldreadingandtime['last_time_reading'];
+            }
+            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_books (id, BookID, reading_by_user, last_time_reading) VALUES ('$UserID', '$BookIDabc', '$OldReading', '$OldTime')");
+            $deleteOldTimeAndReadings = $connection->query("DELETE FROM users_and_unsaved_books  WHERE id = '$UserID' and BookID = '$BookIDabc'");
         }
 		exit($BookIDabc);
     }
@@ -31,8 +37,14 @@
         }
         $isLinkExist = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$DeleteBookID'");
         if ($isLinkExist->num_rows > 0 ) 
-        {
+        {   
+            $getOldReadingAndTime = $connection->query("SELECT * FROM users_and_books WHERE id = '$UserID' and BookID = '$DeleteBookID'");
+            while ($rowoldreadingandtime = $getOldReadingAndTime->fetch_assoc()) {
+                $OldReading = $rowoldreadingandtime['reading_by_user'];
+                $OldTime = $rowoldreadingandtime['last_time_reading'];
+            }
             $deleteLinkBetweenUserAndBook = $connection->query("DELETE FROM users_and_books  WHERE id = '$UserID' and BookID = '$DeleteBookID'");
+            $addLinkBetweenUserAndBook = $connection->query("INSERT INTO users_and_unsaved_books (id, BookID, reading_by_user, last_time_reading) VALUES ('$UserID', '$DeleteBookID', '$OldReading', '$OldTime')");
         }
         exit($DeleteBookID);
     }    
