@@ -23,12 +23,55 @@
 		exit($responseAuthors);
 	}
 	$bookinfo = $_GET['BookInfo'];
+	// получение id юзера
+	$getUserID = $connection->query("SELECT id FROM loginparol WHERE login='$_SESSION[login]'");
+	while ($rowID = $getUserID->fetch_assoc()) {
+		$UserID = $rowID['id'];
+	}
+	// проверка, сохранена ли книга. Если нет, то считаться кол-во прочтений будет в users_and_unsaved_books
+	$isSaved = $connection->query("SELECT * FROM users_and_books WHERE id ='$UserID' and BookID='$bookinfo'");
+	$rowsSaved = mysqli_num_rows($isSaved);
+	if ($rowsSaved > 0) 
+	{ 
+		// количество прочтений юзером
+		$getReadings = $connection->query("SELECT reading_by_user FROM users_and_books WHERE id = '$UserID' and BookID ='$bookinfo'");
+		while ($rowReadings = $getReadings->fetch_assoc()) {
+			$ReadingsValues = $rowReadings['reading_by_user'];
+		}
+		$ReadingsValues++;
+		$updateReadings = $connection->query("UPDATE users_and_books SET reading_by_user='$ReadingsValues' WHERE id='$UserID' and BookID ='$bookinfo'");
+		// последняя дата прочтения
+		$last_time_reading = date("d-m-Y H:i:s");
+		$updateLastTime = $connection->query("UPDATE users_and_books SET last_time_reading='$last_time_reading' WHERE id='$UserID' and BookID='$bookinfo'");
+	} 
+	else
+	{
+		// проверка, читал ли до этого
+		$isReaded = $connection->query("SELECT * FROM users_and_unsaved_books WHERE id ='$UserID' and BookID='$bookinfo'");
+		$rowsReaded = mysqli_num_rows($isReaded);
+		if ($rowsReaded > 0) {
+			$getReadings = $connection->query("SELECT reading_by_user FROM users_and_unsaved_books WHERE id = '$UserID' and BookID ='$bookinfo'");
+			while ($rowReadings = $getReadings->fetch_assoc()) {
+				$ReadingsValues = $rowReadings['reading_by_user'];
+			}
+			$ReadingsValues++;
+			$updateReadings = $connection->query("UPDATE users_and_unsaved_books SET reading_by_user='$ReadingsValues' WHERE id='$UserID' and BookID ='$bookinfo'");
+			// последняя дата прочтения
+			$last_time_reading = date("d-m-Y H:i:s");
+			$updateLastTime = $connection->query("UPDATE users_and_unsaved_books SET last_time_reading='$last_time_reading' WHERE id='$UserID' and BookID='$bookinfo'");
+		} 
+		else //если не читал, то создать запись, что читал
+		{	
+			$last_time_reading = date("d-m-Y H:i:s");
+			$nonReaded = $connection->query("INSERT INTO users_and_unsaved_books (id, BookID, reading_by_user, last_time_reading) VALUES ('$UserID', '$bookinfo', '1', '$last_time_reading')");
+		}
+	}
+	
 ?>
 <!doctype HTML>
 <html>
 	<meta charset="utf-8">
 	<head>
-		
 		<link rel="stylesheet" type="text/css" href="Css/style.css">
 		<link rel="stylesheet" type="text/css" href="Css/BookPageStyle.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>

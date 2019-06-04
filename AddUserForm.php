@@ -23,7 +23,8 @@
 		$familiya = $_POST['familiya'];
 		$otchestvo = $_POST['otchestvo'];
 		$grupa = $_POST['grupa'];
-		$query = "INSERT INTO loginparol (login, password, admin, imya, familiya, otchestvo, grupa) VALUES ('$login', '$password', '$isAdmin', '$imya', '$familiya', '$otchestvo', '$grupa')";
+		$reg_date = date("d-m-Y H:i:s");
+		$query = "INSERT INTO loginparol (login, password, admin, imya, familiya, otchestvo, grupa, reg_date) VALUES ('$login', '$password', '$isAdmin', '$imya', '$familiya', '$otchestvo', '$grupa', '$reg_date')";
 		$result = mysqli_query ($connection, $query);
 		if ($result) 
 		{
