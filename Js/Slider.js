@@ -1,27 +1,7 @@
 jQuery(document).ready(function(){
-	// Кнопки влево/вправо
-	/*SliderWithLastBooks();
-	SliderWithSelectedCategory();
-	SliderWithSelectedAuthor();*/
 	SliderRequest();
 });
-/*$(document).on('click', '.SliderButtonLeft', function() {
-	var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
-		$Step = $Item.width() * 2;
-		if(parseInt($Item.css('left')) < 0) {
-			$Item.css('left', '+=' + $Step);
-			console.log("work");
-	};
-});
-$(document).on('click', '.SliderButtonRight', function() {
-	var $Item = $(this).siblings('.SliderItems').children('.SliderItem');
-		$Step = $Item.width() * 2;
-		$SliderEnd = -(($Item.width() * $Item.length) - ($Step * 2));
-		if(parseInt($Item.css('left')) >= $SliderEnd) {
-			$Item.css('left', '-=' + $Step);
-			console.log("work");
-	};
-});	*/
+
 
 $(document).on('click', '.NewSliderButtonLeft', function() {
 	var $NewItem = $(this).siblings('.NewSliderItemsContainer');
@@ -31,8 +11,6 @@ $(document).on('click', '.NewSliderButtonRight', function() {
 	var $NewItem = $(this).siblings('.NewSliderItemsContainer');
 	$NewItem.animate( { scrollLeft: '+=476' }, 500);
 });
-
-
 
 function SliderRequest() {
 	$.ajax ({
@@ -59,8 +37,18 @@ function SliderRequest() {
 					$SliderTemplate = '<div class="NewSlider"id="' + $SliderID + '">\n'+
 										  '<div class="NewSliderHeader">' + $catOrAutName + '</div>\n'+
 										  '<div class="NewSliderItemsContainer"></div>\n'+
-										  '<button class="NewSliderButton NewSliderButtonLeft"><</button>\n'+
-										  '<button class="NewSliderButton NewSliderButtonRight">></button>\n'+
+										  '<button class="NewSliderButton NewSliderButtonLeft">\n'+
+											'<svg width="30" height="100" version="1.1" viewBox="0 0 13.229 26.458" xmlns="http://www.w3.org/2000/svg">\n'+
+											  '<g transform="translate(0 -270.54)">\n'+
+												'<path d="m11.9 271.86-10.583 11.906 10.583 11.906" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3229"/>\n'+
+											  '</g>\n'+
+											'</svg></button>\n'+
+										  '<button class="NewSliderButton NewSliderButtonRight">\n'+
+										  '<svg width="30" height="100" version="1.1" viewBox="0 0 13.229 26.458" xmlns="http://www.w3.org/2000/svg">\n'+
+											'<g transform="translate(0 -270.54)">\n'+
+											  '<path d="m1.3229 271.86 10.583 11.906-10.583 11.906" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3229"/>\n'+
+											'</g>\n'+
+										  '</svg></button>\n'+
 									  '</div>\n';
 					
 					$('.SiteContent').append($SliderTemplate);
@@ -172,19 +160,10 @@ function SliderWithSelectedAuthor($SliderID, $RequestSliderItems, $RequestSlider
 };
 // Рисуем элементы в слайдер с указанным Id
 function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $PathToFile, $Cover, $SliderBookAuthors, $SliderBookCategories) {
-	/*var $SliderItemTemplate = 
-			'<div class="SliderItem">\n'+
-				'<a href="book.php?BookInfo='+$SliderBookId+'" Class="SliderBookName">' + $SliderBookName + '</a>\n'+
-				'<div class="SliderBookPreview"><img src="'+$Cover+'"></div>\n'+
-				'<div class="SliderBookInfo">\n'+
-					'<p>Год: ' + $SliderBookYear + '</p>\n'+
-					'<p>Авторы: ' + $SliderBookAuthors + '</p>\n'+
-					'<p>Категории: ' + $SliderBookCategories + '</p>\n'
-				'</div>\n'+
-			'</div>\n';
-	$($SliderID).find('.SliderItems').append($SliderItemTemplate);*/
 	var	$SliderItemTemplate = '<div class="NewSliderItem">\n' +
-								'<a href="book.php?BookInfo=' + $SliderBookId + '" title="' + $SliderBookName + '"><img class="NewSliderBookCover" src="' + $Cover + '"></a>\n' +
+								'<div class="NewSliderItemImageContainer">\n' +
+								  '<a href="book.php?BookInfo=' + $SliderBookId + '" title="' + $SliderBookName + '"><img class="NewSliderBookCover" src="' + $Cover + '"></a>\n' +
+								'</div>\n' +
 									//'<span class="NewSliderBookName">\n' +
 									'<a href="book.php?BookInfo=' + $SliderBookId + '" Class="NewSliderBookName">' + $SliderBookName + '</a>\n' +
 									//'</span>\n' +

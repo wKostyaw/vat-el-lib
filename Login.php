@@ -99,19 +99,42 @@
 			</form>
 		</div>
 		<div class="hello">
-			<h1 class="helloHeader">ДОБРО ПОЖАЛОВАТЬ В ЭЛЕКТРОННУЮ БИБЛИЕОТЕКУ ВАТ ИМ В. П. ЧКАЛОВА</h1>
-			<p class="helloText">
+			<div class="LoginPageLogoMainContainer">
+				<div class="LoginPageLogoAlignContainer">
+					<div class="LoginPageLogoContainer">
+						<img src="Img/Logo.png" class="LoginPageLogo">
+					</div><div class="LoginPageLogoCaptionContainer">
+						<h1 class="LoginPageLogoHeader">ДОБРО ПОЖАЛОВАТЬ</h1>
+						<span class="LoginPageLogoCaption">Вы находитесь на сайте электронной библиотеки ВАТ имени В. П. Чкалова</span>
+					</div>
+				</div>
+			</div>
+			<div class="HelloTextContainer">
+				<p class="helloText">
 			
-			</p>
-			<p class="helloText">В нашей библиотеке собраны 
-				<span id="BookAmount"></span> умопомрачительных произведений классической литературы от 
-				<span id="AuthorAmount"></span> величайших авторов в 
-				<span id="CategoryAmount"></span> отборных категориях, после прочтения которых вы поднимите уровень своих знаний до небес. 
-				С каждой прочтенной строчкой ваш уровень эрудированности будет расти в геометрической прогрессии.
-			</p>
-			<p class="helloText">Для того, чтобы ознакомится с представленными на сайте каталогом литературы вам необходимо войти, используя логин и пароль, полученные от вашего [человек выдающий логины и пароли].</p>
-			<p class="helloText">Приятного чтения.</p>
+				</p>
+				<p class="helloText">В нашей библиотеке представлены 
+					<span id="BookAmount"></span> произведений классической и учебной литературы от 
+					<span id="AuthorAmount"></span> авторов в 
+					<span id="CategoryAmount"></span> категориях.
+				</p>
+			<!--<p class="helloText">Для того, чтобы ознакомится с каталогом литературы 
+			вам необходимо быть студентом ВАТ имени В. П. Чкалова и получить логин и пароль от куратора группы</p>-->
+				<p class="helloText">Для того, чтобы ознакомится с каталогом литературы
+				вам необходимо быть студентом ВАТ имени В. П. Чкалова и войти,
+				используя логин и пароль, полученные от вашего куратора.</p>
+				<p class="helloText">Приятного чтения.</p>
+				
+			</div>
+			<button class="LButton openLoginForm" id="openLoginForm">Войти</button>
 		</div>
-		<button class="LButton" id="openLoginForm">Войти</button>
+		<div class="LoginFooter">
+			<div class="LoginFooterInfo">
+				<span class="FooterRow">Контакты</span>
+				<span class="FooterRow">Тел.: +7 (473) 249 10 02</span>
+				<span class="FooterRow">Email: <a href="mailto:vatk2001@mail.ru">vatk2001@mail.ru</a></span>
+				<span class="FooterRow">ВАТ имени В. П. Чкалова: <a href="http://www.vatvrn.ru/">http://www.vatvrn.ru/</a></span>
+			</div>
+		</div>
 	</body>
 </html>

@@ -29,7 +29,6 @@
 			move_uploaded_file($_FILES["BookCover"]["tmp_name"], "Covers/". $new_cover_name);
 			$PathToCover = "Covers/". $new_cover_name;
 		} else {
-			echo "Ошибка загрузки обложки" . "</br>";
 			$PathToCover = "Img/BookDefault.png";
 		}
 		// заливка файла книги
@@ -307,14 +306,14 @@
 							<p class="CategoryName">Файл книги</p>
 							<input name="BookFile" id="BookFile" type="File" class="File">
 							<label for="BookFile" class="AddFileContainer">
-								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите файл</span>
 							</label>
 						</div>
 						<div class="uploadContainer">
 							<p class="CategoryName">Обложка книги</p>
 							<input name="BookCover" id="BookCover" type="File" class="File">
 							<label for="BookCover" class="AddFileContainer">
-								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите фаил</span>
+								<span class="LFile LFName"></span><span class="LFile LFButton">Выберите файл</span>
 							</label>
 						</div>
 					</div>

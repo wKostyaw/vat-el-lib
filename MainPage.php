@@ -4,20 +4,20 @@
 	// поиск соответствий в БД
 	if (isset($_POST['search'])) {
 		$q = $connection->real_escape_string($_POST['q']);
-		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%'");
-		$sql1 = $connection->query("SELECT BookName FROM books WHERE BookName LIKE '%$q%'");
-		$sql2 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q%'");
+		$sql = $connection->query("SELECT Name FROM authors WHERE Name LIKE '%$q%' ORDER BY Name ASC LIMIT 2");
+		$sql1 = $connection->query("SELECT BookName FROM books WHERE BookName LIKE '%$q%' ORDER BY FIND_IN_SET(BookName,'$q*') ASC LIMIT 2");
+		$sql2 = $connection->query("SELECT Category FROM categories WHERE Category LIKE '%$q%' ORDER BY Category ASC LIMIT 2");
 		if ($sql->num_rows > 0 or  $sql1->num_rows > 0 or  $sql2->num_rows > 0) {
 			$responseAuthors = "<ul class='HintList'>";
 				// $responseAuthors .= "<li class='HintHead'>Авторы:</li>";
 				while ($data = $sql->fetch_array())
-					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Name'] . "</li>";
+					$responseAuthors .= "<li id='li0' class='Hint'><a href='#'>" . $data['Name'] . "</a></li>";
 				// $responseAuthors .= "<li class='HintHead'>Книги:</li>";
 				while ($data = $sql1->fetch_array())
-					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['BookName'] . "</li>";
+					$responseAuthors .= "<li id='li0' class='Hint'><a href='#'>" . $data['BookName'] . "</a></li>";
 				// $responseAuthors .= "<li class='HintHead'>Категории:</li>";
 				while ($data = $sql2->fetch_array())
-					$responseAuthors .= "<li id='li0' class='Hint'>" . $data['Category'] . "</li>";
+					$responseAuthors .= "<li id='li0' class='Hint'><a href='#'>" . $data['Category'] . "</a></li>";
 			$responseAuthors .= "</ul>";
 		}
 		exit($responseAuthors);
@@ -45,8 +45,9 @@
 		</div>-->
 		<div class="SiteHeader">
 			<div class="HeaderContent">
-				<img src="Img/WorkInProgress.png" class="Logo">
-				<p class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</p>
+				<!--<img src="Img/WorkInProgress.png" class="Logo">-->
+				<a href="MainPage.php" title="На главную"><img src="Img/LogoBWStroke.png" class="Logo"></a>
+				<h1 class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</h1>
 			</div>
 		</div>
 			<div class="SecondHeader" id="SecondHeader">
@@ -54,12 +55,9 @@
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>
 						<li class="NButton"><a href="Saved.php" class="NBLink">Сохраненное</a></li>
-						<!--<li class="NButton"><a href="Authors.php" class="NBLink">Авторы</a></li>
-						<li class="NButton"><a href="Categories.php" class="NBLink">Категории</a></li>-->
 						<?php 
 							ifAdminShowButton($connection);
 						?>
-						<li class="NButton"><span class="NBLink notificationCall">Вызвать уведомление</span></li>
 					</ul>
 				<button type="button" Class="OpenSearch SButton" onclick="SearchVisible()">
 					<svg class="SButtonIcon" x="0px" y="0px" width="24" height="24" viewBox="0 0 210 210">
@@ -89,38 +87,6 @@
 			</div>
 			<div class="SiteWrapper">
 				<div class="SiteContent">
-					<!--<div class="NewSlider">
-						<div class="NewSliderHeader">Пушкин А. С.</div>
-						<div class="NewSliderItemsContainer">
-							<div class="NewSliderItem">
-								<img class="NewSliderBookCover" src="Img/BookDefault.png">
-								<span class="NewSliderBookName">
-									Название книги в несколько строк
-								</span>
-							</div>
-						</div>
-						<button class="NewSliderButton NewSliderButtonLeft">
-							<
-						</button>
-						<button class="NewSliderButton NewSliderButtonRight">
-							>
-						</button>
-					</div>-->
-					
-					<!--<ul class="PageNavigation">
-						<li class="Page PreviousPage"><a href="#">◀</a></li>
-						<li class="Page FirstPage"><a href="#">1</a></li>
-						<li class="PageEmptySpace"></li>
-						<li class="Page"><a href="#">11</a></li>
-						<li class="Page"><a href="#">12</a></li>
-						<li class="Page"><a href="#">13</a></li>
-						<li class="Page"><a href="#">14</a></li>
-						<li class="Page"><a href="#">15</a></li>
-						<li class="PageEmptySpace"></li>
-						<li class="Page LastPage"><a href="#">999</a></li>
-						<li class="Page NextPage"><a href="#">▶</a></li>
-					</ul>-->
-					
 				</div>
 			</div>
 		<div class="SiteFooter">
