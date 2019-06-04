@@ -2,51 +2,59 @@
 	session_start();
 	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
 	// 
-	if ($_POST['submit']) 
+	if (isset($_POST['login']) and isset($_POST['password']))
 	{
-		if (isset($_POST['login']) and isset($_POST['password']))
+		$login = $_POST['login'];
+		$password = $_POST['password'];
+		$query = "SELECT * FROM loginparol WHERE login='$login' and password='$password'";
+		$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+		$count = mysqli_num_rows($result);
+		if ($count == 1) 
 		{
-			$login = $_POST['login'];
-			$password = $_POST['password'];
-			$query = "SELECT * FROM loginparol WHERE login='$login' and password='$password'";
-			$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-			$count = mysqli_num_rows($result);
-			if ($count == 1) 
-			{
-					$_SESSION['login'] = $login;
-			} else 
-			{
-				echo '<script type="text/javascript">';
-				echo 'alert("Неправильный логин или пароль!")';
-				echo '</script>';
-			}
-		} 
-		if (isset($_SESSION['login']))
+				$_SESSION['login'] = $login;
+		} else 
 		{
-			$isLoginAdmin = $connection->query("SELECT admin FROM loginparol WHERE login='$login'");
-			if ($isLoginAdmin == 1) 
-			{
-				header('Location: AdminPage.php');
-				exit();
-			}
-			else if ($isLoginAdmin == 2) 
-			{	
-				echo '<script type="text/javascript">';
-				echo 'alert("Ваш профиль был заблокирован и Вам отказано в доступе к сайту. Обратитесь к администратору")';
-				echo '</script>';
-			} 
-			else if ($isLoginAdmin == 0) 
-			{
-				header('Location: MainPage.php');
-				exit();
-			}
-			else
-			{
-				echo '<script type="text/javascript">';
-				echo 'alert("В ходе перехода на сайт библиотеки произошла ошибка")';
-				echo '</script>';
-			} 
+			echo '<script type="text/javascript">';
+			echo 'alert("Неправильный логин или пароль!")';
+			echo '</script>';
 		}
+	} 
+	if (isset($_SESSION['login']))
+	{	
+		// подсчёт количества посещений сайта
+		$getVisitsValue = $connection->query("SELECT visits FROM loginparol WHERE login='$login'");
+		while ($row = $getVisitsValue->fetch_assoc()) {
+			$visitsValue = $row["visits"];
+		}
+		$visitsValue++;
+		$updateVisitsValue = $connection->query("UPDATE loginparol SET visits='$visitsValue' WHERE login='$login'");
+		// последняя дата посещения сайта
+		$lastVisitDate = date("d-m-Y H:i:s");
+		$updateLastVisitsDate = $connection->query("UPDATE loginparol SET last_visit='$lastVisitDate' WHERE login='$login'");
+		// проверка статуса пользователя
+		$isLoginAdmin = $connection->query("SELECT admin FROM loginparol WHERE login='$login'");
+		if ($isLoginAdmin == 1) 
+		{
+			header('Location: AdminPage.php');
+			exit();
+		}
+		else if ($isLoginAdmin == 2) 
+		{	
+			echo '<script type="text/javascript">';
+			echo 'alert("Ваш профиль был заблокирован и Вам отказано в доступе к сайту. Обратитесь к администратору")';
+			echo '</script>';
+		} 
+		else if ($isLoginAdmin == 0) 
+		{
+			header('Location: MainPage.php');
+			exit();
+		}
+		else
+		{
+			echo '<script type="text/javascript">';
+			echo 'alert("В ходе перехода на сайт библиотеки произошла ошибка")';
+			echo '</script>';
+		} 
 	}
 	if (isset($_POST['RequestSummaryInfo'])) {
 		$summary = array();

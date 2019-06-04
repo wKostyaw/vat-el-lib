@@ -43,64 +43,52 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table class='reportTable'>"; 
-						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>Фамилия</th><th class='reportTableHeaderCell'>Имя</th><th class='reportTableHeaderCell'>Отчество</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Статус пользователя</th></tr>";
-						    for ($i = 0; $i < $rows; $i++)
-						    {
-						    	$row = mysqli_fetch_row($sql);
-								echo "<tr class='reportTableRow'>";
-							        for ($j = 0 ; $j < 8 ; ++$j) 
-							        {
-
-										$data = $row[$j];
-										if ($data == '') 
-										{
-											echo "<td class='reportTableCell'><font color='LightGray'>Нет данных</font></td>";
-										} 
-										else if ($j == 7)
-										{	
-											$data1 = $row[$j];
-											if ($data1 == '0') 
-											{
-												echo "<td class='reportTableCell'>Читатель</td>";
-											}
-											else if ($data1 == '1')
-											{
-												echo "<td class='reportTableCell'>Администратор</td>";
-											}
-											else if ($data1 == '2')
-											{
-												echo "<td class='reportTableCell'>Заблокирован</td>";
-											}
+							    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>ФИО</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Права пользователя</th><th class='reportTableHeaderCell'>Дата регистрации</th><th class='reportTableHeaderCell'>Дата последнего посещения</th><th class='reportTableHeaderCell'>Количество посещений библиотеки</th></tr>";
+							    for ($i = 0; $i < $rows; $i++)
+							    {
+							    	$row = mysqli_fetch_assoc($sql);
+									echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+										echo "<td class='reportTableCell'>$row[id]</td>";
+										echo "<td class='reportTableCell'>$row[login]</td>";
+										echo "<td class='reportTableCell'>$row[password]</td>";
+										if (empty($row['familiya']) and empty($row['imya']) and empty($row['otchestvo'])) {
+											echo "<td class='reportTableCell'><font color='grey'>Нет данных</font></td>";
+										} else {
+											echo "<td class='reportTableCell'>$row[familiya] $row[imya] $row[otchestvo]</td>";
 										}
-										else 
-										{
-											echo  "<td class='reportTableCell'>". $row[$j] . "</td>";
+										echo "<td class='reportTableCell'>$row[grupa]</td>";
+										if ($row['admin'] == 0) {
+											echo "<td class='reportTableCell'>Читатель</td>";
+										} else if ($row['admin'] == 1) {
+											echo "<td class='reportTableCell'>Администратор</td>";
+										} else if ($row['admin'] == 2) {
+											echo "<td class='reportTableCell'>Заблокирован</td>";
 										}
-									}
-									$booklist = array();
-									$getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[0]'");
-									while ($bookid = $getBooksID->fetch_assoc()) 
-									{
-										array_push($booklist, $bookid['BookID']);	
-									}
-									if (!empty($booklist)) {
-										echo "<tr class='knigi".$row[0]."'><td colspan='8' class='openBookList'>Книги на полке пользователя:</td></tr>";
-										foreach ($booklist as $key => $valueBookID) 
-										{
-											$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
-											$rowsOfGetBook = mysqli_num_rows($getBook);
-											for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
-	                                        {
-	                                        	$rowOfGetBook = mysqli_fetch_row($getBook);
-	                                        	echo "<tr class='kniga".$row[0]."' style='display:none;'>";
-	                                        		echo "<td class='noBorder'></td>";
-		                                            echo "<td colspan='7'>$rowOfGetBook[1], $rowOfGetBook[2]</td>";
-	                                            echo "</tr>";
-											} 
-										}
-									}
-					            echo "</tr>";
-						    }
+										echo "<td class='reportTableCell'>$row[reg_date]</td>";
+										echo "<td class='reportTableCell'>$row[last_visit]</td>";
+										echo "<td class='reportTableCell'>$row[visits]</td>";
+										// $booklist = array();
+										// $getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[id]'");
+										// while ($bookid = $getBooksID->fetch_assoc()) 
+										// {
+										// 	array_push($booklist, $bookid['BookID']);	
+										// }
+										// if (!empty($booklist)) {
+										// 	echo "<td class='reportTableCell'>";
+										// 	foreach ($booklist as $key => $valueBookID) 
+										// 	{
+										// 		$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
+										// 		$rowsOfGetBook = mysqli_num_rows($getBook);
+										// 			for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
+			       //                                  {
+			       //                                  	$rowOfGetBook = mysqli_fetch_row($getBook);
+				      //                                   echo "$rowOfGetBook[1], $rowOfGetBook[2] <br>";
+										// 			} 
+										// 	}
+										// 	echo "</td>";
+										// }
+						            echo "</tr>";
+							    }
 						    echo "</table>";
 						} 
 						else 
@@ -117,68 +105,54 @@
 						$sql = $connection->query("SELECT * FROM loginparol ORDER BY id");
 						if($sql)
 						{
-						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<table class='reportTable'>"; 
-						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>Фамилия</th><th class='reportTableHeaderCell'>Имя</th><th class='reportTableHeaderCell'>Отчество</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Права пользователя</th></tr>";
-						    for ($i = 0; $i < $rows; $i++)
-						    {
-						    	$row = mysqli_fetch_row($sql);
-								echo "<tr class='reportTableRow'>";
-							        for ($j = 0 ; $j < 8 ; ++$j) 
-							        {
-
-										$data = $row[$j];
-										if ($data == '') 
-										{
-											echo "<td class='reportTableCell'><font color='LightGray'>Нет данных</font></td>";
-										} 
-										else if ($j == 7)
-										{	
-											$data1 = $row[$j];
-											if ($data1 == '0') 
-											{
-												echo "<td class='reportTableCell'>Читатель</td>";
-											}
-											else if ($data1 == '1')
-											{
-												echo "<td class='reportTableCell'>Администратор</td>";
-											}
-											else if ($data1 == '2')
-											{
-												echo "<td class='reportTableCell'>Заблокирован</td>";
-											}
+							$rows = mysqli_num_rows($sql); // количество полученных строк
+							echo "<table class='reportTable'>"; 
+								echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>ФИО</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Права пользователя</th><th class='reportTableHeaderCell'>Дата регистрации</th><th class='reportTableHeaderCell'>Дата последнего посещения</th><th class='reportTableHeaderCell'>Количество посещений библиотеки</th></tr>";
+								for ($i = 0; $i < $rows; $i++)
+								{
+									$row = mysqli_fetch_assoc($sql);
+									echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+										echo "<td class='reportTableCell'>$row[id]</td>";
+										echo "<td class='reportTableCell'>$row[login]</td>";
+										echo "<td class='reportTableCell'>$row[password]</td>";
+										if (empty($row['familiya']) and empty($row['imya']) and empty($row['otchestvo'])) {
+											echo "<td class='reportTableCell'><font color='grey'>Нет данных</font></td>";
+										} else {
+											echo "<td class='reportTableCell'>$row[familiya] $row[imya] $row[otchestvo]</td>";
 										}
-										else 
-										{
-											echo  "<td class='reportTableCell'>". $row[$j] . "</td>";
+										echo "<td class='reportTableCell'>$row[grupa]</td>";
+										if ($row['admin'] == 0) {
+											echo "<td class='reportTableCell'>Читатель</td>";
+										} else if ($row['admin'] == 1) {
+											echo "<td class='reportTableCell'>Администратор</td>";
+										} else if ($row['admin'] == 2) {
+											echo "<td class='reportTableCell'>Заблокирован</td>";
 										}
-									}
-									
-									$booklist = array();
-									$getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[0]'");
-									while ($bookid = $getBooksID->fetch_assoc()) 
-									{
-										array_push($booklist, $bookid['BookID']);	
-									}
-									if (!empty($booklist)) {
-										echo "<tr class='knigi".$row[0]."'><td colspan='8' class='openBookList'>Книги на полке пользователя:</td></tr>";
-										foreach ($booklist as $key => $valueBookID) 
-										{
-											$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
-											$rowsOfGetBook = mysqli_num_rows($getBook);
-
-											for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
-	                                        {
-	                                        	$rowOfGetBook = mysqli_fetch_row($getBook);
-	                                        	echo "<tr class='kniga".$row[0]."' style='display:none;'>";
-	                                        		echo "<td class='noBorder'></td>";
-		                                            echo "<td colspan='7'>$rowOfGetBook[1], $rowOfGetBook[2]</td>";
-	                                            echo "</tr>";
-											} 
-										}
-									}
-					            echo "</tr>";
-						    }
+										echo "<td class='reportTableCell'>$row[reg_date]</td>";
+										echo "<td class='reportTableCell'>$row[last_visit]</td>";
+										echo "<td class='reportTableCell'>$row[visits]</td>";
+										// $booklist = array();
+										// $getBooksID = $connection->query("SELECT BookID FROM users_and_books WHERE id = '$row[id]'");
+										// while ($bookid = $getBooksID->fetch_assoc()) 
+										// {
+										// 	array_push($booklist, $bookid['BookID']);	
+										// }
+										// if (!empty($booklist)) {
+										// 	echo "<td class='reportTableCell'>";
+										// 	foreach ($booklist as $key => $valueBookID) 
+										// 	{
+										// 		$getBook = $connection->query("SELECT * FROM books WHERE BookID = '$valueBookID'");
+										// 		$rowsOfGetBook = mysqli_num_rows($getBook);
+										// 			for ($k = 0 ; $k < $rowsOfGetBook ; ++$k) 
+										// 			{
+										// 				$rowOfGetBook = mysqli_fetch_row($getBook);
+										// 				echo "$rowOfGetBook[1], $rowOfGetBook[2] <br>";
+										// 			} 
+										// 	}
+										// 	echo "</td>";
+										// }
+						            echo "</tr>";
+							    }
 						    echo "</table>";
 						} 
 						else 
