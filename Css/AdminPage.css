@@ -206,8 +206,10 @@ a {
 	min-width: calc(100% - 20px);
 	margin: 0 10px;
 }
-.reportTableRow {
-	
+.reportTableRow:hover {
+	cursor: pointer;
+	background: #48C;
+	color: white;
 }
 .reportTableHeaderCell {
 	/*border: 1px solid #000;*/

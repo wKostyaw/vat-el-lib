@@ -27,7 +27,7 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Информация о книгах</h1>
+				<h2 class="AdminStart MainHeader">Информация о книгах</h2>
 				<form method="GET" action="InfoAboutBooks.php">
 					<div class="SearchInReport">
 						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
@@ -75,7 +75,7 @@
 	                                    }
 	                                }
 	                                echo "<table class='reportTable'>"; 
-							    	echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
+							    	echo "<tr class='reportTableHeaderRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 		                                $book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID' ORDER BY BookID");

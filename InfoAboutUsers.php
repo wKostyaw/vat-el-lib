@@ -28,7 +28,7 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Информация о пользователях</h1>
+				<h2 class="AdminStart MainHeader">Информация о пользователях</h2>
 				<form method="GET" action="InfoAboutUsers.php">
 					<div class="SearchInReport">
 						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите группу" autocomplete="off" >
@@ -44,7 +44,7 @@
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<table class='reportTable'>"; 
-							    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>ФИО</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Права пользователя</th><th class='reportTableHeaderCell'>Дата регистрации</th><th class='reportTableHeaderCell'>Дата последнего посещения</th><th class='reportTableHeaderCell'>Количество посещений библиотеки</th></tr>";
+							    echo "<tr class='reportTableHeaderRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Логин</th><th class='reportTableHeaderCell'>Пароль</th><th class='reportTableHeaderCell'>ФИО</th><th class='reportTableHeaderCell'>Группа</th><th class='reportTableHeaderCell'>Права пользователя</th><th class='reportTableHeaderCell'>Дата регистрации</th><th class='reportTableHeaderCell'>Дата последнего посещения</th><th class='reportTableHeaderCell'>Количество посещений библиотеки</th></tr>";
 							    for ($i = 0; $i < $rows; $i++)
 							    {
 							    	$row = mysqli_fetch_assoc($sql);
