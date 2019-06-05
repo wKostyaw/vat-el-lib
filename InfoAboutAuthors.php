@@ -9,7 +9,7 @@
 			$kek = $row["admin"] ;
 		}
 	}
-	if ($kek == 0) {
+	if ($kek != 1) {
 		header('Location: MainPage.php');
 		exit();
 	

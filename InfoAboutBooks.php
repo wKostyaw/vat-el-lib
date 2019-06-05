@@ -9,7 +9,7 @@
 			$kek = $row["admin"] ;
 		}
 	}
-	if ($kek == 0) {
+	if ($kek != 1) {
 		header('Location: MainPage.php');
 		exit();
 	}
@@ -75,108 +75,103 @@
 	                                    }
 	                                }
 	                                echo "<table class='reportTable'>"; 
-							    	echo "<tr class='reportTableHeaderRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
+							    	echo "<tr class='reportTableHeaderRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Количество обращений</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 		                                $book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID' ORDER BY BookID");
 		                                $rowsBooksAuthors = mysqli_num_rows($book);
 		                                for ($i = 0 ; $i < $rowsBooksAuthors ; ++$i) 
 		                                {
-		                                	$row = mysqli_fetch_row($book);
+		                                	$row = mysqli_fetch_assoc($book);
 		                                	echo "<tr class='reportTableRow'>";
-									            for ($j = 0 ; $j < 5 ; ++$j) 
+									         	echo "<td class='reportTableCell'>$row[BookID]</td>";
+									         	echo "<td class='reportTableCell'>$row[BookName]</td>";
+									         	echo "<td class='reportTableCell'>$row[BookYear]</td>";
+									         	$AuthorName = array();
+				          						$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[BookID]'");
+									            $result = $connection->query ($whoisauthor);
+									            if ($result->num_rows > 0) 
 									            {
-									            	if ($j == 2) 
-									            	{
-									            		echo "<td class='reportTableCell'>". $row[$j]. "</td>";
-									            		$AuthorName = array();
-				          								$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
-									                    $result = $connection->query ($whoisauthor);
-									                    if ($result->num_rows > 0) 
+									                while ($rowauthor = $result->fetch_assoc())
+									                {
+									                    $AuthorID = $rowauthor["AuthorID"];
+									                    $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
+									                    $result2 = $connection->query ($whoisauthor2);
+									                    if ($result2->num_rows > 0) 
 									                    {
-									                        while ($rowauthor = $result->fetch_assoc())
+									                        while ($rowauthor2 = $result2->fetch_assoc())
 									                        {
-									                            $AuthorID = $rowauthor["AuthorID"];
-									                            $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
-									                            $result2 = $connection->query ($whoisauthor2);
-									                            if ($result2->num_rows > 0) 
-									                            {
-									                                while ($rowauthor2 = $result2->fetch_assoc())
-									                                {
-									                                    array_push($AuthorName, $rowauthor2["Name"]);
-									                                }
-									                            } 
-									                            else 
-									                            {
-									                                $AuthorName = 'Авторов нет';
+									                        	array_push($AuthorName, $rowauthor2["Name"]);
 									                            }
-									                        }
-									                    } else 
-									                    {
-									                        $AuthorID = 'Авторов нет';
-									                    }
-									                    echo "<td class='reportTableCell'>";
-									                    foreach ($AuthorName as $key => $value) 
-									                    { 
-									                        if($value == end($AuthorName)) 
-									                        {
-									                            echo $value;
-									                        }
+									                        } 
 									                        else 
 									                        {
-									                            echo $value . ", ";
+									                        	$AuthorName = 'Авторов нет';
 									                        }
 									                    }
-									                    unset($key);
-				                    					echo "</td>";
-				                    					$Categories = array();
-									                    $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[0]'");
-									                    $result = $connection->query ($whatiscategory);
-									                    if ($result->num_rows > 0) 
+									            } 
+									            else 
+									            {
+									            	$AuthorID = 'Авторов нет';
+									            }
+									            echo "<td class='reportTableCell'>";
+									            foreach ($AuthorName as $key => $value) 
+									            { 
+									            	if($value == end($AuthorName)) 
+									                {
+									                	echo $value;
+									                }
+									                else 
+									                {
+									                	echo $value . ", ";
+									                }
+									            }
+									            unset($key);
+				                    			echo "</td>";
+				                    			$Categories = array();
+									            $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[BookID]'");
+									            $result = $connection->query ($whatiscategory);
+									            if ($result->num_rows > 0) 
+									            {
+									            	while ($rowcategory = $result->fetch_assoc())
+									                {
+									                    $CategoryID = $rowcategory["CategoryID"];
+									                    $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
+									                    $result2 = $connection->query ($whatiscategory2);
+									                    if ($result2->num_rows > 0) 
 									                    {
-									                        while ($rowcategory = $result->fetch_assoc())
+									                        while ($rowcategory2 = $result2->fetch_assoc())
 									                        {
-									                            $CategoryID = $rowcategory["CategoryID"];
-									                            $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
-									                            $result2 = $connection->query ($whatiscategory2);
-									                            if ($result2->num_rows > 0) 
-									                            {
-									                                while ($rowcategory2 = $result2->fetch_assoc())
-									                                {
-									                                    array_push($Categories, $rowcategory2["Category"]);
-									                                }
-									                            } 
-									                            else 
-									                            {
-									                                $Categories = 'Категорий нет';
-									                            }
+									                        	array_push($Categories, $rowcategory2["Category"]);
 									                        }
 									                    } 
 									                    else 
 									                    {
-									                        $CategoryID = 'Категорий нет';
+									                    	$Categories = 'Категорий нет';
 									                    }
-									                    echo "<td class='reportTableCell'>";
-									                    foreach ($Categories as $key => $value) 
-									                    { 
-									                        if($value == end($Categories)) 
-									                        {
-									                            echo $value;
-									                        }
-									                        else 
-									                        {
-									                            echo $value . ", ";
-									                        }
-									                    }
-									                    unset($key);
-									                    echo "</td>";
-				                    					
-									            	} else 
-									            	{
-										            	echo "<td class='reportTableCell'>". $row[$j]. "</td>";
-									            	}
+									                }
 									            } 
-									        echo "</tr>";
+									            else 
+									            {
+									            	$CategoryID = 'Категорий нет';
+									            }
+									            echo "<td class='reportTableCell'>";
+									            foreach ($Categories as $key => $value) 
+									            { 
+									            	if($value == end($Categories)) 
+									                {
+									                	echo $value;
+									                }
+									                else 
+									                {
+									                	echo $value . ", ";
+									                }
+									            }
+									            unset($key);
+									            echo "</td>";
+									         	echo "<td class='reportTableCell'>$row[Description]</td>";
+									         	echo "<td class='reportTableCell'>$row[reading]</td>";
+									    	echo "</tr>";
 		                                }
 	                            	} 
 	                            	echo "</table>";
@@ -211,108 +206,103 @@
 									    }
 	                                }
 	                                echo "<table class='reportTable'>"; 
-							    	echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
+							    	echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Количество обращений</th></tr>";
 	                                foreach ($bookslist as $key => $valueBookID) 
 	                                {
 	                                	$book = $connection->query("SELECT * FROM books WHERE BookID LIKE '$valueBookID'");
 	                                    $rowsBooksCategories = mysqli_num_rows($book);
 	                                    for ($i = 0 ; $i < $rowsBooksCategories ; ++$i) 
 	                                    {
-	                                    	$row = mysqli_fetch_row($book);
+	                                    	$row = mysqli_fetch_assoc($book);
 	                                        echo "<tr class='reportTableRow'>";
-									            for ($j = 0 ; $j < 5 ; ++$j) 
+									         	echo "<td class='reportTableCell'>$row[BookID]</td>";
+									         	echo "<td class='reportTableCell'>$row[BookName]</td>";
+									         	echo "<td class='reportTableCell'>$row[BookYear]</td>";
+									         	$AuthorName = array();
+				          						$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[BookID]'");
+									            $result = $connection->query ($whoisauthor);
+									            if ($result->num_rows > 0) 
 									            {
-									            	if ($j == 2) 
-									            	{
-									            		echo "<td class='reportTableCell'>". $row[$j]. "</td>";
-									            		$AuthorName = array();
-				          								$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
-									                    $result = $connection->query ($whoisauthor);
-									                    if ($result->num_rows > 0) 
+									                while ($rowauthor = $result->fetch_assoc())
+									                {
+									                    $AuthorID = $rowauthor["AuthorID"];
+									                    $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
+									                    $result2 = $connection->query ($whoisauthor2);
+									                    if ($result2->num_rows > 0) 
 									                    {
-									                        while ($rowauthor = $result->fetch_assoc())
+									                        while ($rowauthor2 = $result2->fetch_assoc())
 									                        {
-									                            $AuthorID = $rowauthor["AuthorID"];
-									                            $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
-									                            $result2 = $connection->query ($whoisauthor2);
-									                            if ($result2->num_rows > 0) 
-									                            {
-									                                while ($rowauthor2 = $result2->fetch_assoc())
-									                                {
-									                                    array_push($AuthorName, $rowauthor2["Name"]);
-									                                }
-									                            } 
-									                            else 
-									                            {
-									                                $AuthorName = 'Авторов нет';
+									                        	array_push($AuthorName, $rowauthor2["Name"]);
 									                            }
-									                        }
-									                    } else 
-									                    {
-									                        $AuthorID = 'Авторов нет';
-									                    }
-									                    echo "<td class='reportTableCell'>";
-									                    foreach ($AuthorName as $key => $value) 
-									                    { 
-									                        if($value == end($AuthorName)) 
-									                        {
-									                            echo $value;
-									                        }
+									                        } 
 									                        else 
 									                        {
-									                            echo $value . ", ";
+									                        	$AuthorName = 'Авторов нет';
 									                        }
 									                    }
-									                    unset($key);
-				                    					echo "</td>";
-				                    					$Categories = array();
-									                    $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[0]'");
-									                    $result = $connection->query ($whatiscategory);
-									                    if ($result->num_rows > 0) 
+									            } 
+									            else 
+									            {
+									            	$AuthorID = 'Авторов нет';
+									            }
+									            echo "<td class='reportTableCell'>";
+									            foreach ($AuthorName as $key => $value) 
+									            { 
+									            	if($value == end($AuthorName)) 
+									                {
+									                	echo $value;
+									                }
+									                else 
+									                {
+									                	echo $value . ", ";
+									                }
+									            }
+									            unset($key);
+				                    			echo "</td>";
+				                    			$Categories = array();
+									            $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[BookID]'");
+									            $result = $connection->query ($whatiscategory);
+									            if ($result->num_rows > 0) 
+									            {
+									            	while ($rowcategory = $result->fetch_assoc())
+									                {
+									                    $CategoryID = $rowcategory["CategoryID"];
+									                    $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
+									                    $result2 = $connection->query ($whatiscategory2);
+									                    if ($result2->num_rows > 0) 
 									                    {
-									                        while ($rowcategory = $result->fetch_assoc())
+									                        while ($rowcategory2 = $result2->fetch_assoc())
 									                        {
-									                            $CategoryID = $rowcategory["CategoryID"];
-									                            $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
-									                            $result2 = $connection->query ($whatiscategory2);
-									                            if ($result2->num_rows > 0) 
-									                            {
-									                                while ($rowcategory2 = $result2->fetch_assoc())
-									                                {
-									                                    array_push($Categories, $rowcategory2["Category"]);
-									                                }
-									                            } 
-									                            else 
-									                            {
-									                                $Categories = 'Категорий нет';
-									                            }
+									                        	array_push($Categories, $rowcategory2["Category"]);
 									                        }
 									                    } 
 									                    else 
 									                    {
-									                        $CategoryID = 'Категорий нет';
+									                    	$Categories = 'Категорий нет';
 									                    }
-									                    echo "<td class='reportTableCell'>";
-									                    foreach ($Categories as $key => $value) 
-									                    { 
-									                        if($value == end($Categories)) 
-									                        {
-									                            echo $value;
-									                        }
-									                        else 
-									                        {
-									                            echo $value . ", ";
-									                        }
-									                    }
-									                    unset($key);
-									                    echo "</td>";
-				                    					
-									            	} else 
-									            	{
-										            	echo "<td class='reportTableCell'>". $row[$j]. "</td>";
-									            	}
+									                }
 									            } 
-									        echo "</tr>";
+									            else 
+									            {
+									            	$CategoryID = 'Категорий нет';
+									            }
+									            echo "<td class='reportTableCell'>";
+									            foreach ($Categories as $key => $value) 
+									            { 
+									            	if($value == end($Categories)) 
+									                {
+									                	echo $value;
+									                }
+									                else 
+									                {
+									                	echo $value . ", ";
+									                }
+									            }
+									            unset($key);
+									            echo "</td>";
+									         	echo "<td class='reportTableCell'>$row[Description]</td>";
+									         	echo "<td class='reportTableCell'>$row[reading]</td>";
+									    	echo "</tr>";
 	                                    } 
 	                                }
 	                            } 
@@ -331,105 +321,100 @@
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
 						    echo "<span class='totalAmount'>Всего книг в библиотеке: ".$rows."<span>";
 						    echo "<table class='reportTable'>"; 
-						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Путь к файлу</th></tr>";
+						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Количество обращений</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)
-						    {
-						    	$row = mysqli_fetch_row($sql);
-						    	echo "<tr class='reportTableRow'>";
-						            for ($j = 0 ; $j < 5 ; ++$j) 
-						            {
-						            	if ($j == 2) 
-						            	{
-						            		echo "<td class='reportTableCell'>". $row[$j]. "</td>";
-						            		$AuthorName = array();
-	          								$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[0]'");
-						                    $result = $connection->query ($whoisauthor);
-						                    if ($result->num_rows > 0) 
-						                    {
-						                        while ($rowauthor = $result->fetch_assoc())
-						                        {
-						                            $AuthorID = $rowauthor["AuthorID"];
-						                            $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
-						                            $result2 = $connection->query ($whoisauthor2);
-						                            if ($result2->num_rows > 0) 
-						                            {
-						                                while ($rowauthor2 = $result2->fetch_assoc())
-						                                {
-						                                    array_push($AuthorName, $rowauthor2["Name"]);
-						                                }
-						                            } 
-						                            else 
-						                            {
-						                                $AuthorName = 'Авторов нет';
-						                            }
-						                        }
-						                    } else 
-						                    {
-						                        $AuthorID = 'Авторов нет';
-						                    }
-						                    echo "<td class='reportTableCell'>";
-						                    foreach ($AuthorName as $key => $value) 
-						                    { 
-						                        if($value == end($AuthorName)) 
-						                        {
-						                            echo $value;
-						                        }
-						                        else 
-						                        {
-						                            echo $value . ", ";
-						                        }
-						                    }
-						                    unset($key);
-	                    					echo "</td>";
-	                    					$Categories = array();
-						                    $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[0]'");
-						                    $result = $connection->query ($whatiscategory);
-						                    if ($result->num_rows > 0) 
-						                    {
-						                        while ($rowcategory = $result->fetch_assoc())
-						                        {
-						                            $CategoryID = $rowcategory["CategoryID"];
-						                            $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
-						                            $result2 = $connection->query ($whatiscategory2);
-						                            if ($result2->num_rows > 0) 
-						                            {
-						                                while ($rowcategory2 = $result2->fetch_assoc())
-						                                {
-						                                    array_push($Categories, $rowcategory2["Category"]);
-						                                }
-						                            } 
-						                            else 
-						                            {
-						                                $Categories = 'Категорий нет';
-						                            }
-						                        }
-						                    } 
-						                    else 
-						                    {
-						                        $CategoryID = 'Категорий нет';
-						                    }
-						                    echo "<td class='reportTableCell'>";
-						                    foreach ($Categories as $key => $value) 
-						                    { 
-						                        if($value == end($Categories)) 
-						                        {
-						                            echo $value;
-						                        }
-						                        else 
-						                        {
-						                            echo $value . ", ";
-						                        }
-						                    }
-						                    unset($key);
-						                    echo "</td>";
-	                    					
-						            	} else 
-						            	{
-							            	echo "<td class='reportTableCell'>". $row[$j]. "</td>";
-						            	}
-						            } 
-						        echo "</tr>";
-						    }
+							    {
+							    	$row = mysqli_fetch_assoc($sql);
+							    	echo "<tr class='reportTableRow'>";
+							         	echo "<td class='reportTableCell'>$row[BookID]</td>";
+							         	echo "<td class='reportTableCell'>$row[BookName]</td>";
+							         	echo "<td class='reportTableCell'>$row[BookYear]</td>";
+							         	$AuthorName = array();
+		          						$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[BookID]'");
+							            $result = $connection->query ($whoisauthor);
+							            if ($result->num_rows > 0) 
+							            {
+							                while ($rowauthor = $result->fetch_assoc())
+							                {
+							                    $AuthorID = $rowauthor["AuthorID"];
+							                    $whoisauthor2 = ("SELECT Name FROM authors WHERE AuthorID LIKE '$AuthorID'");
+							                    $result2 = $connection->query ($whoisauthor2);
+							                    if ($result2->num_rows > 0) 
+							                    {
+							                        while ($rowauthor2 = $result2->fetch_assoc())
+							                        {
+							                        	array_push($AuthorName, $rowauthor2["Name"]);
+							                            }
+							                        } 
+							                        else 
+							                        {
+							                        	$AuthorName = 'Авторов нет';
+							                        }
+							                    }
+							            } 
+							            else 
+							            {
+							            	$AuthorID = 'Авторов нет';
+							            }
+							            echo "<td class='reportTableCell'>";
+							            foreach ($AuthorName as $key => $value) 
+							            { 
+							            	if($value == end($AuthorName)) 
+							                {
+							                	echo $value;
+							                }
+							                else 
+							                {
+							                	echo $value . ", ";
+							                }
+							            }
+							            unset($key);
+		                    			echo "</td>";
+		                    			$Categories = array();
+							            $whatiscategory = ("SELECT CategoryID FROM books_and_categories WHERE BookID LIKE '$row[BookID]'");
+							            $result = $connection->query ($whatiscategory);
+							            if ($result->num_rows > 0) 
+							            {
+							            	while ($rowcategory = $result->fetch_assoc())
+							                {
+							                    $CategoryID = $rowcategory["CategoryID"];
+							                    $whatiscategory2 = ("SELECT Category FROM categories WHERE CategoryID LIKE '$CategoryID'");
+							                    $result2 = $connection->query ($whatiscategory2);
+							                    if ($result2->num_rows > 0) 
+							                    {
+							                        while ($rowcategory2 = $result2->fetch_assoc())
+							                        {
+							                        	array_push($Categories, $rowcategory2["Category"]);
+							                        }
+							                    } 
+							                    else 
+							                    {
+							                    	$Categories = 'Категорий нет';
+							                    }
+							                }
+							            } 
+							            else 
+							            {
+							            	$CategoryID = 'Категорий нет';
+							            }
+							            echo "<td class='reportTableCell'>";
+							            foreach ($Categories as $key => $value) 
+							            { 
+							            	if($value == end($Categories)) 
+							                {
+							                	echo $value;
+							                }
+							                else 
+							                {
+							                	echo $value . ", ";
+							                }
+							            }
+							            unset($key);
+							            echo "</td>";
+							         	echo "<td class='reportTableCell'>$row[Description]</td>";
+							         	echo "<td class='reportTableCell'>$row[reading]</td>";
+							    	echo "</tr>";
+							    }
 						    echo "</table>";
 						} else 
 						{
