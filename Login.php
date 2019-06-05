@@ -35,20 +35,21 @@
 		// проверка статуса пользователя
 		$isLoginAdmin = $connection->query("SELECT admin FROM loginparol WHERE login='$login'");
 		while ($rowStatus = $isLoginAdmin->fetch_assoc()) {
-			$Status = $rowStatus['admin'];
+			$_SESSION['status'] = $rowStatus['admin'];
 		}
-		if ($Status == '1') 
+		if ($_SESSION['status'] == '1') 
 		{
 			header('Location: AdminPage.php');
 			exit();
 		}
-		else if ($Status == '2') 
+		else if ($_SESSION['status'] == '2') 
 		{	
 			echo '<script type="text/javascript">';
 			echo 'alert("Ваш профиль был заблокирован и Вам отказано в доступе к сайту. Обратитесь к администратору")';
 			echo '</script>';
+			session_destroy(); 
 		} 
-		else if ($Status == '0') 
+		else if ($_SESSION['status'] == '0') 
 		{
 			header('Location: MainPage.php');
 			exit();
@@ -58,6 +59,7 @@
 			echo '<script type="text/javascript">';
 			echo 'alert("В ходе перехода на сайт библиотеки произошла ошибка")';
 			echo '</script>';
+			session_destroy(); 
 		} 
 	}
 	if (isset($_POST['RequestSummaryInfo'])) {
