@@ -1,5 +1,19 @@
 <?php
 	include_once "auth.php";
+
+	// Проверка на админа
+	$username = $_SESSION['login'];
+	$admin = ("SELECT admin FROM loginparol WHERE login='$username'");
+	$result = $connection->query ($admin);
+	if ($result->num_rows > 0) {
+		while ($row = $result->fetch_assoc()) {
+			$kek = $row["admin"] ;
+		}
+	}
+	if ($kek != 1) {
+		header('Location: MainPage.php');
+		exit();
+	}
 	
 	if (isset($_POST['nameValue'])) {
 		$nameValue = $connection->real_escape_string($_POST['nameValue']);

@@ -9,7 +9,7 @@
 			$isAdmin = $row["admin"];
 		}
 	}
-	if ($isAdmin == 0) {
+	if ($isAdmin != 1) {
 		header('Location: MainPage.php');
 		exit();
 	}

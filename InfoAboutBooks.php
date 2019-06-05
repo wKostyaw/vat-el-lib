@@ -9,7 +9,7 @@
 			$kek = $row["admin"] ;
 		}
 	}
-	if ($kek == 0) {
+	if ($kek != 1) {
 		header('Location: MainPage.php');
 		exit();
 	}
@@ -86,7 +86,7 @@
 		                                	echo "<tr class='reportTableRow'>";
 									         	echo "<td class='reportTableCell'>$row[BookID]</td>";
 									         	echo "<td class='reportTableCell'>$row[BookName]</td>";
-									         	echo "<td class='reportTableCell'>$row[Year]</td>";
+									         	echo "<td class='reportTableCell'>$row[BookYear]</td>";
 									         	$AuthorName = array();
 				          						$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[BookID]'");
 									            $result = $connection->query ($whoisauthor);
@@ -217,7 +217,7 @@
 	                                        echo "<tr class='reportTableRow'>";
 									         	echo "<td class='reportTableCell'>$row[BookID]</td>";
 									         	echo "<td class='reportTableCell'>$row[BookName]</td>";
-									         	echo "<td class='reportTableCell'>$row[Year]</td>";
+									         	echo "<td class='reportTableCell'>$row[BookYear]</td>";
 									         	$AuthorName = array();
 				          						$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[BookID]'");
 									            $result = $connection->query ($whoisauthor);
@@ -328,7 +328,7 @@
 							    	echo "<tr class='reportTableRow'>";
 							         	echo "<td class='reportTableCell'>$row[BookID]</td>";
 							         	echo "<td class='reportTableCell'>$row[BookName]</td>";
-							         	echo "<td class='reportTableCell'>$row[Year]</td>";
+							         	echo "<td class='reportTableCell'>$row[BookYear]</td>";
 							         	$AuthorName = array();
 		          						$whoisauthor = ("SELECT AuthorID FROM books_and_authors WHERE BookID LIKE '$row[BookID]'");
 							            $result = $connection->query ($whoisauthor);

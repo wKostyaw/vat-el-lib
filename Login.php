@@ -10,9 +10,10 @@
 		$result = mysqli_query($connection, $query) or die(mysqli_error($connection));
 		$count = mysqli_num_rows($result);
 		if ($count == 1) 
-		{
-				$_SESSION['login'] = $login;
-		} else 
+		{	
+			$_SESSION['login'] = $login;
+		} 
+		else 
 		{
 			echo '<script type="text/javascript">';
 			echo 'alert("Неправильный логин или пароль!")';
@@ -33,18 +34,21 @@
 		$updateLastVisitsDate = $connection->query("UPDATE loginparol SET last_visit='$lastVisitDate' WHERE login='$login'");
 		// проверка статуса пользователя
 		$isLoginAdmin = $connection->query("SELECT admin FROM loginparol WHERE login='$login'");
-		if ($isLoginAdmin == 1) 
+		while ($rowStatus = $isLoginAdmin->fetch_assoc()) {
+			$Status = $rowStatus['admin'];
+		}
+		if ($Status == '1') 
 		{
 			header('Location: AdminPage.php');
 			exit();
 		}
-		else if ($isLoginAdmin == 2) 
+		else if ($Status == '2') 
 		{	
 			echo '<script type="text/javascript">';
 			echo 'alert("Ваш профиль был заблокирован и Вам отказано в доступе к сайту. Обратитесь к администратору")';
 			echo '</script>';
 		} 
-		else if ($isLoginAdmin == 0) 
+		else if ($Status == '0') 
 		{
 			header('Location: MainPage.php');
 			exit();
