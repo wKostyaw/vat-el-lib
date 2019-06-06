@@ -32,7 +32,7 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Дополнительная информация о пользователе <? echo $rowUserData['login'] ?></h1>
+				<h2 class="AdminStart MainHeader">Дополнительная информация о пользователе <? echo $rowUserData['login'] ?></h2>
 				<?php 
 					echo '<p>Книги на полке пользователя:</p>';
 					$booklist = array();

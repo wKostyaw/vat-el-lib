@@ -28,7 +28,7 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Информация о категориях</h1>
+				<h2 class="AdminStart MainHeader">Информация о категориях</h2>
 				<!-- <form method="GET" action="InfoAboutBooks.php">
 					<input type="text" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
 					<input type="submit" name="otpravit-sql-zapros" value="Отправить">
@@ -39,7 +39,7 @@
 					{
 						$rows = mysqli_num_rows($sql);
 						echo "<table class='reportTable'>"; 
-						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>Категория</th><th class='reportTableHeaderCell'>Книги</th></tr>";
+						    echo "<tr class='reportTableHeaderRow'><th class='reportTableHeaderCell'>Категория</th><th class='reportTableHeaderCell'>Книги</th></tr>";
 							for ($i = 0; $i < $rows; $i++) 
 							{ 
 								$row = $sql->fetch_assoc();
