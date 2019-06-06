@@ -100,6 +100,7 @@
 					{
 						echo '<p>Пользователь не обращался ещё ни к одной книге</p>';
 					}
+					echo '<a href="InfoAboutUsers.php"><button>Назад</button></a>';
 				?>
 			</div>
 		</div>

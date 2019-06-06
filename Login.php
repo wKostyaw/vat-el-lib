@@ -22,23 +22,37 @@
 	} 
 	if (isset($_SESSION['login']))
 	{	
-		// подсчёт количества посещений сайта
-		$getVisitsValue = $connection->query("SELECT visits FROM loginparol WHERE login='$login'");
-		while ($row = $getVisitsValue->fetch_assoc()) {
-			$visitsValue = $row["visits"];
-		}
-		$visitsValue++;
-		$updateVisitsValue = $connection->query("UPDATE loginparol SET visits='$visitsValue' WHERE login='$login'");
-		// последняя дата посещения сайта
-		$lastVisitDate = date("d-m-Y H:i:s");
-		$updateLastVisitsDate = $connection->query("UPDATE loginparol SET last_visit='$lastVisitDate' WHERE login='$login'");
+		
 		// проверка статуса пользователя
 		$isLoginAdmin = $connection->query("SELECT admin FROM loginparol WHERE login='$login'");
 		while ($rowStatus = $isLoginAdmin->fetch_assoc()) {
 			$_SESSION['status'] = $rowStatus['admin'];
 		}
 		if ($_SESSION['status'] == '1') 
-		{
+		{	
+			// подсчёт количества посещений сайта конкретным юзером
+			$getVisitsValue = $connection->query("SELECT visits FROM loginparol WHERE login='$login'");
+			while ($row = $getVisitsValue->fetch_assoc()) {
+				$visitsValue = $row["visits"];
+			}
+			$visitsValue++;
+			$updateVisitsValue = $connection->query("UPDATE loginparol SET visits='$visitsValue' WHERE login='$login'");
+			// подсчет количества посещений вообще
+			$Today = date("d-m-Y");
+			$getDate = $connection->query("SELECT * FROM visit_stats ORDER BY `date` DESC LIMIT 1");
+			while ($rowGetDate = $getDate->fetch_assoc()) {
+				$DateValue = $rowGetDate['date'];
+				$VisitsValue = $rowGetDate['visits'];
+			}
+			if ($Today == $DateValue) {
+				$VisitsValue++;
+				$sql = $connection->query("UPDATE visit_stats SET visits = '$VisitsValue'");
+			} else if ($Today != $DateValue) {
+				$sql = $connection->query("INSERT INTO visit_stats (`date`, visits) VALUES ('$Today', '1')");
+			}
+			// последняя дата посещения сайта
+			$lastVisitDate = date("d-m-Y H:i:s");
+			$updateLastVisitsDate = $connection->query("UPDATE loginparol SET last_visit='$lastVisitDate' WHERE login='$login'");
 			header('Location: AdminPage.php');
 			exit();
 		}
@@ -51,6 +65,29 @@
 		} 
 		else if ($_SESSION['status'] == '0') 
 		{
+			// подсчёт количества посещений сайта
+			$getVisitsValue = $connection->query("SELECT visits FROM loginparol WHERE login='$login'");
+			while ($row = $getVisitsValue->fetch_assoc()) {
+				$visitsValue = $row["visits"];
+			}
+			$visitsValue++;
+			$updateVisitsValue = $connection->query("UPDATE loginparol SET visits='$visitsValue' WHERE login='$login'");
+			// подсчет количества посещений вообще
+			$Today = date("d-m-Y");
+			$getDate = $connection->query("SELECT * FROM visit_stats ORDER BY `date` DESC LIMIT 1");
+			while ($rowGetDate = $getDate->fetch_assoc()) {
+				$DateValue = $rowGetDate['date'];
+				$VisitsValue = $rowGetDate['visits'];
+			}
+			if ($Today == $DateValue) {
+				$VisitsValue++;
+				$sql = $connection->query("UPDATE visit_stats SET visits = '$VisitsValue'");
+			} else if ($Today != $DateValue) {
+				$sql = $connection->query("INSERT INTO visit_stats (`date`, visits) VALUES ('$Today', '1')");
+			}
+			// последняя дата посещения сайта
+			$lastVisitDate = date("d-m-Y H:i:s");
+			$updateLastVisitsDate = $connection->query("UPDATE loginparol SET last_visit='$lastVisitDate' WHERE login='$login'");
 			header('Location: MainPage.php');
 			exit();
 		}

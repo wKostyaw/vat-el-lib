@@ -13,6 +13,13 @@
 		header('Location: MainPage.php');
 		exit();
 	}
+	$sql0 = $connection->query("SELECT reading FROM books");
+	$rows = mysqli_num_rows($sql0);
+	$readingValue = array();
+	while ($row0 = $sql0->fetch_assoc()) {
+		array_push($readingValue, $row0['reading']);
+	}
+	$sum = array_sum($readingValue);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +35,16 @@
 			</div>
 			<div class="Option">
 				<h1 class="AdminStart">Информация о книгах</h1>
+				<table border="1">
+					<tr>
+						<th>Всего книг:</th>
+						<td><? echo $rows ?></td>
+					</tr>
+					<tr>
+						<th>Всего обращений к ним:</th>
+						<td><? echo $sum ?></td>
+					</tr>
+				</table>
 				<form method="GET" action="InfoAboutBooks.php">
 					<div class="SearchInReport">
 						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
@@ -35,7 +52,9 @@
 					</div>
 				</form>
 				<br>
+				
 				<?php 
+
 					if (isset($_GET['otpravit-sql-zapros']) and !empty($_GET['sql-zapros']))
 					{
 						$q = $_GET['sql-zapros'];
@@ -319,7 +338,6 @@
 						if($sql)
 						{
 						    $rows = mysqli_num_rows($sql); // количество полученных строк
-						    echo "<span class='totalAmount'>Всего книг в библиотеке: ".$rows."<span>";
 						    echo "<table class='reportTable'>"; 
 						    echo "<tr class='reportTableRow'><th class='reportTableHeaderCell'>id</th><th class='reportTableHeaderCell'>Название книги</th><th class='reportTableHeaderCell'>Год написания</th><th class='reportTableHeaderCell'>Авторы</th><th class='reportTableHeaderCell'>Категории</th><th class='reportTableHeaderCell'>Описание</th><th class='reportTableHeaderCell'>Количество обращений</th></tr>";
 						    for ($i = 0; $i < $rows; $i++)

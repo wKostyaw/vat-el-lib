@@ -33,10 +33,10 @@ function AdminNavigation() {
 			echo '<li class="AdminLinkBox"><a href="InfoAboutCategories.php" class="SecondaryAdminLink">Информация о категориях</a></li>';
 			echo '<li class="AdminLinkBox"><a href="InfoAboutAuthors.php" class="SecondaryAdminLink">Информация об авторах</a></li>';
 		echo '</ul>';
-		// echo '<ul class="SecondaryLinksContainer">';
-		// 	echo '<li class="AdminLinkBox"><span class="SecondaryLinkHeader">Статистика</span></li>';
-		// 	echo '<li class="AdminLinkBox"><a href="UsersSummary.php" class="SecondaryAdminLink">Сводка по пользователям</a></li>';
-		// echo '</ul>';	
+		echo '<ul class="SecondaryLinksContainer">';
+			echo '<li class="AdminLinkBox"><span class="SecondaryLinkHeader">Статистика</span></li>';
+			echo '<li class="AdminLinkBox"><a href="visitstats.php" class="SecondaryAdminLink">Общая статистика посещений</a></li>';
+		echo '</ul>';	
 		echo '<ul class="SecondaryLinksContainer">';
 			echo '<li class="AdminLinkBox"><span class="SecondaryLinkHeader">Настройки сайта</span></li>';
 			echo '<li class="AdminLinkBox"><a href="CustomizeSlider.php" class="SecondaryAdminLink">Настройка главной страницы</a></li>';
