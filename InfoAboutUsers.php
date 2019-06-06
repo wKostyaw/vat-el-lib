@@ -112,6 +112,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -152,6 +153,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -192,6 +194,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+
 							}
 						} 
 						else if ($_GET['status'] == 1) 
@@ -234,6 +237,7 @@
 									            echo "</tr>";
 										    }
 									    echo "</table>";
+
 									} 
 									else
 									{
@@ -244,6 +248,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -284,6 +289,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -324,6 +330,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							}
 						}
 						else if ($_GET['status'] == 2) 
@@ -376,6 +383,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -416,6 +424,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -456,6 +465,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+							echo '<button onclick="javascript:history.back();﻿">Назад</button>';	
 							}
 						}
 						else if ($_GET['status'] == 3) 
@@ -508,6 +518,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -548,6 +559,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -588,6 +600,7 @@
 								{
 									echo "Произошла ошибка";
 								}
+								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 							}
 						}	
 					?>

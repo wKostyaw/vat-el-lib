@@ -100,7 +100,7 @@
 					{
 						echo '<p>Пользователь не обращался ещё ни к одной книге</p>';
 					}
-					echo '<a href="InfoAboutUsers.php"><button>Назад</button></a>';
+					echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 				?>
 			</div>
 		</div>

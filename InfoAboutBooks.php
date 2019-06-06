@@ -326,7 +326,8 @@
 	                                }
 	                            } 
 	                        }
-						}	
+						}
+						echo '<button onclick="javascript:history.back();﻿">Назад</button>';	
 					} 
 					else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros']))
 					{

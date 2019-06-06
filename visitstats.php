@@ -83,7 +83,7 @@
 									echo "</tr>";
 								}
 							echo '</table>';
-							echo '<a href="visitstats.php"><button>Назад</button></a>';
+							echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 						} 
 						else if (empty($_GET['zaprosText']) and isset($_GET['zaprosSubmit'])) 
 						{
