@@ -28,12 +28,6 @@ function SliderRequest() {
 					$amount = SliderInfo['amount'],
 					$catOrAutId = SliderInfo['categoryOrAuthorID'],
 					$catOrAutName = SliderInfo['catOrAutName'],
-					/*$SliderTemplate = '<div class="Slider" id="' + $SliderID + '">\n'+
-						'<div Class="SliderLogo">' + $catOrAutName + '</div>\n'+
-						'<div class="SliderButton SliderButtonLeft"><img src="Img/ArrowL.png"></div>\n'+
-						'<div class="SliderItems"></div>\n'+
-						'<div class="SliderButton SliderButtonRight"><img src="Img/ArrowR.png"></div>\n'+
-					'</div>\n';*/
 					$SliderTemplate = '<div class="NewSlider"id="' + $SliderID + '">\n'+
 										  '<div class="NewSliderHeader">' + $catOrAutName + '</div>\n'+
 										  '<div class="NewSliderItemsContainer"></div>\n'+
@@ -68,8 +62,6 @@ function SliderRequest() {
 }
 /* Функция выводящая последние добавленные книги */
 function SliderWithLastBooks($SliderID, $RequestSliderItems) {
-	//$RequestSliderItems = 10; // количество выводимых книг
-	//$SliderID = '#ListofLast';
 	$.ajax (
 				{
 					url: 'Slider.php',
@@ -81,8 +73,7 @@ function SliderWithLastBooks($SliderID, $RequestSliderItems) {
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	//$SliderID = '#SliderListofLast',
-								$SliderBookId = book['BookID'],
+							var	$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
@@ -98,8 +89,6 @@ function SliderWithLastBooks($SliderID, $RequestSliderItems) {
 };
 // Функция, выводящая книги определенной категории
 function SliderWithSelectedCategory($SliderID, $RequestSliderItems, $RequestSliderItemsCategory) {
-	//$RequestSliderItemsCategory = 1; // категория выводимых книг
-	//$RequestSliderItems = 20; // количество выводимых книг
 	$.ajax (
 				{
 					url: 'Slider.php',
@@ -112,8 +101,7 @@ function SliderWithSelectedCategory($SliderID, $RequestSliderItems, $RequestSlid
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	//$SliderID = '#SliderCategory1',
-								$SliderBookId = book['BookID'],
+							var	$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
@@ -129,8 +117,6 @@ function SliderWithSelectedCategory($SliderID, $RequestSliderItems, $RequestSlid
 };
 // Функция, выводящая книги определенного автора
 function SliderWithSelectedAuthor($SliderID, $RequestSliderItems, $RequestSliderItemsAuthor) {
-	//$RequestSliderItemsAuthor = 1; // категория выводимых книг
-	//$RequestSliderItems = 5; // количество выводимых книг
 	$.ajax (
 				{
 					url: 'Slider.php',
@@ -143,8 +129,7 @@ function SliderWithSelectedAuthor($SliderID, $RequestSliderItems, $RequestSlider
 						var LastBooks = JSON.parse(data);
 						$.each(LastBooks, function() {
 							book = this;
-							var	//$SliderID = '#SliderAuthor1',
-								$SliderBookId = book['BookID'],
+							var	$SliderBookId = book['BookID'],
 								$SliderBookName = book['BookName'],
 								$SliderBookYear  = book['BookYear'],
 								$PathToFile = book['PathToFile'],
@@ -164,10 +149,7 @@ function makeItem($SliderID, $SliderBookId, $SliderBookName, $SliderBookYear, $P
 								'<div class="NewSliderItemImageContainer">\n' +
 								  '<a href="book.php?BookInfo=' + $SliderBookId + '" title="' + $SliderBookName + '"><img class="NewSliderBookCover" src="' + $Cover + '"></a>\n' +
 								'</div>\n' +
-									//'<span class="NewSliderBookName">\n' +
 									'<a href="book.php?BookInfo=' + $SliderBookId + '" Class="NewSliderBookName">' + $SliderBookName + '</a>\n' +
-									//'</span>\n' +
 								'</div>\n';
 	$($SliderID).find('.NewSliderItemsContainer').append($SliderItemTemplate);
-	/*$($SliderID).find('.NewSliderButtonLeft').hide();*/
 };

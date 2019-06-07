@@ -59,17 +59,46 @@
 			drawingList($sliderId, $whatToDo, $catOrAutName, $amount, $connection);
 		}
 	}
+	if (isset($_POST['refreshSliderInfo'])) {
+		$i = 1;
+		$Sliders = array();
+		$sqlSliderInfo = $connection->query("SELECT * FROM slideroptions");
+		while ($sliderInfo = $sqlSliderInfo->fetch_assoc()) {
+			$catOrAutId = $sliderInfo['categoryOrAuthorID'];
+			$catOrAutName = '';
+			$whatToDo = $sliderInfo['whatToDo'];
+			if ($whatToDo == 1) {
+				$sqlAuthorInfo = $connection->query("SELECT Name FROM authors WHERE AuthorID LIKE $catOrAutId");
+				$catOrAutName = $sqlAuthorInfo->fetch_assoc()['Name'];
+			} else if ($whatToDo == 2) {
+				$sqlCategoryInfo = $connection->query("SELECT Category FROM categories WHERE CategoryID LIKE $catOrAutId");
+				$catOrAutName = $sqlCategoryInfo->fetch_assoc()['Category'];
+			}
+			
+			$Sliders[$i]['sliderId'] = $sliderInfo['sliderId'];
+			$Sliders[$i]['amount'] = $sliderInfo['amount'];
+			$Sliders[$i]['whatToDo'] = $whatToDo;
+			$Sliders[$i]['categoryOrAuthorID'] = $sliderInfo['categoryOrAuthorID'];
+			$Sliders[$i]['catOrAutName'] = $catOrAutName;
+			$i = $i + 1;
+		}
+		$Sliders = json_encode($Sliders);
+		exit($Sliders);
+	}
 	
 	if (isset($_POST['delSlider'])) {
 		$SliderId = $_POST['SliderId'];
 		$SqlDel = $connection->query("DELETE FROM slideroptions WHERE Sliderid = $SliderId");
+		collectInfo($connection);
 	}
 	
 	if (isset($_POST['addNewSlider'])) {
 		$whatToDo = $_POST['whatToDo'];
 		$amount = $_POST['amount'];
 		$sliderName = $_POST['sliderName'];
-		
+		if ($amount == "") {
+			$amount = 25;
+		}
 		if ($whatToDo == 0) {
 			$catOrAutId = 0;
 		} else if ($whatToDo == 1) {
@@ -117,7 +146,7 @@
 						<p>[Название категории/Имя автора]: </p>
 						<div class="sliderNameContainer SBorder HalfWidth">
 							<div class="flexContainer">
-								<input type="text" name="sliderName" class="TextInput sliderOptField sliderName">
+								<input type="text" name="sliderName" class="TextInput sliderOptField sliderName" autocomplete="off">
 							</div>
 							<div class="HintBox responseAuthors"></div>
 							<div class="HintBox responseCategory"></div>
@@ -125,7 +154,7 @@
 					</div>
 					<div class="FormElemContainer">
 						<p>Максимальное количество элементов: </p>
-						<input type="text" name="amount" class="TextInput amount sliderOptField HalfWidth">
+						<input placeholder="25" type="text" name="amount" class="TextInput amount sliderOptField HalfWidth">
 					</div>
 					<div class="FormElemContainer">
 						<button type="reset" class="FormButton ResetButton">Очистить</button>
