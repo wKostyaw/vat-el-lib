@@ -26,7 +26,7 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Выберите одну из опций слева</h1>
+				<h2 class="AdminStart MainHeader">Выберите одну из опций слева</h2>
 			</div>
 		</div>
 	</body>

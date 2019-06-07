@@ -20,6 +20,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/jquery.table2excel.min.js" type="text/javascript"></script>
 		<script src="Js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -30,7 +31,9 @@
 			<div class="Option">
 				<h2 class="AdminStart MainHeader">Информация о пользователях</h2>
 				<div>
-					<p>Сводка по юзерам</p>
+					<div class="SearchInReport">
+						<p>Сводка по юзерам</p>
+					</div>
 					<?php 
 						$sql = $connection->query("SELECT * FROM loginparol");
 						$rows = $sql->num_rows;
@@ -38,18 +41,18 @@
 						$rows1 = $sql1->num_rows;
 						$rows2 = $rows - $rows1;
 					?>
-					<table border="1">
-						<tr>
-							<th>Количество зарегистрированных пользователей</th>
-							<td><? echo $rows ?></td>
+					<table class='sumReportTable'>
+						<tr class='sumReportTableRow'>
+							<th class='sumReportTableHeaderCell'>Количество зарегистрированных пользователей</th>
+							<td class='sumReportTableCell'><? echo $rows ?></td>
 						</tr>
-						<tr>
-							<th>Количество действующих пользователей</th>
-							<td><? echo $rows2 ?></td>
+						<tr class='sumReportTableRow'>
+							<th class='sumReportTableHeaderCell'>Количество действующих пользователей</th>
+							<td class='sumReportTableCell'><? echo $rows2 ?></td>
 						</tr>
-						<tr>
-							<th>Количество заблокированных пользователей</th>
-							<td><? echo $rows1 ?></td>
+						<tr class='sumReportTableRow'>
+							<th class='sumReportTableHeaderCell'>Количество заблокированных пользователей</th>
+							<td class='sumReportTableCell'><? echo $rows1 ?></td>
 						</tr>
 					</table>
 					<br>
@@ -65,6 +68,7 @@
 							<input type="radio" name="status" value="2"> Администраторов
 							<input type="radio" name="status" value="3"> Заблокированных
 							<input type="submit" name="otpravit-sql-zapros" value="Отправить">
+							<input type="button" name="exportInto" class="exportInto" value="Экспорт таблицы">
 						</div>
 					</form>
 					<br>
@@ -83,7 +87,7 @@
 									    for ($i = 0; $i < $rows; $i++)
 									    {
 									    	$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -112,7 +116,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -125,7 +129,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -166,7 +170,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -213,7 +217,7 @@
 										    for ($i = 0; $i < $rows; $i++)
 										    {
 										    	$row = mysqli_fetch_assoc($sql);
-												echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+												echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 													echo "<td class='reportTableCell'>$row[id]</td>";
 													echo "<td class='reportTableCell'>$row[login]</td>";
 													echo "<td class='reportTableCell'>$row[password]</td>";
@@ -248,7 +252,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -261,7 +265,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -289,7 +293,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -302,7 +306,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -330,7 +334,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 						}
 						else if ($_GET['status'] == 2) 
@@ -349,7 +353,7 @@
 										    for ($i = 0; $i < $rows; $i++)
 										    {
 										    	$row = mysqli_fetch_assoc($sql);
-												echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+												echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 													echo "<td class='reportTableCell'>$row[id]</td>";
 													echo "<td class='reportTableCell'>$row[login]</td>";
 													echo "<td class='reportTableCell'>$row[password]</td>";
@@ -383,7 +387,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -396,7 +400,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -424,7 +428,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -437,7 +441,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -465,7 +469,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-							echo '<button onclick="javascript:history.back();﻿">Назад</button>';	
+							echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';	
 							}
 						}
 						else if ($_GET['status'] == 3) 
@@ -484,7 +488,7 @@
 										    for ($i = 0; $i < $rows; $i++)
 										    {
 										    	$row = mysqli_fetch_assoc($sql);
-												echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+												echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 													echo "<td class='reportTableCell'>$row[id]</td>";
 													echo "<td class='reportTableCell'>$row[login]</td>";
 													echo "<td class='reportTableCell'>$row[password]</td>";
@@ -518,7 +522,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -531,7 +535,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -559,7 +563,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -572,7 +576,7 @@
 										for ($i = 0; $i < $rows; $i++)
 										{
 											$row = mysqli_fetch_assoc($sql);
-											echo "<tr class='reportTableRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
+											echo "<tr class='reportTableLinkRow' onclick='document.location.href=\"/InfoAboutOneUser.php?userid=" . $row['id'] . "\"'>";
 												echo "<td class='reportTableCell'>$row[id]</td>";
 												echo "<td class='reportTableCell'>$row[login]</td>";
 												echo "<td class='reportTableCell'>$row[password]</td>";
@@ -600,7 +604,7 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button onclick="javascript:history.back();﻿">Назад</button>';
+								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 						}	
 					?>

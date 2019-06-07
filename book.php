@@ -96,7 +96,7 @@
 				<h1 class="SiteName">Электронная библиотека ВАТ имени В. П. Чкалова</h1>
 			</div>
 		</div>
-			<div class="SecondHeader SecondHeaderNotSticky" id="SecondHeader">
+			<div class="SecondHeaderNotSticky" id="SecondHeader">
 			<div class="NCentered">
 					<ul class="Navigation">
 						<li class="NButton"><a href="MainPage.php" class="NBLink">Главная</a></li>

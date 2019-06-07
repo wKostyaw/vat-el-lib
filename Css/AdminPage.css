@@ -198,6 +198,22 @@ a {
 .noBorder {
 	border: none;
 }
+.sumReportTable {
+	width: calc(50% - 8px);
+	margin: 0 10px;
+}
+.sumReportTable, .sumReportTableRow, .sumReportTableHeaderCell, .sumReportTableCell {
+	border: 1px solid #000;
+	border-collapse: collapse;
+}
+.sumReportTableHeaderCell {
+	text-align: left;
+	padding: 5px;
+}
+.sumReportTableCell {
+	text-align: center;
+	width: 30px;
+}
 .reportTable, .reportTableRow, .reportTableHeaderCell, .reportTableCell {
 	border: 1px solid #000;
 	border-collapse: collapse;
@@ -206,7 +222,7 @@ a {
 	min-width: calc(100% - 20px);
 	margin: 0 10px;
 }
-.reportTableRow:hover {
+.reportTableLinkRow:hover {
 	cursor: pointer;
 	background: #48C;
 	color: white;

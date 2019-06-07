@@ -20,6 +20,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
+		<script src="Js/jquery.table2excel.min.js" type="text/javascript"></script>
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
 	</head>
 	<body>

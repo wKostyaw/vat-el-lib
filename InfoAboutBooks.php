@@ -27,6 +27,8 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/jquery.table2excel.min.js" type="text/javascript"></script>
+		<script src="Js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -34,21 +36,24 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Информация о книгах</h1>
-				<table border="1">
-					<tr>
-						<th>Всего книг:</th>
-						<td><? echo $rows ?></td>
+				<h2 class="AdminStart MainHeader">Информация о книгах</h2>
+				
+				<table class="sumReportTable">
+					<tr class="sumReportTableRow">
+						<th class="sumReportTableHeaderCell">Всего книг:</th>
+						<td class="sumReportTableCell"><? echo $rows ?></td>
 					</tr>
-					<tr>
-						<th>Всего обращений к ним:</th>
-						<td><? echo $sum ?></td>
+					<tr class="sumReportTableRow">
+						<th class="sumReportTableHeaderCell">Всего обращений к ним:</th>
+						<td class="sumReportTableCell"><? echo $sum ?></td>
 					</tr>
 				</table>
+				<br>
 				<form method="GET" action="InfoAboutBooks.php">
 					<div class="SearchInReport">
 						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
 						<input type="submit" name="otpravit-sql-zapros" value="Отправить">
+						<input type="button" name="exportInto" class="exportInto" value="Экспорт таблицы">
 					</div>
 				</form>
 				<br>
@@ -327,7 +332,7 @@
 	                            } 
 	                        }
 						}
-						echo '<button onclick="javascript:history.back();﻿">Назад</button>';	
+						echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';	
 					} 
 					else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros']))
 					{

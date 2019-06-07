@@ -138,7 +138,7 @@
 				<label class="LFormLabel">Пароль<input type="password" name="password" class="TextField" required></label>
 				<input name="submit" type="submit" class="LButton" value="Войти">
 				<br>
-				<span>Если вы забыли пароль обратитесь в службу газа</span>
+				<span>Если вы забыли пароль обратитесь к своему куратору</span>
 			</form>
 		</div>
 		<div class="hello">

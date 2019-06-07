@@ -88,8 +88,8 @@ body {
 	background: linear-gradient(45deg, transparent 50%, #48C 0);
 }
 .LoginPageLogoContainer {
-	display: inline-block;
-	max-width: 475px;
+	display: flex;
+	max-width: 500px;
 	width: 40%;
 	height: 203px;
 	box-sizing: border-box;
@@ -98,8 +98,10 @@ body {
 	z-index: 10;
 }
 .LoginPageLogoCaptionContainer {
-	display: inline-block;
-	max-width: 475px;
+	display: flex;
+	flex-direction: column;
+	max-width: 500px;
+	min-width: 300px;
 	width: 40%;
 	height: 203px;
 	z-index: 9;
@@ -135,29 +137,25 @@ body {
 .LoginPageLogo {
 	height: 193px;
 	padding: 5px 0;
-	margin: 0 0 0 50px;
+	margin: auto;
 	position: relative;
 	z-index: 11;
 }
 .LoginPageLogoHeader {
-	/*padding: 0;
-	margin: 0;*/
 	color: white;
 	font-size: 32pt;
-	margin-top: 30px;
-	margin-bottom: 0px;
-	margin-left: -30px;
+	margin: auto auto auto -30px;
 	text-align: center;
+	width: 100%;
 }
 .LoginPageLogoCaption {
 	word-wrap: break-word;
 	text-align: center;
+	width: 100%;
 	display: block;
 	color: white;
 	font-size: 18pt;
-	margin-left: -30px;
-	margin-top: auto;
-	margin-bottom: 30px;
+	margin: auto auto auto -30px;
 	z-index: 0;
 }
 

@@ -202,4 +202,18 @@ $(document).ready(function(){
 			toggleElement = ('.kniga' + ClassNumber);
 		$(toggleElement).toggle( 'display' );
 	});
+	
+	$(document).on('click', '.exportInto', function() {
+		var $TableName = prompt("Введите название таблицы", "Отчет");
+		if ($TableName == null) {
+			return false;
+		} else if ($TableName != '') {
+		$('.reportTable').table2excel({
+			name: "repTable",
+			filename: $TableName + ".xls"
+		});
+		} else {
+			alert ("Вы не указали имя!");
+		}
+	});
 });

@@ -34,6 +34,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
+		<script src="Js/jquery.table2excel.min.js" type="text/javascript"></script>
 		<script src="Js/AddOneMore.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -42,34 +43,40 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h1 class="AdminStart">Количество посещений</h1>
-				<p>Общая статистика посещений</p>
-				<table border="1">
-					<tr>
-						<th>Суммарное количество посещений</th>
-						<th>Среднее количество в день</th>
-						<th>Максимальное за день</th>	
-					</tr>
-					<tr>
-						<td><? echo $sum ?></td>
-						<td><? echo $srarifm ?></td>
-						<td><? echo $max ?></td>
-					</tr>
-				</table>
-				<p>Статистика посещений по дням</p>
-				<form method="GET">
-					<p>Введите день в формате: день-месяц-год (например: 06-06-2019)</p>
-					<input type="text" name="zaprosText">
-					<input type="submit" name="zaprosSubmit">
-				</form>
 				
+					<h2 class="AdminStart MainHeader">Количество посещений</h2>
+					<p class="SearchInReport">Общая статистика посещений</p>
+					<table class="sumReportTable">
+						<tr class="sumReportTableRow">
+							<th class="sumReportTableHeaderCell">Суммарное количество посещений</th>
+							<td class="sumReportTableCell"><? echo $sum ?></td>
+						</tr>
+						<tr class="sumReportTableRow">
+						<th class="sumReportTableHeaderCell">Среднее количество в день</th>
+							<td class="sumReportTableCell"><? echo $srarifm ?></td>
+						</tr>
+						<tr class="sumReportTableRow">
+							<th class="sumReportTableHeaderCell">Максимальное за день</th>	
+							<td class="sumReportTableCell"><? echo $max ?></td>
+						</tr>
+					</table>
+				<div class="SearchInReport">
+					<p>Статистика посещений по дням</p>
+					<form method="GET">
+						<p>Введите день в формате: день-месяц-год (например: 06-06-2019)</p>
+						<input type="text" name="zaprosText">
+						<input type="submit" name="zaprosSubmit">
+						<input type="button" name="exportInto" class="exportInto" value="Экспорт таблицы">
+					</form>
+				</div>
+				<br>
 					<?php 
 						if (!empty($_GET['zaprosText']) and isset($_GET['zaprosSubmit'])) 
 						{
-							echo '<table border="1">';
-								echo'<tr>';
-									echo '<th>День</th>';
-									echo '<th>Количество посещений</th>';
+							echo '<table class="reportTable">';
+								echo'<tr class="reportTableRow">';
+									echo '<th class="reportTableHeaderCell">День</th>';
+									echo '<th class="reportTableHeaderCell">Количество посещений</th>';
 								echo '</tr>';
 								$q = $_GET['zaprosText'];
 								$sql = $connection->query("SELECT * FROM visit_stats WHERE `date` = '$q'"); 
@@ -77,9 +84,9 @@
 								for ($i=0; $i < $rows; $i++) 
 								{ 
 									$row2 = mysqli_fetch_row($sql);
-									echo "<tr>";
-										echo "<td> $row2[0]</td>";
-										echo "<td> $row2[1]</td>";
+									echo "<tr class='reportTableRow'>";
+										echo "<td class='reportTableCell'> $row2[0]</td>";
+										echo "<td class='reportTableCell'> $row2[1]</td>";
 									echo "</tr>";
 								}
 							echo '</table>';
@@ -91,25 +98,24 @@
 						} 
 						else if (!isset($_GET['zaprosSubmit'])) 
 						{
-							echo '<table border="1">';
-								echo'<tr>';
-									echo '<th>День</th>';
-									echo '<th>Количество посещений</th>';
+							echo '<table class="reportTable">';
+								echo'<tr class="reportTableRow">';
+									echo '<th class="reportTableHeaderCell">День</th>';
+									echo '<th class="reportTableHeaderCell">Количество посещений</th>';
 								echo '</tr>';
 								$sql = $connection->query("SELECT * FROM visit_stats"); //если второй раз не сделать запрос, то почему-то не хочет рисовать данные в таблицу
 								$rows = mysqli_num_rows($sql);
 								for ($i=0; $i < $rows; $i++) 
 								{ 
 									$row2 = mysqli_fetch_row($sql);
-									echo "<tr>";
-										echo "<td> $row2[0]</td>";
-										echo "<td> $row2[1]</td>";
+									echo "<tr class='reportTableRow'>";
+										echo "<td class='reportTableCell'> $row2[0]</td>";
+										echo "<td class='reportTableCell'> $row2[1]</td>";
 									echo "</tr>";
 								}
 							echo '</table>';
 						}
 					?>
-				
 			</div>
 	</body>
 </html>
