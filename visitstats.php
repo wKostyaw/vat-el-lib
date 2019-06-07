@@ -32,6 +32,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Статистика посещений</title>
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
 		<script src="Js/jquery.table2excel.min.js" type="text/javascript"></script>

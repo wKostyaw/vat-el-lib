@@ -19,6 +19,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Информация об авторах</title>
 		<link rel="stylesheet" type="text/css" href="Css/AdminPage.css">
 		<script src="Js/JQuerry.js" type="text/javascript"></script>
 		<script src="Js/jquery.table2excel.min.js" type="text/javascript"></script>
@@ -30,7 +31,7 @@
 				<? include_once "AdminNavigation.php"; ?>
 			</div>
 			<div class="Option">
-				<h2 class="AdminStart MainHeader">Информация о авторах</h2>
+				<h2 class="AdminStart MainHeader">Информация об авторах</h2>
 				<!-- <form method="GET" action="InfoAboutBooks.php">
 					<input type="text" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
 					<input type="submit" name="otpravit-sql-zapros" value="Отправить">

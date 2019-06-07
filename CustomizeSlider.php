@@ -162,24 +162,6 @@
 					</div>
 				</form>
 				<div class="FormElemContainer" id="SliderPreview">
-					<!-- Шаблон строки
-					
-						<div class="sliderBox flexContainer">
-						<span class="SBCell">
-							<span class="SBText">[Тип]</span>
-							<span class="SBText">[Название категории/имя автора]</span>
-							<span class="SBSpace"></span>
-						</span>
-						<span class="SBCell">
-							<span class="SBText">Количество элементов: </span>
-							<span class="SBText">40</span>
-						</span>
-						<button type="button" Class="deleteSlider" title="удалить" id="SlId">
-							<svg class="SButtonIcon" x="0px" y="0px" width="16" height="16" viewBox="0 0 192 192">
-								<path d="M45.65625,34.34375l-11.3125,11.3125l50.34375,50.34375l-50.34375,50.34375l11.3125,11.3125l50.34375,-50.34375l50.34375,50.34375l11.3125,-11.3125l-50.34375,-50.34375l50.34375,-50.34375l-11.3125,-11.3125l-50.34375,50.34375z"></path>
-							</svg>
-						</button>
-					</div>-->
 					<?php
 						collectInfo($connection);
 					?>
