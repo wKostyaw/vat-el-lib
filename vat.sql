@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 05 2019 г., 03:20
+-- Время создания: Июн 07 2019 г., 03:49
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -176,7 +176,7 @@ CREATE TABLE `loginparol` (
 --
 
 INSERT INTO `loginparol` (`id`, `login`, `password`, `familiya`, `imya`, `otchestvo`, `grupa`, `admin`, `reg_date`, `last_visit`, `visits`) VALUES
-(1, 'admin', '1', '', '', '', '', 1, '', '05-06-2019 03:15:06', 21),
+(1, 'admin', '1', '', '', '', '', 1, '', '07-06-2019 21:08:47', 24),
 (2, 'izvekov', '6WKpAJ3IKj', '', '', '', '', 1, '', '04-06-2019 21:59:51', 2),
 (10, 'fsg3gsgs3', 'IduHGtGGrY', '', '', '', '', 2, '', '05-06-2019 03:15:22', 6),
 (11, 'dwqfj3g3', 'utVlg0AwBo', '', '', '', '', 0, '', '', 0),
@@ -246,6 +246,25 @@ CREATE TABLE `users_and_unsaved_books` (
 
 INSERT INTO `users_and_unsaved_books` (`id`, `BookID`, `reading_by_user`, `last_time_reading`) VALUES
 (10, 75, 2, '05-06-2019 02:59:27');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `visit_stats`
+--
+
+CREATE TABLE `visit_stats` (
+  `date` varchar(255) NOT NULL,
+  `visits` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `visit_stats`
+--
+
+INSERT INTO `visit_stats` (`date`, `visits`) VALUES
+('06-06-2019', 2),
+('07-06-2019', 1);
 
 --
 -- Индексы сохранённых таблиц
