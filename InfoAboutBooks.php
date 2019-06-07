@@ -49,15 +49,24 @@
 					</tr>
 				</table>
 				<br>
-				<form method="GET" action="InfoAboutBooks.php">
+				<form method="GET" action="InfoAboutBooks.php" class="FilterReport">
+					<p class="SearchInReportHeader">Фильтры вывода</p>
 					<div class="SearchInReport">
-						<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
-						<input type="submit" name="otpravit-sql-zapros" value="Отправить">
-						<input type="button" name="exportInto" class="exportInto" value="Экспорт таблицы">
+						<label class="filterContainer">Поиск по автору или категории<br>
+							<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите автора или категорию" autocomplete="off">
+							<input type="submit" name="otpravit-sql-zapros" value="Отправить" class="ReportTableButton ApplyFilter">
+						</label>
 					</div>
 				</form>
 				<br>
-				
+				<div class="reportTableButtonsContainer">
+					<input type="button" name="exportInto" class="exportInto ReportTableButton" value="Экспорт таблицы">
+					<? 
+						if (isset($_GET['otpravit-sql-zapros'])) {
+							echo '<button class="ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
+						}
+					?>
+				</div>
 				<?php 
 
 					if (isset($_GET['otpravit-sql-zapros']) and !empty($_GET['sql-zapros']))
@@ -331,8 +340,7 @@
 	                                }
 	                            } 
 	                        }
-						}
-						echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';	
+						}	
 					} 
 					else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros']))
 					{
@@ -448,7 +456,14 @@
 						echo "Ничего не найдено";
 					}
 				?>
-
+				<div class="reportTableButtonsContainer">
+					<input type="button" name="exportInto" class="exportInto ReportTableButton" value="Экспорт таблицы">
+					<? 
+						if (isset($_GET['otpravit-sql-zapros'])) {
+							echo '<button class="ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
+						}
+					?>
+				</div>
 			</div>
 		</div>
 	</body>

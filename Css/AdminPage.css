@@ -235,9 +235,44 @@ a {
 	/*border: 1px solid #000;*/
 	padding: 5px;
 }
+.FilterReport {
+	border: 1px solid #CECECE;
+	margin: 10px;
+}
+.SearchInReportHeader {
+	text-align: center;
+	font-weight: bold;
+	font-size: 18pt;
+	margin: 5px 0;
+}
+.filterContainer {
+	display: block;
+	margin-bottom: 10px;
+	position: relative;
+}
 .SearchInReport {
 	margin-left: 10px;
 }
 .totalAmount {
 	margin-left: 10px;
+}
+.ReportTableButton {
+	background-color: #59D;
+	border: 1px solid #CECECE;
+	color: #FFF;
+	padding: 5px 10px;
+	border-radius: 3px;
+	font-size: 12pt;
+}
+.ApplyFilter {
+	position: absolute;
+	right: 10px;
+	bottom: 0px;
+}
+.ReportTableButton:hover {
+	cursor : pointer;
+	background: #48C;
+}
+.reportTableButtonsContainer {
+	margin: 5px 10px;
 }

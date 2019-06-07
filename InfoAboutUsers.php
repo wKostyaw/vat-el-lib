@@ -32,7 +32,7 @@
 				<h2 class="AdminStart MainHeader">Информация о пользователях</h2>
 				<div>
 					<div class="SearchInReport">
-						<p>Сводка по юзерам</p>
+						<p>Общая сводка</p>
 					</div>
 					<?php 
 						$sql = $connection->query("SELECT * FROM loginparol");
@@ -58,20 +58,30 @@
 					<br>
 				</div>
 				<div>
-					<form method="GET" action="InfoAboutUsers.php">
+					<form method="GET" action="InfoAboutUsers.php" class="FilterReport">
+						<p class="SearchInReportHeader">Фильтры вывода</p>
 						<div class="SearchInReport">
-							<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите группу" autocomplete="off" >
-							
-							<p>Вывести пользователей:</p>
-							<input type="radio" name="status" value="0" > Всех
-							<input type="radio" name="status" value="1"> Читателей
-							<input type="radio" name="status" value="2"> Администраторов
-							<input type="radio" name="status" value="3"> Заблокированных
-							<input type="submit" name="otpravit-sql-zapros" value="Отправить">
-							<input type="button" name="exportInto" class="exportInto" value="Экспорт таблицы">
+							<label class="filterContainer">Вывести группу:<br>
+								<input type="text" class="TextInput HalfWidth" name="sql-zapros" placeholder="Введите группу" autocomplete="off" >
+							</label>
+							<label class="filterContainer">Вывести пользователей:<br>
+								<input type="radio" name="status" value="0" > Всех
+								<input type="radio" name="status" value="1"> Читателей
+								<input type="radio" name="status" value="2"> Администраторов
+								<input type="radio" name="status" value="3"> Заблокированных
+								<input type="submit" name="otpravit-sql-zapros" value="Применить" class="ReportTableButton ApplyFilter">
+							</label>
 						</div>
 					</form>
 					<br>
+					<div class="reportTableButtonsContainer">
+						<input type="button" name="exportInto" class="exportInto ReportTableButton" value="Экспорт таблицы">
+						<? 
+							if (isset($_GET['otpravit-sql-zapros'])) {
+								echo '<button class="ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
+							}
+						?>
+					</div>
 					<?php 
 						if ($_GET['status'] == 0) 
 						{
@@ -116,7 +126,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -252,7 +261,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -293,7 +301,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -334,7 +341,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 						}
 						else if ($_GET['status'] == 2) 
@@ -387,7 +393,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -428,7 +433,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -469,7 +473,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-							echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';	
 							}
 						}
 						else if ($_GET['status'] == 3) 
@@ -522,7 +525,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							} 
 							else if (isset($_GET['otpravit-sql-zapros']) and empty($_GET['sql-zapros'])) 
 							{
@@ -563,7 +565,6 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 							else if (!isset($_GET['otpravit-sql-zapros'])) 
 							{
@@ -604,10 +605,17 @@
 								{
 									echo "Произошла ошибка";
 								}
-								echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
 							}
 						}	
 					?>
+					<div class="reportTableButtonsContainer">
+						<input type="button" name="exportInto" class="exportInto ReportTableButton" value="Экспорт таблицы">
+						<? 
+							if (isset($_GET['otpravit-sql-zapros'])) {
+								echo '<button class="ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
+							}
+						?>
+					</div>
 				</div>
 			</div>
 			</div>

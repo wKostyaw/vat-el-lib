@@ -101,7 +101,7 @@
 					{
 						echo '<p class="SearchInReport">Пользователь не обращался ещё ни к одной книге</p>';
 					}
-					echo '<button class="SearchInReport" onclick="javascript:history.back();﻿">Назад</button>';
+					echo '<button  class="SearchInReport ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
 				?>
 			</div>
 		</div>

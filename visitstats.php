@@ -60,16 +60,26 @@
 							<td class="sumReportTableCell"><? echo $max ?></td>
 						</tr>
 					</table>
-				<div class="SearchInReport">
-					<p>Статистика посещений по дням</p>
-					<form method="GET">
-						<p>Введите день в формате: день-месяц-год (например: 06-06-2019)</p>
-						<input type="text" name="zaprosText">
-						<input type="submit" name="zaprosSubmit">
-						<input type="button" name="exportInto" class="exportInto" value="Экспорт таблицы">
+				
+					<form method="GET" class="FilterReport">
+						<p class="SearchInReportHeader">Статистика посещений по дням</p>
+						<div class="SearchInReport">
+						<label class="filterContainer">Введите день в формате: день-месяц-год (например: 06-06-2019)<br>
+							<input type="text" name="zaprosText" class="TextInput HalfWidth" placeholder="ДД-ММ-ГГГГ">
+							<input type="submit" name="zaprosSubmit" class="ReportTableButton ApplyFilter">
+						</label>
+						</div>
 					</form>
-				</div>
+				
 				<br>
+				<div class="reportTableButtonsContainer">
+					<input type="button" name="exportInto" class="exportInto ReportTableButton" value="Экспорт таблицы">
+					<? 
+						if (isset($_GET['zaprosSubmit'])) {
+							echo '<button class="ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
+						}
+					?>
+				</div>
 					<?php 
 						if (!empty($_GET['zaprosText']) and isset($_GET['zaprosSubmit'])) 
 						{
@@ -90,7 +100,6 @@
 									echo "</tr>";
 								}
 							echo '</table>';
-							echo '<button onclick="javascript:history.back();﻿">Назад</button>';
 						} 
 						else if (empty($_GET['zaprosText']) and isset($_GET['zaprosSubmit'])) 
 						{
@@ -116,6 +125,14 @@
 							echo '</table>';
 						}
 					?>
+				<div class="reportTableButtonsContainer">
+					<input type="button" name="exportInto" class="exportInto ReportTableButton" value="Экспорт таблицы">
+					<? 
+						if (isset($_GET['zaprosSubmit'])) {
+							echo '<button class="ReportTableButton" onclick="javascript:history.back();﻿">Назад</button>';
+						}
+					?>
+				</div>
 			</div>
 	</body>
 </html>
