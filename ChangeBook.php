@@ -212,7 +212,7 @@
 				
 				<form class="findBook" name="findBook">
 					<div class="FormElemContainer">
-						<p class="CategoryName">Поиск по названию(надо придумать нормальную подпись)</p>
+						<p class="CategoryName">Поиск по названию</p>
 						
 						<div class="SBorder">
 							<div class="flexContainer">

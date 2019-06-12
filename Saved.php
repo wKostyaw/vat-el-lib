@@ -29,7 +29,7 @@
 		echo '<div class="BookBlock">';
 			echo '<div class="BookBlockItem">';
 				echo '<div class="BookPreview">';
-					echo '<img src="' . $PathToCover . '">';
+					echo '<a href="book.php?BookInfo=' . $SavedBookId . '#bookFile"><img src="' . $PathToCover . '"></a>';
 				echo '</div>';
 				echo '<div class="BookInfo">';
 					echo '<span class="BookInfoItem">Название книги: <a href="book.php?BookInfo=' . $SavedBookId . '">' . $BookName . '</a></span>';
@@ -118,7 +118,7 @@
 <html>
 	<meta charset="utf-8">
 	<head>
-		<title>Главная</title>
+		<title>Сохраненное</title>
 		<link rel="stylesheet" type="text/css" href="Css/style.css">
 		<link rel="stylesheet" type="text/css" href="Css/BooksList.css">
 		<link rel="stylesheet" type="text/css" href="Css/BooksList.css">
