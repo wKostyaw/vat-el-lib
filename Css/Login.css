@@ -174,7 +174,7 @@ body {
 	word-wrap: break-word;
 }
 .HelloTextContainer {
-	width: 100%;
+	width: calc(100% - 10px);
 	max-width: 1190px;
 	padding: 0 5px;
 }
@@ -185,7 +185,7 @@ body {
 	overflow-wrap: break-word;
 	max-width: 1190px;
 	padding: 5px;
-	width: 100%;
+	width: calc(100% - 10px);
 	text-align: justify;
 	line-break: normal;
 }
@@ -201,7 +201,7 @@ body {
 }
 .LoginFooterInfo {
 	max-width: 1200px;
-	width: 100%;
+	width: calc(100% - 10px);
 	margin: auto;
 	padding: 5px;
 }
