@@ -46,7 +46,7 @@
 			}
 			if ($Today == $DateValue) {
 				$VisitsValue++;
-				$sql = $connection->query("UPDATE visit_stats SET visits = '$VisitsValue'");
+				$sql = $connection->query("UPDATE visit_stats SET visits = '$VisitsValue' WHERE `date` = '$Today'");
 			} else if ($Today != $DateValue) {
 				$sql = $connection->query("INSERT INTO visit_stats (`date`, visits) VALUES ('$Today', '1')");
 			}
