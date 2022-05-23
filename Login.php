@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
+	$connection = mysqli_connect( 'vat-el-lib.local', 'root',  '', 'vat');
 	// 
 	if (isset($_POST['login']) and isset($_POST['password']))
 	{

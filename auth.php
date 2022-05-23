@@ -1,5 +1,5 @@
 <?php
-	$connection = mysqli_connect( 'vat', 'root',  '', 'vat');
+	$connection = mysqli_connect( 'vat-el-lib.local', 'root',  '', 'vat');
 	$connection->query ("SET NAMES 'utf8'");
 	$select_db = mysqli_select_db ($connection, 'vat');
 	session_start();
